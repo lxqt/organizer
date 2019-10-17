@@ -1,2 +1,2 @@
-# pim
+# lxqt-pim
 Personal Information Manager 
