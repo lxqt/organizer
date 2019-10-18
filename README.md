@@ -1,2 +1,2 @@
-# lxqt-pim
+# lxqt-organizer
 Personal Information Manager 
