@@ -52,7 +52,7 @@ void MainWindow::DisplayAllAppointments()
    while (query.next())
        {
          int idName = query.record().indexOf("ID");
-//         int id = query.value(idName).toInt();
+         int id = query.value(idName).toInt();
 
           idName = query.record().indexOf("Title");
           QString title = query.value(idName).toString();
@@ -89,7 +89,7 @@ void MainWindow::DisplayAllAppointments()
 
            tmpDate=*new QDate(year, month,day);
 
-           QString tmpStr = title+ " "
+           QString tmpStr = QString::number(id)+" "+title+ " "
                    +location+" "+tmpDate.toString()
                    +" "+QString::number(starttime)+":00";
 
@@ -269,10 +269,21 @@ void MainWindow::on_pushButtonShowAll_clicked()
 }
 
 void MainWindow::on_listView_clicked(const QModelIndex &index)
-{
+{    
+    //Needs overhauling and a rewrite
+    QVariant qv =model->data(index);
+    QString qs = qv.toString();
+    QStringList ql =qs.split(" ");
 
-    //currentID =index.row(); //?
-
+    //    foreach(QString item, ql)
+    //    {
+    //        qDebug()<<item;
+    //    }
+    //    QString ids = ql.first();
+    //    qDebug()<<"Index string = "<<ids;
+    QString ids = ql.first();
+    currentID = ids.toInt();
+    //    qDebug()<<"Current ID = "<<currentID;
 }
 
 void MainWindow::on_pushButtonAppointmentToday_clicked()
@@ -330,4 +341,10 @@ void MainWindow::on_pushButtonAppointmentToday_clicked()
                ui->listView->setModel(model);
            }
        }
+}
+
+void MainWindow::on_pushButtonDelete_clicked()
+{
+    dbc.removeAppointmentById(currentID);
+    DisplayAllAppointments();
 }

@@ -93,6 +93,8 @@ private slots:
 
     void on_pushButtonAppointmentToday_clicked();
 
+    void on_pushButtonDelete_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
