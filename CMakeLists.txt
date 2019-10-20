@@ -5,7 +5,9 @@ cmake_minimum_required(VERSION 3.1.0 FATAL_ERROR)
 # command to specify that the current project code is written for the given range of CMake
 # versions.
 project( lxqt-organizer )
+
 include(GNUInstallDirs)
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
