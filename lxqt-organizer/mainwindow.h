@@ -9,22 +9,8 @@
 #include <QSqlQueryModel>
 #include <QStringListModel>
 #include "dbcontroller.h"
-
-
-/* #include <lxqt/LXQt/lxqtnotification.h>
- * Lubuntu 19.10 has moved lxqt header files
- * from /usr/include/lxqt/LXQt
- * to /usr/include/lxqt
- * and the shared library liblxqt.so
- * is on longer in
- * /usr/lib/x86_64-linux-gnu/
- * Adding an external library with QtCreator now not
- * consistent with Debian?
- * Need a new way of compiling code to link with
- * lxqtnotificationd
- * https://github.com/lxqt/lxqt-notificationd
- *
- */
+#include "dialogabout.h"
+#include "simpledbusnotifier.h"
 
 
 struct Date
@@ -68,7 +54,6 @@ public:
     void DisplayAllAppointments();
     int DayDifferenceBetweenDates(Date dt1, Date dt2); //Will rewrite with QDates
     int LeapYearNumber(Date d); //Will rewrite with QDate
-
     void CheckNotificationsForToday();
     void CheckNotificationReminders();
 

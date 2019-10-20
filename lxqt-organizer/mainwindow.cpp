@@ -14,9 +14,6 @@ MainWindow::MainWindow(QWidget *parent) :
     InitialiseDates();
     model= new QStringListModel(this);
     DisplayAllAppointments();
-
-    //eventDate = ui->calendarWidget->selectedDate();
-    //ui->labelSelectedDate->setText(eventDate.toString());
 }
 
 MainWindow::~MainWindow()
@@ -132,65 +129,13 @@ int MainWindow::LeapYearNumber(Date d)
 
 void MainWindow::CheckNotificationsForToday()
 {
+    //To do..
 
-//    LXQt::Notification *n =nullptr;
-
-//        QDate currentDate = QDate::currentDate();
-//        Date todayDate = {currentDate.day(), currentDate.month(), currentDate.year()};
-
-//        Date theEventDate;
-
-//        QSqlQuery query("SELECT * FROM appointment");
-
-//        while (query.next())
-//        {
-//    //        int idName = query.record().indexOf("ID");
-//    //        int id = query.value(idName).toInt();
-
-//            int idName = query.record().indexOf("Date");
-//            QString date = query.value(idName).toString();
-
-//            idName = query.record().indexOf("Day");
-//            int day = query.value(idName).toInt();
-
-//            idName = query.record().indexOf("Month");
-//            int month = query.value(idName).toInt();
-
-//            idName = query.record().indexOf("Year");
-//            int year = query.value(idName).toInt();
-
-//            idName = query.record().indexOf("Starts");
-//            int starttime = query.value(idName).toInt();
-
-//            idName = query.record().indexOf("Ends");
-//            int endtime = query.value(idName).toInt();
-
-//            idName = query.record().indexOf("Description");
-//            QString description = query.value(idName).toString();
-
-//            theEventDate ={day, month,year};
-
-
-//            //int dayDiff =DayDifferenceBetweenDates(todayDate, theEventDate);
-
-//            if (DayDifferenceBetweenDates(todayDate, theEventDate) ==0)
-//            {
-//                //push notification
-//                QString title = "Event today";
-//                QString message =" Description: "+description;
-//                message.append(" Starts: "+QString::number(starttime)+":00"+" Ends: "+QString::number(endtime)+":00");
-//                n = new LXQt::Notification(title);
-//                n->setBody(message);
-//                n->setTimeout(4000);
-//                n->setIcon(QStringLiteral("preferences-desktop-launch-feedback"));
-//                n->update();
-//            }
-//        }
 }
 
 void MainWindow::CheckNotificationReminders()
 {
-    //Todo
+    //Todo ..
 }
 
 void MainWindow::on_pushButtonAddAppointment_clicked()
@@ -229,9 +174,9 @@ void MainWindow::on_pushButtonAddAppointment_clicked()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::information( this, "LxQt Organizer 0.01",
-                              ("Keeping track of appointments and tasks"
-                               "\nLXQt Team") );
+    DialogAbout *aboutDialog = new DialogAbout(this);
+    aboutDialog->setModal(false);
+    aboutDialog->exec();
 }
 
 void MainWindow::on_actionExit_triggered()
@@ -274,13 +219,6 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
     QVariant qv =model->data(index);
     QString qs = qv.toString();
     QStringList ql =qs.split(" ");
-
-    //    foreach(QString item, ql)
-    //    {
-    //        qDebug()<<item;
-    //    }
-    //    QString ids = ql.first();
-    //    qDebug()<<"Index string = "<<ids;
     QString ids = ql.first();
     currentID = ids.toInt();
     //    qDebug()<<"Current ID = "<<currentID;
@@ -289,58 +227,48 @@ void MainWindow::on_listView_clicked(const QModelIndex &index)
 void MainWindow::on_pushButtonAppointmentToday_clicked()
 {
     //Needs an overhaul and rewrite..
-
     model->setStringList(QStringList{});
-
     QDate currentDate = QDate::currentDate();
     Date todayDate = {currentDate.day(), currentDate.month(), currentDate.year()};
-
     Date theEventDate;
+    QSqlQuery query =dbc.SelectAllRecords();
 
-       QSqlQuery query("SELECT * FROM appointment");
+    while (query.next())
+    {
+        int idName = query.record().indexOf("Title");
+        QString title = query.value(idName).toString();
 
-       while (query.next())
-       {
+        idName = query.record().indexOf("Location");
+        QString location = query.value(idName).toString();
 
-           int idName = query.record().indexOf("Title");
-           QString title = query.value(idName).toString();
+        idName = query.record().indexOf("Day");
+        int day = query.value(idName).toInt();
 
-         idName = query.record().indexOf("Location");
-          QString location = query.value(idName).toString();
+        idName = query.record().indexOf("Month");
+        int month = query.value(idName).toInt();
 
-           idName = query.record().indexOf("Day");
-           int day = query.value(idName).toInt();
+        idName = query.record().indexOf("Year");
+        int year = query.value(idName).toInt();
 
-           idName = query.record().indexOf("Month");
-           int month = query.value(idName).toInt();
+        idName = query.record().indexOf("Starts");
+        int starttime = query.value(idName).toInt();
 
-           idName = query.record().indexOf("Year");
-           int year = query.value(idName).toInt();
+        theEventDate ={day, month,year};
+        QDate tmpDate=*new QDate(year, month,day);
 
-           idName = query.record().indexOf("Starts");
-           int starttime = query.value(idName).toInt();
+        if (DayDifferenceBetweenDates(todayDate, theEventDate) ==0)
+        {
+            QString tmpStr = title+ " "
+                    +location+" "+tmpDate.toString()
+                    +" "+QString::number(starttime)+":00";
 
-//           idName = query.record().indexOf("Ends");
-//           int endtime = query.value(idName).toInt();
-
-           theEventDate ={day, month,year};
-           QDate tmpDate=*new QDate(year, month,day);
-
-
-           if (DayDifferenceBetweenDates(todayDate, theEventDate) ==0)
-           {
-               QString tmpStr = title+ " "
-                       +location+" "+tmpDate.toString()
-                       +" "+QString::number(starttime)+":00";
-
-               if(model->insertRow(model->rowCount())) {
-                   QModelIndex index = model->index(model->rowCount() - 1, 0);
-                   model->setData(index, tmpStr);
-               }
-
-               ui->listView->setModel(model);
-           }
-       }
+            if(model->insertRow(model->rowCount())) {
+                QModelIndex index = model->index(model->rowCount() - 1, 0);
+                model->setData(index, tmpStr);
+            }
+            ui->listView->setModel(model);
+        }
+    }
 }
 
 void MainWindow::on_pushButtonDelete_clicked()
