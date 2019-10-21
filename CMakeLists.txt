@@ -42,6 +42,7 @@ include(LXQtPreventInSourceBuilds)
 include(LXQtTranslate)
 
 add_subdirectory(lxqt-organizer)
+add_subdirectory(scripts)
 
 INSTALL(TARGETS
     lxqt-organizer
@@ -49,8 +50,9 @@ INSTALL(TARGETS
     COMPONENT Runtime
 )
 
+
 # install(FILES
-#     man/lxqt-openssh-askpass.1
+#     man/lxqt-organzier.1
 #     DESTINATION "${CMAKE_INSTALL_MANDIR}/man1"
 #     COMPONENT Runtime
 # )
