@@ -16,27 +16,47 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef DIALOGABOUT_H
-#define DIALOGABOUT_H
 
-#include <QDialog>
-
-namespace Ui {
-class DialogAbout;
-}
-
-class DialogAbout : public QDialog
-{
-    Q_OBJECT
-
-public:
-    explicit DialogAbout(QWidget *parent = nullptr);
-    ~DialogAbout();
-    void SetAboutMessage();
+#ifndef EVENT_H
+#define EVENT_H
 
 
-private:
-    Ui::DialogAbout *ui;
+#include <QString>
+
+
+struct Event {
+    int id;
+    QString title;
+    QString location;
+    int day;
+    int month;
+    int year;
+    int startTime;
+    int endTime;
+    int reminderDay;
+    int reminderMonth;
+    int reminderYear;
+    int reminderTime;
+
+    Event(int id, const QString& title, const QString& location,
+                int day, int month, int year,
+                int startTime, int endTime,
+                int reminderDay, int reminderMonth, int reminderYear,
+                int reminderTime ) :
+        id(id),
+        title(title),
+        location(location),
+        day(day),
+        month(month),
+        year(year),
+        startTime(startTime),
+        endTime(endTime),
+        reminderDay(reminderDay),
+        reminderMonth(reminderMonth),
+        reminderYear(reminderYear),
+        reminderTime(reminderTime)
+    {}
 };
 
-#endif // DIALOGABOUT_H
+
+#endif // EVENT_H

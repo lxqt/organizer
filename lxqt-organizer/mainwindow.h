@@ -1,3 +1,21 @@
+/***************************************************************************
+ *   Author aka. crispina                 *
+ *   crispinalan@gmail.com                                                    *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
+ ***************************************************************************/
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -8,19 +26,13 @@
 #include <QSqlQuery>
 #include <QSqlQueryModel>
 #include <QStringListModel>
-#include "dbcontroller.h"
+#include <QTextCharFormat>
 #include "dialogabout.h"
-#include "simpledbusnotifier.h"
-
-
-struct Date
-{
-    int d, m, y;
-};
-
-const int monthDays[12] = {31, 28, 31, 30, 31, 30,
-                        31, 31, 30, 31, 30, 31};
-
+#include "event.h"
+#include "eventmodel.h"
+#include "dbmanager.h"
+#include "dbussessionmessage.h"
+#include "dialogaddevent.h"
 
 namespace Ui {
 class MainWindow;
@@ -33,15 +45,20 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    DbController dbc;
-    QDate eventDate;
+
+    DbManager dbm;
+    //QDate appointmentDate;
+    EventModel eventModel;
     QStringListModel *model; //use model-view architecture
     int day=0;
     int month=0;
     int year=0;
     int startTime=0;
     int endTime=0;
-    int currentID=0;
+    //int id=0;
+    QDate selectedDate;
+    int selectedDbId =0;
+    int selectedRowIdx=0;
     QDate reminderDate;
     int remDay=0;
     int remMonth=0;
@@ -50,17 +67,23 @@ public:
     int reminderDays=0;
     QString title="";
     QString location="";
-    void InitialiseDates();
-    void DisplayAllAppointments();
-    int DayDifferenceBetweenDates(Date dt1, Date dt2); //Will rewrite with QDates
-    int LeapYearNumber(Date d); //Will rewrite with QDate
-    void CheckNotificationsForToday();
-    void CheckNotificationReminders();
+    void initialiseDates();
+    void showDbEventsAll();
+    void ShowDbEventsForDate(QDate &dairyDate);
+    void addEvent();
+    QList<Event> getAllAppointments();
+    bool notificationsFlag;
+    void setDefaultOptions();
+    void setCalendarOptions();
+    QTextCharFormat eventDayFormat;
+    QTextCharFormat weekDayFormat;
+    QTextCharFormat weekendFormat;
+    void resetCalendarColours();
+
 
 
 
 private slots:
-    void on_pushButtonAddAppointment_clicked();
 
     void on_actionAbout_triggered();
 
@@ -68,17 +91,23 @@ private slots:
 
     void on_calendarWidget_clicked(const QDate &date);
 
-    void on_actionDelete_All_triggered();
-
-    void on_pushButtonClear_clicked();
-
-    void on_pushButtonShowAll_clicked();
+    void on_actionDelete_All_triggered();   
 
     void on_listView_clicked(const QModelIndex &index);
 
-    void on_pushButtonAppointmentToday_clicked();
+    void on_actionNotifications_triggered();
 
-    void on_pushButtonDelete_clicked();
+    void on_listView_doubleClicked(const QModelIndex &index);
+
+    void on_actionClear_List_triggered();
+
+    void on_actionCalendar_Grid_triggered();
+
+    void on_actionCalendar_Weeks_triggered();
+
+    void on_actionAdd_triggered();
+
+    void on_actionShow_All_triggered();
 
 private:
     Ui::MainWindow *ui;

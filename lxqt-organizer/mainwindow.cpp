@@ -1,19 +1,40 @@
+/***************************************************************************
+ *   Author aka. crispina                 *
+ *   crispinalan@gmail.com                                                    *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
+ ***************************************************************************/
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "dialogsetappointment.h"
+#include <qcalendarwidget.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
+    eventModel(),
     ui(new Ui::MainWindow)
+     //appointmentModel()
 {
     ui->setupUi(this);
-
     setWindowTitle("LXQt Organizer");
-    dbc.OpenDatabase();
-    dbc.CreateDatabaseTable();
-    InitialiseDates();
-    model= new QStringListModel(this);
-    DisplayAllAppointments();
+    dbm.openDatabase();
+    dbm.createDatabaseTable();
+   // id=0;
+    initialiseDates();
+    setCalendarOptions();
+    ui->calendarWidget->update();
+    showDbEventsAll();
 }
 
 MainWindow::~MainWindow()
@@ -21,155 +42,116 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::InitialiseDates()
+void MainWindow::initialiseDates()
 {
     //initialise event date
-    eventDate = ui->calendarWidget->selectedDate();
-    day =eventDate.day();
-    month=eventDate.month();
-    year=eventDate.year();
-    ui->labelSelectedDate->setText(eventDate.toString());
+    selectedDate = ui->calendarWidget->selectedDate();
+    day =selectedDate.day();
+    month=selectedDate.month();
+    year=selectedDate.year();
+    ui->labelSelectedDate->setText(selectedDate.toString());
 
     //initialise reminder date
     reminderDays=0;
-    reminderDate=eventDate.addDays(-reminderDays);
+    reminderDate=selectedDate.addDays(-reminderDays);
     remDay=reminderDate.day();
     remMonth=reminderDate.month();
     remYear=reminderDate.year();
 }
 
-void MainWindow::DisplayAllAppointments()
+void MainWindow::showDbEventsAll()
 {
-   model->setStringList(QStringList{});
-   QDate tmpDate;
-   //QDate tmpReminderDate;
-   QSqlQuery query=dbc.SelectAllRecords();
-   query.exec();
-    //Get data
-   while (query.next())
-       {
-         int idName = query.record().indexOf("ID");
-         int id = query.value(idName).toInt();
-
-          idName = query.record().indexOf("Title");
-          QString title = query.value(idName).toString();
-
-          idName = query.record().indexOf("Location");
-          QString location = query.value(idName).toString();
-
-           idName = query.record().indexOf("Day");
-           int day = query.value(idName).toInt();
-
-           idName = query.record().indexOf("Month");
-           int month = query.value(idName).toInt();
-
-           idName = query.record().indexOf("Year");
-           int year = query.value(idName).toInt();
-
-           idName = query.record().indexOf("Starts");
-           int starttime = query.value(idName).toInt();
-
-//           idName = query.record().indexOf("Ends");
-//           int endtime = query.value(idName).toInt();
-
-//           idName = query.record().indexOf("ReminderDay");
-//           int remday = query.value(idName).toInt();
-
-//           idName = query.record().indexOf("ReminderMonth");
-//           int remmonth = query.value(idName).toInt();
-
-//           idName = query.record().indexOf("ReminderYear");
-//           int remyear = query.value(idName).toInt();
-
-//           idName = query.record().indexOf("ReminderTime");
-//           int remtime = query.value(idName).toInt();
-
-           tmpDate=*new QDate(year, month,day);
-
-           QString tmpStr = QString::number(id)+" "+title+ " "
-                   +location+" "+tmpDate.toString()
-                   +" "+QString::number(starttime)+":00";
-
-
-           if(model->insertRow(model->rowCount())) {
-               QModelIndex index = model->index(model->rowCount() - 1, 0);
-               model->setData(index, tmpStr);
-           }
-
-           ui->listView->setModel(model);
-   }
-
-}
-
-int MainWindow::DayDifferenceBetweenDates(Date dt1, Date dt2)
-{
-    int n1 = dt1.y*365 + dt1.d;
-        for (int i=0; i<dt1.m - 1; i++){
-            n1 += monthDays[i];
-
-        }
-        n1 += LeapYearNumber(dt1);
-        int n2 = dt2.y*365 + dt2.d;
-        for (int i=0; i<dt2.m - 1; i++)
-        {
-            n2 += monthDays[i];
-
-        }
-        n2 += LeapYearNumber(dt2);
-        return (n2 - n1);
-
-}
-
-int MainWindow::LeapYearNumber(Date d)
-{
-    int years = d.y;
-    if (d.m <= 2)  years--;
-    return years/4 - years/100 + years/400;
-}
-
-void MainWindow::CheckNotificationsForToday()
-{
-    //To do..
-
-}
-
-void MainWindow::CheckNotificationReminders()
-{
-    //Todo ..
-}
-
-void MainWindow::on_pushButtonAddAppointment_clicked()
-{
-    day=eventDate.day();
-    month=eventDate.month();
-    year=eventDate.year();
-
-    DialogSetAppointment *appointmentDialog = new DialogSetAppointment(this, &eventDate);
-    appointmentDialog->setModal(true);
-
-    if (appointmentDialog->exec() == QDialog::Accepted ) {
-
-        title =appointmentDialog->getTitle();
-        location =appointmentDialog->getLocation();
-        startTime=appointmentDialog->getStartTime();
-        endTime=appointmentDialog->getEndTime();
-
-        reminderDate =appointmentDialog->getReminderDate();
-        remDay=reminderDate.day();
-        remMonth=reminderDate.month();
-        remYear=reminderDate.year();
-        remTime=appointmentDialog->getReminderTime();
-
-
-        if (dbc.isOpen())
-        {
-            dbc.addAppointment(title, location, day, month, year,
-                               startTime, endTime,
-                               remDay,remMonth,remYear,remTime);
-        }
-        DisplayAllAppointments();
-
+    eventModel.clearAllEvents();//clear model
+    //get appointments stored in database as a QList
+    QList<Event> list=dbm.getAllAppointments();
+    foreach(Event a, list){
+        Event *atmp = new Event(a.id,
+                                         a.title,
+                                         a.location,
+                                         a.day,
+                                         a.month,
+                                         a.year,
+                                         a.startTime,
+                                         a.endTime,
+                                         a.reminderDay,
+                                         a.reminderMonth,
+                                         a.reminderYear,
+                                         a.reminderTime);
+       qDebug()<<"Database id = "<<a.id;
+       eventModel.addEvent(atmp);
+       QDate tmp=QDate(a.year,a.month,a.day);
+       ui->calendarWidget->setDateTextFormat(tmp,eventDayFormat);
     }
+    ui->listView->setModel(&eventModel); //display
+}
+
+
+void MainWindow::ShowDbEventsForDate(QDate &dairyDate)
+{
+    //resetCalendarColours();
+    eventModel.clearAllEvents();//clear model
+    //get appointments stored in database as a QList
+    eventModel.clearAllEvents();
+    QDate checkDate=QDate(dairyDate);
+    QList<Event> list=dbm.getAppointmentsOnDate(&checkDate);
+    foreach(Event a, list){
+        Event *atmp = new Event(a.id,
+                                         a.title,
+                                         a.location,
+                                         a.day,
+                                         a.month,
+                                         a.year,
+                                         a.startTime,
+                                         a.endTime,
+                                         a.reminderDay,
+                                         a.reminderMonth,
+                                         a.reminderYear,
+                                         a.reminderTime);
+       qDebug()<<"Database id = "<<a.id;
+       eventModel.addEvent(atmp);
+       QDate tmp=QDate(a.year,a.month,a.day);
+       ui->calendarWidget->setDateTextFormat(tmp,eventDayFormat);
+    }
+    ui->listView->setModel(&eventModel);
+}
+
+QList<Event> MainWindow::getAllAppointments()
+{
+    QList<Event> list=dbm.getAllAppointments();
+    return list;
+}
+
+void MainWindow::setDefaultOptions()
+{
+    ui->actionNotifications->setChecked(true);
+    this->notificationsFlag=true;
+}
+
+void MainWindow::setCalendarOptions()
+{
+   ui->calendarWidget->setGridVisible(true);
+   ui->calendarWidget->setVerticalHeaderFormat(ui->calendarWidget->NoVerticalHeader);
+   eventDayFormat.setForeground(Qt::magenta);
+   eventDayFormat.setBackground(Qt::gray);
+   weekDayFormat.setForeground(Qt::black);
+   weekDayFormat.setBackground(Qt::white);
+   weekendFormat.setForeground(Qt::red);
+   weekendFormat.setBackground(Qt::white);
+
+}
+
+void MainWindow::resetCalendarColours()
+{
+    ui->calendarWidget->setWeekdayTextFormat(Qt::Monday, weekDayFormat);
+    ui->calendarWidget->setWeekdayTextFormat(Qt::Tuesday, weekDayFormat);
+    ui->calendarWidget->setWeekdayTextFormat(Qt::Wednesday, weekDayFormat);
+    ui->calendarWidget->setWeekdayTextFormat(Qt::Thursday, weekDayFormat);
+    ui->calendarWidget->setWeekdayTextFormat(Qt::Friday, weekDayFormat);
+
+    ui->calendarWidget->setWeekdayTextFormat(Qt::Saturday, weekendFormat);
+    ui->calendarWidget->setWeekdayTextFormat(Qt::Sunday, weekendFormat);
+    ui->calendarWidget->repaint();
+
 }
 
 void MainWindow::on_actionAbout_triggered()
@@ -186,93 +168,147 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_calendarWidget_clicked(const QDate &date)
 {
-    eventDate=date;
-    ui->labelSelectedDate->setText(eventDate.toString());
-    year =date.year();
-    month =date.month();
-    day=date.day();
+    ui->labelSelectedDate->setText(date.toString());
+    //Show appointments for selected date
+    selectedDate=date;
+    QDate checkDate=QDate(date);
+    ShowDbEventsForDate(checkDate);
 }
-
-
 
 void MainWindow::on_actionDelete_All_triggered()
 {
-    dbc.removeAllAppointments();
-    model->setStringList(QStringList{});
-
+    eventModel.clearAllEvents();
+    ui->listView->setModel(&eventModel);
+    dbm.removeAllAppointments();
 }
 
-void MainWindow::on_pushButtonClear_clicked()
-{
-    model->setStringList(QStringList{});
-    //model->removeRows( 0, model.rowCount() )
-}
-
-void MainWindow::on_pushButtonShowAll_clicked()
-{
-    DisplayAllAppointments();
-}
 
 void MainWindow::on_listView_clicked(const QModelIndex &index)
-{    
-    //Needs overhauling and a rewrite
-    QVariant qv =model->data(index);
-    QString qs = qv.toString();
-    QStringList ql =qs.split(" ");
-    QString ids = ql.first();
-    currentID = ids.toInt();
-    //    qDebug()<<"Current ID = "<<currentID;
+{
+    selectedRowIdx=index.row();
+    Event *a =eventModel.getEvent(selectedRowIdx);    
+    selectedDbId=a->id;
 }
 
-void MainWindow::on_pushButtonAppointmentToday_clicked()
+void MainWindow::on_actionNotifications_triggered()
 {
-    //Needs an overhaul and rewrite..
-    model->setStringList(QStringList{});
-    QDate currentDate = QDate::currentDate();
-    Date todayDate = {currentDate.day(), currentDate.month(), currentDate.year()};
-    Date theEventDate;
-    QSqlQuery query =dbc.SelectAllRecords();
-
-    while (query.next())
+    if(ui->actionNotifications->isChecked())
     {
-        int idName = query.record().indexOf("Title");
-        QString title = query.value(idName).toString();
-
-        idName = query.record().indexOf("Location");
-        QString location = query.value(idName).toString();
-
-        idName = query.record().indexOf("Day");
-        int day = query.value(idName).toInt();
-
-        idName = query.record().indexOf("Month");
-        int month = query.value(idName).toInt();
-
-        idName = query.record().indexOf("Year");
-        int year = query.value(idName).toInt();
-
-        idName = query.record().indexOf("Starts");
-        int starttime = query.value(idName).toInt();
-
-        theEventDate ={day, month,year};
-        QDate tmpDate=*new QDate(year, month,day);
-
-        if (DayDifferenceBetweenDates(todayDate, theEventDate) ==0)
-        {
-            QString tmpStr = title+ " "
-                    +location+" "+tmpDate.toString()
-                    +" "+QString::number(starttime)+":00";
-
-            if(model->insertRow(model->rowCount())) {
-                QModelIndex index = model->index(model->rowCount() - 1, 0);
-                model->setData(index, tmpStr);
-            }
-            ui->listView->setModel(model);
-        }
+        this->notificationsFlag =true;
+    }
+    else {
+        this->notificationsFlag=false;
     }
 }
 
-void MainWindow::on_pushButtonDelete_clicked()
+void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
 {
-    dbc.removeAppointmentById(currentID);
-    DisplayAllAppointments();
+    selectedRowIdx=index.row();
+    Event *a =eventModel.getEvent(selectedRowIdx);
+    QDate tmp=QDate(a->year,a->month,a->day);    
+    selectedDbId=a->id;
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Delete Event");
+    msgBox.setText("Are you sure you want to delete event?");
+    msgBox.setStandardButtons(QMessageBox::Yes);
+    msgBox.addButton(QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::No);
+    if(msgBox.exec() == QMessageBox::Yes){
+        //remove from database
+        dbm.removeAppointmentById(selectedDbId);
+        //remove from model
+        eventModel.removeEvent(selectedRowIdx);
+        ui->listView->setModel(&eventModel);
+        //reset calendar colours
+
+        if(tmp.dayOfWeek()==Qt::Saturday || tmp.dayOfWeek()==Qt::Sunday)
+        {
+            ui->calendarWidget->setDateTextFormat(tmp,weekendFormat);
+        }
+        else {
+           ui->calendarWidget->setDateTextFormat(tmp,weekDayFormat);
+        }
+
+    }else {
+      //qDebug()<<"abort delete event";
+    }
+
+
+}
+
+void MainWindow::on_actionClear_List_triggered()
+{
+    eventModel.clearAllEvents();
+    ui->listView->setModel(&eventModel);
+}
+
+
+void MainWindow::on_actionCalendar_Grid_triggered()
+{
+
+    if (ui->actionCalendar_Grid->isChecked())
+    {
+        ui->calendarWidget->setGridVisible(true);
+    }
+    else {
+        ui->calendarWidget->setGridVisible(false);
+    }
+}
+
+void MainWindow::on_actionCalendar_Weeks_triggered()
+{
+    if(ui->actionCalendar_Weeks->isChecked())
+    {
+        ui->calendarWidget->setVerticalHeaderFormat(ui->calendarWidget->ISOWeekNumbers);
+    }
+    else {
+        ui->calendarWidget->setVerticalHeaderFormat(ui->calendarWidget->NoVerticalHeader);
+    }
+}
+
+void MainWindow::on_actionAdd_triggered()
+{
+      addEvent();
+}
+
+void MainWindow::addEvent()
+{
+   // DialogSetAppointment *appointmentDialog = new DialogSetAppointment(this, &selectedDate);
+   // appointmentDialog->setModal(true);
+    DialogAddEvent *addEventDialog = new  DialogAddEvent(this,&selectedDate);
+    addEventDialog->setModal(true);
+
+    if (addEventDialog->exec() == QDialog::Accepted ) {
+
+        title =addEventDialog->getTitle();
+        location =addEventDialog->getLocation();
+
+        selectedDate=addEventDialog->getEventDate();
+        day=selectedDate.day();
+        month =selectedDate.month();
+        year =selectedDate.year();
+        startTime=addEventDialog->getStartTime();
+        endTime=addEventDialog->getEndTime();
+
+        reminderDate =addEventDialog->getReminderDate();
+        remDay=reminderDate.day();
+        remMonth=reminderDate.month();
+        remYear=reminderDate.year();
+        remTime=addEventDialog->getReminderTime();
+        //Add new appointment to database (id autogenerated)
+        if (dbm.isOpen())
+        {
+            qDebug()<<"adding appointment..";
+            dbm.addAppointment(title, location, day, month, year,
+                               startTime, endTime,
+                               remDay,remMonth,remYear,remTime);
+        }
+        showDbEventsAll();
+        ui->listView->setModel(&eventModel); //?
+    }
+}
+
+void MainWindow::on_actionShow_All_triggered()
+{
+     showDbEventsAll();
 }

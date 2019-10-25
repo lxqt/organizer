@@ -16,27 +16,42 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef DIALOGABOUT_H
-#define DIALOGABOUT_H
+#ifndef DBMANAGER_H
+#define DBMANAGER_H
 
-#include <QDialog>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QStringListModel>
+#include <QDebug>
+#include <QDate>
+#include <QList>
+#include"event.h"
 
-namespace Ui {
-class DialogAbout;
-}
 
-class DialogAbout : public QDialog
+class DbManager
 {
-    Q_OBJECT
-
 public:
-    explicit DialogAbout(QWidget *parent = nullptr);
-    ~DialogAbout();
-    void SetAboutMessage();
+    DbManager();
+    QSqlDatabase db;
+    bool isOpen() const;
+    void openDatabase();
+    void createDatabaseTable();
+
+    bool removeAllAppointments();
+    bool removeAppointmentById(const int id);
 
 
-private:
-    Ui::DialogAbout *ui;
+    void addAppointment(Event &appointment);
+
+    void addAppointment(QString &title, QString &location,
+                            int &day, int &month, int &year,
+                            int &starttime, int &endtime,
+                            int &remday, int &remmonth, int &remyear, int&remtime);
+    QList<Event> getAllAppointments();
+    QList<Event> getAppointmentsToday();
+    QList<Event> getAppointmentsOnDate(QDate *diaryDate);
 };
 
-#endif // DIALOGABOUT_H
+#endif // DBMANAGER_H

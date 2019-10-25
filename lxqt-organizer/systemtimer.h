@@ -16,27 +16,35 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef DIALOGABOUT_H
-#define DIALOGABOUT_H
+#ifndef SYSTEMTIMER_H
+#define SYSTEMTIMER_H
 
-#include <QDialog>
+#include <QTimer>
+#include <QDebug>
+#include <QDate>
+#include <QTime>
+#include <QList>
 
-namespace Ui {
-class DialogAbout;
-}
+#include "event.h"
+#include "mainwindow.h"
+#include "dbussessionmessage.h"
 
-class DialogAbout : public QDialog
+
+class SystemTimer: public QObject
 {
-    Q_OBJECT
-
 public:
-    explicit DialogAbout(QWidget *parent = nullptr);
-    ~DialogAbout();
-    void SetAboutMessage();
+    SystemTimer();    
+    QTimer *timer;
+    QDate currentDate;
+    QDate eventDate;
+    QDate reminderDate;
+    QTime currentTime;
+    void checkReminders(int currentHour);
 
 
-private:
-    Ui::DialogAbout *ui;
+    public slots:
+           void SystemTimerSlot();
+
 };
 
-#endif // DIALOGABOUT_H
+#endif // SYSTEMTIMER_H

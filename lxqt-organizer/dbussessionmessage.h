@@ -16,27 +16,50 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef DIALOGABOUT_H
-#define DIALOGABOUT_H
+#ifndef DBUSSESSIONMESSAGE_H
+#define DBUSSESSIONMESSAGE_H
 
-#include <QDialog>
 
-namespace Ui {
-class DialogAbout;
-}
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
+#include <QDBusInterface>
+#include <QObject>
+#include <QTimer>
+#include <QDebug>
 
-class DialogAbout : public QDialog
+#define SERVICE_FREEDESKTOP "org.freedesktop.Notifications"
+#define PATH_FREEDESKTOP "/org/freedesktop/Notifications"
+#define INTERFACE_FREEDESKTOP "org.freedesktop.Notifications"
+
+struct MessageData {
+    QString header;
+    QString message;
+
+    MessageData(QString header, QString message)
+    {
+        this->header = header;
+        this->message = message;
+    }
+};
+
+class QDBusInterface; //declare the interface
+
+
+
+class DbusSessionMessage: public QObject
 {
     Q_OBJECT
 
-public:
-    explicit DialogAbout(QWidget *parent = nullptr);
-    ~DialogAbout();
-    void SetAboutMessage();
 
+public:
+    explicit DbusSessionMessage(QObject *parent = nullptr);
+    void displayMessage(const MessageData& message);
 
 private:
-    Ui::DialogAbout *ui;
+    QList<QVariant> prepareDbusMessage(const MessageData& message);
+    QDBusInterface *dbusNotifier;
+    int messageDuration;
+    QString theIconPath;
 };
 
-#endif // DIALOGABOUT_H
+#endif // DBUSSESSIONMESSAGE_H

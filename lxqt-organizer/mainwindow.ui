@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1065</width>
-    <height>485</height>
+    <width>816</width>
+    <height>398</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,66 +18,31 @@
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QCalendarWidget" name="calendarWidget"/>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelDate">
-          <property name="text">
-           <string>Selected Date: </string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelSelectedDate">
-          <property name="font">
-           <font>
-            <pointsize>14</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>the Date</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButtonAddAppointment">
+       <widget class="QLabel" name="labelSelectedDate">
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
-         <string>Add Appointment</string>
+         <string>the Date</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButtonAppointmentToday">
-        <property name="text">
-         <string>Appointments Today</string>
+       <widget class="QCalendarWidget" name="calendarWidget">
+        <property name="verticalHeaderFormat">
+         <enum>QCalendarWidget::NoVerticalHeader</enum>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButtonShowAll">
-        <property name="text">
-         <string>Show All</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout"/>
       </item>
      </layout>
     </item>
@@ -103,7 +68,7 @@
           <item>
            <widget class="QLabel" name="labelAppointmentSchedule">
             <property name="text">
-             <string>Appointment Schedule</string>
+             <string> Schedule</string>
             </property>
            </widget>
           </item>
@@ -114,37 +79,6 @@
       <item>
        <widget class="QListView" name="listView"/>
       </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButtonClear">
-          <property name="text">
-           <string>Clear</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButtonDelete">
-          <property name="text">
-           <string>Delete</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
      </layout>
     </item>
    </layout>
@@ -154,7 +88,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1065</width>
+     <width>816</width>
      <height>29</height>
     </rect>
    </property>
@@ -168,6 +102,10 @@
     <property name="title">
      <string>Edit</string>
     </property>
+    <addaction name="actionAdd"/>
+    <addaction name="separator"/>
+    <addaction name="actionClear_List"/>
+    <addaction name="separator"/>
     <addaction name="actionDelete_All"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -176,8 +114,24 @@
     </property>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuOptiions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="actionNotifications"/>
+    <addaction name="actionCalendar_Grid"/>
+    <addaction name="actionCalendar_Weeks"/>
+   </widget>
+   <widget class="QMenu" name="menuShow">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionShow_All"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuShow"/>
+   <addaction name="menuOptiions"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -187,6 +141,9 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionAdd"/>
+   <addaction name="actionShow_All"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAbout">
@@ -202,6 +159,64 @@
   <action name="actionDelete_All">
    <property name="text">
     <string>Delete All</string>
+   </property>
+  </action>
+  <action name="actionNotifications">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Notifications</string>
+   </property>
+  </action>
+  <action name="actionClear_List">
+   <property name="text">
+    <string>Clear List</string>
+   </property>
+  </action>
+  <action name="actionCalendar_Grid">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Calendar Grid</string>
+   </property>
+  </action>
+  <action name="actionCalendar_Weeks">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Calendar Weeks</string>
+   </property>
+  </action>
+  <action name="actionShow_All">
+   <property name="icon">
+    <iconset>
+     <normalon>:/new/svg/icons/view.svg</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Show All</string>
+   </property>
+  </action>
+  <action name="actionAdd">
+   <property name="icon">
+    <iconset>
+     <normalon>:/new/svg/icons/add.svg</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Add</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Event</string>
    </property>
   </action>
  </widget>
