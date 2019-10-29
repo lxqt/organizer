@@ -36,7 +36,6 @@
 #include "appointmentmodel.h"
 #include "proxymodel.h"
 
-
 namespace Ui {
 class MainWindow;
 }
@@ -76,12 +75,10 @@ public:
     QTimer *timer;
 
     //Models
-
     AppointmentModel *appointmentModel;
     AppointmentModel *dayModel;
     AppointmentModel *reminderModel;
     ProxyModel *proxyModel;
-
 
     //Methods
     void initialiseDates();
@@ -91,13 +88,8 @@ public:
     void showDayAppointmentsForDate(QDate theSelectedDate);
     void showAllEventsOnCalendar();
     void clearAllEventsOnCalendar();
-
-
-
     void AddAppointment();
     void checkForReminders();
-
-
 
 private slots:
 

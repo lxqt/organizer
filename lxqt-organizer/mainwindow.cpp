@@ -84,8 +84,6 @@ void MainWindow::initialiseDates()
         day =selectedDate.day();
         month=selectedDate.month();
         year=selectedDate.year();
-        //ui->labelSelectedDate->setText(selectedDate.toString());
-
         //initialise reminder date
         reminderDays=0;
         reminderDate=selectedDate.addDays(-reminderDays);
@@ -140,10 +138,7 @@ void MainWindow::loadAppointmentModelFromDatabase()
 void MainWindow::showDayAppointmentsForDate(QDate theSelectedDate)
 {
     dayModel->clearAllAppointments();//clear model
-    //Now load day model with appointments for the selected date
-    //Could use appointment model?
-    //Display on table view
-    QList<Appointment> list=dbm.getAllAppointments();
+        QList<Appointment> list=dbm.getAllAppointments();
     foreach(Appointment a, list){
 
         QDate evtDate=QDate(a.m_year,a.m_month,a.m_day);
@@ -151,12 +146,6 @@ void MainWindow::showDayAppointmentsForDate(QDate theSelectedDate)
 
         if (evtDate ==checkDate)
         {
-//            qDebug()<<"Database id = "<<a.m_id;
-//            qDebug()<<"Datebase start time = "<<a.m_startTime;
-//            qDebug()<<"Datebase start time = "<<a.m_endTime;
-//            qDebug()<<"Datebase title  = "<<a.m_title;
-//            qDebug()<<"Datebase location = "<<a.m_location;
-
             Appointment *atmp = new Appointment
                     (a.m_id,
                      a.m_title,
@@ -170,20 +159,18 @@ void MainWindow::showDayAppointmentsForDate(QDate theSelectedDate)
                      a.m_reminderMonth,
                      a.m_reminderYear,
                      a.m_reminderTime);
-               //qDebug()<<"Database id = "<<a.id;
+
             dayModel->addAppointment(*atmp);
         }
     }//foreach
 
     proxyModel->setSourceModel(dayModel);
     ui->tableView->setModel(proxyModel);
-
     //enable sorting then sort then disable sorting
     ui->tableView->setSortingEnabled(true);
     ui->tableView->sortByColumn(0, Qt::AscendingOrder);
     ui->tableView->horizontalHeader()->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableView->setSortingEnabled(false);
-
     ui->tableView->hideColumn(0); //int time for sorting
     ui->tableView->hideColumn(1); //database id
     ui->tableView->hideColumn(2); //date string
@@ -241,27 +228,13 @@ void MainWindow::AddAppointment()
         remYear=reminderDate.year();
         remTime=addAppointmentDialog->getReminderTime();
 
-//        qDebug()<<"Title = "<<title;
-//        qDebug()<<"Location = "<<location;
-//        qDebug()<<"Appointment Day ="<<day;
-//        qDebug()<<"Appointment Month ="<<month;
-//        qDebug()<<"Appointment Year ="<<year;
-//        qDebug()<<"Start Time = "<<startTime;
-//        qDebug()<<"End Time = "<<endTime;
-//        qDebug()<<"Reminder Day = "<<remDay;
-//        qDebug()<<"Reminder Month = "<<remMonth;
-//        qDebug()<<"Reminder Year = "<<remYear;
-//        qDebug()<<"Reminder Time = "<<remTime;
-
         if (dbm.isOpen())
         {
             qDebug()<<"adding appointment..";
             if(dbm.addAppointment(title, location, day, month, year,
                                   startTime, endTime,
                                   remDay,remMonth,remYear,remTime))
-            {
-                //if successfully added appointment update model
-                //load all appointment directly from db to capture auto generated id
+            {            
                 loadAppointmentModelFromDatabase();
                 QDate d=QDate(year,month,day);
                 showDayAppointmentsForDate(d);
@@ -280,19 +253,15 @@ void MainWindow::checkForReminders()
     QDate currentDate=QDate::currentDate();
     QTime currentTime= QTime::currentTime();
     int currentHour =currentTime.hour();
-    reminderModel->clearAllAppointments();
+    //reminderModel->clearAllAppointments();
 
     QList<Appointment> list=dbm.getAllAppointments();
     foreach(Appointment a, list){
-//        qDebug()<<"Appointment title = "<<a.m_title;
-//        qDebug()<<"Reminder date = "<<reminderDate.toString();
-//        qDebug()<<"Reminder hour = "<<a.m_reminderTime;
+
         if (reminderDate==currentDate)
         {
-            //qDebug()<<"Current and reminder dates equal";
 
             if(currentHour==a.m_reminderTime){
-                //qDebug()<<"Date and time match: Show Reminder Alarm!";
                 reminderModel->addAppointment(a);
                 ui->statusBar->showMessage("Event reminder!!",5000); //5 seconds
                 if (notificationsFlag){
@@ -325,17 +294,13 @@ void MainWindow::timerUpdateSlot()
     for (int i=0; i<24; i++) //Check 24 hour clock
     {
         if (hour ==i){
-            //qDebug()<<"Current hour = "<<i;
-            //qDebug()<<"Current minute = "<<minute;
-            //qDebug()<<"Current seconds = "<<second;
-            if((minute ==0) && (second ==0))
+             if((minute ==0) && (second ==0))
             {
                 qDebug()<<"Minute and seconds are zero checking reminders on the hour";
                 checkForReminders();
             }
         }
     }
-
 }
 
 void MainWindow::on_actionExit_triggered()
@@ -358,8 +323,7 @@ void MainWindow::on_actionAbout_triggered()
 void MainWindow::on_calendarWidget_clicked(const QDate &date)
 {
     selectedDate=date;
-    ui->labelSchedule->setText("Schedule for "+date.toString());
-    //Show the day appointment schedule next
+    ui->labelSchedule->setText("Schedule for "+date.toString());    
     showDayAppointmentsForDate(selectedDate);
 }
 
@@ -394,7 +358,6 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
     if(msgBox.exec() == QMessageBox::Yes){
         //remove from database
         dbm.removeAppointmentById(selectedDbId);
-        //don't remove from model- need to reload all directly from db
 
         if(selectedDate.dayOfWeek()==Qt::Saturday || selectedDate.dayOfWeek()==Qt::Sunday)
         {

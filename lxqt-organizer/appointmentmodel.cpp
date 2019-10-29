@@ -19,7 +19,6 @@
 
 #include "appointmentmodel.h"
 
-
 AppointmentModel::AppointmentModel(QObject *parent):
     QAbstractTableModel(parent)
 {

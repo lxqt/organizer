@@ -19,7 +19,6 @@
 #ifndef DBUSSESSIONMESSAGE_H
 #define DBUSSESSIONMESSAGE_H
 
-
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QDBusInterface>
@@ -43,8 +42,6 @@ struct MessageData {
 };
 
 class QDBusInterface; //declare the interface
-
-
 
 class DbusSessionMessage: public QObject
 {

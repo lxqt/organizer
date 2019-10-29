@@ -18,7 +18,6 @@
 
 #include "dbussessionmessage.h"
 
-
 DbusSessionMessage::DbusSessionMessage(QObject *parent) : QObject(parent)
 {
    //Use the default session bus for desktop message notifications

@@ -34,7 +34,6 @@ public:
     ~DialogAbout();
     void SetAboutMessage();
 
-
 private:
     Ui::DialogAbout *ui;
 };

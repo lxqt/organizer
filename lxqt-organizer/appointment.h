@@ -19,8 +19,6 @@
 #ifndef APPOINTMENT_H
 #define APPOINTMENT_H
 
-
-
 #include <QString>
 struct Appointment {
 
@@ -49,9 +47,7 @@ struct Appointment {
         m_reminderYear(reminderYear),
         m_reminderTime(reminderTime)
     {
-
     }
-
    int m_id;
    QString m_title;
    QString m_location;
@@ -64,8 +60,6 @@ struct Appointment {
    int m_reminderMonth;
    int m_reminderYear;
    int m_reminderTime;
-
-
 };
 
 

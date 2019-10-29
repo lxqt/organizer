@@ -65,5 +65,4 @@ void DialogAbout::SetAboutMessage()
     ui->plainTextEditAbout->setPlainText(msg);
     ui->labelLXQt->setTextFormat(Qt::RichText);
     ui->labelLXQt->setText(lxqtLinkMsg);
-
 }

@@ -42,9 +42,6 @@ public:
     bool removeAllAppointments();
     bool removeAppointmentById(const int id);
 
-
-    //bool addAppointment(Event &appointment);
-
     bool addAppointment(QString &title, QString &location,
                             int &day, int &month, int &year,
                             int &starttime, int &endtime,

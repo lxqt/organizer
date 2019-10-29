@@ -20,7 +20,6 @@
 
 DbManager::DbManager()
 {
-
 }
 
 bool DbManager::isOpen() const
@@ -93,43 +92,6 @@ bool DbManager::removeAppointmentById(const int id)
     qDebug()<< "Remove appointment success = "<<success;
     return success;
 }
-
-//bool DbManager::addAppointment(Event &appointment)
-//{
-//    QString title=appointment.title;
-//    QString location=appointment.location;
-//    int day =appointment.day;
-//    int month=appointment.month;
-//    int year=appointment.year;
-//    int starttime=appointment.startTime;
-//    int endtime=appointment.endTime;
-//    int remday=appointment.reminderDay;
-//    int remmonth=appointment.reminderMonth;
-//    int remyear=appointment.reminderYear;
-//    int remtime=appointment.reminderTime;
-
-//    QSqlQuery query;
-//    query.prepare("INSERT INTO appointment(`ID`,`Title`,`Location`,`Day`,`Month`,`Year`,`Starts`,`Ends`,`ReminderDay`,`ReminderMonth`,`ReminderYear`,`ReminderTime`) "
-//                  "VALUES (:idin, :tin, :lin,:dyin, :mnin, :yrin, :stin,:etin,:drin, :mrin,:yrrin,:rtin);");
-//    //query.bindValue(":idin", 1); //autoincrement as primary key
-//    query.bindValue(":tin", title); //title in
-//    query.bindValue(":lin",location);
-//    query.bindValue(":dyin", day);
-//    query.bindValue(":mnin", month);
-//    query.bindValue(":yrin", year);
-//    query.bindValue(":stin", starttime);
-//    query.bindValue(":etin", endtime);
-//    query.bindValue(":drin", remday);
-//    query.bindValue(":mrin", remmonth);
-//    query.bindValue(":yrrin", remyear);
-//    query.bindValue(":rtin", remtime);
-//    bool success = query.exec();
-//    if (success) {
-//        qDebug() << "added new record";
-//    } else {
-//        qDebug() << "new record add failed" << query.lastError();
-//    }
-//}
 
 bool DbManager::addAppointment(QString &title, QString &location, int &day, int &month, int &year, int &starttime, int &endtime, int &remday, int &remmonth, int &remyear, int &remtime)
 {
