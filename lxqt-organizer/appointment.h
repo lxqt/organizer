@@ -16,42 +16,57 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef DBMANAGER_H
-#define DBMANAGER_H
-
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QSqlRecord>
-#include <QStringListModel>
-#include <QDebug>
-#include <QDate>
-#include <QList>
-#include"appointment.h"
+#ifndef APPOINTMENT_H
+#define APPOINTMENT_H
 
 
-class DbManager
-{
-public:
-    DbManager();
-    QSqlDatabase db;
-    bool isOpen() const;
-    void openDatabase();
-    void createDatabaseTable();
 
-    bool removeAllAppointments();
-    bool removeAppointmentById(const int id);
+#include <QString>
+struct Appointment {
+
+    Appointment(int id=0,
+                const QString& title= QString(),
+                const QString& location= QString(),
+                int day=0,
+                int month=0,
+                int year=0,
+                int startTime=0,
+                int endTime=0,
+                int reminderDay=0,
+                int reminderMonth=0,
+                int reminderYear=0,
+                int reminderTime=0 ):
+        m_id(id),
+        m_title(title),
+        m_location(location),
+        m_day(day),
+        m_month(month),
+        m_year(year),
+        m_startTime(startTime),
+        m_endTime(endTime),
+        m_reminderDay(reminderDay),
+        m_reminderMonth(reminderMonth),
+        m_reminderYear(reminderYear),
+        m_reminderTime(reminderTime)
+    {
+
+    }
+
+   int m_id;
+   QString m_title;
+   QString m_location;
+   int m_day;
+   int m_month;
+   int m_year;
+   int m_startTime;
+   int m_endTime;
+   int m_reminderDay;
+   int m_reminderMonth;
+   int m_reminderYear;
+   int m_reminderTime;
 
 
-    //bool addAppointment(Event &appointment);
-
-    bool addAppointment(QString &title, QString &location,
-                            int &day, int &month, int &year,
-                            int &starttime, int &endtime,
-                            int &remday, int &remmonth, int &remyear, int&remtime);
-    QList<Appointment> getAllAppointments();
-    QList<Appointment> getAppointmentsToday();
-    QList<Appointment> getAppointmentsOnDate(QDate *diaryDate);
 };
 
-#endif // DBMANAGER_H
+
+#endif // APPOINTMENT_H

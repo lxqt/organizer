@@ -15,61 +15,42 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
+#ifndef APPOINTMENTMODEL_H
+#define APPOINTMENTMODEL_H
 
-
-#ifndef DIALOGADDEVENT_H
-#define DIALOGADDEVENT_H
-
-
-#include <QDialog>
+#include <QAbstractTableModel>
+#include "appointment.h"
+#include <QColor>
+#include <QList>
 #include <QDate>
 #include <QDebug>
-#include <QMessageBox>
 
-namespace Ui {
-class DialogAddEvent;
-}
-
-class DialogAddEvent : public QDialog
+class AppointmentModel : public QAbstractTableModel
 {
-    Q_OBJECT
-
 public:
-    explicit DialogAddEvent(QWidget *parent = nullptr,  QDate *eventDate=nullptr);
-    ~DialogAddEvent();
-    QString getTitle();
-    QString getLocation();
-    QDate getEventDate();
-    int getStartTime();
-    int getEndTime();
-    QDate getReminderDate();
-    int getReminderTime();
-
-    QDate eventDate;
-    int startTime=0;
-    int endTime=0;
-
-    QDate reminderDate;
-    int reminderTime=0;
-    int reminderDays=0;
-
-    void setupComboBoxes();
-
-private slots:
+    AppointmentModel(QObject* parent = nullptr);
 
 
-    void on_dateEdit_userDateChanged(const QDate &date);
+    AppointmentModel(const QList<Appointment>& appointmentList,
+                                  QObject *parent = nullptr);
 
-    void on_comboBoxStartTime_activated(int index);
+    void addAppointment(Appointment &appointment);
+    Appointment getAppointment(int index);
+    void clearAllAppointments();
+    void removeAppointment(int idx);
 
-    void on_comboBoxEndTime_activated(int index);
+    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
-    void on_comboBoxReminderDays_activated(int index);
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    void on_comboBoxReminderTime_activated(int index);
+    QVariant data (const QModelIndex & index,
+                           int role = Qt::DisplayRole) const override;
 
+    QVariant headerData(int section, Qt::Orientation orientation,
+                                int role = Qt::DisplayRole) const override;
 private:
-    Ui::DialogAddEvent *ui;
+    QList<Appointment> modelAppointmentList;
+
 };
 
-#endif // DIALOGADDEVENT_H
+#endif // APPOINTMENTMODEL_H

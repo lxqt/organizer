@@ -24,9 +24,12 @@ DbusSessionMessage::DbusSessionMessage(QObject *parent) : QObject(parent)
    //Use the default session bus for desktop message notifications
     dbusNotifier = new QDBusInterface(QStringLiteral(SERVICE_FREEDESKTOP), QStringLiteral(PATH_FREEDESKTOP), QStringLiteral(INTERFACE_FREEDESKTOP),
                                       QDBusConnection::sessionBus(), this);
-       if (dbusNotifier->lastError().type() != QDBusError::NoError) {          
+       if (dbusNotifier->lastError().type() != QDBusError::NoError) {
+           qDebug() << "Unable to create QDBus interface.";
            return;
-       }       
+       }
+       //qDebug() << "QDBus interface successfully created (it works!)";
+
        this->messageDuration=2000;
        this->theIconPath="";
 }

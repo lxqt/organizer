@@ -73,7 +73,7 @@ bool DbManager::removeAllAppointments()
     }
     else
     {
-       // qDebug() << "remove all appointments failed: " << removeQuery.lastError();
+        qDebug() << "remove all appointments failed: " << removeQuery.lastError();
     }
     return success;
 }
@@ -88,51 +88,52 @@ bool DbManager::removeAppointmentById(const int id)
     success = queryDelete.exec();
     if(!success)
     {
-       // qDebug() << "remove appointment failed: " << queryDelete.lastError();
+        qDebug() << "remove appointment failed: " << queryDelete.lastError();
     }
-   // qDebug()<< "Remove appointment success = "<<success;
+    qDebug()<< "Remove appointment success = "<<success;
     return success;
 }
 
-void DbManager::addAppointment(Event &appointment)
-{
-    QString title=appointment.title;
-    QString location=appointment.location;
-    int day =appointment.day;
-    int month=appointment.month;
-    int year=appointment.year;
-    int starttime=appointment.startTime;
-    int endtime=appointment.endTime;
-    int remday=appointment.reminderDay;
-    int remmonth=appointment.reminderMonth;
-    int remyear=appointment.reminderYear;
-    int remtime=appointment.reminderTime;
+//bool DbManager::addAppointment(Event &appointment)
+//{
+//    QString title=appointment.title;
+//    QString location=appointment.location;
+//    int day =appointment.day;
+//    int month=appointment.month;
+//    int year=appointment.year;
+//    int starttime=appointment.startTime;
+//    int endtime=appointment.endTime;
+//    int remday=appointment.reminderDay;
+//    int remmonth=appointment.reminderMonth;
+//    int remyear=appointment.reminderYear;
+//    int remtime=appointment.reminderTime;
 
-    QSqlQuery query;
-    query.prepare("INSERT INTO appointment(`ID`,`Title`,`Location`,`Day`,`Month`,`Year`,`Starts`,`Ends`,`ReminderDay`,`ReminderMonth`,`ReminderYear`,`ReminderTime`) "
-                  "VALUES (:idin, :tin, :lin,:dyin, :mnin, :yrin, :stin,:etin,:drin, :mrin,:yrrin,:rtin);");
-    //query.bindValue(":idin", 1); //autoincrement as primary key
-    query.bindValue(":tin", title); //title in
-    query.bindValue(":lin",location);
-    query.bindValue(":dyin", day);
-    query.bindValue(":mnin", month);
-    query.bindValue(":yrin", year);
-    query.bindValue(":stin", starttime);
-    query.bindValue(":etin", endtime);
-    query.bindValue(":drin", remday);
-    query.bindValue(":mrin", remmonth);
-    query.bindValue(":yrrin", remyear);
-    query.bindValue(":rtin", remtime);
-    bool success = query.exec();
-    if (success) {
-        qDebug() << "added new record";
-    } else {
-        qDebug() << "new record add failed" << query.lastError();
-    }
-}
+//    QSqlQuery query;
+//    query.prepare("INSERT INTO appointment(`ID`,`Title`,`Location`,`Day`,`Month`,`Year`,`Starts`,`Ends`,`ReminderDay`,`ReminderMonth`,`ReminderYear`,`ReminderTime`) "
+//                  "VALUES (:idin, :tin, :lin,:dyin, :mnin, :yrin, :stin,:etin,:drin, :mrin,:yrrin,:rtin);");
+//    //query.bindValue(":idin", 1); //autoincrement as primary key
+//    query.bindValue(":tin", title); //title in
+//    query.bindValue(":lin",location);
+//    query.bindValue(":dyin", day);
+//    query.bindValue(":mnin", month);
+//    query.bindValue(":yrin", year);
+//    query.bindValue(":stin", starttime);
+//    query.bindValue(":etin", endtime);
+//    query.bindValue(":drin", remday);
+//    query.bindValue(":mrin", remmonth);
+//    query.bindValue(":yrrin", remyear);
+//    query.bindValue(":rtin", remtime);
+//    bool success = query.exec();
+//    if (success) {
+//        qDebug() << "added new record";
+//    } else {
+//        qDebug() << "new record add failed" << query.lastError();
+//    }
+//}
 
-void DbManager::addAppointment(QString &title, QString &location, int &day, int &month, int &year, int &starttime, int &endtime, int &remday, int &remmonth, int &remyear, int &remtime)
+bool DbManager::addAppointment(QString &title, QString &location, int &day, int &month, int &year, int &starttime, int &endtime, int &remday, int &remmonth, int &remyear, int &remtime)
 {
+    bool success=false;
     QSqlQuery query;
 
           query.prepare("INSERT INTO appointment(`ID`,`Title`,`Location`,`Day`,`Month`,`Year`,`Starts`,`Ends`,`ReminderDay`,`ReminderMonth`,`ReminderYear`,`ReminderTime`) "
@@ -149,17 +150,19 @@ void DbManager::addAppointment(QString &title, QString &location, int &day, int 
           query.bindValue(":mrin", remmonth);
           query.bindValue(":yrrin", remyear);
           query.bindValue(":rtin", remtime);
-          bool success = query.exec();
+          success = query.exec();
           if (success) {
               qDebug() << "added new record";
+              return success;
           } else {
               qDebug() << "new record add failed" << query.lastError();
           }
+          return success;
 }
 
-QList<Event> DbManager::getAllAppointments()
+QList<Appointment> DbManager::getAllAppointments()
 {
-    QList<Event> appointmentList;
+    QList<Appointment> appointmentList;
 
     QSqlQuery query("SELECT * FROM appointment");
 
@@ -201,10 +204,23 @@ QList<Event> DbManager::getAllAppointments()
         int remyear = query.value(idName).toInt();
 
         idName = query.record().indexOf("ReminderTime");
-        int remtime = query.value(idName).toInt();        
+        int remtime = query.value(idName).toInt();
+
+//        qDebug()<<"Title = "<<title;
+//        qDebug()<<"Location = "<<location;
+//        qDebug()<<"Appointment Day ="<<day;
+//        qDebug()<<"Appointment Month ="<<month;
+//        qDebug()<<"Appointment Year ="<<year;
+//        qDebug()<<"Start Time = "<<starttime;
+//        qDebug()<<"End Time = "<<endtime;
+//        qDebug()<<"Reminder Day = "<<remday;
+//        qDebug()<<"Reminder Month = "<<remmonth;
+//        qDebug()<<"Reminder Year = "<<remyear;
+//        qDebug()<<"Reminder Time = "<<remtime;
 
         //Create a temporatory appointment
-        Event *a = new Event(id,
+
+        Appointment *a = new Appointment(id,
                                          title,
                                          location,
                                          day,
@@ -219,14 +235,21 @@ QList<Event> DbManager::getAllAppointments()
 
         appointmentList.append(*a);
        }
+
+
     return appointmentList;
 }
 
-QList<Event> DbManager::getAppointmentsToday()
+QList<Appointment> DbManager::getAppointmentsToday()
 {
     QDate currentDate = QDate::currentDate();
-    QList<Event> appointmentList = QList<Event>(); //Construct an empty list
+
+
+    QList<Appointment> appointmentList = QList<Appointment>(); //Construct an empty list
+   // QList<Appointment> appointmentList;
+
     QSqlQuery query("SELECT * FROM appointment");
+
     query.exec();
 
     while (query.next())
@@ -266,12 +289,27 @@ QList<Event> DbManager::getAppointmentsToday()
 
         idName = query.record().indexOf("ReminderTime");
         int remtime = query.value(idName).toInt();
+
+//        qDebug()<<"Title = "<<title;
+//        qDebug()<<"Location = "<<location;
+//        qDebug()<<"Appointment Day ="<<day;
+//        qDebug()<<"Appointment Month ="<<month;
+//        qDebug()<<"Appointment Year ="<<year;
+//        qDebug()<<"Start Time = "<<starttime;
+//        qDebug()<<"End Time = "<<endtime;
+//        qDebug()<<"Reminder Day = "<<remday;
+//        qDebug()<<"Reminder Month = "<<remmonth;
+//        qDebug()<<"Reminder Year = "<<remyear;
+//        qDebug()<<"Reminder Time = "<<remtime;
+
+        //Create a temporatory appointment
+
 
         QDate eventDate =QDate(year,month,day);
 
         if (eventDate==currentDate){
 
-            Event *a = new Event(id,
+            Appointment *a = new Appointment(id,
                                              title,
                                              location,
                                              day,
@@ -285,17 +323,24 @@ QList<Event> DbManager::getAppointmentsToday()
                                              remtime);
 
             appointmentList.append(*a);
+
+
         }
        }
+
+
     return appointmentList;
+
 }
 
-QList<Event> DbManager::getAppointmentsOnDate(QDate *diaryDate)
+QList<Appointment> DbManager::getAppointmentsOnDate(QDate *diaryDate)
 {
     QDate checkDate = QDate(*diaryDate);
 
 
-    QList<Event> appointmentList = QList<Event>(); //Construct an empty list
+    QList<Appointment> appointmentList = QList<Appointment>(); //Construct an empty list
+   // QList<Appointment> appointmentList;
+
     QSqlQuery query("SELECT * FROM appointment");
 
     query.exec();
@@ -338,11 +383,26 @@ QList<Event> DbManager::getAppointmentsOnDate(QDate *diaryDate)
         idName = query.record().indexOf("ReminderTime");
         int remtime = query.value(idName).toInt();
 
+//        qDebug()<<"Title = "<<title;
+//        qDebug()<<"Location = "<<location;
+//        qDebug()<<"Appointment Day ="<<day;
+//        qDebug()<<"Appointment Month ="<<month;
+//        qDebug()<<"Appointment Year ="<<year;
+//        qDebug()<<"Start Time = "<<starttime;
+//        qDebug()<<"End Time = "<<endtime;
+//        qDebug()<<"Reminder Day = "<<remday;
+//        qDebug()<<"Reminder Month = "<<remmonth;
+//        qDebug()<<"Reminder Year = "<<remyear;
+//        qDebug()<<"Reminder Time = "<<remtime;
+
+        //Create a temporatory appointment
+
+
         QDate eventDate =QDate(year,month,day);
 
         if (eventDate==checkDate){
 
-            Event *a = new Event(id,
+            Appointment *a = new Appointment(id,
                                              title,
                                              location,
                                              day,
@@ -356,7 +416,12 @@ QList<Event> DbManager::getAppointmentsOnDate(QDate *diaryDate)
                                              remtime);
 
             appointmentList.append(*a);
+
+
         }
        }
+
+
     return appointmentList;
+
 }

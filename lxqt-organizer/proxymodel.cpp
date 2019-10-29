@@ -15,36 +15,17 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
+#include "proxymodel.h"
 
-#ifndef SYSTEMTIMER_H
-#define SYSTEMTIMER_H
-
-#include <QTimer>
-#include <QDebug>
-#include <QDate>
-#include <QTime>
-#include <QList>
-
-#include "event.h"
-#include "mainwindow.h"
-#include "dbussessionmessage.h"
-
-
-class SystemTimer: public QObject
+ProxyModel::ProxyModel(QObject *parent)
 {
-public:
-    SystemTimer();    
-    QTimer *timer;
-    QDate currentDate;
-    QDate eventDate;
-    QDate reminderDate;
-    QTime currentTime;
-    void checkReminders(int currentHour);
+     Q_UNUSED(parent)
 
+}
 
-    public slots:
-           void SystemTimerSlot();
+QVariant ProxyModel::headerData(int section, Qt::Orientation orientation,
+                                int role) const {
+    return sourceModel()->headerData(section, orientation,
+                                     role);
+}
 
-};
-
-#endif // SYSTEMTIMER_H

@@ -15,7 +15,6 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -27,12 +26,16 @@
 #include <QSqlQueryModel>
 #include <QStringListModel>
 #include <QTextCharFormat>
+#include <QTimer>
+#include <QSortFilterProxyModel>
 #include "dialogabout.h"
-#include "event.h"
-#include "eventmodel.h"
+#include "appointment.h"
 #include "dbmanager.h"
 #include "dbussessionmessage.h"
-#include "dialogaddevent.h"
+#include "dialogaddappointment.h"
+#include "appointmentmodel.h"
+#include "proxymodel.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -45,69 +48,80 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+    //Database
     DbManager dbm;
-    //QDate appointmentDate;
-    EventModel eventModel;
-    QStringListModel *model; //use model-view architecture
+    //Variables
+    QString title="";
+    QString location="";
     int day=0;
     int month=0;
     int year=0;
     int startTime=0;
     int endTime=0;
-    //int id=0;
-    QDate selectedDate;
-    int selectedDbId =0;
-    int selectedRowIdx=0;
-    QDate reminderDate;
     int remDay=0;
     int remMonth=0;
     int remYear=0;
     int remTime=0;
     int reminderDays=0;
-    QString title="";
-    QString location="";
-    void initialiseDates();
-    void showDbEventsAll();
-    void ShowDbEventsForDate(QDate &dairyDate);
-    void addEvent();
-    QList<Event> getAllAppointments();
+    QDate selectedDate;
+    QDate reminderDate;
+    int selectedDbId =0;
+    int selectedRowIdx=0;
     bool notificationsFlag;
-    void setDefaultOptions();
-    void setCalendarOptions();
     QTextCharFormat eventDayFormat;
     QTextCharFormat weekDayFormat;
     QTextCharFormat weekendFormat;
-    void resetCalendarColours();
+    QLabel *statusDateLabel;
+    QLabel *statusTimeLabel;
+    QTimer *timer;
 
+    //Models
+
+    AppointmentModel *appointmentModel;
+    AppointmentModel *dayModel;
+    AppointmentModel *reminderModel;
+    ProxyModel *proxyModel;
+
+
+    //Methods
+    void initialiseDates();
+    void setDefaultOptions();
+    void setCalendarOptions();
+    void loadAppointmentModelFromDatabase();
+    void showDayAppointmentsForDate(QDate theSelectedDate);
+    void showAllEventsOnCalendar();
+    void clearAllEventsOnCalendar();
+
+
+
+    void AddAppointment();
+    void checkForReminders();
 
 
 
 private slots:
 
-    void on_actionAbout_triggered();
+    void timerUpdateSlot();
 
     void on_actionExit_triggered();
 
+    void on_actionAdd_Appointment_triggered();
+
+    void on_actionAbout_triggered();
+
     void on_calendarWidget_clicked(const QDate &date);
 
-    void on_actionDelete_All_triggered();   
+    void on_actionDelete_All_triggered();
 
-    void on_listView_clicked(const QModelIndex &index);
+    void on_tableView_doubleClicked(const QModelIndex &index);
+
+    void on_tableViewReminders_doubleClicked(const QModelIndex &index);
 
     void on_actionNotifications_triggered();
-
-    void on_listView_doubleClicked(const QModelIndex &index);
-
-    void on_actionClear_List_triggered();
 
     void on_actionCalendar_Grid_triggered();
 
     void on_actionCalendar_Weeks_triggered();
-
-    void on_actionAdd_triggered();
-
-    void on_actionShow_All_triggered();
 
 private:
     Ui::MainWindow *ui;

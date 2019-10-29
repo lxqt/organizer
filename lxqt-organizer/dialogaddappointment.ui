@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DialogAddEvent</class>
- <widget class="QDialog" name="DialogAddEvent">
+ <class>DialogAddAppointment</class>
+ <widget class="QDialog" name="DialogAddAppointment">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>504</width>
-    <height>349</height>
+    <width>596</width>
+    <height>367</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,11 +17,11 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
        <item>
         <widget class="QLabel" name="labelEventDate">
          <property name="text">
-          <string>Event Date:</string>
+          <string>Appointment  Date:</string>
          </property>
         </widget>
        </item>
@@ -45,25 +45,32 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QLabel" name="labelTitle">
          <property name="text">
-          <string>Event Title:</string>
+          <string>Appointment Title: </string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditTitle"/>
+        <widget class="QLineEdit" name="lineEditTitle">
+         <property name="minimumSize">
+          <size>
+           <width>350</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QLabel" name="label_4">
+        <widget class="QLabel" name="labelLocation">
          <property name="text">
-          <string>Location:</string>
+          <string>Location: </string>
          </property>
         </widget>
        </item>
@@ -73,11 +80,11 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QLabel" name="labelStartTime">
          <property name="text">
-          <string>Start Time (24 hours)</string>
+          <string>Start Time:</string>
          </property>
         </widget>
        </item>
@@ -87,11 +94,11 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QLabel" name="labelEndTime">
          <property name="text">
-          <string>End Time (24 hours)</string>
+          <string>End Time: </string>
          </property>
         </widget>
        </item>
@@ -101,11 +108,11 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <widget class="QLabel" name="labelReminder">
          <property name="text">
-          <string>Reminder:</string>
+          <string>Reminder: </string>
          </property>
         </widget>
        </item>
@@ -115,9 +122,9 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
-        <widget class="QLabel" name="labelReminderTime">
+        <widget class="QLabel" name="label">
          <property name="text">
           <string>Reminder Time:</string>
          </property>
@@ -147,7 +154,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DialogAddEvent</receiver>
+   <receiver>DialogAddAppointment</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -163,7 +170,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DialogAddEvent</receiver>
+   <receiver>DialogAddAppointment</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

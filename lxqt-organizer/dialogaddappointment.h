@@ -15,48 +15,57 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
+#ifndef DIALOGADDAPPOINTMENT_H
+#define DIALOGADDAPPOINTMENT_H
+
+#include <QDialog>
+#include <QDate>
+#include <QDebug>
+#include <QMessageBox>
+
+namespace Ui {
+class DialogAddAppointment;
+}
+
+class DialogAddAppointment : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit DialogAddAppointment(QWidget *parent = nullptr, QDate *theAppointmentDate=nullptr);
+    ~DialogAddAppointment();
+    QString getTitle();
+    QString getLocation();
+    QDate getAppointmentDate();
+    int getStartTime();
+    int getEndTime();
+    QDate getReminderDate();
+    int getReminderTime();
+
+    QDate appointmentDate;
+    int startTime=0;
+    int endTime=0;
+
+    QDate reminderDate;
+    int reminderTime=0;
+    int reminderDays=0;
+
+    void setupComboBoxes();
 
 
-#ifndef EVENT_H
-#define EVENT_H
+private slots:
+    void on_comboBoxStartTime_activated(int index);
 
+    void on_comboBoxEndTime_activated(int index);
 
-#include <QString>
+    void on_comboBoxReminderDays_activated(int index);
 
+    void on_comboBoxReminderTime_activated(int index);
 
-struct Event {
-    int id;
-    QString title;
-    QString location;
-    int day;
-    int month;
-    int year;
-    int startTime;
-    int endTime;
-    int reminderDay;
-    int reminderMonth;
-    int reminderYear;
-    int reminderTime;
+    void on_dateEdit_userDateChanged(const QDate &date);
 
-    Event(int id, const QString& title, const QString& location,
-                int day, int month, int year,
-                int startTime, int endTime,
-                int reminderDay, int reminderMonth, int reminderYear,
-                int reminderTime ) :
-        id(id),
-        title(title),
-        location(location),
-        day(day),
-        month(month),
-        year(year),
-        startTime(startTime),
-        endTime(endTime),
-        reminderDay(reminderDay),
-        reminderMonth(reminderMonth),
-        reminderYear(reminderYear),
-        reminderTime(reminderTime)
-    {}
+private:
+    Ui::DialogAddAppointment *ui;
 };
 
-
-#endif // EVENT_H
+#endif // DIALOGADDAPPOINTMENT_H

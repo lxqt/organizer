@@ -6,78 +6,151 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>816</width>
-    <height>398</height>
+    <width>996</width>
+    <height>585</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>LXQt Organizer</string>
+   <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QFormLayout" name="formLayout">
     <item row="0" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QLabel" name="labelSelectedDate">
-        <property name="font">
-         <font>
-          <pointsize>14</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>the Date</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
+       <widget class="QCalendarWidget" name="calendarWidget"/>
       </item>
       <item>
-       <widget class="QCalendarWidget" name="calendarWidget">
-        <property name="verticalHeaderFormat">
-         <enum>QCalendarWidget::NoVerticalHeader</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout"/>
-      </item>
-     </layout>
-    </item>
-    <item row="0" column="1">
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QLabel" name="labelAppointmentSchedule">
-            <property name="text">
-             <string> Schedule</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Reminders</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
       <item>
-       <widget class="QListView" name="listView"/>
+       <widget class="QTableView" name="tableViewReminders">
+        <property name="minimumSize">
+         <size>
+          <width>500</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="showGrid">
+         <bool>false</bool>
+        </property>
+        <property name="gridStyle">
+         <enum>Qt::NoPen</enum>
+        </property>
+        <property name="cornerButtonEnabled">
+         <bool>false</bool>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderCascadingSectionResizes">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderHighlightSections">
+         <bool>false</bool>
+        </attribute>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelSchedule">
+          <property name="text">
+           <string>Day Schedule</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QTableView" name="tableView">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
+        <property name="showGrid">
+         <bool>false</bool>
+        </property>
+        <property name="gridStyle">
+         <enum>Qt::NoPen</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>false</bool>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderHighlightSections">
+         <bool>false</bool>
+        </attribute>
+       </widget>
       </item>
      </layout>
     </item>
@@ -88,7 +161,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>816</width>
+     <width>996</width>
      <height>29</height>
     </rect>
    </property>
@@ -102,19 +175,10 @@
     <property name="title">
      <string>Edit</string>
     </property>
-    <addaction name="actionAdd"/>
-    <addaction name="separator"/>
-    <addaction name="actionClear_List"/>
-    <addaction name="separator"/>
+    <addaction name="actionAdd_Appointment"/>
     <addaction name="actionDelete_All"/>
    </widget>
-   <widget class="QMenu" name="menuHelp">
-    <property name="title">
-     <string>Help</string>
-    </property>
-    <addaction name="actionAbout"/>
-   </widget>
-   <widget class="QMenu" name="menuOptiions">
+   <widget class="QMenu" name="menuOptions">
     <property name="title">
      <string>Options</string>
     </property>
@@ -122,16 +186,15 @@
     <addaction name="actionCalendar_Grid"/>
     <addaction name="actionCalendar_Weeks"/>
    </widget>
-   <widget class="QMenu" name="menuShow">
+   <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>View</string>
+     <string>Help</string>
     </property>
-    <addaction name="actionShow_All"/>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
-   <addaction name="menuShow"/>
-   <addaction name="menuOptiions"/>
+   <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -141,19 +204,34 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionAdd"/>
-   <addaction name="actionShow_All"/>
-   <addaction name="separator"/>
+   <addaction name="actionAdd_Appointment"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionAbout">
-   <property name="text">
-    <string>About</string>
-   </property>
-  </action>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionAdd_Appointment">
+   <property name="icon">
+    <iconset resource="icon_resource.qrc">
+     <normaloff>:/new/icon/icons/add.svg</normaloff>:/new/icon/icons/add.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Add Appointment</string>
+   </property>
+  </action>
+  <action name="actionNotifications">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Notifications</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
   <action name="actionDelete_All">
@@ -161,27 +239,8 @@
     <string>Delete All</string>
    </property>
   </action>
-  <action name="actionNotifications">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Notifications</string>
-   </property>
-  </action>
-  <action name="actionClear_List">
-   <property name="text">
-    <string>Clear List</string>
-   </property>
-  </action>
   <action name="actionCalendar_Grid">
    <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
     <bool>true</bool>
    </property>
    <property name="text">
@@ -196,31 +255,10 @@
     <string>Calendar Weeks</string>
    </property>
   </action>
-  <action name="actionShow_All">
-   <property name="icon">
-    <iconset>
-     <normalon>:/new/svg/icons/view.svg</normalon>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>Show All</string>
-   </property>
-  </action>
-  <action name="actionAdd">
-   <property name="icon">
-    <iconset>
-     <normalon>:/new/svg/icons/add.svg</normalon>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>Add</string>
-   </property>
-   <property name="toolTip">
-    <string>Add Event</string>
-   </property>
-  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="icon_resource.qrc"/>
+ </resources>
  <connections/>
 </ui>
