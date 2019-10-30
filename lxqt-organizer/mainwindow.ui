@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QFormLayout" name="formLayout">
+   <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
@@ -45,37 +45,13 @@
        </layout>
       </item>
       <item>
-       <widget class="QTableView" name="tableViewReminders">
+       <widget class="QListView" name="listViewReminders">
         <property name="minimumSize">
          <size>
           <width>500</width>
           <height>0</height>
          </size>
         </property>
-        <property name="showGrid">
-         <bool>false</bool>
-        </property>
-        <property name="gridStyle">
-         <enum>Qt::NoPen</enum>
-        </property>
-        <property name="cornerButtonEnabled">
-         <bool>false</bool>
-        </property>
-        <attribute name="horizontalHeaderVisible">
-         <bool>false</bool>
-        </attribute>
-        <attribute name="horizontalHeaderHighlightSections">
-         <bool>false</bool>
-        </attribute>
-        <attribute name="verticalHeaderVisible">
-         <bool>false</bool>
-        </attribute>
-        <attribute name="verticalHeaderCascadingSectionResizes">
-         <bool>false</bool>
-        </attribute>
-        <attribute name="verticalHeaderHighlightSections">
-         <bool>false</bool>
-        </attribute>
        </widget>
       </item>
      </layout>
@@ -176,6 +152,9 @@
      <string>Edit</string>
     </property>
     <addaction name="actionAdd_Appointment"/>
+    <addaction name="separator"/>
+    <addaction name="actionClear_Reminders"/>
+    <addaction name="separator"/>
     <addaction name="actionDelete_All"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
@@ -253,6 +232,11 @@
    </property>
    <property name="text">
     <string>Calendar Weeks</string>
+   </property>
+  </action>
+  <action name="actionClear_Reminders">
+   <property name="text">
+    <string>Clear Reminders</string>
    </property>
   </action>
  </widget>

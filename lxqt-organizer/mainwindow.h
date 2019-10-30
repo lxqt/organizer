@@ -35,6 +35,7 @@
 #include "dialogaddappointment.h"
 #include "appointmentmodel.h"
 #include "proxymodel.h"
+#include "remindermodel.h"
 
 namespace Ui {
 class MainWindow;
@@ -77,7 +78,7 @@ public:
     //Models
     AppointmentModel *appointmentModel;
     AppointmentModel *dayModel;
-    AppointmentModel *reminderModel;
+    ReminderModel *reminderModel;
     ProxyModel *proxyModel;
 
     //Methods
@@ -107,13 +108,15 @@ private slots:
 
     void on_tableView_doubleClicked(const QModelIndex &index);
 
-    void on_tableViewReminders_doubleClicked(const QModelIndex &index);
-
     void on_actionNotifications_triggered();
 
     void on_actionCalendar_Grid_triggered();
 
     void on_actionCalendar_Weeks_triggered();
+
+    void on_actionClear_Reminders_triggered();
+
+    void on_listViewReminders_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;

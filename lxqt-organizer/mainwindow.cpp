@@ -41,12 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tableView->horizontalHeader()->setStretchLastSection(true);
     ui->tableView->verticalHeader()->setVisible(false);
-    //setup reminder treeview
-    ui->tableViewReminders->horizontalHeader()->setVisible(true);
-    ui->tableViewReminders->horizontalHeader()->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tableViewReminders->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    ui->tableViewReminders->horizontalHeader()->setStretchLastSection(true);
-    ui->tableViewReminders->verticalHeader()->setVisible(false);
+    //setup reminder treeview/
     //setup status bar
     statusTimeLabel= new QLabel();
     statusTimeLabel->setText(QTime::currentTime().toString());
@@ -62,7 +57,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //setup appointment models
     appointmentModel = new AppointmentModel(); //stores all appointments
     dayModel = new AppointmentModel(); //stores appointments for a day
-    reminderModel = new AppointmentModel(); //stores reminders
+    //reminderModel = new AppointmentModel(); //stores reminders
+    reminderModel = new ReminderModel();
+
     proxyModel = new ProxyModel; //needed for time sorting
     //Get data from database and display
     loadAppointmentModelFromDatabase(); //loads all apointments
@@ -230,7 +227,7 @@ void MainWindow::AddAppointment()
 
         if (dbm.isOpen())
         {
-            qDebug()<<"adding appointment..";
+            //qDebug()<<"adding appointment..";
             if(dbm.addAppointment(title, location, day, month, year,
                                   startTime, endTime,
                                   remDay,remMonth,remYear,remTime))
@@ -262,7 +259,8 @@ void MainWindow::checkForReminders()
         {
 
             if(currentHour==a.m_reminderTime){
-                reminderModel->addAppointment(a);
+                reminderModel->addReminderAppointment(a);
+
                 ui->statusBar->showMessage("Event reminder!!",5000); //5 seconds
                 if (notificationsFlag){
                     QString h="Reminder: "+a.m_title +" ("+a.m_location+")";
@@ -275,9 +273,8 @@ void MainWindow::checkForReminders()
             }
         }
     }
-    ui->tableViewReminders->setModel(reminderModel);
-    ui->tableViewReminders->hideColumn(0); //start time as int
-    ui->tableViewReminders->hideColumn(1); //id
+
+    ui->listViewReminders->setModel(reminderModel);    
  }
 
 void MainWindow::timerUpdateSlot()
@@ -333,11 +330,7 @@ void MainWindow::on_actionDelete_All_triggered()
     dbm.removeAllAppointments(); //remove all from database
     appointmentModel->clearAllAppointments(); //remove all from event model
     dayModel->clearAllAppointments();  //remove all from day model
-    reminderModel->clearAllAppointments();
-    loadAppointmentModelFromDatabase(); //should be nothing
-    ui->tableViewReminders->setModel(reminderModel);
-    ui->tableViewReminders->hideColumn(0);
-    ui->tableViewReminders->hideColumn(1);
+    reminderModel->clearAllReminderAppointments();   
     ui->calendarWidget->setSelectedDate(QDate::currentDate());   
 }
 
@@ -373,31 +366,12 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 
     loadAppointmentModelFromDatabase();
     showDayAppointmentsForDate(selectedDate);
-
 }
 
-void MainWindow::on_tableViewReminders_doubleClicked(const QModelIndex &index)
-{
-   int selectedReminderRowIdx=index.row();
-    QMessageBox msgBox;
-    msgBox.setWindowTitle("Delete Reminder");
-    msgBox.setText("Are you sure you want to delete reminder?");
-    msgBox.setStandardButtons(QMessageBox::Yes);
-    msgBox.addButton(QMessageBox::No);
-    msgBox.setDefaultButton(QMessageBox::No);
-    if(msgBox.exec() == QMessageBox::Yes){
-        //remove from model
-        reminderModel->removeAppointment(selectedReminderRowIdx);
-    }else {
-        qDebug()<<"abort delete reminder";
-    }
-    //update reminder tableview
-    ui->tableViewReminders->setModel(reminderModel);
-}
+
 
 void MainWindow::on_actionNotifications_triggered()
 {
-
     if(ui->actionNotifications->isChecked())
     {
         this->notificationsFlag =true;
@@ -417,7 +391,6 @@ void MainWindow::on_actionCalendar_Grid_triggered()
             ui->calendarWidget->setGridVisible(false);
 
         }
-
 }
 
 void MainWindow::on_actionCalendar_Weeks_triggered()
@@ -429,5 +402,28 @@ void MainWindow::on_actionCalendar_Weeks_triggered()
     else {
         ui->calendarWidget->setVerticalHeaderFormat(ui->calendarWidget->NoVerticalHeader);
     }
+}
 
+void MainWindow::on_actionClear_Reminders_triggered()
+{
+    reminderModel->clearAllReminderAppointments();
+    ui->listViewReminders->setModel(reminderModel);}
+
+void MainWindow::on_listViewReminders_doubleClicked(const QModelIndex &index)
+{
+    int selectedReminderRowIdx=index.row();
+     QMessageBox msgBox;
+     msgBox.setWindowTitle("Delete Reminder");
+     msgBox.setText("Are you sure you want to delete reminder?");
+     msgBox.setStandardButtons(QMessageBox::Yes);
+     msgBox.addButton(QMessageBox::No);
+     msgBox.setDefaultButton(QMessageBox::No);
+     if(msgBox.exec() == QMessageBox::Yes){
+         //remove from model
+         reminderModel->removeReminderAppointment(selectedReminderRowIdx);
+     }else {
+         qDebug()<<"abort delete reminder";
+     }
+     //update reminder listview
+     ui->listViewReminders->setModel(reminderModel);
 }
