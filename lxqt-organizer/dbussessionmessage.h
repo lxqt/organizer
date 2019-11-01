@@ -19,9 +19,11 @@
 #ifndef DBUSSESSIONMESSAGE_H
 #define DBUSSESSIONMESSAGE_H
 
-#include <QDBusConnection>
-#include <QDBusConnectionInterface>
-#include <QDBusInterface>
+
+
+#include <QtDBus/QDBusConnection>
+#include <QtDBus/QDBusConnectionInterface>
+#include <QtDBus/QDBusInterface>
 #include <QObject>
 #include <QTimer>
 #include <QDebug>

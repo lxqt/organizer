@@ -18,6 +18,7 @@ set(LXQT_MINIMUM_VERSION "0.14.1")
 set(QT_MINIMUM_VERSION "5.7.1")
 
 find_package(Qt5Core ${QT_MINIMUM_VERSION} REQUIRED)
+find_package(Qt5DBus ${QT_MINIMUM_VERSION} REQUIRED)
 find_package(Qt5Gui ${QT_MINIMUM_VERSION} REQUIRED)
 find_package(Qt5LinguistTools ${QT_MINIMUM_VERSION} REQUIRED)
 find_package(Qt5Widgets ${QT_MINIMUM_VERSION} REQUIRED)
@@ -33,13 +34,13 @@ set(LXQT_ORGANIZER_PATCH_VERSION 1)
 set(LXQT_ORGANIZER_VERSION ${LXQT_ORGANIZER_MAJOR_VERSION}.${LXQT_ORGANIZER_MINOR_VERSION}.${LXQT_ORGANIZER_PATCH_VERSION})
 add_definitions("-DLXQT_ORGANIZER_VERSION=\"${LXQT_ORGANIZER_VERSION}\"")
 
-include(LXQtPreventInSourceBuilds)
+# include(LXQtPreventInSourceBuilds)
 
 # leave our compiler settings out for now, some fixes needed
 # include(LXQtCompilerSettings NO_POLICY_SCOPE)
 
 # Translations **********************************
-include(LXQtTranslate)
+# include(LXQtTranslate)
 
 add_subdirectory(lxqt-organizer)
 add_subdirectory(scripts)
