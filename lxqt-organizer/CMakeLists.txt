@@ -13,6 +13,7 @@ set (lxqt-organizer_HDRS
 )
 
 set(lxqt-organizer_SRCS
+    appointmentmodel.cpp
     dbmanager.cpp
     dbussessionmessage.cpp
     dialogabout.cpp
