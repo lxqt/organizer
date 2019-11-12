@@ -23,11 +23,22 @@ DialogAddAppointment::DialogAddAppointment(QWidget *parent, QDate *theAppointmen
     ui(new Ui::DialogAddAppointment)
 {
     ui->setupUi(this);
-    setWindowTitle("Add Appointment");
-    ui->labelSelectedEventDate->setText(theAppointmentDate->toString());
-    ui->dateEdit->setDate(*theAppointmentDate);
+    setWindowTitle("New Appointment");
+    ui->labelSelectedAppointmentDate->setText(theAppointmentDate->toString());
+    ui->calendarWidgetDialog->setSelectedDate(*theAppointmentDate);
+    ui->dateEditReminder->setDate(*theAppointmentDate);
     this->appointmentDate=*theAppointmentDate;
-    setupComboBoxes();
+    ui->checkBoxReminder->setCheckState(Qt::Unchecked);
+    ui->dateEditReminder->setDisabled(true);
+    ui->timeEditReminder->setDisabled(true);
+    reminderRequested=0;
+
+   this->appointmentDate=*theAppointmentDate;
+   this->startTime=ui->timeEditStartTime->time();
+   this->endTime=ui->timeEditEndTime->time();
+   this->reminderDate=ui->dateEditReminder->date();
+   this->reminderTime=ui->timeEditReminder->time();
+
 }
 
 DialogAddAppointment::~DialogAddAppointment()
@@ -45,94 +56,100 @@ QString DialogAddAppointment::getLocation()
     return ui->lineEditLocation->text();
 }
 
+QString DialogAddAppointment::getDescription()
+{
+    return ui->textEditDescription->toPlainText();
+}
+
 QDate DialogAddAppointment::getAppointmentDate()
 {
-    return appointmentDate;
+    return this->appointmentDate;
 }
 
-int DialogAddAppointment::getStartTime()
+QTime DialogAddAppointment::getStartTime()
 {
-    return startTime;
+    return this->startTime;
 }
 
-int DialogAddAppointment::getEndTime()
+QTime DialogAddAppointment::getEndTime()
 {
-    return endTime;
+    return this->endTime;
 }
 
 QDate DialogAddAppointment::getReminderDate()
 {
-    return reminderDate;
+    return this->reminderDate;
 }
 
-int DialogAddAppointment::getReminderTime()
+QTime DialogAddAppointment::getReminderTime()
 {
-    return reminderTime;
+    return this->reminderTime;
 }
 
-void DialogAddAppointment::setupComboBoxes()
+int DialogAddAppointment::getReminderRequested()
 {
-    //Setup start and end time ComboBoxes 24 hour clock
-           for (int i=1; i<25; i++)
-           {
-               QString timeStr =QString::number(i)+":00";
-               ui->comboBoxStartTime->addItem(timeStr);
-               ui->comboBoxEndTime->addItem(timeStr);
-               ui->comboBoxReminderTime->addItem(timeStr);
-           }
-           ui->comboBoxStartTime->setCurrentIndex(8);
-           ui->comboBoxEndTime->setCurrentIndex(9);
-           ui->comboBoxReminderTime->setCurrentIndex(9);
-           startTime=ui->comboBoxStartTime->currentIndex()+1;
-           endTime=ui->comboBoxEndTime->currentIndex()+1;
-           reminderTime=ui->comboBoxReminderTime->currentIndex()+1;
-
-           //Set up reminder days ComboBox
-           for (int i=0; i<8; i++)
-           {
-               QString dayReminderStr =QString::number(i)+" days before";
-               ui->comboBoxReminderDays->addItem(dayReminderStr);
-           }
-           ui->comboBoxReminderDays->setCurrentIndex(0);
-           reminderDays = ui->comboBoxReminderDays->currentIndex()+1;
-
-           reminderDate =appointmentDate; //setup initialisation
-
+    return reminderRequested;
 }
 
-void DialogAddAppointment::on_comboBoxStartTime_activated(int index)
+void DialogAddAppointment::accept()
 {
-    startTime=index+1;
-}
-
-void DialogAddAppointment::on_comboBoxEndTime_activated(int index)
-{
-     endTime=index+1;
-}
-
-void DialogAddAppointment::on_comboBoxReminderDays_activated(int index)
-{
-    reminderDays=index;
-        reminderDate=appointmentDate.addDays(-reminderDays);
-        //if reminder date before current date message error
-        QDate currentDate = QDate::currentDate();
-
-        if (reminderDate.operator<(currentDate)){
-            QMessageBox::information( this, "Date Error",
-                                      ("You cannot set a reminder date before current date"
-                                       "\nLXQt Team") );
-            reminderDate=currentDate;
-            ui->comboBoxReminderDays->setCurrentIndex(0);
+    if (this->getTitle().isEmpty() || this->getLocation().isEmpty())
+        {
+            QMessageBox::information(this, tr("Empty Details"),
+                      tr("Must enter a title and location"));
+                    return;
+        }
+        else {
+    //        QMessageBox::information(this, tr("Success"),
+    //                  tr("Data entered"));
+            qDebug()<<"Success title and location fields completed by user";
+            QDialog::accept();
         }
 }
 
-void DialogAddAppointment::on_comboBoxReminderTime_activated(int index)
-{
-    reminderTime=index+1;
+void DialogAddAppointment::on_checkBoxReminder_stateChanged(int arg1)
+{   
+
+    if (arg1==Qt::Checked)
+    {
+        //enable reminder date time edit boxes
+        ui->dateEditReminder->setDisabled(false);
+        ui->timeEditReminder->setDisabled(false);
+        reminderRequested=1;
+    }
+    else if (arg1==Qt::Unchecked) {
+        //disable reminder date and time edit boxes
+        ui->dateEditReminder->setDisabled(true);
+        ui->timeEditReminder->setDisabled(true);
+        reminderRequested=0;
+    }
 }
 
-void DialogAddAppointment::on_dateEdit_userDateChanged(const QDate &date)
+
+void DialogAddAppointment::on_timeEditStartTime_userTimeChanged(const QTime &time)
 {
-    appointmentDate=date;
-    ui->labelSelectedEventDate->setText(appointmentDate.toString());
+    this->startTime=time;
+    ui->timeEditReminder->setTime(time);
+}
+
+void DialogAddAppointment::on_timeEditEndTime_userTimeChanged(const QTime &time)
+{
+    this->endTime=time;
+}
+
+void DialogAddAppointment::on_dateEditReminder_userDateChanged(const QDate &date)
+{
+    this->reminderDate=date;
+}
+
+void DialogAddAppointment::on_timeEditReminder_userTimeChanged(const QTime &time)
+{
+    this->reminderTime=time;
+}
+
+void DialogAddAppointment::on_calendarWidgetDialog_clicked(const QDate &date)
+{
+    this->appointmentDate=date;
+    ui->labelSelectedAppointmentDate->setText(appointmentDate.toString());
+    ui->dateEditReminder->setDate(date);
 }

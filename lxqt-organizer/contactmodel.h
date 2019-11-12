@@ -15,61 +15,41 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#ifndef DIALOGADDAPPOINTMENT_H
-#define DIALOGADDAPPOINTMENT_H
+#ifndef CONTACTMODEL_H
+#define CONTACTMODEL_H
 
-#include <QDialog>
+#include <QAbstractTableModel>
+#include "contact.h"
+#include <QColor>
+#include <QList>
 #include <QDate>
-#include <QTime>
 #include <QDebug>
-#include <QMessageBox>
 
-namespace Ui {
-class DialogAddAppointment;
-}
-
-class DialogAddAppointment : public QDialog
+class ContactModel : public QAbstractTableModel
 {
-    Q_OBJECT
-
 public:
-    explicit DialogAddAppointment(QWidget *parent = nullptr, QDate *theAppointmentDate=nullptr);
-    ~DialogAddAppointment();
+    ContactModel(QObject* parent = nullptr);
+    ContactModel(const QList<Contact>& contactList,
+                 QObject *parent = nullptr);
 
-    QDate appointmentDate;
-    QTime startTime;
-    QTime endTime;
+    void AddContact(Contact &contact);
+    Contact getContact(int index);
+    void clearAllContacts();
+    void removeContact(int idx);
 
-    QDate reminderDate;
-    QTime reminderTime;
-    int reminderRequested=0;
+    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
-    QString getTitle();
-    QString getLocation();
-    QString getDescription();
-    QDate getAppointmentDate();
-    QTime getStartTime();
-    QTime getEndTime();
-    QDate getReminderDate();
-    QTime getReminderTime();
-    int getReminderRequested();
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
-private slots:
-    void accept();
-    void on_checkBoxReminder_stateChanged(int arg1);
+    QVariant data (const QModelIndex & index,
+                   int role = Qt::DisplayRole) const override;
 
-    void on_timeEditStartTime_userTimeChanged(const QTime &time);
-
-    void on_timeEditEndTime_userTimeChanged(const QTime &time);
-
-    void on_dateEditReminder_userDateChanged(const QDate &date);
-
-    void on_timeEditReminder_userTimeChanged(const QTime &time);
-
-    void on_calendarWidgetDialog_clicked(const QDate &date);
-
+    QVariant headerData(int section, Qt::Orientation orientation,
+                        int role = Qt::DisplayRole) const override;
 private:
-    Ui::DialogAddAppointment *ui;
+    QList<Contact> modelContactList;
+
+
 };
 
-#endif // DIALOGADDAPPOINTMENT_H
+#endif // CONTACTMODEL_H

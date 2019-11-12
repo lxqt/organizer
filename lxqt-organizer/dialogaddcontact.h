@@ -15,61 +15,87 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#ifndef DIALOGADDAPPOINTMENT_H
-#define DIALOGADDAPPOINTMENT_H
+#ifndef DIALOGADDCONTACT_H
+#define DIALOGADDCONTACT_H
 
 #include <QDialog>
+#include <QMessageBox>
+#include <QDialogButtonBox>
+#include <QDebug>
 #include <QDate>
 #include <QTime>
-#include <QDebug>
-#include <QMessageBox>
+#include <QString>
+
 
 namespace Ui {
-class DialogAddAppointment;
+class DialogAddContact;
 }
 
-class DialogAddAppointment : public QDialog
+class DialogAddContact : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit DialogAddAppointment(QWidget *parent = nullptr, QDate *theAppointmentDate=nullptr);
-    ~DialogAddAppointment();
+    explicit DialogAddContact(QWidget *parent = nullptr, QDate *theBirthdayDate=nullptr);
+    ~DialogAddContact();
 
-    QDate appointmentDate;
-    QTime startTime;
-    QTime endTime;
+    QString firstName="";
+    QString lastName="";
+    QString email="";
+    QDate bornDate;
 
+    QString getFirstName();
+    QString getLastName();
+    QString getEmail();
+    QDate getBirthday();
+
+    bool addToBirthdayAppointment=true;
+    bool getAddBirthdayAppointment();
+
+
+    //Reminder
     QDate reminderDate;
     QTime reminderTime;
     int reminderRequested=0;
 
-    QString getTitle();
-    QString getLocation();
-    QString getDescription();
-    QDate getAppointmentDate();
-    QTime getStartTime();
-    QTime getEndTime();
     QDate getReminderDate();
     QTime getReminderTime();
-    int getReminderRequested();
+    int getReminderRequested();    
+
+    //Contact details
+    QString street="";
+    QString city="";
+    QString county="";
+    QString postcode="";
+    QString country="";
+    QString phoneNumber; //could have + code
+
+    QString getStreet();
+    QString getCity();
+    QString getCounty();
+    QString getPostcode();
+    QString getCountry();
+    QString getPhoneNumber();
+
+
 
 private slots:
-    void accept();
-    void on_checkBoxReminder_stateChanged(int arg1);
+void accept();
 
-    void on_timeEditStartTime_userTimeChanged(const QTime &time);
+void on_dateEditBirthday_userDateChanged(const QDate &date);
 
-    void on_timeEditEndTime_userTimeChanged(const QTime &time);
+void on_dateEditReminder_userDateChanged(const QDate &date);
 
-    void on_dateEditReminder_userDateChanged(const QDate &date);
+void on_timeEditReminder_userTimeChanged(const QTime &time);
 
-    void on_timeEditReminder_userTimeChanged(const QTime &time);
+void on_checkBoxReminder_stateChanged(int arg1);
 
-    void on_calendarWidgetDialog_clicked(const QDate &date);
+void on_checkBoxContactDetails_stateChanged(int arg1);
+
+void on_checkBoxAddToCalendar_stateChanged(int arg1);
 
 private:
-    Ui::DialogAddAppointment *ui;
+    Ui::DialogAddContact *ui;
 };
 
-#endif // DIALOGADDAPPOINTMENT_H
+#endif // DIALOGADDCONTACT_H

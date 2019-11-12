@@ -16,40 +16,55 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef APPOINTMENT_H
-#define APPOINTMENT_H
+#ifndef CONTACT_H
+#define CONTACT_H
 
 #include <QString>
-struct Appointment {
+struct Contact {
 
-    Appointment(int id=0,
-                const QString& title= QString(),
-                const QString& location= QString(),
-                const QString& description= QString(),
-                const QString& appointmentStartTimestamp=QString(),
-                const QString& appointmentEndTimestamp=QString(),
-                int reminderRequest=0, //bool 0=no 1 =yes
-                const QString& reminderTimestamp=QString()
-                ):
+    Contact(int id=0,
+            const QString& firstname= QString(),
+            const QString& lastname= QString(),
+            const QString& email= QString(),
+            const QString& street= QString(),
+            const QString& city= QString(),
+            const QString& county= QString(),
+            const QString& postcode= QString(),
+            const QString& country= QString(),
+            const QString& telephone= QString(),
+            const QString& birthdayTimestamp=QString(),
+            int reminderRequest=0,
+            const QString&reminderTimestamp=QString()
+            ):
         m_id(id),
-        m_title(title),
-        m_location(location),
-        m_description(description),
-        m_appointmentStartTimestamp(appointmentStartTimestamp),
-        m_appointmentEndTimestamp(appointmentEndTimestamp),
+        m_firstname(firstname),
+        m_lastname(lastname),
+        m_email(email),
+        m_street(street),
+        m_city(city),
+        m_county(county),
+        m_postcode(postcode),
+        m_country(country),
+        m_telephone(telephone),
+        m_birthdayTimestamp(birthdayTimestamp),
         m_reminderRequest(reminderRequest),
         m_reminderTimestamp(reminderTimestamp)
     {
     }
-   int m_id;
-   QString m_title;
-   QString m_location;
-   QString m_description;
-   QString m_appointmentStartTimestamp;
-   QString m_appointmentEndTimestamp;
-   int m_reminderRequest;
-   QString m_reminderTimestamp;
+    int m_id;
+    QString m_firstname;
+    QString m_lastname;
+    QString m_email;
+    QString m_street;
+    QString m_city;
+    QString m_county;
+    QString m_postcode;
+    QString m_country;
+    QString m_telephone;
+    QString m_birthdayTimestamp;
+    int m_reminderRequest;
+    QString m_reminderTimestamp;
 };
 
 
-#endif // APPOINTMENT_H
+#endif // CONTACT_H

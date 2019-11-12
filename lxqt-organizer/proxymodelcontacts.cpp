@@ -15,17 +15,14 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#include "proxymodel.h"
+#include "proxymodelcontacts.h"
 
-ProxyModel::ProxyModel(QObject *parent)
+ProxyModelContacts::ProxyModelContacts(QObject *parent)
 {
      Q_UNUSED(parent)
-
 }
 
-QVariant ProxyModel::headerData(int section, Qt::Orientation orientation,
-                                int role) const {
-    return sourceModel()->headerData(section, orientation,
-                                     role);
+QVariant ProxyModelContacts::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    return sourceModel()->headerData(section, orientation, role);
 }
-

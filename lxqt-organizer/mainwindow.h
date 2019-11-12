@@ -20,22 +20,34 @@
 
 #include <QMainWindow>
 #include <QDate>
+#include <QTime>
+#include <QDateTime>
 #include <QDebug>
 #include <QMessageBox>
-#include <QSqlQuery>
-#include <QSqlQueryModel>
-#include <QStringListModel>
+#include <QList>
 #include <QTextCharFormat>
 #include <QTimer>
-#include <QSortFilterProxyModel>
-#include "dialogabout.h"
-#include "appointment.h"
-#include "dbmanager.h"
-#include "dbussessionmessage.h"
+#include <QList>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QFile>
+#include <QFileDialog>
+#include <QXmlStreamWriter>
+
 #include "dialogaddappointment.h"
+#include "dialogaddcontact.h"
+#include "dbmanager.h"
+#include "appointment.h"
+#include "contact.h"
 #include "appointmentmodel.h"
 #include "proxymodel.h"
+#include "contactmodel.h"
+#include "proxymodelcontacts.h"
 #include "remindermodel.h"
+#include "dialogabout.h"
+#include "dbussessionmessage.h"
+
+
 
 namespace Ui {
 class MainWindow;
@@ -48,24 +60,31 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    //Database
+
     DbManager dbm;
-    //Variables
+
+    QDate selectedDate;
+
     QString title="";
     QString location="";
-    int day=0;
-    int month=0;
-    int year=0;
-    int startTime=0;
-    int endTime=0;
-    int remDay=0;
-    int remMonth=0;
-    int remYear=0;
-    int remTime=0;
-    int reminderDays=0;
-    QDate selectedDate;
+    QString description="";
+
+    QTime appointmentStartTime;
+    QTime appointmentEndTime;
+    QDateTime appointmentStartDateTime;
+    QDateTime appointmentEndDateTime;
+    QString appointmentStartTimestamp;
+    QString appointmentEndTimestamp;
+
+    Appointment reminderAppointment;
+
     QDate reminderDate;
-    int selectedDbId =0;
+    QTime reminderTime;
+    QDateTime reminderDateTime;
+    QString reminderTimestamp;
+    int reminderRequested=0;
+
+    int selectedAppointmentdDbId =0;
     int selectedRowIdx=0;
     bool notificationsFlag;
     QTextCharFormat eventDayFormat;
@@ -74,52 +93,117 @@ public:
     QLabel *statusDateLabel;
     QLabel *statusTimeLabel;
     QTimer *timer;
+    QTimer *timerSingleShot;
+
+
+
+    QString contactFirstName ="";
+    QString contactLastName="";
+    QString contactEmail="";
+    QDate birthdayDate=QDate();
+    QString street="";
+    QString city="";
+    QString county="";
+    QString postcode ="";
+    QString country ="";
+    QString phoneNumber="";
+    QDateTime birthdayDateTime;
+    QString birthdayTimestamp;
+    QDate birthdayReminderDate;
+    QTime birthdayReminderTime;
+    QDateTime birthdayReminderDateTime;
+    int birthdayReminderRequest=0;
+    QString birthdayReminderTimestamp;
+    int selectedContactDbId=0;
+    Contact selectedContact;
 
     //Models
     AppointmentModel *appointmentModel;
     AppointmentModel *dayModel;
+    AppointmentModel *birthdayModel;
     ReminderModel *reminderModel;
     ProxyModel *proxyModel;
+    ContactModel *contactModel;
+    ProxyModelContacts *proxyModelContacts;
 
-    //Methods
-    void initialiseDates();
-    void setDefaultOptions();
+
+    void AddAppointment();
+    void AddContact();
+
+    void LoadAppointmentsListFromDatabase(); //initialise AppointmentsList
+    void LoadContactsListFromDatabase(); //initialise contactsList
+
+    void DisplayContactsOnTableView();
+    bool quickViewFlag=false;
+
+
+    void UpdateDisplayList();
+    void DisplayEventsForDate(QDate theSelectedDate);
+
+    //Calendar
     void setCalendarOptions();
-    void loadAppointmentModelFromDatabase();
-    void showDayAppointmentsForDate(QDate theSelectedDate);
     void showAllEventsOnCalendar();
     void clearAllEventsOnCalendar();
-    void AddAppointment();
+
+    //Reminders
     void checkForReminders();
 
+
+
+
 private slots:
+      void timerUpdateSlot();
 
-    void timerUpdateSlot();
+      void sendReminderMessage();
 
-    void on_actionExit_triggered();
+      void on_actionNew_Appointment_triggered();
 
-    void on_actionAdd_Appointment_triggered();
+      void on_actionNew_Contact_triggered();
 
-    void on_actionAbout_triggered();
+      void on_actionDelete_All_Contacts_triggered();
 
-    void on_calendarWidget_clicked(const QDate &date);
+      void on_actionDelete_All_Appointments_2_triggered();
 
-    void on_actionDelete_All_triggered();
+      void on_actionExit_triggered();
 
-    void on_tableView_doubleClicked(const QModelIndex &index);
+      void on_tableView_doubleClicked(const QModelIndex &index);
 
-    void on_actionNotifications_triggered();
+      void on_tableViewContacts_doubleClicked(const QModelIndex &index);
 
-    void on_actionCalendar_Grid_triggered();
+      void on_tableViewContacts_clicked(const QModelIndex &index);
 
-    void on_actionCalendar_Weeks_triggered();
+      void on_pushButtonShowQuickDetails_clicked();
 
-    void on_actionClear_Reminders_triggered();
 
-    void on_listViewReminders_doubleClicked(const QModelIndex &index);
+
+      void on_pushButtonMailTo_clicked();
+
+      void on_actionExport_Contacts_XML_triggered();
+
+      void on_calendarWidget_clicked(const QDate &date);
+
+      void on_pushButtonSearchByLastname_clicked();
+
+      void on_actionExport_Appointments_XML_triggered();
+
+      void on_listViewReminders_clicked(const QModelIndex &index);
+
+      void on_actionClear_All_Reminder_Messages_triggered();
+
+      void on_actionAbout_triggered();
+
+      void on_actionSystem_Notifications_triggered();
+
+      void on_actionCalendar_Grid_triggered();
+
+      void on_actionCalendar_Weeks_triggered();
 
 private:
     Ui::MainWindow *ui;
+    QList<Appointment> appointmentsList;
+    QList <Contact> contactsList;
+    QList<Appointment> displayList;
+    QXmlStreamWriter xml;
 };
 
 #endif // MAINWINDOW_H

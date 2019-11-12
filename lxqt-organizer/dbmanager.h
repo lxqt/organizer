@@ -28,6 +28,7 @@
 #include <QDate>
 #include <QList>
 #include"appointment.h"
+#include "contact.h"
 
 
 class DbManager
@@ -36,19 +37,24 @@ public:
     DbManager();
     QSqlDatabase db;
     bool isOpen() const;
-    void openDatabase();
-    void createDatabaseTable();
-
-    bool removeAllAppointments();
-    bool removeAppointmentById(const int id);
-
-    bool addAppointment(QString &title, QString &location,
-                            int &day, int &month, int &year,
-                            int &starttime, int &endtime,
-                            int &remday, int &remmonth, int &remyear, int&remtime);
+    void openDatabase();    
+    void createDatebaseTables();
+    bool addAppointment(Appointment &appointment);
+    bool addContact(Contact &contact);
     QList<Appointment> getAllAppointments();
+    QList<Appointment> getAppointmentsOnDate(QDate &diaryDate);
     QList<Appointment> getAppointmentsToday();
-    QList<Appointment> getAppointmentsOnDate(QDate *diaryDate);
+    bool removeAppointmentById(const int id);
+    bool removeAllAppointments();
+
+    QList<Contact> getAllContacts();
+    bool removeAllContacts();
+    bool removeContactById(const int id);
+    QList<Contact> findContactsByLastName(QString lastname);
+
+
+
+
 };
 
 #endif // DBMANAGER_H
