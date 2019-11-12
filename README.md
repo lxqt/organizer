@@ -12,7 +12,7 @@ v002
 * reminder notifications
 
 
-v003 alpha
+v003 Alpha
 
 * set appointments on hour and minute
 
