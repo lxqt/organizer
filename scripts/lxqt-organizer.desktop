@@ -4,7 +4,7 @@ GenericName=Personal Information Manager
 GenericName[de]=Personal Information Manager
 GenericName[es]=Gerente de información personal
 GenericName[fr]=Gestionnaire d'informations personnelles
-GenericName[ja_JP]=個人情報管理者(Qt)
+GenericName[ja_JP]=個人情報管理 Qt
 GenericName[pl]=Menedżer danych osobowych
 GenericName[pt]=Gerente de Informações Pessoais
 GenericName[tr]=Kişisel Bilgi Yöneticisi
@@ -13,7 +13,7 @@ Comment=Keeps track of appointments and tasks
 Comment[de]=Verfolgt Termine und Aufgaben
 Comment[es]=Realiza un seguimiento de las citas y tareas
 Comment[fr]=Assure le suivi des rendez-vous et des tâches
-Comment[ja_JP]=Nglacak janjian lan tugas
+Comment[ja_JP]=予定とタスクを管理します
 Comment[pl]=Śledzi terminy i zadania
 Comment[pt]=Mantém o controle de compromissos e tarefas
 Comment[tr]=Randevuları ve görevleri takip eder
@@ -32,5 +32,6 @@ Actions=new-window;
 [Desktop Action new-window]
 Name=New Window
 Name[de]=Neues Fenster
+Name[ja_JP]=新しいウィンドウ
 Exec=/usr/local/lxqt-organizer --win
 
