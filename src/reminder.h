@@ -15,14 +15,34 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#include "proxymodelcontacts.h"
 
-ProxyModelContacts::ProxyModelContacts(QObject *parent)
-{
-     Q_UNUSED(parent)
-}
+#ifndef REMINDER_H
+#define REMINDER_H
 
-QVariant ProxyModelContacts::headerData(int section, Qt::Orientation orientation, int role) const
-{
-    return sourceModel()->headerData(section, orientation, role);
-}
+#include <QString>
+struct Reminder {
+
+    Reminder(int id=0,
+                const QString& details= QString(),
+                const QString& reminderDate=QString(),
+                const QString& reminderTime=QString(),
+                int reminderRequest=0 //bool 0=no 1 =yes
+                ):
+        m_id(id),
+        m_details(details),
+        m_reminderDate(reminderDate),
+        m_reminderTime(reminderTime),
+        m_reminderRequest(reminderRequest)
+    {
+    }
+   int m_id;
+   QString m_details;
+   QString m_reminderDate;
+   QString m_reminderTime;
+   int m_reminderRequest;
+
+};
+
+
+
+#endif // REMINDER_H

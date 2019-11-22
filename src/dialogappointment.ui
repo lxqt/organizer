@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DialogAddAppointment</class>
- <widget class="QDialog" name="DialogAddAppointment">
+ <class>DialogAppointment</class>
+ <widget class="QDialog" name="DialogAppointment">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>691</width>
-    <height>608</height>
+    <width>575</width>
+    <height>507</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,19 +17,16 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QCalendarWidget" name="calendarWidgetDialog"/>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLabel" name="labelAppointment">
+        <widget class="QLabel" name="labelDate">
          <property name="text">
           <string>Appointment Date:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="labelSelectedAppointmentDate">
+        <widget class="QLabel" name="labelDateDisplay">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -38,18 +35,34 @@
           </font>
          </property>
          <property name="text">
-          <string>Selected Date</string>
+          <string>theDate</string>
          </property>
         </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="dateEditAppointmentDate"/>
        </item>
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QLabel" name="labelTitle">
          <property name="text">
-          <string>Appointment Title:</string>
+          <string>Title:       </string>
          </property>
         </widget>
        </item>
@@ -66,11 +79,11 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QLabel" name="labelLocation">
          <property name="text">
-          <string>Location</string>
+          <string>Location: </string>
          </property>
         </widget>
        </item>
@@ -87,11 +100,11 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QLabel" name="labelDescription">
          <property name="text">
-          <string>Description:</string>
+          <string>Discription:</string>
          </property>
         </widget>
        </item>
@@ -103,63 +116,22 @@
            <height>0</height>
           </size>
          </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>100</height>
-          </size>
-         </property>
         </widget>
        </item>
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_10">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+        <widget class="QLabel" name="labelStarts">
+         <property name="text">
+          <string>Start Time:</string>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
+        </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_9">
-         <item>
-          <widget class="QLabel" name="labelStartTime">
-           <property name="text">
-            <string>Start Time:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QTimeEdit" name="timeEditStartTime"/>
-         </item>
-        </layout>
+        <widget class="QTimeEdit" name="timeEditStartTime"/>
        </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QLabel" name="labelEndTime">
-           <property name="text">
-            <string>End Time:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QTimeEdit" name="timeEditEndTime"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_8">
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -174,12 +146,23 @@
         </spacer>
        </item>
        <item>
+        <widget class="QLabel" name="labelEndTime">
+         <property name="text">
+          <string>End Time: </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTimeEdit" name="timeEditEndTime"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
         <widget class="QCheckBox" name="checkBoxReminder">
          <property name="text">
           <string>Set Reminder</string>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -191,33 +174,47 @@
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QDateEdit" name="dateEditReminder">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QDateEdit" name="dateEditReminder"/>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <widget class="QLabel" name="labelReminderTime">
-           <property name="text">
-            <string>Time:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QTimeEdit" name="timeEditReminder">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QLabel" name="labelReminderTime">
+         <property name="text">
+          <string>Time:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTimeEdit" name="timeEditReminder"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QCheckBox" name="checkBoxDelete">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Delete Appointment</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </item>
@@ -240,7 +237,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DialogAddAppointment</receiver>
+   <receiver>DialogAppointment</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -256,7 +253,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DialogAddAppointment</receiver>
+   <receiver>DialogAppointment</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

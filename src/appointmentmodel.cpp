@@ -79,24 +79,16 @@ QVariant AppointmentModel::data(const QModelIndex &index, int role) const
 
 
     if (role == Qt::DisplayRole) {
-        const Appointment& appointment = modelAppointmentList.at(index.row());
+        const Appointment& a = modelAppointmentList.at(index.row());
 
-        QString startTimestamp =appointment.m_appointmentStartTimestamp;
-        QString endTimestamp =appointment.m_appointmentEndTimestamp;
-        QDateTime startdatetime =QDateTime::fromString(startTimestamp);
-        QDateTime enddatetime=QDateTime::fromString(endTimestamp);
+        QDate appointmentDate=QDate::fromString(a.m_appointmentDate);
+        QTime startTime=QTime::fromString(a.m_appointmentStartTime);
+        QTime endTime=QTime::fromString(a.m_appointmentEndTime);
 
-        //qDebug()<<"Converted timestamp date"<<startdatetime.date();
-        //qDebug()<<"Converted timestamp time"<<startdatetime.time();
 
-        QDate startDate =startdatetime.date();
-        QTime startTime =startdatetime.time();
-        //QDate endDate= enddatetime.date();
-        QTime endTime = enddatetime.time();
-
-        int appointmentDay =startDate.day();
-        int appointmentMonth =startDate.month();
-        int appointmentYear =startDate.year();
+        int appointmentDay =appointmentDate.day();
+        int appointmentMonth =appointmentDate.month();
+        int appointmentYear =appointmentDate.year();
         int appointmentStartHour = startTime.hour();
         int appointmentStartMin=startTime.minute();
         int appointmentEndHour=endTime.hour();
@@ -114,7 +106,7 @@ QVariant AppointmentModel::data(const QModelIndex &index, int role) const
                 ":"+minutesEndStr;
         switch (index.column()) {
         case 0:
-            return appointment.m_id; //hidden (nneded for appointment removal)
+            return a.m_id; //hidden (nneded for appointment removal)
         case 1:
             return appointmentStartHour; //going to sort on start hour column 1 -hide
         case 2:
@@ -126,11 +118,11 @@ QVariant AppointmentModel::data(const QModelIndex &index, int role) const
         case 5:
             return endTimeStr;
         case 6:
-            return appointment.m_title;
+            return a.m_title;
         case 7:
-            return appointment.m_location;
+            return a.m_location;
         case 8:
-            return appointment.m_description;
+            return a.m_description;
 
         default:
             return QVariant();

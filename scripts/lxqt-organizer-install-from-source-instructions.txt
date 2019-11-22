@@ -1,0 +1,62 @@
+Building and Installation from Source Code
+-------------------------------------------
+
+You need the Linux C/C++ Compiler (with make), cmake, the Qt libraries and git. 
+To install these on Lubuntu use the terminal commands below. 
+With Debian install these packages as superuser.
+
+sudo apt install build-essential 
+sudo apt install cmake
+sudo apt install qt5-default
+sudo apt install qtbase5-dev
+sudo apt install qt5base5-dev-tools
+sudo apt install git 
+
+Note: You can use "cmake --version" to check the installed version of cmake
+
+The repository of lxqt-organizer can be downloaded using
+
+git clone https://github.com/lxqt/lxqt-organizer.git
+
+Note: You can update the respository at a later stage using "git pull"
+
+Change to the respository directory,create a “Built Directory” and change to the build directory.
+
+mkdir build
+cd build
+
+Now run cmake as follows
+
+cmake ..
+
+Make sure not to omit the periods after cmake command.
+
+The cmake command should create a Makefile in the build directory. Now run
+
+make   (or use make VERBOSE=1)
+
+Root authorisation is required to install the software using
+
+sudo make install
+
+The default installation directory is “/usr/local”.
+
+You can change the installation directory by modifying the configuration of CMAKE_INSTALL_PREFIX of CMake.
+
+Copy the lxqt-organizer.desktop file to /usr/share/applications to add a menu item.
+
+sudo cp lxqt-organizer.desktop /usr/share/applications
+
+
+
+
+
+
+
+
+
+
+
+
+
+

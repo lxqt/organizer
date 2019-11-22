@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1150</width>
-    <height>649</height>
+    <width>1220</width>
+    <height>772</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,12 +49,38 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="gridVisible">
+             <bool>false</bool>
+            </property>
+            <property name="navigationBarVisible">
+             <bool>true</bool>
+            </property>
+            <property name="dateEditEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelBirthdays">
+            <property name="text">
+             <string>Birthdays</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListView" name="listViewBirthdays">
+            <property name="minimumSize">
+             <size>
+              <width>550</width>
+              <height>0</height>
+             </size>
+            </property>
            </widget>
           </item>
           <item>
            <widget class="QLabel" name="labelReminders">
             <property name="text">
-             <string>Reminders</string>
+             <string>Reminders Today</string>
             </property>
            </widget>
           </item>
@@ -90,9 +116,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButtonSearchByLastname">
+           <widget class="QPushButton" name="pushButtonSortByFirstLastname">
             <property name="text">
-             <string>Search </string>
+             <string>Sort</string>
             </property>
            </widget>
           </item>
@@ -116,7 +142,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1150</width>
+     <width>1220</width>
      <height>29</height>
     </rect>
    </property>
@@ -126,6 +152,10 @@
     </property>
     <addaction name="actionExport_Contacts_XML"/>
     <addaction name="actionExport_Appointments_XML"/>
+    <addaction name="separator"/>
+    <addaction name="ActionImport_Contacts_XML"/>
+    <addaction name="actionImport_Appointments_XML"/>
+    <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuAction">
@@ -134,6 +164,7 @@
     </property>
     <addaction name="actionNew_Appointment"/>
     <addaction name="actionNew_Contact"/>
+    <addaction name="actionCheckForUpcomingBirthdays"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
@@ -190,11 +221,6 @@
    <addaction name="actionNew_Appointment"/>
    <addaction name="actionNew_Contact"/>
   </widget>
-  <action name="actionExit">
-   <property name="text">
-    <string>Exit</string>
-   </property>
-  </action>
   <action name="actionNew_Appointment">
    <property name="icon">
     <iconset resource="icons.qrc">
@@ -265,6 +291,61 @@
    </property>
    <property name="text">
     <string>Calendar Weeks</string>
+   </property>
+  </action>
+  <action name="actionImport_Appointments_XML">
+   <property name="text">
+    <string>Import Appointments (XML)</string>
+   </property>
+  </action>
+  <action name="ActionImport_Contacts_XML">
+   <property name="text">
+    <string>Import Contacts (XML)</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionDelete_All_Birthdays">
+   <property name="text">
+    <string>Delete All Birthdays</string>
+   </property>
+  </action>
+  <action name="actionShow_All_Birthdays">
+   <property name="text">
+    <string>Show All Birthdays</string>
+   </property>
+  </action>
+  <action name="actionDelete_Appointment">
+   <property name="text">
+    <string>Delete Appointment</string>
+   </property>
+  </action>
+  <action name="actionDelete_Contact">
+   <property name="text">
+    <string>Delete Contact</string>
+   </property>
+  </action>
+  <action name="actionShow_All_Reminders">
+   <property name="text">
+    <string>Show All Reminders</string>
+   </property>
+  </action>
+  <action name="actionCheckForReminders">
+   <property name="text">
+    <string>CheckForReminders</string>
+   </property>
+  </action>
+  <action name="actionCheckForBirthdayReminders">
+   <property name="text">
+    <string>CheckForBirthdayReminders</string>
+   </property>
+  </action>
+  <action name="actionCheckForUpcomingBirthdays">
+   <property name="text">
+    <string>CheckForUpcomingBirthdays</string>
    </property>
   </action>
  </widget>

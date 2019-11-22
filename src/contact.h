@@ -16,45 +16,52 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef DBMANAGER_H
-#define DBMANAGER_H
+#ifndef CONTACT_H
+#define CONTACT_H
 
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QSqlRecord>
-#include <QStringListModel>
-#include <QDebug>
-#include <QDate>
-#include <QList>
-#include"appointment.h"
-#include "contact.h"
+#include <QString>
+struct Contact {
 
-
-class DbManager
-{
-public:
-    DbManager();
-    QSqlDatabase db;
-    bool isOpen() const;
-    void openDatabase();    
-    void createDatebaseTables();
-    bool addAppointment(Appointment &appointment);
-    bool addContact(Contact &contact);
-    QList<Appointment> getAllAppointments();
-    QList<Appointment> getAppointmentsOnDate(QDate &diaryDate);
-    QList<Appointment> getAppointmentsToday();
-    bool removeAppointmentById(const int id);
-    bool removeAllAppointments();
-
-    QList<Contact> getAllContacts();
-    bool removeAllContacts();
-    bool removeContactById(const int id);
-    QList<Contact> findContactsByLastName(QString lastname);
-
-
-
-
+    Contact(int id=0,
+            const QString& firstname= QString(),
+            const QString& lastname= QString(),
+            const QString& email= QString(),
+            const QString& street= QString(),
+            const QString& city= QString(),
+            const QString& county= QString(),
+            const QString& postcode= QString(),
+            const QString& country= QString(),
+            const QString& telephone= QString(),           
+            const QString& birthdate=QString(),
+            int birthdayid=0
+            ):
+        m_id(id),
+        m_firstname(firstname),
+        m_lastname(lastname),
+        m_email(email),
+        m_street(street),
+        m_city(city),
+        m_county(county),
+        m_postcode(postcode),
+        m_country(country),
+        m_telephone(telephone),        
+        m_birthdate(birthdate),
+        m_birthdayid(birthdayid)
+    {
+    }
+    int m_id;
+    QString m_firstname;
+    QString m_lastname;
+    QString m_email;
+    QString m_street;
+    QString m_city;
+    QString m_county;
+    QString m_postcode;
+    QString m_country;
+    QString m_telephone;    
+    QString m_birthdate;
+    int m_birthdayid;
 };
 
-#endif // DBMANAGER_H
+
+#endif // CONTACT_H

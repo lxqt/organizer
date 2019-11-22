@@ -15,40 +15,36 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#ifndef REMINDERMODEL_H
-#define REMINDERMODEL_H
 
-#include <QColor>
-#include <QList>
-#include <QDate>
-#include <QDebug>
-#include "appointment.h"
-#include <QAbstractListModel>
+#ifndef BIRTHDAY_H
+#define BIRTHDAY_H
 
-class ReminderModel: public QAbstractListModel
-{
-public:
-    ReminderModel(QObject* parent = nullptr);
+#include <QString>
+struct Birthday {
 
-    ReminderModel(const QList<Appointment>& appointmentList,
-                                  QObject *parent = nullptr);
-
-    void addReminderAppointment(Appointment &appointment);
-    Appointment getAReminderAppointment(int index);
-    void clearAllReminderAppointments();
-    void removeReminderAppointment(int idx);
-
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-
-    QVariant data (const QModelIndex & index,
-                           int role = Qt::DisplayRole) const override;
-
-
-private:
-    QList<Appointment> modelReminderList;
-
-
-
+    Birthday(int id=0,
+                const QString& name= QString(),
+                const QString& location= QString(),
+                const QString& description= QString(),
+                const QString& birthDate=QString(),
+                int addToCalendar=1
+                ):
+        m_id(id),
+        m_name(name),
+        m_location(location),
+        m_description(description),
+        m_birthDate(birthDate),
+        m_addToCalendar(addToCalendar)
+    {
+    }
+   int m_id;
+   QString m_name;
+   QString m_location;
+   QString m_description;
+   QString m_birthDate;
+   int m_addToCalendar;
 };
 
-#endif // REMINDERMODEL_H
+
+
+#endif // BIRTHDAY_H

@@ -1,5 +1,5 @@
 # lxqt-organizer
-Personal Information Manager
+LXQt Organizer is a lightweight organizer for personal information management.
 
 ![](lxqt-organizer-v003.png)
 
@@ -24,7 +24,22 @@ v003 Alpha
 
 * XML export of appointments and contacts
 
+v003 alpha 2
+
+* edit appointments and contacts
+
+* birthdays added to calendar
+
+* checking for upcoming birthdays (next 7 days)
+
+* reminder today messages
+
+* XML import of appointment and contacts
+
+
 v003 Beta
+
+Code refactoring, testing, bug fixing etc..
 
 ....
 

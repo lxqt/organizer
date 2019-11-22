@@ -15,8 +15,9 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#ifndef DIALOGADDCONTACT_H
-#define DIALOGADDCONTACT_H
+
+#ifndef DIALOGCONTACT_H
+#define DIALOGCONTACT_H
 
 #include <QDialog>
 #include <QMessageBox>
@@ -25,42 +26,33 @@
 #include <QDate>
 #include <QTime>
 #include <QString>
-
+#include "contact.h"
 
 namespace Ui {
-class DialogAddContact;
+class DialogContact;
 }
 
-class DialogAddContact : public QDialog
+class DialogContact : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit DialogAddContact(QWidget *parent = nullptr, QDate *theBirthdayDate=nullptr);
-    ~DialogAddContact();
+    //explicit DialogContact(QWidget *parent = nullptr);
+    explicit DialogContact(QWidget *parent = nullptr, QDate *theBirthDate=nullptr);
+    explicit DialogContact(QWidget *parent = nullptr, Contact *theContact=nullptr);
+    ~DialogContact();
 
     QString firstName="";
     QString lastName="";
     QString email="";
-    QDate bornDate;
+    QDate birthDate =QDate();
+    int birthDateId=0;
 
     QString getFirstName();
     QString getLastName();
     QString getEmail();
-    QDate getBirthday();
-
-    bool addToBirthdayAppointment=true;
-    bool getAddBirthdayAppointment();
-
-
-    //Reminder
-    QDate reminderDate;
-    QTime reminderTime;
-    int reminderRequested=0;
-
-    QDate getReminderDate();
-    QTime getReminderTime();
-    int getReminderRequested();    
+    QDate getBirthDate();
+    int getBirthDateId();
 
     //Contact details
     QString street="";
@@ -69,6 +61,8 @@ public:
     QString postcode="";
     QString country="";
     QString phoneNumber; //could have + code
+    bool deleteRequested=false;
+    int addToCalendar=1;
 
     QString getStreet();
     QString getCity();
@@ -76,26 +70,20 @@ public:
     QString getPostcode();
     QString getCountry();
     QString getPhoneNumber();
-
-
+    bool getDeleteRequested();
+    int getAddToCalendar();
 
 private slots:
-void accept();
+    void accept();
+    void on_dateEditBirthDate_userDateChanged(const QDate &date);
 
-void on_dateEditBirthday_userDateChanged(const QDate &date);
 
-void on_dateEditReminder_userDateChanged(const QDate &date);
+    void on_checkBoxDelete_stateChanged(int arg1);
 
-void on_timeEditReminder_userTimeChanged(const QTime &time);
-
-void on_checkBoxReminder_stateChanged(int arg1);
-
-void on_checkBoxContactDetails_stateChanged(int arg1);
-
-void on_checkBoxAddToCalendar_stateChanged(int arg1);
+    void on_checkBoxAddToCalendar_stateChanged(int arg1);
 
 private:
-    Ui::DialogAddContact *ui;
+    Ui::DialogContact *ui;
 };
 
-#endif // DIALOGADDCONTACT_H
+#endif // DIALOGCONTACT_H
