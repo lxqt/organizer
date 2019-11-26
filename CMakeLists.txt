@@ -23,6 +23,8 @@ find_package(Qt5Gui ${QT_MINIMUM_VERSION} REQUIRED)
 find_package(Qt5LinguistTools ${QT_MINIMUM_VERSION} REQUIRED)
 find_package(Qt5Widgets ${QT_MINIMUM_VERSION} REQUIRED)
 find_package(Qt5Sql ${QT_MINIMUM_VERSION} REQUIRED)
+find_package(Qt5Svg ${QT_MINIMUM_VERSION} REQUIRED)
+find_package(Qt5Xml ${QT_MINIMUM_VERSION} REQUIRED)
 find_package(lxqt ${LXQT_MINIMUM_VERSION} REQUIRED)
 message(STATUS "Building with Qt${Qt5Core_VERSION}")
 
@@ -42,7 +44,7 @@ add_definitions("-DLXQT_ORGANIZER_VERSION=\"${LXQT_ORGANIZER_VERSION}\"")
 # Translations **********************************
 # include(LXQtTranslate)
 
-add_subdirectory(lxqt-organizer)
+add_subdirectory(src)
 add_subdirectory(scripts)
 
 INSTALL(TARGETS
