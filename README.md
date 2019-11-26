@@ -34,7 +34,7 @@ v003 alpha 2
 
 * reminder today messages
 
-* XML import of appointment and contacts
+* XML import of appointments and contacts
 
 
 v003 Beta
