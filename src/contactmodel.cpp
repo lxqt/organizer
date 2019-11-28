@@ -65,7 +65,7 @@ int ContactModel::rowCount(const QModelIndex &parent) const
 int ContactModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return 12; //11 columns (see cases below)
+    return 14; //14 columns (see cases below)
 }
 
 QVariant ContactModel::data(const QModelIndex &index, int role) const
@@ -92,24 +92,28 @@ QVariant ContactModel::data(const QModelIndex &index, int role) const
            case 1:
                return c.m_firstname;
            case 2:
-               return c.m_lastname;
+               return c.m_midnames;
            case 3:
-               return c.m_email; //format to 2 decimal place
+               return c.m_lastname;
            case 4:
-               return c.m_street;
+               return c.m_email; //format to 2 decimal place
            case 5:
-               return c.m_city;
+               return c.m_street;
            case 6:
-               return c.m_county;
+               return c.m_district;
            case 7:
-               return c.m_postcode;
+               return c.m_city;
            case 8:
-               return c.m_country;
+               return c.m_county;
            case 9:
-               return c.m_telephone;
+               return c.m_postcode;
            case 10:
-               return birthdayDateStr;
+               return c.m_country;
            case 11:
+               return c.m_telephone;
+           case 12:
+               return birthdayDateStr;
+           case 13:
                return c.m_birthdayid;
 
 
@@ -140,24 +144,28 @@ QVariant ContactModel::headerData(int section, Qt::Orientation orientation, int 
         case 1:
             return "First Name";
         case 2:
-            return "Last Name";
+            return "Mid Names";
         case 3:
-            return "Email";
+            return "Last Name";
         case 4:
-            return "Street";
+            return "Email";
         case 5:
-            return "City";
+            return "Street";
         case 6:
-            return "County";
+            return "District";
         case 7:
-            return "Postcode";
+            return "City";
         case 8:
-            return "Country";
+            return "County";
         case 9:
-            return "Telephone";       
+            return "Postcode";
         case 10:
-            return "Birthday";
+            return "Country";
         case 11:
+            return "Telephone";       
+        case 12:
+            return "Birthday";
+        case 13:
             return "BirthId";
         default:
             return QVariant();

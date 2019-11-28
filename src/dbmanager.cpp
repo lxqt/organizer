@@ -66,9 +66,11 @@ void DbManager::createDatebaseTables()
 
     QString sql3 = "CREATE TABLE contacts (ContactId INTEGER PRIMARY KEY,";
     sql3.append("FirstName TEXT,");
+    sql3.append("MidName TEXT,");
     sql3.append("LastName TEXT,");
     sql3.append("Email TEXT,");
     sql3.append("Street TEXT,");
+    sql3.append("District TEXT,");
     sql3.append("City TEXT,");
     sql3.append("County TEXT,");
     sql3.append("Postcode TEXT,");
@@ -252,9 +254,11 @@ bool DbManager::updateAppointment(Appointment &appointment, int id)
 bool DbManager::addContact(Contact &contact)
 {
     QString firstName =contact.m_firstname;
+    QString midName=contact.m_midnames;
     QString lastName =contact.m_lastname;
     QString email =contact.m_email;
     QString street =contact.m_street;
+    QString district=contact.m_district;
     QString city =contact.m_city;
     QString county =contact.m_county;
     QString postcode = contact.m_postcode;
@@ -266,9 +270,11 @@ bool DbManager::addContact(Contact &contact)
 
     QString sql="INSERT INTO contacts(`ContactId`,";
     sql.append("`FirstName`,");
+    sql.append("`MidName`,");
     sql.append("`LastName`,");
     sql.append("`Email`,");
     sql.append("`Street`,");
+     sql.append("`District`,");
     sql.append("`City`,");
     sql.append("`County`,");
     sql.append("`Postcode`,");
@@ -278,9 +284,11 @@ bool DbManager::addContact(Contact &contact)
     sql.append("`BirthdayId`)");
     sql.append("VALUES (:idin,");
     sql.append(":firstnamein,");
+    sql.append(":midnamein,");
     sql.append(":lastnamein,");
     sql.append(":emailin,");
     sql.append(":streetin,");
+    sql.append(":districtin,");
     sql.append(":cityin,");
     sql.append(":countyin,");
     sql.append(":postcodein,");
@@ -294,9 +302,11 @@ bool DbManager::addContact(Contact &contact)
 
     //query.bindValue(":idin", 1); //autoincrement as primary key
     query.bindValue(":firstnamein", firstName);
+    query.bindValue(":midnamein", midName);
     query.bindValue(":lastnamein", lastName);
     query.bindValue(":emailin", email);
     query.bindValue(":streetin", street);
+    query.bindValue(":districtin", district);
     query.bindValue(":cityin", city);
     query.bindValue(":countyin", county);
     query.bindValue(":postcodein", postcode);
@@ -320,9 +330,11 @@ bool DbManager::updateContact(Contact &contact,int id)
 
     QString sql ="UPDATE contacts SET ";
     sql.append(" FirstName = :fnin");
+    sql.append(", MidName = :mnin");
     sql.append(", LastName = :lnin");
     sql.append(", Email = :emin");
     sql.append(", Street = :stin");
+    sql.append(", District = :disin");
     sql.append(", City = :ctyin");
     sql.append(", County = :cntin");
     sql.append(", Postcode = :pcin");
@@ -338,9 +350,11 @@ bool DbManager::updateContact(Contact &contact,int id)
     if(qry.prepare(sql))
     {
       qry.bindValue(":fnin", contact.m_firstname);
+      qry.bindValue(":mnin",contact.m_midnames);
       qry.bindValue(":lnin",contact.m_lastname);
       qry.bindValue(":emin",contact.m_email);
       qry.bindValue(":stin",contact.m_street);
+      qry.bindValue(":disin",contact.m_district);
       qry.bindValue(":ctyin",contact.m_city);
       qry.bindValue(":cntin",contact.m_county);
       qry.bindValue(":pcin",contact.m_postcode);
@@ -459,13 +473,17 @@ QList<Contact> DbManager::getAllContacts()
         int idName = query.record().indexOf("ContactId");
         int id = query.value(idName).toInt();
         idName = query.record().indexOf("FirstName");
-        QString firstname = query.value(idName).toString();
+        QString firstname = query.value(idName).toString();        
+        idName = query.record().indexOf("MidName");
+        QString midname = query.value(idName).toString();
         idName = query.record().indexOf("LastName");
-        QString lastname = query.value(idName).toString();
+        QString lastname = query.value(idName).toString();        
         idName = query.record().indexOf("Email");
         QString email = query.value(idName).toString();
         idName = query.record().indexOf("Street");
-        QString street = query.value(idName).toString();
+        QString street = query.value(idName).toString();        
+        idName = query.record().indexOf("District");
+        QString district = query.value(idName).toString();
         idName = query.record().indexOf("City");
         QString city = query.value(idName).toString();
         idName = query.record().indexOf("County");
@@ -484,9 +502,11 @@ QList<Contact> DbManager::getAllContacts()
         Contact tmp;
         tmp.m_id=id;
         tmp.m_firstname=firstname;
+        tmp.m_midnames=midname;
         tmp.m_lastname=lastname;
         tmp.m_email=email;
         tmp.m_street=street;
+        tmp.m_district=district;
         tmp.m_city=city;
         tmp.m_county=county;
         tmp.m_postcode=postcode;
@@ -511,12 +531,16 @@ Contact DbManager::getContactByID(int id)
     int idd = query.value(idName).toInt();
     idName = query.record().indexOf("FirstName");
     QString firstname = query.value(idName).toString();
+    idName = query.record().indexOf("MidName");
+    QString midname = query.value(idName).toString();
     idName = query.record().indexOf("LastName");
     QString lastname = query.value(idName).toString();
     idName = query.record().indexOf("Email");
     QString email = query.value(idName).toString();
     idName = query.record().indexOf("Street");
     QString street = query.value(idName).toString();
+    idName = query.record().indexOf("District");
+    QString district = query.value(idName).toString();
     idName = query.record().indexOf("City");
     QString city = query.value(idName).toString();
     idName = query.record().indexOf("County");
@@ -535,9 +559,11 @@ Contact DbManager::getContactByID(int id)
     Contact contact;
     contact.m_id=idd;
     contact.m_firstname=firstname;
+    contact.m_midnames=midname;
     contact.m_lastname=lastname;
     contact.m_email=email;
     contact.m_street=street;
+    contact.m_district=district;
     contact.m_city=city;
     contact.m_county=county;
     contact.m_postcode=postcode;

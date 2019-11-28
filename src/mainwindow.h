@@ -91,6 +91,8 @@ public:
     int selectedRowIdx=0;
     bool notificationsFlag;
 
+    QTextCharFormat todayFormat;
+    QTextCharFormat birthdayFormat;
     QTextCharFormat eventDayFormat;
     QTextCharFormat weekDayFormat;
     QTextCharFormat weekendFormat;
@@ -102,9 +104,11 @@ public:
 
     //Contacts
     QString contactFirstName ="";
+    QString contactMiddleNames="";
     QString contactLastName="";
     QString contactEmail="";    
     QString street="";
+    QString district="";
     QString city="";
     QString county="";
     QString postcode ="";
@@ -152,6 +156,8 @@ public:
     void clearAllAppointmentsOnCalendar();
     void showAllBirthdaysOnCalendar();
     void clearAllBirthdaysOnCalendar();
+    void showTodayOnCalendar();
+    void clearTodayOnCalendar();
 
     //Reminders
     void checkForReminders();    

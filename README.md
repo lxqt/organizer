@@ -39,7 +39,9 @@ v003 alpha2
 
 v003 alpha3
 
-to do ....
+* updated contact details
+
+* current date marked on calendar
 
 ### Compiling source code
 #### Build Dependencies

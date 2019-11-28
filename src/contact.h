@@ -24,9 +24,11 @@ struct Contact {
 
     Contact(int id=0,
             const QString& firstname= QString(),
+            const QString& midnames= QString(),
             const QString& lastname= QString(),
             const QString& email= QString(),
             const QString& street= QString(),
+            const QString& district= QString(),
             const QString& city= QString(),
             const QString& county= QString(),
             const QString& postcode= QString(),
@@ -37,9 +39,11 @@ struct Contact {
             ):
         m_id(id),
         m_firstname(firstname),
+        m_midnames(midnames),
         m_lastname(lastname),
         m_email(email),
         m_street(street),
+        m_district(district),
         m_city(city),
         m_county(county),
         m_postcode(postcode),
@@ -51,9 +55,11 @@ struct Contact {
     }
     int m_id;
     QString m_firstname;
+    QString m_midnames;
     QString m_lastname;
     QString m_email;
     QString m_street;
+    QString m_district;
     QString m_city;
     QString m_county;
     QString m_postcode;

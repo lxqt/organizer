@@ -43,12 +43,14 @@ public:
     ~DialogContact();
 
     QString firstName="";
+    QString middleNames="";
     QString lastName="";
     QString email="";
     QDate birthDate =QDate();
     int birthDateId=0;
 
     QString getFirstName();
+    QString getMiddleNames();
     QString getLastName();
     QString getEmail();
     QDate getBirthDate();
@@ -56,6 +58,7 @@ public:
 
     //Contact details
     QString street="";
+    QString district="";
     QString city="";
     QString county="";
     QString postcode="";
@@ -65,6 +68,7 @@ public:
     int addToCalendar=1;
 
     QString getStreet();
+    QString getDistrict();
     QString getCity();
     QString getCounty();
     QString getPostcode();

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>635</width>
-    <height>513</height>
+    <width>686</width>
+    <height>594</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,11 +17,11 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QLabel" name="labelFirstName">
          <property name="text">
-          <string>First Name:</string>
+          <string>First Name:     </string>
          </property>
         </widget>
        </item>
@@ -38,11 +38,32 @@
       </layout>
      </item>
      <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="labelMidNames">
+         <property name="text">
+          <string>Middle Names:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditMiddleNames">
+         <property name="minimumSize">
+          <size>
+           <width>400</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QLabel" name="labelLastName">
          <property name="text">
-          <string>Last Name:</string>
+          <string>Last Name:     </string>
          </property>
         </widget>
        </item>
@@ -63,7 +84,7 @@
        <item>
         <widget class="QLabel" name="labelEmail">
          <property name="text">
-          <string>Email:        </string>
+          <string>Email:             </string>
          </property>
         </widget>
        </item>
@@ -121,7 +142,7 @@
        <item>
         <widget class="QLabel" name="labelStreet">
          <property name="text">
-          <string>Street:    </string>
+          <string>Street:     </string>
          </property>
         </widget>
        </item>
@@ -139,6 +160,27 @@
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QLabel" name="labelDistrict">
+         <property name="text">
+          <string>District:   </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditDistrict">
+         <property name="minimumSize">
+          <size>
+           <width>400</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
        <item>
         <widget class="QLabel" name="labelCity">
          <property name="text">
@@ -159,7 +201,7 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_8">
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
        <item>
         <widget class="QLabel" name="labelCounty">
          <property name="text">
@@ -180,7 +222,7 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_9">
+      <layout class="QHBoxLayout" name="horizontalLayout_10">
        <item>
         <widget class="QLabel" name="labelPostcode">
          <property name="text">
@@ -201,7 +243,7 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_10">
+      <layout class="QHBoxLayout" name="horizontalLayout_11">
        <item>
         <widget class="QLabel" name="labelCountry">
          <property name="text">
@@ -222,9 +264,9 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_11">
+      <layout class="QHBoxLayout" name="horizontalLayout_12">
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="labelPhone">
          <property name="text">
           <string>Phone:    </string>
          </property>
@@ -243,7 +285,7 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout_13">
        <item>
         <widget class="QCheckBox" name="checkBoxDelete">
          <property name="font">

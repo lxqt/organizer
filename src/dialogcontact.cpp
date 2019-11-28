@@ -42,9 +42,11 @@ DialogContact::DialogContact(QWidget *parent, Contact *theContact):
     ui->checkBoxDelete->show();
 
     ui->lineEditFirstName->setText(theContact->m_firstname);
+    ui->lineEditMiddleNames->setText(theContact->m_midnames);
     ui->lineEditLastName->setText(theContact->m_lastname);
     ui->lineEditEmail->setText(theContact->m_email);    
     ui->lineEditStreet->setText(theContact->m_street);
+    ui->lineEditDistrict->setText(theContact->m_district);
     ui->lineEditCity->setText(theContact->m_city);
     ui->lineEditCounty->setText(theContact->m_county);
     ui->lineEditPostcode->setText(theContact->m_postcode);
@@ -69,6 +71,12 @@ QString DialogContact::getFirstName()
 {
     firstName = ui->lineEditFirstName->text();
     return firstName;
+}
+
+QString DialogContact::getMiddleNames()
+{
+    middleNames=ui->lineEditMiddleNames->text();
+    return middleNames;
 }
 
 QString DialogContact::getLastName()
@@ -98,6 +106,12 @@ QString DialogContact::getStreet()
 {
     this->street=ui->lineEditStreet->text();
     return this->street;
+}
+
+QString DialogContact::getDistrict()
+{
+    this->district=ui->lineEditDistrict->text();
+    return this->district;
 }
 
 QString DialogContact::getCity()

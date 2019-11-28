@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //setup tableview
     ui->tableView->horizontalHeader()->setVisible(true);
     ui->tableView->horizontalHeader()->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tableView->horizontalHeader()->setStretchLastSection(true);
     ui->tableView->verticalHeader()->setVisible(false);
 
@@ -89,8 +89,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //Display
     DisplayAppointmentsForDate(this->selectedDate);
     DisplayBirthdaysForDate(this->selectedDate);
-    showAllAppointmentsOnCalendar();
     showAllBirthdaysOnCalendar();
+    showAllAppointmentsOnCalendar();
+    showTodayOnCalendar();
 
     ui->actionSystem_Notifications->setChecked(true);
     this->notificationsFlag=true;
@@ -164,9 +165,11 @@ void MainWindow::NewAppointment()
             }
         }
     }
+    clearAllAppointmentsOnCalendar();
     LoadAppointmentsListFromDatabase();
     LoadReminderListFromDatabase();
     DisplayAppointmentsForDate(selectedDate); //updates the displayList using appointmentList
+    showAllBirthdaysOnCalendar();
     showAllAppointmentsOnCalendar();
 }
 
@@ -189,8 +192,9 @@ void MainWindow::UpdateAppointment(int dbID)
                 clearAllAppointmentsOnCalendar();
                 LoadAppointmentsListFromDatabase();
                 LoadReminderListFromDatabase();
+                showAllAppointmentsOnCalendar();
                 DisplayAppointmentsForDate(selectedDate);
-                showAllAppointmentsOnCalendar();                
+                showAllBirthdaysOnCalendar();
                 return;
             }
 
@@ -246,10 +250,13 @@ void MainWindow::UpdateAppointment(int dbID)
             }
 
         }
+        clearAllAppointmentsOnCalendar();
         LoadAppointmentsListFromDatabase();//clears and updates appointmentlist from db
         LoadReminderListFromDatabase();
         DisplayAppointmentsForDate(selectedDate);
+        showAllBirthdaysOnCalendar();
         showAllAppointmentsOnCalendar();
+
 }
 
 void MainWindow::NewContact()
@@ -259,10 +266,12 @@ void MainWindow::NewContact()
     contactDialog->setModal(true);
     if (contactDialog->exec() == QDialog::Accepted ) {
         this->contactFirstName=contactDialog->getFirstName();
+        this->contactMiddleNames=contactDialog->getMiddleNames();
         this->contactLastName=contactDialog->getLastName();
         this->contactEmail=contactDialog->getEmail();        
         this->street=contactDialog->getStreet();
         this->city=contactDialog->getCity();
+        this->district=contactDialog->getDistrict();
         this->county=contactDialog->getCounty();
         this->postcode=contactDialog->getPostcode();
         this->country=contactDialog->getCountry();
@@ -273,9 +282,11 @@ void MainWindow::NewContact()
 
         Contact c;
         c.m_firstname=contactFirstName;
+        c.m_midnames=contactMiddleNames;
         c.m_lastname=contactLastName;
         c.m_email=contactEmail;
         c.m_street=street;
+        c.m_district=district;
         c.m_city=city;
         c.m_county=county;
         c.m_postcode=postcode;
@@ -308,6 +319,7 @@ void MainWindow::NewContact()
     LoadBirthdayListFromDatabase();
     DisplayContactsOnTableView(); //display
     showAllBirthdaysOnCalendar();
+    showAllAppointmentsOnCalendar();
 }
 
 void MainWindow::UpdateContact(int dbID)
@@ -323,17 +335,20 @@ void MainWindow::UpdateContact(int dbID)
             int birthdaykey = currentContact.m_birthdayid;
             dbm.removeContactById(dbID);
             dbm.removeBirthdayById(birthdaykey);
-            clearAllAppointmentsOnCalendar();
+            clearAllBirthdaysOnCalendar();
             LoadContactsListFromDatabase(); //clears and reloads contact lsit
             LoadBirthdayListFromDatabase();
             DisplayContactsOnTableView();
-            DisplayBirthdaysForDate(this->selectedDate);            
+            DisplayBirthdaysForDate(this->selectedDate);
+            showAllAppointmentsOnCalendar();
             return;  //gone!
         }        
         this->contactFirstName=contactDialog->getFirstName();
         this->contactLastName=contactDialog->getLastName();
+        this->contactMiddleNames=contactDialog->getMiddleNames();
         this->contactEmail=contactDialog->getEmail();
         this->street=contactDialog->getStreet();
+        this->district=contactDialog->getDistrict();
         this->city=contactDialog->getCity();
         this->county=contactDialog->getCounty();
         this->postcode=contactDialog->getPostcode();
@@ -345,9 +360,11 @@ void MainWindow::UpdateContact(int dbID)
 
         Contact c;
         c.m_firstname=contactFirstName;
+        c.m_midnames=contactMiddleNames;
         c.m_lastname=contactLastName;
         c.m_email=contactEmail;
         c.m_street=street;
+        c.m_district=district;
         c.m_city=city;
         c.m_county=county;
         c.m_postcode=postcode;
@@ -378,8 +395,9 @@ void MainWindow::UpdateContact(int dbID)
     LoadContactsListFromDatabase(); //clears and reloads contactList
     LoadBirthdayListFromDatabase(); //clears and reloads birthdayList
     DisplayContactsOnTableView();
-    DisplayBirthdaysForDate(this->selectedDate);
+    DisplayBirthdaysForDate(this->selectedDate);    
     showAllBirthdaysOnCalendar();
+    showAllAppointmentsOnCalendar();
 }
 
 void MainWindow::LoadAppointmentsListFromDatabase()
@@ -470,8 +488,22 @@ void MainWindow::setCalendarOptions()
 {
     ui->calendarWidget->setGridVisible(false);
     ui->calendarWidget->setVerticalHeaderFormat(ui->calendarWidget->NoVerticalHeader);
+
+    todayFormat.setForeground(Qt::black);
+    todayFormat.setFontItalic(true);
+    todayFormat.setFontWeight(QFont::Bold);
+    //todayFormat.setUnderlineStyle(QTextCharFormat::SingleUnderline);
+    todayFormat.setFontUnderline(true);
+    todayFormat.setBackground(Qt::white);
+
     eventDayFormat.setForeground(Qt::magenta);
-    eventDayFormat.setBackground(Qt::gray);
+    eventDayFormat.setBackground(Qt::lightGray);
+
+    birthdayFormat.setForeground(Qt::black);
+    birthdayFormat.setBackground(Qt::yellow);
+
+
+
     weekDayFormat.setForeground(Qt::black);
     weekDayFormat.setBackground(Qt::white);
     weekendFormat.setForeground(Qt::red);
@@ -486,6 +518,7 @@ void MainWindow::showAllAppointmentsOnCalendar()
         QDate appointmentDate =QDate::fromString(a.m_appointmentDate);
         ui->calendarWidget->setDateTextFormat(appointmentDate,eventDayFormat);
     }
+    showTodayOnCalendar();
 }
 
 void MainWindow::clearAllAppointmentsOnCalendar()
@@ -502,6 +535,7 @@ void MainWindow::clearAllAppointmentsOnCalendar()
             ui->calendarWidget->setDateTextFormat(appointmentDate,weekDayFormat);
         }
     }
+    showTodayOnCalendar();
     ui->calendarWidget->repaint();
 }
 
@@ -513,9 +547,10 @@ void MainWindow::showAllBirthdaysOnCalendar()
         if(b.m_addToCalendar==1){
             QDate borndate =QDate::fromString(b.m_birthDate);
             QDate currentBDay =QDate(currentDate.year(), borndate.month(), borndate.day());
-            ui->calendarWidget->setDateTextFormat(currentBDay,eventDayFormat);
+            ui->calendarWidget->setDateTextFormat(currentBDay,birthdayFormat);
         }
     }
+    showTodayOnCalendar();
 }
 
 void MainWindow::clearAllBirthdaysOnCalendar()
@@ -534,6 +569,26 @@ void MainWindow::clearAllBirthdaysOnCalendar()
         }
     }
     ui->calendarWidget->repaint();
+    showTodayOnCalendar();
+}
+
+void MainWindow::showTodayOnCalendar()
+{
+    QDate currentDate =QDate::currentDate();
+    ui->calendarWidget->setDateTextFormat(currentDate,todayFormat);
+}
+
+void MainWindow::clearTodayOnCalendar()
+{
+    QDate currentDate =QDate::currentDate();
+
+    if(currentDate.dayOfWeek()==Qt::Saturday || currentDate.dayOfWeek()==Qt::Sunday)
+    {
+        ui->calendarWidget->setDateTextFormat(currentDate,weekendFormat);
+    }
+    else {
+        ui->calendarWidget->setDateTextFormat(currentDate,weekDayFormat);
+    }
 }
 
 void MainWindow::checkForReminders()
@@ -644,9 +699,11 @@ void MainWindow::exportContactsXML()
     QList<Contact> dbContactList =dbm.getAllContacts();
     foreach(Contact c, dbContactList){
         QString firstName=c.m_firstname;
+        QString midName =c.m_midnames;
         QString lastName=c.m_lastname;
         QString email =c.m_email;
         QString street =c.m_street;
+        QString district =c.m_district;
         QString city =c.m_city;
         QString county =c.m_county;
         QString postcode=c.m_postcode;
@@ -656,9 +713,11 @@ void MainWindow::exportContactsXML()
 
         QDomElement contact = document.createElement("Contact");
         contact.setAttribute("FirstName",firstName );
+        contact.setAttribute("MidName",midName);
         contact.setAttribute("LastName", lastName);
         contact.setAttribute("Email",email);
         contact.setAttribute("Street",street);
+        contact.setAttribute("District",district);
         contact.setAttribute("City",city);
         contact.setAttribute("County",county);
         contact.setAttribute("Postcode",postcode);
@@ -714,9 +773,11 @@ void MainWindow::importContactsXML()
 
             Contact c;
             c.m_firstname=contact.attribute("FirstName");
+            c.m_midnames=contact.attribute("MidName");
             c.m_lastname=contact.attribute("LastName");
             c.m_email=contact.attribute("Email");
             c.m_street=contact.attribute("Street");
+            c.m_district=contact.attribute("District");
             c.m_city=contact.attribute("City");
             c.m_county=contact.attribute("County");
             c.m_postcode=contact.attribute("Postcode");
@@ -913,25 +974,29 @@ void MainWindow::on_tableViewContacts_doubleClicked(const QModelIndex &index)
 void MainWindow::on_pushButtonShowQuickDetails_clicked()
 {
     ui->tableViewContacts->hideColumn(0); //index
-    ui->tableViewContacts->hideColumn(11); //BithID
+    ui->tableViewContacts->hideColumn(13); //BithID
 
     if (quickViewFlag)
     {
-        ui->tableViewContacts->hideColumn(4); //street      
-        ui->tableViewContacts->hideColumn(6); //county
-        ui->tableViewContacts->hideColumn(7); //postcode
-        ui->tableViewContacts->hideColumn(8); //country
-        ui->tableViewContacts->hideColumn(9); //telephone       
+        ui->tableViewContacts->hideColumn(2); //mid names
+        ui->tableViewContacts->hideColumn(5); //street
+        ui->tableViewContacts->hideColumn(6); //district
+        ui->tableViewContacts->hideColumn(8); //county
+        ui->tableViewContacts->hideColumn(9); //postcode
+        ui->tableViewContacts->hideColumn(10); //country
+        ui->tableViewContacts->hideColumn(11); //telephone
         quickViewFlag=false;
     }
     else {
 
-        ui->tableViewContacts->showColumn(4); //street
-        ui->tableViewContacts->showColumn(5); //city
-        ui->tableViewContacts->showColumn(6); //county
-        ui->tableViewContacts->showColumn(7); //postcode
-        ui->tableViewContacts->showColumn(8); //country
-        ui->tableViewContacts->showColumn(9); //telephone       
+        ui->tableViewContacts->showColumn(2); //mid names
+        ui->tableViewContacts->showColumn(5); //street
+        ui->tableViewContacts->showColumn(6); //district
+        ui->tableViewContacts->showColumn(7); //city
+        ui->tableViewContacts->showColumn(8); //county
+        ui->tableViewContacts->showColumn(9); //postcode
+        ui->tableViewContacts->showColumn(10); //country
+        ui->tableViewContacts->showColumn(11); //telephone
         quickViewFlag=true;
     }
 }
@@ -1051,17 +1116,20 @@ void MainWindow::DisplayContactsOnTableView()
     proxyModelContacts->setSourceModel(contactModel);
     ui->tableViewContacts->setModel(proxyModelContacts);
     ui->tableViewContacts->setSortingEnabled(true);
-    ui->tableViewContacts->sortByColumn(2, Qt::AscendingOrder); //sort on lastname
+    ui->tableViewContacts->sortByColumn(3, Qt::AscendingOrder); //sort on lastname
     ui->tableViewContacts->horizontalHeader()->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableViewContacts->setSortingEnabled(false);
     ui->tableViewContacts->hideColumn(0); //index
-    ui->tableViewContacts->hideColumn(4); //street
-    //ui->tableViewContacts->hideColumn(5); //city
-    ui->tableViewContacts->hideColumn(6); //county
-    ui->tableViewContacts->hideColumn(7); //postcode
-    ui->tableViewContacts->hideColumn(8); //country
-    ui->tableViewContacts->hideColumn(9); //telephone
-    ui->tableViewContacts->hideColumn(11); //birthID
+    ui->tableViewContacts->hideColumn(2); //mid names
+    ui->tableViewContacts->hideColumn(5); //street
+    ui->tableViewContacts->hideColumn(6); //district
+    //city
+    ui->tableViewContacts->hideColumn(8); //county
+    ui->tableViewContacts->hideColumn(9); //postcode
+    ui->tableViewContacts->hideColumn(10); //country
+    ui->tableViewContacts->hideColumn(11); //telephone
+    //birthday
+    ui->tableViewContacts->hideColumn(13); //birthID
 }
 
 void MainWindow::on_pushButtonSortByFirstLastname_clicked()
@@ -1089,13 +1157,15 @@ void MainWindow::on_pushButtonSortByFirstLastname_clicked()
     ui->tableViewContacts->setSortingEnabled(true);
     ui->tableViewContacts->sortByColumn(2,order);
     //ui->tableViewContacts->horizontalHeader()->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tableViewContacts->setSortingEnabled(false);
     ui->tableViewContacts->hideColumn(0); //index
-    ui->tableViewContacts->hideColumn(4); //street
-    //ui->tableViewContacts->hideColumn(5); //city
-    ui->tableViewContacts->hideColumn(6); //county
-    ui->tableViewContacts->hideColumn(7); //postcode
-    ui->tableViewContacts->hideColumn(8); //country
-    ui->tableViewContacts->hideColumn(9); //telephone
-    ui->tableViewContacts->hideColumn(11); //birthID
+    ui->tableViewContacts->hideColumn(2); //mid names
+    ui->tableViewContacts->hideColumn(5); //street
+    ui->tableViewContacts->hideColumn(6); //district
+    //city
+    ui->tableViewContacts->hideColumn(8); //county
+    ui->tableViewContacts->hideColumn(9); //postcode
+    ui->tableViewContacts->hideColumn(10); //country
+    ui->tableViewContacts->hideColumn(11); //telephone
+    //birthday
+    ui->tableViewContacts->hideColumn(13); //birthID
 }
