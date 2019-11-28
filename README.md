@@ -12,7 +12,7 @@ v002
 * reminder notifications
 
 
-v003 Alpha
+v003 alpha
 
 * set appointments on hour and minute
 
@@ -24,7 +24,7 @@ v003 Alpha
 
 * XML export of appointments and contacts
 
-v003 alpha 2
+v003 alpha2
 
 * edit appointments and contacts
 
@@ -37,11 +37,9 @@ v003 alpha 2
 * XML import of appointments and contacts
 
 
-v003 Beta
+v003 alpha3
 
-Code refactoring, testing, bug fixing etc..
-
-....
+to do ....
 
 ### Compiling source code
 #### Build Dependencies
