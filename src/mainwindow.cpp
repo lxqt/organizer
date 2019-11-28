@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableViewContacts->verticalHeader()->setVisible(false);
 
     this->selectedDate=QDate::currentDate();
-    ui->labelSchedule->setText("Schedule for "+selectedDate.toString());
+    ui->labelSchedule->setText("Appointments for "+selectedDate.toString());
 
     //setup status bar
     statusTimeLabel= new QLabel();
@@ -942,7 +942,7 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 void MainWindow::on_calendarWidget_clicked(const QDate &date)
 {
     selectedDate=date;
-    ui->labelSchedule->setText("Schedule for "+date.toString());
+    ui->labelSchedule->setText("Appointments for "+date.toString());
     DisplayAppointmentsForDate(selectedDate);
     DisplayBirthdaysForDate(selectedDate);
 }
@@ -1035,7 +1035,7 @@ void MainWindow::on_actionClear_All_Reminder_Messages_triggered()
 
 void MainWindow::on_actionDelete_All_Appointments_2_triggered()
 {
-    qDebug()<<"Entering Delete All Appointments...";
+    //qDebug()<<"Entering Delete All Appointments...";
     clearAllAppointmentsOnCalendar(); //uses appointment list
     dbm.removeAllAppointments();
     dbm.removeAllReminders();
