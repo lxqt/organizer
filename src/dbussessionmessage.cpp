@@ -30,7 +30,7 @@ DbusSessionMessage::DbusSessionMessage(QObject *parent) : QObject(parent)
        //qDebug() << "QDBus interface successfully created (it works!)";
 
        this->messageDuration=2000;
-       this->theIconPath="";
+       this->theIconPath=QLatin1String("");
 }
 
 void DbusSessionMessage::displayMessage(const MessageData &message)

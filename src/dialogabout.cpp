@@ -34,31 +34,31 @@ DialogAbout::~DialogAbout()
 
 void DialogAbout::SetAboutMessage()
 {
-    QString descMsg = "LXQt Organizer is a lightweight organizer for personal information management.";
-    QString headerMsg = "LXQt Organizer (v0.003 Alpha3)";
-    QString authorMsg = "Author (Lead Developer): Alan Crispin  (aka. crispina)";
-    QString lxqtMsg1 =  "LXQt desktop project.";
-    QString lxqtLinkMsg ="<a href='https://github.com/lxqt'>LXQt</a>";
-    QString license1 ="LXQt Organizer is free software: you can redistribute it and/or modify it under the terms "
-                      "of the GNU General Public License as published by the Free Software Foundation.";
+    QString descMsg = QStringLiteral("LXQt Organizer is a lightweight organizer for personal information management.");
+    QString headerMsg = QStringLiteral("LXQt Organizer (v0.003 Alpha3)");
+    QString authorMsg = QStringLiteral("Author (Lead Developer): Alan Crispin  (aka. crispina)");
+    QString lxqtMsg1 =  QStringLiteral("LXQt desktop project.");
+    QString lxqtLinkMsg =QStringLiteral("<a href='https://github.com/lxqt'>LXQt</a>");
+    QString license1 =QLatin1String("LXQt Organizer is free software: you can redistribute it and/or modify it under the terms "
+                      "of the GNU General Public License as published by the Free Software Foundation.");
     QString
-            license2="LXQt Organizer is distributed in the hope that it will be useful, "
+            license2=QLatin1String("LXQt Organizer is distributed in the hope that it will be useful, "
                      "but WITHOUT ANY WARRANTY; without even the implied warranty of"
                      " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. "
-                     "See the GNU General Public License for more details.";
+                     "See the GNU General Public License for more details.");
 
     QString msg =descMsg;
-        msg.append("\n"); //new line
-        msg.append("\n"); //new line
+        msg.append(QLatin1Char('\n')); //new line
+        msg.append(QLatin1Char('\n')); //new line
         msg.append(authorMsg);
-        msg.append("\n"); //new line
-        msg.append("\n"); //new line
+        msg.append(QLatin1Char('\n')); //new line
+        msg.append(QLatin1Char('\n')); //new line
         msg.append(lxqtMsg1);
-        msg.append("\n"); //new line
-        msg.append("\n"); //new line
+        msg.append(QLatin1Char('\n')); //new line
+        msg.append(QLatin1Char('\n')); //new line
         msg.append(license1);
-        msg.append("\n"); //new line
-        msg.append("\n"); //new line
+        msg.append(QLatin1Char('\n')); //new line
+        msg.append(QLatin1Char('\n')); //new line
         msg.append(license2);
 
     ui->labelHeader->setText(headerMsg);

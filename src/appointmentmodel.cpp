@@ -95,15 +95,15 @@ QVariant AppointmentModel::data(const QModelIndex &index, int role) const
         int appointmentEndMin=endTime.minute();
 
 
-        QString dateStr="("+QString::number(appointmentDay)+"/"
-                +QString::number(appointmentMonth)+"/"
-                +QString::number(appointmentYear)+")";    
-        QString minutesStartStr = QString("%1").arg(appointmentStartMin, 2, 10, QChar('0'));
+        QString dateStr=QLatin1String("(")+QString::number(appointmentDay)+QLatin1Char('/')
+                +QString::number(appointmentMonth)+QLatin1Char('/')
+                +QString::number(appointmentYear)+QLatin1Char(')');
+        QString minutesStartStr = QStringLiteral("%1").arg(appointmentStartMin, 2, 10, QLatin1Char('0'));
         QString startTimeStr=QString::number(appointmentStartHour,'f',0)
-                +":"+minutesStartStr;
-        QString minutesEndStr = QString("%1").arg(appointmentEndMin, 2, 10, QChar('0'));
+                +QLatin1Char(':')+minutesStartStr;
+        QString minutesEndStr = QStringLiteral("%1").arg(appointmentEndMin, 2, 10, QLatin1Char('0'));
         QString endTimeStr=QString::number(appointmentEndHour,'f',0)+
-                ":"+minutesEndStr;
+                QLatin1Char(':')+minutesEndStr;
         switch (index.column()) {
         case 0:
             return a.m_id; //hidden (nneded for appointment removal)
@@ -145,23 +145,23 @@ QVariant AppointmentModel::headerData(int section, Qt::Orientation orientation, 
     if (orientation == Qt::Horizontal) {
         switch (section) {
         case 0:
-            return "Id";
+            return QLatin1String("Id");
         case 1:
-            return "Hour";
+            return QLatin1String("Hour");
         case 2:
-            return "Min";
+            return QLatin1String("Min");
         case 3:
-            return "Date";
+            return QLatin1String("Date");
         case 4:
-            return "Starts";
+            return QLatin1String("Starts");
         case 5:
-            return "Ends";
+            return QLatin1String("Ends");
         case 6:
-            return "Title";
+            return QLatin1String("Title");
         case 7:
-            return "Location";
+            return QLatin1String("Location");
         case 8:
-            return "Description";
+            return QLatin1String("Description");
         default:
             return QVariant();
         }

@@ -26,7 +26,7 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
 {
     ui->setupUi(this);
     //New appointment
-    setWindowTitle("New Appointment");
+    setWindowTitle(QStringLiteral("New Appointment"));
     ui->checkBoxDelete->hide();
 
     ui->dateEditAppointmentDate->setDate(*theAppointmentDate);
@@ -68,7 +68,7 @@ DialogAppointment::DialogAppointment(QWidget *parent, Appointment *theAppointmen
     ui->setupUi(this);
     //Update an appointment
 
-    setWindowTitle("Update Appointment");
+    setWindowTitle(QStringLiteral("Update Appointment"));
     ui->checkBoxDelete->show();
 
     ui->lineEditTitle->setText(theAppointment->m_title);

@@ -64,9 +64,9 @@ public:
     QDate selectedDate; //from clicking on calendar
 
     //Appointments
-    QString title="";
-    QString location="";
-    QString description="";
+    QString title=QLatin1String("");
+    QString location=QLatin1String("");
+    QString description=QLatin1String("");
     QDate appointmentDate;
     QTime appointmentStartTime;
     QTime appointmentEndTime;
@@ -79,9 +79,9 @@ public:
     Reminder reminderSingleShot;
 
     //Birthday (Keep Appointment format for display purposes)
-    QString birthdayName="";
-    QString birthdayLocation="";
-    QString birthdayDescription="";
+    QString birthdayName=QLatin1String("");
+    QString birthdayLocation=QLatin1String("");
+    QString birthdayDescription=QLatin1String("");
     QDate birthdayDate;
     int addToCalendar=1;
 
@@ -103,17 +103,17 @@ public:
     QTimer *timerSingleShot;
 
     //Contacts
-    QString contactFirstName ="";
-    QString contactMiddleNames="";
-    QString contactLastName="";
-    QString contactEmail="";    
-    QString street="";
-    QString district="";
-    QString city="";
-    QString county="";
-    QString postcode ="";
-    QString country ="";
-    QString phoneNumber="";
+    QString contactFirstName =QLatin1String("");
+    QString contactMiddleNames=QLatin1String("");
+    QString contactLastName=QLatin1String("");
+    QString contactEmail=QLatin1String("");    
+    QString street=QLatin1String("");
+    QString district=QLatin1String("");
+    QString city=QLatin1String("");
+    QString county=QLatin1String("");
+    QString postcode =QLatin1String("");
+    QString country =QLatin1String("");
+    QString phoneNumber=QLatin1String("");
     QDate birthDate=QDate(); //(0,0,0)
     int birthDateId=0;
 

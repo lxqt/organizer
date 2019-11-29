@@ -81,9 +81,9 @@ QVariant ContactModel::data(const QModelIndex &index, int role) const
            const Contact& c = modelContactList.at(index.row());
            QDate birthdayDate =QDate::fromString(c.m_birthdate);
 
-           QString birthdayDateStr="("+QString::number(birthdayDate.day())+"/"
-                   +QString::number(birthdayDate.month())+"/"
-                   +QString::number(birthdayDate.year())+")";
+           QString birthdayDateStr=QLatin1Char('(')+QString::number(birthdayDate.day())+QLatin1Char('/')
+                   +QString::number(birthdayDate.month())+QLatin1Char('/')
+                   +QString::number(birthdayDate.year())+QLatin1Char(')');
 
 
            switch (index.column()) {
@@ -140,33 +140,33 @@ QVariant ContactModel::headerData(int section, Qt::Orientation orientation, int 
     if (orientation == Qt::Horizontal) {
         switch (section) {
         case 0:
-            return "ContactId";
+            return QLatin1String("ContactId");
         case 1:
-            return "First Name";
+            return QLatin1String("First Name");
         case 2:
-            return "Mid Names";
+            return QLatin1String("Mid Names");
         case 3:
-            return "Last Name";
+            return QLatin1String("Last Name");
         case 4:
-            return "Email";
+            return QLatin1String("Email");
         case 5:
-            return "Street";
+            return QLatin1String("Street");
         case 6:
-            return "District";
+            return QLatin1String("District");
         case 7:
-            return "City";
+            return QLatin1String("City");
         case 8:
-            return "County";
+            return QLatin1String("County");
         case 9:
-            return "Postcode";
+            return QLatin1String("Postcode");
         case 10:
-            return "Country";
+            return QLatin1String("Country");
         case 11:
-            return "Telephone";       
+            return QLatin1String("Telephone");
         case 12:
-            return "Birthday";
+            return QLatin1String("Birthday");
         case 13:
-            return "BirthId";
+            return QLatin1String("BirthId");
         default:
             return QVariant();
         }

@@ -38,8 +38,12 @@ add_definitions("-DLXQT_ORGANIZER_VERSION=\"${LXQT_ORGANIZER_VERSION}\"")
 
 # include(LXQtPreventInSourceBuilds)
 
-# leave our compiler settings out for now, some fixes needed
-# include(LXQtCompilerSettings NO_POLICY_SCOPE)
+include(LXQtCompilerSettings NO_POLICY_SCOPE)
+
+# foreach is still used
+remove_definitions(
+    -DQT_NO_FOREACH
+)
 
 # Translations **********************************
 # include(LXQtTranslate)

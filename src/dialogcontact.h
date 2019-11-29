@@ -42,10 +42,10 @@ public:
     explicit DialogContact(QWidget *parent = nullptr, Contact *theContact=nullptr);
     ~DialogContact();
 
-    QString firstName="";
-    QString middleNames="";
-    QString lastName="";
-    QString email="";
+    QString firstName=QLatin1String("");
+    QString middleNames=QLatin1String("");
+    QString lastName=QLatin1String("");
+    QString email=QLatin1String("");
     QDate birthDate =QDate();
     int birthDateId=0;
 
@@ -57,12 +57,12 @@ public:
     int getBirthDateId();
 
     //Contact details
-    QString street="";
-    QString district="";
-    QString city="";
-    QString county="";
-    QString postcode="";
-    QString country="";
+    QString street=QLatin1String("");
+    QString district=QLatin1String("");
+    QString city=QLatin1String("");
+    QString county=QLatin1String("");
+    QString postcode=QLatin1String("");
+    QString country=QLatin1String("");
     QString phoneNumber; //could have + code
     bool deleteRequested=false;
     int addToCalendar=1;

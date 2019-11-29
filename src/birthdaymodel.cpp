@@ -87,13 +87,13 @@ QVariant BirthdayModel::data(const QModelIndex &index, int role) const
         int birthdayMonth =birthdayDate.month();
         int birthdayYear =birthdayDate.year();
 
-        QString dateStr="("+QString::number(birthdayDay)+"/"
-                +QString::number(birthdayMonth)+"/"
-                +QString::number(birthdayYear)+")";
+        QString dateStr=QLatin1Char('(')+QString::number(birthdayDay)+QLatin1Char('/')
+                +QString::number(birthdayMonth)+QLatin1Char('/')
+                +QString::number(birthdayYear)+QLatin1Char(')');
 
-        QString details="Birthday: "+birthday.m_name
-                +" ("+birthday.m_location
-                + ") "+dateStr;
+        QString details=QLatin1String("Birthday: ")+birthday.m_name
+                +QLatin1String(" (")+birthday.m_location
+                + QLatin1String(") ")+dateStr;
 
 
         return details;

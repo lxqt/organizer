@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle("LXQt Organizer");
+    setWindowTitle(QStringLiteral("LXQt Organizer"));
     //setup databse
     dbm.openDatabase();
     dbm.createDatebaseTables();
@@ -48,17 +48,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableViewContacts->verticalHeader()->setVisible(false);
 
     this->selectedDate=QDate::currentDate();
-    ui->labelSchedule->setText("Appointments for "+selectedDate.toString());
+    ui->labelSchedule->setText(QLatin1String("Appointments for ")+selectedDate.toString());
 
     //setup status bar
     statusTimeLabel= new QLabel();
     statusTimeLabel->setText(QTime::currentTime().toString(Qt::SystemLocaleDate));
-    statusTimeLabel->setText(QTime::currentTime().toString("hh:mm"));
+    statusTimeLabel->setText(QTime::currentTime().toString(QStringLiteral("hh:mm")));
     statusDateLabel = new QLabel(this);
     statusDateLabel->setText(QDate::currentDate().toString());
     ui->statusBar->addPermanentWidget(statusDateLabel);
     ui->statusBar->addPermanentWidget(statusTimeLabel);
-    ui->statusBar->showMessage("Hello. Watch for notifications here! Double click items to edit",5000);
+    ui->statusBar->showMessage(QStringLiteral("Hello. Watch for notifications here! Double click items to edit"),5000);
 
     //setup timer
     timer = new QTimer();
@@ -130,20 +130,20 @@ void MainWindow::NewAppointment()
         a.m_appointmentEndTime=appointmentEndTime.toString();
         a.m_reminderId=0;
 
-        QString dateStr="("+QString::number(selectedDate.day())+"/"
-                +QString::number(selectedDate.month())+"/"
-                +QString::number(selectedDate.year())+")";
+        QString dateStr=QLatin1Char('(')+QString::number(selectedDate.day())+QLatin1Char('/')
+                +QString::number(selectedDate.month())+QLatin1Char('/')
+                +QString::number(selectedDate.year())+QLatin1Char(')');
 
-        QString minutesStartStr = QString("%1").arg(appointmentStartTime.minute(), 2, 10, QChar('0'));
+        QString minutesStartStr = QStringLiteral("%1").arg(appointmentStartTime.minute(), 2, 10, QLatin1Char('0'));
         QString startTimeStr=QString::number(appointmentStartTime.hour(),'f',0)
-                +":"+minutesStartStr;
-        QString minutesEndStr = QString("%1").arg(appointmentEndTime.minute(), 2, 10, QChar('0'));
+                +QLatin1Char(':')+minutesStartStr;
+        QString minutesEndStr = QStringLiteral("%1").arg(appointmentEndTime.minute(), 2, 10, QLatin1Char('0'));
         QString endTimeStr=QString::number(appointmentEndTime.hour(),'f',0)+
-                ":"+minutesEndStr;
+                QLatin1Char(':')+minutesEndStr;
         QString reminderDetails=title
-                +" ("+location
-                + ") "+dateStr+" ("
-                +startTimeStr+"->"+endTimeStr+")";
+                +QLatin1String(" (")+location
+                + QLatin1String(") ")+dateStr+QLatin1String(" (")
+                +startTimeStr+QLatin1String("->")+endTimeStr+QLatin1Char(')');
 
 
         Reminder r;
@@ -218,20 +218,20 @@ void MainWindow::UpdateAppointment(int dbID)
             tmp.m_appointmentEndTime=appointmentEndTime.toString();
             tmp.m_reminderId=0;
 
-            QString dateStr="("+QString::number(selectedDate.day())+"/"
-                    +QString::number(selectedDate.month())+"/"
-                    +QString::number(selectedDate.year())+")";
+            QString dateStr=QLatin1Char('(')+QString::number(selectedDate.day())+QLatin1Char('/')
+                    +QString::number(selectedDate.month())+QLatin1Char('/')
+                    +QString::number(selectedDate.year())+QLatin1Char(')');
 
-            QString minutesStartStr = QString("%1").arg(appointmentStartTime.minute(), 2, 10, QChar('0'));
+            QString minutesStartStr = QStringLiteral("%1").arg(appointmentStartTime.minute(), 2, 10, QLatin1Char('0'));
             QString startTimeStr=QString::number(appointmentStartTime.hour(),'f',0)
-                    +":"+minutesStartStr;
-            QString minutesEndStr = QString("%1").arg(appointmentEndTime.minute(), 2, 10, QChar('0'));
+                    +QLatin1Char(':')+minutesStartStr;
+            QString minutesEndStr = QStringLiteral("%1").arg(appointmentEndTime.minute(), 2, 10, QLatin1Char('0'));
             QString endTimeStr=QString::number(appointmentEndTime.hour(),'f',0)+
-                    ":"+minutesEndStr;
+                    QLatin1Char(':')+minutesEndStr;
             QString reminderDetails=title
-                    +" ("+location
-                    + ") "+dateStr+" ("
-                    +startTimeStr+"->"+endTimeStr+")";
+                    +QLatin1String(" (")+location
+                    + QLatin1String(") ")+dateStr+QLatin1String(" (")
+                    +startTimeStr+QLatin1String("->")+endTimeStr+QLatin1String(")");
 
             if (dbm.isOpen())
             {
@@ -296,9 +296,9 @@ void MainWindow::NewContact()
         c.m_birthdayid=this->birthDateId;
 
         Birthday b;
-        b.m_name=c.m_firstname+" "+c.m_lastname;
+        b.m_name=c.m_firstname+QLatin1Char(' ')+c.m_lastname;
         b.m_location=c.m_city;
-        b.m_description="Birthday";
+        b.m_description=QLatin1String("Birthday");
         b.m_birthDate=birthDate.toString();
         b.m_addToCalendar=this->addToCalendar;
 
@@ -376,9 +376,9 @@ void MainWindow::UpdateContact(int dbID)
         if (dbm.isOpen())
         {
             Birthday b = dbm.getBirthdayByID(currentContact.m_birthdayid);
-            b.m_name=contactFirstName+" "+contactLastName;
+            b.m_name=contactFirstName+QLatin1Char(' ')+contactLastName;
             b.m_location=city;
-            b.m_description="Birthday";
+            b.m_description=QLatin1String("Birthday");
             b.m_birthDate=birthDate.toString();
             b.m_addToCalendar=this->addToCalendar;
 
@@ -641,7 +641,7 @@ void MainWindow::checkForBirthdaysNextSevenDays()
             QDate bdayDate=QDate(currentDate.year(),bornDate.month(),bornDate.day());
             if (bdayDate.addDays(-i)==currentDate) { //add all - day birthdays
                 Birthday remBirthday =b;
-                remBirthday.m_name="(Reminder) "+b.m_name;
+                remBirthday.m_name=QLatin1String("(Resminder) ")+b.m_name;
                 birthdayReminderModel->addBirthday(remBirthday);
             }
         }
@@ -652,7 +652,7 @@ void MainWindow::checkForBirthdaysNextSevenDays()
 void MainWindow::exportAppointmentsXML()
 {
     QDomDocument document;
-    QDomElement root = document.createElement("Appointments");
+    QDomElement root = document.createElement(QStringLiteral("Appointments"));
     document.appendChild(root);
 
     QList<Appointment> dbAppointmentList =dbm.getAllAppointments();
@@ -664,17 +664,17 @@ void MainWindow::exportAppointmentsXML()
         QString startTime =a.m_appointmentStartTime;
         QString endTime=a.m_appointmentEndTime;
 
-        QDomElement appointment = document.createElement("Appointment");
-        appointment.setAttribute("Title",title);
-        appointment.setAttribute("Location", location);
-        appointment.setAttribute("Description",description);
-        appointment.setAttribute("Date",date);
-        appointment.setAttribute("StartTime",startTime);
-        appointment.setAttribute("EndTime",endTime);
+        QDomElement appointment = document.createElement(QStringLiteral("Appointment"));
+        appointment.setAttribute(QStringLiteral("Title"),title);
+        appointment.setAttribute(QStringLiteral("Location"), location);
+        appointment.setAttribute(QStringLiteral("Description"),description);
+        appointment.setAttribute(QStringLiteral("Date"),date);
+        appointment.setAttribute(QStringLiteral("StartTime"),startTime);
+        appointment.setAttribute(QStringLiteral("EndTime"),endTime);
         root.appendChild(appointment);
     }
 
-    QString filename = QFileDialog::getSaveFileName(this, "Save Appointments Xml", ".", "Xml files (*.xml)");
+    QString filename = QFileDialog::getSaveFileName(this, QStringLiteral("Save Appointments Xml"), QStringLiteral("."), QStringLiteral("Xml files (*.xml)"));
     QFile file(filename);
     if (!file.open(QFile::WriteOnly | QFile::Text)){
 
@@ -693,7 +693,7 @@ void MainWindow::exportAppointmentsXML()
 void MainWindow::exportContactsXML()
 {
     QDomDocument document;
-    QDomElement root = document.createElement("Contacts");
+    QDomElement root = document.createElement(QStringLiteral("Contacts"));
     document.appendChild(root);
 
     QList<Contact> dbContactList =dbm.getAllContacts();
@@ -711,23 +711,23 @@ void MainWindow::exportContactsXML()
         QString telephone =c.m_telephone;
         QString birthdate =c.m_birthdate;
 
-        QDomElement contact = document.createElement("Contact");
-        contact.setAttribute("FirstName",firstName );
-        contact.setAttribute("MidName",midName);
-        contact.setAttribute("LastName", lastName);
-        contact.setAttribute("Email",email);
-        contact.setAttribute("Street",street);
-        contact.setAttribute("District",district);
-        contact.setAttribute("City",city);
-        contact.setAttribute("County",county);
-        contact.setAttribute("Postcode",postcode);
-        contact.setAttribute("Country",country);
-        contact.setAttribute("Telephone",telephone);
-        contact.setAttribute("BirthDate",birthdate);
+        QDomElement contact = document.createElement(QStringLiteral("Contact"));
+        contact.setAttribute(QStringLiteral("FirstName"),firstName );
+        contact.setAttribute(QStringLiteral("MidName"),midName);
+        contact.setAttribute(QStringLiteral("LastName"), lastName);
+        contact.setAttribute(QStringLiteral("Email"),email);
+        contact.setAttribute(QStringLiteral("Street"),street);
+        contact.setAttribute(QStringLiteral("District"),district);
+        contact.setAttribute(QStringLiteral("City"),city);
+        contact.setAttribute(QStringLiteral("County"),county);
+        contact.setAttribute(QStringLiteral("Postcode"),postcode);
+        contact.setAttribute(QStringLiteral("Country"),country);
+        contact.setAttribute(QStringLiteral("Telephone"),telephone);
+        contact.setAttribute(QStringLiteral("BirthDate"),birthdate);
         root.appendChild(contact);
     }
 
-    QString filename = QFileDialog::getSaveFileName(this, "Save Contacts Xml", ".", "Xml files (*.xml)");
+    QString filename = QFileDialog::getSaveFileName(this, QStringLiteral("Save Contacts Xml"), QStringLiteral("."), QStringLiteral("Xml files (*.xml)"));
     QFile file(filename);
     if (!file.open(QFile::WriteOnly | QFile::Text)){
         //qDebug() << "Error saving XML file.";
@@ -744,7 +744,7 @@ void MainWindow::exportContactsXML()
 void MainWindow::importContactsXML()
 {
     QDomDocument document;
-    QString filename = QFileDialog::getOpenFileName(this, "Open Contacts Xml", ".", "Xml files (*.xml)");
+    QString filename = QFileDialog::getOpenFileName(this, QStringLiteral("Open Contacts Xml"), QStringLiteral("."), QStringLiteral("Xml files (*.xml)"));
     QFile file(filename);
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
@@ -763,7 +763,7 @@ void MainWindow::importContactsXML()
 
 
     QDomElement root = document.firstChildElement();
-    QDomNodeList contact = root.elementsByTagName("Contact");
+    QDomNodeList contact = root.elementsByTagName(QStringLiteral("Contact"));
     for(int i = 0; i < contact.count(); i++)
     {
         QDomNode contactnode = contact.at(i);
@@ -772,25 +772,25 @@ void MainWindow::importContactsXML()
             QDomElement contact = contactnode.toElement();
 
             Contact c;
-            c.m_firstname=contact.attribute("FirstName");
-            c.m_midnames=contact.attribute("MidName");
-            c.m_lastname=contact.attribute("LastName");
-            c.m_email=contact.attribute("Email");
-            c.m_street=contact.attribute("Street");
-            c.m_district=contact.attribute("District");
-            c.m_city=contact.attribute("City");
-            c.m_county=contact.attribute("County");
-            c.m_postcode=contact.attribute("Postcode");
-            c.m_country=contact.attribute("Country");
-            c.m_telephone=contact.attribute("Telephone");
-            c.m_birthdate=contact.attribute("BirthDate");
+            c.m_firstname=contact.attribute(QStringLiteral("FirstName"));
+            c.m_midnames=contact.attribute(QStringLiteral("MidName"));
+            c.m_lastname=contact.attribute(QStringLiteral("LastName"));
+            c.m_email=contact.attribute(QStringLiteral("Email"));
+            c.m_street=contact.attribute(QStringLiteral("Street"));
+            c.m_district=contact.attribute(QStringLiteral("District"));
+            c.m_city=contact.attribute(QStringLiteral("City"));
+            c.m_county=contact.attribute(QStringLiteral("County"));
+            c.m_postcode=contact.attribute(QStringLiteral("Postcode"));
+            c.m_country=contact.attribute(QStringLiteral("Country"));
+            c.m_telephone=contact.attribute(QStringLiteral("Telephone"));
+            c.m_birthdate=contact.attribute(QStringLiteral("BirthDate"));
             c.m_birthdayid=0;
 
             Birthday b;
-            b.m_name=c.m_firstname+" "+c.m_lastname;
+            b.m_name=c.m_firstname+QLatin1Char(' ')+c.m_lastname;
             b.m_location=c.m_city;
-            b.m_description="Birthday";
-            b.m_birthDate=contact.attribute("BirthDate");
+            b.m_description=QLatin1String("Birthday");
+            b.m_birthDate=contact.attribute(QStringLiteral("BirthDate"));
             b.m_addToCalendar=1;
 
             if (dbm.isOpen())
@@ -822,7 +822,7 @@ void MainWindow::importAppointmentsXML()
 {
 
     QDomDocument document;
-    QString filename = QFileDialog::getOpenFileName(this, "Open Appointments Xml", ".", "Xml files (*.xml)");
+    QString filename = QFileDialog::getOpenFileName(this, QStringLiteral("Open Appointments Xml"), QStringLiteral("."), QStringLiteral("Xml files (*.xml)"));
     QFile file(filename);
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
@@ -840,7 +840,7 @@ void MainWindow::importAppointmentsXML()
     }
 
     QDomElement root = document.firstChildElement();
-    QDomNodeList appointment = root.elementsByTagName("Appointment");
+    QDomNodeList appointment = root.elementsByTagName(QStringLiteral("Appointment"));
     for(int i = 0; i < appointment.count(); i++)
     {
         QDomNode appointmentnode = appointment.at(i);
@@ -849,32 +849,32 @@ void MainWindow::importAppointmentsXML()
             QDomElement appointment = appointmentnode.toElement();
 
             Appointment a;
-            a.m_title=appointment.attribute("Title");
-            a.m_location=appointment.attribute("Location");
-            a.m_description=appointment.attribute("Description");
-            a.m_appointmentDate=appointment.attribute("Date");
-            a.m_appointmentStartTime=appointment.attribute("StartTime");
-            a.m_appointmentEndTime=appointment.attribute("EndTime");
+            a.m_title=appointment.attribute(QStringLiteral("Title"));
+            a.m_location=appointment.attribute(QStringLiteral("Location"));
+            a.m_description=appointment.attribute(QStringLiteral("Description"));
+            a.m_appointmentDate=appointment.attribute(QStringLiteral("Date"));
+            a.m_appointmentStartTime=appointment.attribute(QStringLiteral("StartTime"));
+            a.m_appointmentEndTime=appointment.attribute(QStringLiteral("EndTime"));
             a.m_reminderId=0;
 
-            QDate appDate =QDate::fromString(appointment.attribute("Date"));
-            QTime appStartTime =QTime::fromString(appointment.attribute("StartTime"));
-            QTime appEndTime =QTime::fromString(appointment.attribute("EndTime"));
+            QDate appDate =QDate::fromString(appointment.attribute(QStringLiteral("Date")));
+            QTime appStartTime =QTime::fromString(appointment.attribute(QStringLiteral("StartTime")));
+            QTime appEndTime =QTime::fromString(appointment.attribute(QStringLiteral("EndTime")));
 
-            QString dateStr="("+QString::number(appDate.day())+"/"
-                    +QString::number(appDate.month())+"/"
-                    +QString::number(appDate.year())+")";
+            QString dateStr=QLatin1Char('(')+QString::number(appDate.day())+QLatin1Char('/')
+                    +QString::number(appDate.month())+QLatin1Char('/')
+                    +QString::number(appDate.year())+QLatin1Char(')');
 
-            QString minutesStartStr = QString("%1").arg(appStartTime.minute(), 2, 10, QChar('0'));
+            QString minutesStartStr = QStringLiteral("%1").arg(appStartTime.minute(), 2, 10, QLatin1Char('0'));
             QString startTimeStr=QString::number(appStartTime.hour(),'f',0)
-                    +":"+minutesStartStr;
-            QString minutesEndStr = QString("%1").arg(appEndTime.minute(), 2, 10, QChar('0'));
+                    +QLatin1Char(':')+minutesStartStr;
+            QString minutesEndStr = QStringLiteral("%1").arg(appEndTime.minute(), 2, 10, QLatin1Char('0'));
             QString endTimeStr=QString::number(appEndTime.hour(),'f',0)+
-                    ":"+minutesEndStr;
-            QString reminderDetails=appointment.attribute("Title")
-                    +" ("+appointment.attribute("Location")
-                    + ") "+dateStr+" ("
-                    +startTimeStr+"->"+endTimeStr+")";
+                    QLatin1Char(':')+minutesEndStr;
+            QString reminderDetails=appointment.attribute(QStringLiteral("Title"))
+                    +QLatin1String(" (")+appointment.attribute(QStringLiteral("Location"))
+                    + QLatin1String(") ")+dateStr+QLatin1String(" (")
+                    +startTimeStr+QLatin1String("->")+endTimeStr+QLatin1Char(')');
             Reminder r;
             r.m_details=reminderDetails;
             r.m_reminderDate=appDate.toString();
@@ -910,14 +910,14 @@ void MainWindow::importAppointmentsXML()
 void MainWindow::timerUpdateSlot()
 {
     QTime currentTime =QTime::currentTime();
-    statusTimeLabel->setText(currentTime.toString("hh:mm:ss"));
+    statusTimeLabel->setText(currentTime.toString(QStringLiteral("hh:mm:ss")));
     checkForReminders();
 }
 
 void MainWindow::sendReminderMessage()
 {
-    ui->statusBar->showMessage("New reminder notification .. ",10000); //10 seconds
-    QString h="Reminder Notification";
+    ui->statusBar->showMessage(QStringLiteral("New reminder notification .. "),10000); //10 seconds
+    QString h=QStringLiteral("Reminder Notification");
     QString m=reminderSingleShot.m_details;
 
     MessageData *msg = new MessageData(h,m);
@@ -942,7 +942,7 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 void MainWindow::on_calendarWidget_clicked(const QDate &date)
 {
     selectedDate=date;
-    ui->labelSchedule->setText("Appointments for "+date.toString());
+    ui->labelSchedule->setText(QLatin1String("Appointments for ")+date.toString());
     DisplayAppointmentsForDate(selectedDate);
     DisplayBirthdaysForDate(selectedDate);
 }
@@ -1003,7 +1003,7 @@ void MainWindow::on_pushButtonShowQuickDetails_clicked()
 
 void MainWindow::on_pushButtonMailTo_clicked()
 {   
-    QString url="mailto:?to="+selectedContact.m_email+"&subject=Enter the subject&body=Enter message";
+    QString url=QLatin1String("mailto:?to=")+selectedContact.m_email+QLatin1String("&subject=Enter the subject&body=Enter message");
     QDesktopServices::openUrl(QUrl(url, QUrl::TolerantMode));
 }
 
