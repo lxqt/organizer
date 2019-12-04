@@ -12,36 +12,27 @@ v002
 * reminder notifications
 
 
-v003 alpha
+v003 
 
 * set appointments on hour and minute
 
 * add and remove contacts
 
-* current birthdays added to appointment schedule
-
-* single shot reminder notifications
-
-* XML export of appointments and contacts
-
-v003 alpha2
-
 * edit appointments and contacts
 
-* birthdays added to calendar
+* current birthdays added to calendar
+
+* single shot reminder notifications
 
 * checking for upcoming birthdays (next 7 days)
 
 * reminder today messages
 
+* XML export of appointments and contacts
+
 * XML import of appointments and contacts
 
 
-v003 alpha3
-
-* updated contact details
-
-* current date marked on calendar
 
 ### Compiling source code
 #### Build Dependencies
