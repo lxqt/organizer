@@ -698,7 +698,7 @@ void MainWindow::AddHolidayAppointmentsToDatabase(int year)
     holidayList.append(h2);
 
     //Calculate Easter and add
-    QDate easterSunday =CalculateEaster(year);
+    QDate easterSunday =CalculateEaster2(year);
     //qDebug()<<"Easter Sunday 2019 = "<<easterSunday.toString();
     Holiday h3;
     h3.m_id=3;
@@ -711,6 +711,12 @@ void MainWindow::AddHolidayAppointmentsToDatabase(int year)
     h4.m_name="Good Friday ";
     h4.m_date=easterSunday.addDays(-2).toString();
     holidayList.append(h4);
+
+    Holiday h5;
+    h5.m_id=5;
+    h5.m_name="Easter Monday ";
+    h5.m_date=easterSunday.addDays(1).toString();
+    holidayList.append(h5);
 
     Appointment ha;
 
@@ -731,31 +737,30 @@ void MainWindow::AddHolidayAppointmentsToDatabase(int year)
     }
 }
 
-QDate MainWindow::CalculateEaster(int year)
-{
 
+QDate MainWindow::CalculateEaster2(int year)
+{
     QDate easter;
 
-    int g = year % 19;
-        int c = year / 100;
-        int h = h = (c - static_cast<int>(c/4)
-                     - static_cast<int>((8 * c + 13) / 25)
-                                            + 19 * g + 15) % 30;
-        int i = h - static_cast<int>(h / 28) * (1 - static_cast<int>(h / 28) *
-                    static_cast<int>(29 / (h + 1)) * static_cast<int>((21 - g) / 11));
-
-        int day   = i - ((year + static_cast<int>(year / 4) +
-                      i + 2 - c + static_cast<int>(c / 4)) % 7) + 28;
-        int month = 3;
-
-        if (day > 31)
-        {
-            month++;
-            day -= 31;
-        }
+    int Y = year;
+    int a = Y % 19;
+    int b = Y / 100;
+    int c = Y % 100;
+    int d = b / 4;
+    int e = b % 4;
+    int f = (b + 8) / 25;
+    int g = (b - f + 1) / 3;
+    int h = (19 * a + b - d - g + 15) % 30;
+    int i = c / 4;
+    int k = c % 4;
+    int L = (32 + 2 * e + 2 * i - h - k) % 7;
+    int m = (a + 11 * h + 22 * L) / 451;
+    int month = (h + L - 7 * m + 114) / 31;
+    int day = ((h + L - 7 * m + 114) % 31) + 1;
 
     easter.setDate(year,month,day);
     return easter;
+
 }
 
 void MainWindow::exportContactsXML()
