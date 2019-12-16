@@ -152,7 +152,8 @@ public:
     void LoadHolidayListFromDatabase();
     void RemoveAllHolidayAppointmentsFromDatabase();
     void AddHolidayAppointmentsToDatabase(int year);
-    QDate CalculateEaster(int year);
+
+    QDate CalculateEaster2(int year);
 
     //exports and imports
 
