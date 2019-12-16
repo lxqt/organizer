@@ -733,17 +733,19 @@ void MainWindow::AddHolidayAppointmentsToDatabase(int year)
 
 QDate MainWindow::CalculateEaster(int year)
 {
+
     QDate easter;
 
     int g = year % 19;
         int c = year / 100;
-        int h = h = (c - (int)(c / 4) - (int)((8 * c + 13) / 25)
+        int h = h = (c - static_cast<int>(c/4)
+                     - static_cast<int>((8 * c + 13) / 25)
                                             + 19 * g + 15) % 30;
-        int i = h - (int)(h / 28) * (1 - (int)(h / 28) *
-                    (int)(29 / (h + 1)) * (int)((21 - g) / 11));
+        int i = h - static_cast<int>(h / 28) * (1 - static_cast<int>(h / 28) *
+                    static_cast<int>(29 / (h + 1)) * static_cast<int>((21 - g) / 11));
 
-        int day   = i - ((year + (int)(year / 4) +
-                      i + 2 - c + (int)(c / 4)) % 7) + 28;
+        int day   = i - ((year + static_cast<int>(year / 4) +
+                      i + 2 - c + static_cast<int>(c / 4)) % 7) + 28;
         int month = 3;
 
         if (day > 31)
