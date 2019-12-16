@@ -15,36 +15,35 @@ find_package(Qt5Xml REQUIRED)
 
 set ( lxqt-organizer_HDRS
 	appointment.h
-	appointmentmodel.h
 	contact.h
-	contactmodel.h
 	dbmanager.h
-	remindermodel.h
-	birthday.h
-	birthdaymodel.h
 	reminder.h
+	contactmodel.h
+	holiday.h
+	reminderslistmodel.h
+	daylistmodel.h
 	)
 
 set ( lxqt-organizer_SRCS
 	main.cpp
 	mainwindow.cpp
-	dialogcontact.cpp
-	dialogappointment.cpp
-	appointmentmodel.cpp
-	contactmodel.cpp
 	dbmanager.cpp
+	dialogappointment.cpp
+	dialogshowreminders.cpp
 	dbussessionmessage.cpp
-	dialogabout.cpp
-	proxymodel.cpp
+	contactmodel.cpp
 	proxymodelcontacts.cpp
-	remindermodel.cpp
-	birthdaymodel.cpp
+	dialogcontact.cpp
+	reminderslistmodel.cpp
+	daylistmodel.cpp
+	dialogabout.cpp
 	)
 
 set ( lxqt-organizer_UIS
 	mainwindow.ui
-	dialogcontact.ui
 	dialogappointment.ui
+	dialogshowreminders.ui
+	dialogcontact.ui
 	dialogabout.ui
 	)
 QT5_WRAP_UI(UIS ${lxqt-organizer_UIS})
@@ -56,16 +55,16 @@ QT5_ADD_RESOURCES(RSCS ${lxqt-organizer_RSCS})
 
 set ( lxqt-organizer_MOCS
 	mainwindow.h
-	dialogcontact.h
 	dialogappointment.h
+	dialogshowreminders.h
 	dbussessionmessage.h
-	dialogabout.h
-	proxymodel.h
 	proxymodelcontacts.h
+	dialogcontact.h
+	dialogabout.h
 	)
 QT5_WRAP_CPP(MOCS ${lxqt-organizer_MOCS})
 
 add_executable ( lxqt-organizer ${lxqt-organizer_SRCS} ${UIS} ${RSCS} ${TRS} ${MOCS} )
-target_link_libraries ( lxqt-organizer  Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::DBus Qt5::Svg Qt5::Xml )
+target_link_libraries ( lxqt-organizer  Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::DBus Qt5::Svg Qt5::Xml)
 
-#install(TARGETS lxqt-organizer DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(TARGETS lxqt-organizer DESTINATION ${CMAKE_INSTALL_PREFIX})

@@ -16,38 +16,43 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef BIRTHDAYMODEL_H
-#define BIRTHDAYMODEL_H
+#include "dialogshowreminders.h"
+#include "ui_dialogshowreminders.h"
 
-#include <QColor>
-#include <QList>
-#include <QDate>
-#include <QDebug>
-#include "birthday.h"
-#include <QAbstractListModel>
-
-
-class BirthdayModel: public QAbstractListModel
+DialogShowReminders::DialogShowReminders(QWidget *parent,
+                                         QDate *theSelectedDate,
+                                         DbManager *theDbm) :
+    QDialog(parent),
+    ui(new Ui::DialogShowReminders)
 {
-public:
+    ui->setupUi(this);
+    setWindowTitle("Reminders");
+    ui->labelSelectedDate->setText(theSelectedDate->toString());
 
-    BirthdayModel(QObject* parent = nullptr);
+    this->reminderList =theDbm->getAllReminders();
 
-    BirthdayModel(const QList<Birthday>& birthdayList,
-                  QObject *parent = nullptr);
+    QList<Reminder> dayReminderList =QList<Reminder>();
 
-    void addBirthday(Birthday &birthday);
-    Birthday getABirthday(int index);
-    void clearAllBirthdays();
-    void removeBirthday(int idx);
+    foreach(Reminder r, reminderList)
+    {
+        QDate adate = QDate::fromString(r.m_reminderDate);
 
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+        if(adate==*theSelectedDate)
+        {
+            qDebug()<<"Reminder: "<<r.m_details;
+            dayReminderList.append(r);
 
-    QVariant data (const QModelIndex & index,
-                   int role = Qt::DisplayRole) const override;
+        }
+    }
+    reminderListModel = new remindersListModel(dayReminderList);
 
-private:
-    QList<Birthday> modelBirthdayList;
-};
 
-#endif // BIRTHDAYMODEL_H
+    ui->listView->setModel(reminderListModel);
+
+
+}
+
+DialogShowReminders::~DialogShowReminders()
+{
+    delete ui;
+}

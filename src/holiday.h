@@ -15,17 +15,26 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#include "proxymodel.h"
 
-ProxyModel::ProxyModel(QObject *parent)
-{
-     Q_UNUSED(parent)
+#ifndef HOLIDAY_H
+#define HOLIDAY_H
 
-}
+#include <QString>
+struct Holiday {
 
-QVariant ProxyModel::headerData(int section, Qt::Orientation orientation,
-                                int role) const {
-    return sourceModel()->headerData(section, orientation,
-                                     role);
-}
+    Holiday(int id=0,
+                const QString& name= QString(),
+                const QString& date=QString()
+                ):
+        m_id(id),
+        m_name(name),
+        m_date(date)
+    {
+    }
+   int m_id;
+   QString m_name;
+   QString m_date;
+};
 
+
+#endif // HOLIDAY_H

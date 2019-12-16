@@ -15,42 +15,37 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#ifndef APPOINTMENTMODEL_H
-#define APPOINTMENTMODEL_H
 
-#include <QAbstractTableModel>
+#ifndef DAYLISTMODEL_H
+#define DAYLISTMODEL_H
+
+#include <QAbstractListModel>
+#include <QTime>
 #include "appointment.h"
-#include <QColor>
-#include <QList>
-#include <QDate>
-#include <QDebug>
+//#include "dialogappointment.h"
 
-class AppointmentModel : public QAbstractTableModel
+
+class DayListModel: public QAbstractListModel
 {
 public:
-    AppointmentModel(QObject* parent = nullptr);
 
-
-    AppointmentModel(const QList<Appointment>& appointmentList,
-                                  QObject *parent = nullptr);
+    DayListModel(QObject* parent = nullptr);
+    DayListModel(const QList<Appointment>& appointmentList,
+                        QObject *parent = nullptr);
 
     void addAppointment(Appointment &appointment);
+    void updateAppointment(Appointment &appointment, int index);
     Appointment getAppointment(int index);
-    void clearAllAppointments();
+    void clearAllAppointment();
     void removeAppointment(int idx);
 
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
-
     QVariant data (const QModelIndex & index,
-                           int role = Qt::DisplayRole) const override;
-
-    QVariant headerData(int section, Qt::Orientation orientation,
-                                int role = Qt::DisplayRole) const override;
+                   int role = Qt::DisplayRole) const override;
 private:
     QList<Appointment> modelAppointmentList;
 
 };
 
-#endif // APPOINTMENTMODEL_H
+#endif // DAYLISTMODEL_H

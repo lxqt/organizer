@@ -16,35 +16,35 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef BIRTHDAY_H
-#define BIRTHDAY_H
+#ifndef DIALOGSHOWREMINDERS_H
+#define DIALOGSHOWREMINDERS_H
 
-#include <QString>
-struct Birthday {
+#include <QDialog>
+#include <reminder.h>
+#include <dbmanager.h>
+#include <reminderslistmodel.h>
 
-    Birthday(int id=0,
-                const QString& name= QString(),
-                const QString& location= QString(),
-                const QString& description= QString(),
-                const QString& birthDate=QString(),
-                int addToCalendar=1
-                ):
-        m_id(id),
-        m_name(name),
-        m_location(location),
-        m_description(description),
-        m_birthDate(birthDate),
-        m_addToCalendar(addToCalendar)
-    {
-    }
-   int m_id;
-   QString m_name;
-   QString m_location;
-   QString m_description;
-   QString m_birthDate;
-   int m_addToCalendar;
+namespace Ui {
+class DialogShowReminders;
+}
+
+class DialogShowReminders : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit DialogShowReminders(QWidget *parent = nullptr,
+                                 QDate *theSelectedDate=nullptr,
+                                 DbManager *theDbm=nullptr);
+    ~DialogShowReminders();
+    QDate selectedDate;
+    remindersListModel *reminderListModel;
+
+
+private:
+    Ui::DialogShowReminders *ui;
+    QList<Reminder> reminderList;
+    DbManager theDbm;
 };
 
-
-
-#endif // BIRTHDAY_H
+#endif // DIALOGSHOWREMINDERS_H

@@ -29,8 +29,9 @@
 #include <QList>
 #include"appointment.h"
 #include "contact.h"
-#include "birthday.h"
 #include "reminder.h"
+#include "holiday.h"
+
 
 
 class DbManager
@@ -41,15 +42,28 @@ public:
     bool isOpen() const;
     void openDatabase();    
     void createDatebaseTables();
-    bool addAppointment(Appointment &appointment);
-    bool updateAppointment(Appointment &appointment, int id);
 
+    //Appointments
+    int addAppointment(Appointment &appointment);
+    bool updateAppointment(Appointment &appointment, int id);
     QList<Appointment> getAllAppointments();
     Appointment getAppointmentByID(int id);
     QList<Appointment> getAppointmentsOnDate(QDate &diaryDate);    
-    bool removeAppointmentById(const int id);
-    bool removeAllAppointments();
+    bool deleteAppointmentById(const int id);
+    bool deleteAppointmentByParentID(const int parentId);
+    bool deleteAllAppointments();
 
+    //Reminders
+    bool addReminder(Reminder &reminder);
+    //bool updateReminder(Reminder &reminder, int id);
+    bool updateReminder(Reminder &reminder, int id);
+    QList<Reminder> getAllReminders();
+    Reminder getReminderByID(int id);
+    QList<Reminder> getRemindersOnDate(QDate &diaryDate);
+    bool removeReminderById(const int appointmentId);
+    bool removeAllReminders();
+
+    //Contacts
     bool addContact(Contact &contact);
     bool updateContact(Contact &contact, int id);
     QList<Contact> getAllContacts();
@@ -57,24 +71,13 @@ public:
     bool removeAllContacts();
     bool removeContactById(const int id);
 
-    int addBirthday(Birthday &birthdate); //returns db index
-    bool updateBirthday(Birthday &birthday, int id);
-    QList<Birthday> getAllBirthdays();
-    Birthday getBirthdayByID(int id);
-    QList<Birthday> getBirthdaysOnDate(QDate &diaryDate);
-    bool removeBirthdayById(const int id);
-    bool removeAllBirthdays();
-
-
-    int addReminder(Reminder &reminder);
-    bool updateReminder(Reminder &reminder, int id);
-    QList<Reminder> getAllReminders();
-    Reminder getReminderByID(int id);
-    QList<Reminder> getRemindersOnDate(QDate &diaryDate);
-    bool removeReminderById(const int id);
-    bool removeAllReminders();
-
-
+    //Holidays
+     bool addHoliday(Holiday &holiday); //returns db index
+     QList<Holiday> getAllHolidays();
+     Holiday getHolidayByID(int id);
+     QList<Holiday> getHolidaysOnDate(QDate &diaryDate);
+     bool removeHolidayById(const int id);
+     bool removeAllHolidays();
 
 
 };

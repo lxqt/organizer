@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>575</width>
-    <height>507</height>
+    <width>643</width>
+    <height>513</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QLabel" name="labelDate">
          <property name="text">
@@ -58,11 +58,11 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QLabel" name="labelTitle">
          <property name="text">
-          <string>Title:       </string>
+          <string>Title:           </string>
          </property>
         </widget>
        </item>
@@ -70,20 +70,39 @@
         <widget class="QLineEdit" name="lineEditTitle">
          <property name="minimumSize">
           <size>
-           <width>400</width>
+           <width>350</width>
            <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>350</width>
+           <height>16777215</height>
           </size>
          </property>
         </widget>
        </item>
+       <item>
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QLabel" name="labelLocation">
          <property name="text">
-          <string>Location: </string>
+          <string>Location:    </string>
          </property>
         </widget>
        </item>
@@ -91,16 +110,35 @@
         <widget class="QLineEdit" name="lineEditLocation">
          <property name="minimumSize">
           <size>
-           <width>400</width>
+           <width>350</width>
            <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>350</width>
+           <height>16777215</height>
           </size>
          </property>
         </widget>
        </item>
+       <item>
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <widget class="QLabel" name="labelDescription">
          <property name="text">
@@ -116,21 +154,24 @@
            <height>0</height>
           </size>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>200</height>
+          </size>
+         </property>
         </widget>
        </item>
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLabel" name="labelStarts">
+        <widget class="QCheckBox" name="checkBoxAllDay">
          <property name="text">
-          <string>Start Time:</string>
+          <string>All Day</string>
          </property>
         </widget>
-       </item>
-       <item>
-        <widget class="QTimeEdit" name="timeEditStartTime"/>
        </item>
        <item>
         <spacer name="horizontalSpacer">
@@ -144,6 +185,16 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelStarts">
+         <property name="text">
+          <string>Start Time:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTimeEdit" name="timeEditStartTime"/>
        </item>
        <item>
         <widget class="QLabel" name="labelEndTime">
@@ -160,31 +211,37 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
+        <widget class="QLabel" name="labelCategory">
+         <property name="text">
+          <string>Category:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxCategory"/>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QCheckBox" name="checkBoxReminder">
          <property name="text">
-          <string>Set Reminder</string>
+          <string>Reminder</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="labelReminderDate">
-         <property name="text">
-          <string>Date:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QDateEdit" name="dateEditReminder"/>
-       </item>
-       <item>
-        <widget class="QLabel" name="labelReminderTime">
-         <property name="text">
-          <string>Time:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTimeEdit" name="timeEditReminder"/>
+        <widget class="QComboBox" name="comboBoxReminder"/>
        </item>
       </layout>
      </item>

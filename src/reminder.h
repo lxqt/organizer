@@ -22,26 +22,30 @@
 #include <QString>
 struct Reminder {
 
-    Reminder(int id=0,
+    Reminder( int appointmentId=0,
                 const QString& details= QString(),
                 const QString& reminderDate=QString(),
-                const QString& reminderTime=QString(),
-                int reminderRequest=0 //bool 0=no 1 =yes
+                const QString& reminderTime=QString()
+                //int reminderRequest=0 //bool 0=no 1 =yes
                 ):
-        m_id(id),
+
+        m_appointmentId(appointmentId),
         m_details(details),
         m_reminderDate(reminderDate),
-        m_reminderTime(reminderTime),
-        m_reminderRequest(reminderRequest)
+        m_reminderTime(reminderTime)
+        //m_reminderRequest(reminderRequest)
     {
     }
-   int m_id;
+
+   int m_appointmentId;
    QString m_details;
    QString m_reminderDate;
    QString m_reminderTime;
-   int m_reminderRequest;
+   //int m_reminderRequest;
 
 };
+
+
 
 
 

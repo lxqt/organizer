@@ -26,30 +26,42 @@ struct Appointment {
                 const QString& title= QString(),
                 const QString& location= QString(),
                 const QString& description= QString(),
-                const QString& appointmentDate=QString(),
-                const QString& appointmentStartTime=QString(),
-                const QString& appointmentEndTime=QString(),
-                int reminderId=0
+                const QString& date=QString(),
+                const QString& startTime=QString(),                
+                const QString& endTime=QString(),
+                const QString& category=QString(),
+                int isFullDay =0,
+                int isRepeating=0,
+                int parentId=0,
+                int hasReminder=0
+
                 ):
         m_id(id),
         m_title(title),
         m_location(location),
         m_description(description),
-        m_appointmentDate(appointmentDate),
-        m_appointmentStartTime(appointmentStartTime),
-        m_appointmentEndTime(appointmentEndTime),
-        m_reminderId(reminderId)
-
+        m_date(date),
+        m_startTime(startTime),
+        m_endTime(endTime),
+        m_category(category),
+        m_isFullDay(isFullDay),
+        m_isRepeating(isRepeating),
+        m_parentId(parentId),
+        m_hasReminder(hasReminder)
     {
     }
    int m_id;
    QString m_title;
    QString m_location;
    QString m_description;
-   QString m_appointmentDate;
-   QString m_appointmentStartTime;
-   QString m_appointmentEndTime;
-   int m_reminderId;
+   QString m_date;
+   QString m_startTime;
+   QString m_endTime;
+   QString m_category;
+   int m_isFullDay;
+   int m_isRepeating;
+   int m_parentId;
+   int m_hasReminder;   
 };
 
 

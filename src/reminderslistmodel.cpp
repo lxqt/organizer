@@ -15,69 +15,90 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#include "remindermodel.h"
 
 
-ReminderModel::ReminderModel(QObject *parent)
+#include "reminderslistmodel.h"
+
+remindersListModel::remindersListModel(QObject *parent)
 {
     Q_UNUSED(parent)
     this->modelReminderList= QList<Reminder>();
 
 }
 
-ReminderModel::ReminderModel(const QList<Reminder> &reminderList, QObject *parent)
+remindersListModel::remindersListModel(const QList<Reminder> &reminderList, QObject *parent)
 {
     Q_UNUSED(parent)
    this->modelReminderList=reminderList;
 }
 
-void ReminderModel::addReminder(Reminder &reminder)
+
+
+void remindersListModel::addReminder(Reminder &reminder)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     this->modelReminderList.append(reminder);
     endInsertRows();
 }
 
-Reminder ReminderModel::getAReminder(int index)
+void remindersListModel::updateReminder(Reminder &reminder, int index)
+{
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+        Reminder r = modelReminderList.value(index);
+        r.m_details=reminder.m_details;
+        r.m_reminderDate=reminder.m_reminderDate;
+        r.m_reminderTime=reminder.m_reminderTime;
+        modelReminderList.removeAt(index);
+        modelReminderList.insert(index,r);
+       endInsertRows();
+}
+
+Reminder remindersListModel::getReminder(int index)
 {
     Reminder r = modelReminderList.value(index);
     return r;
 }
 
-void ReminderModel::clearAllReminders()
+void remindersListModel::clearAllReminders()
 {
     beginResetModel();
     modelReminderList.clear();
     endResetModel();
 }
 
-void ReminderModel::removeReminder(int idx)
+void remindersListModel::removeReminder(int idx)
 {
     beginRemoveRows(QModelIndex(), 0, rowCount());
     modelReminderList.removeAt(idx);
     endRemoveRows();
 }
 
-int ReminderModel::rowCount(const QModelIndex &parent) const
+int remindersListModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
     return modelReminderList.size();
 }
 
-QVariant ReminderModel::data(const QModelIndex &index, int role) const
+QVariant remindersListModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
-        return QVariant();
-    if (index.row() >= modelReminderList.size() || index.row() < 0)
-        return QVariant();
+            return QVariant();
+        if (index.row() >= modelReminderList.size() || index.row() < 0)
+            return QVariant();
 
-    if (role == Qt::DisplayRole) {
+        if (role == Qt::DisplayRole) {
 
-        const Reminder& reminder = modelReminderList.at(index.row());
+            const Reminder& reminder = modelReminderList.at(index.row());
 
-
-        return reminder.m_details;
-    }
-
+            return reminder.m_details;
+        }
         return QVariant();
 }
+
+
+
+
+
+
+
+

@@ -15,40 +15,34 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#ifndef REMINDERMODEL_H
-#define REMINDERMODEL_H
 
-#include <QColor>
-#include <QList>
-#include <QDate>
-#include <QDebug>
-#include "reminder.h"
+#ifndef REMINDERSLISTMODEL_H
+#define REMINDERSLISTMODEL_H
+
 #include <QAbstractListModel>
+#include "reminder.h"
 
-class ReminderModel: public QAbstractListModel
+
+class remindersListModel: public QAbstractListModel
 {
 public:
-    ReminderModel(QObject* parent = nullptr);
-
-    ReminderModel(const QList<Reminder>& reminderList,
-                                  QObject *parent = nullptr);
-
+    remindersListModel(QObject* parent = nullptr);
+    remindersListModel(const QList<Reminder>& reminderList,QObject* parent = nullptr);
+   // ~remindersListModel();
     void addReminder(Reminder &reminder);
-    Reminder getAReminder(int index);
+    void updateReminder(Reminder &reminder, int index);
+    Reminder getReminder(int index);
     void clearAllReminders();
     void removeReminder(int idx);
 
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
     QVariant data (const QModelIndex & index,
-                           int role = Qt::DisplayRole) const override;
-
+                            int role = Qt::DisplayRole) const override;
 
 private:
     QList<Reminder> modelReminderList;
 
-
-
 };
 
-#endif // REMINDERMODEL_H
+#endif // REMINDERSLISTMODEL_H

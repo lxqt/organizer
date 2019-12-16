@@ -28,18 +28,9 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
     //New appointment
     setWindowTitle("New Appointment");
     ui->checkBoxDelete->hide();
-
     ui->dateEditAppointmentDate->setDate(*theAppointmentDate);
-    ui->dateEditReminder->setDate(*theAppointmentDate);
 
-    ui->checkBoxReminder->setCheckState(Qt::Unchecked);
-    //ui->dateEditReminder->setDisabled(true);
-    //ui->timeEditReminder->setDisabled(true);
-    ui->dateEditReminder->hide();
-    ui->timeEditReminder->hide();
-    reminderRequested=0;
-
-
+    reminderDays=0;
 
     QTime timeNow =QTime::currentTime();
 
@@ -48,16 +39,15 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
 
     ui->labelDateDisplay->setText(this->appointmentDate.toString());
 
-    ui->dateEditReminder->setDate(*theAppointmentDate);
-
     this->startTime=timeNow;
     this->endTime=timeNow;
     ui->timeEditStartTime->setTime(timeNow);
     ui->timeEditEndTime->setTime(timeNow);
     this->reminderTime=timeNow;
-    ui->timeEditReminder->setTime(timeNow);
 
-
+    category="Event";
+    setupComboBoxes();
+    ui->comboBoxReminder->setEnabled(false);
 
 }
 
@@ -66,8 +56,7 @@ DialogAppointment::DialogAppointment(QWidget *parent, Appointment *theAppointmen
     ui(new Ui::DialogAppointment)
 {
     ui->setupUi(this);
-    //Update an appointment
-
+    //Update an appointment    
     setWindowTitle("Update Appointment");
     ui->checkBoxDelete->show();
 
@@ -75,35 +64,41 @@ DialogAppointment::DialogAppointment(QWidget *parent, Appointment *theAppointmen
     ui->lineEditLocation->setText(theAppointment->m_location);
     ui->textEditDescription->setText(theAppointment->m_description);
 
-    this->appointmentDate=QDate::fromString(theAppointment->m_appointmentDate);
+    this->appointmentDate=QDate::fromString(theAppointment->m_date);
     //QDate appointmentDate=QDate::fromString(theAppointment->m_appointmentDate);
     ui->dateEditAppointmentDate->setDate(this->appointmentDate);
     ui->labelDateDisplay->setText(this->appointmentDate.toString());
 
-    this->startTime=QTime::fromString(theAppointment->m_appointmentStartTime);
-    this->endTime =QTime::fromString(theAppointment->m_appointmentEndTime);
+    this->startTime=QTime::fromString(theAppointment->m_startTime);
+    this->endTime =QTime::fromString(theAppointment->m_endTime);
 
     ui->timeEditStartTime->setTime(startTime);
     ui->timeEditEndTime->setTime(endTime);
 
-    //Testing
+    category=theAppointment->m_category;
+    isAllDay=theAppointment->m_isFullDay;
 
-    ui->dateEditReminder->setDate(this->appointmentDate);
-    ui->timeEditReminder->setTime(this->startTime);
-    ui->dateEditReminder->hide();
-    ui->timeEditReminder->hide();
+    if (isAllDay==1)
+    {
+        ui->checkBoxAllDay->setCheckState(Qt::Checked);
+    }
+
+    reminderRequested=theAppointment->m_hasReminder;
 
 
-//    int r = theAppointment->m_reminderRequest;
-//    if (r==1)
-//    {
-//        ui->checkBoxReminder->setCheckState(Qt::CheckState::Checked);
-//    }
 
-//    this->reminderDate=QDate::fromString(theAppointment->m_reminderDate);
-//    this->reminderTime=QTime::fromString(theAppointment->m_reminderTime);
-//    ui->dateEditReminder->setDate(reminderDate);
-//    ui->timeEditReminder->setTime(reminderTime);
+    if(reminderRequested==1)
+    {
+        ui->checkBoxReminder->setCheckState(Qt::Checked);
+        ui->comboBoxReminder->setEnabled(true);
+        reminderDays=1; //reminder days to be stored in appointment?
+    }
+    else {
+        ui->checkBoxReminder->setCheckState(Qt::Unchecked);
+        ui->comboBoxReminder->setEnabled(false);
+    }
+
+    setupComboBoxes();
 
 }
 
@@ -142,24 +137,53 @@ QTime DialogAppointment::getEndTime()
     return this->endTime;
 }
 
-QDate DialogAppointment::getReminderDate()
+int DialogAppointment::getReminderDays()
 {
-     return this->reminderDate;
+    return reminderDays;
 }
 
-QTime DialogAppointment::getReminderTime()
+
+int DialogAppointment::getAllDay()
 {
-    return this->reminderTime;
+    return isAllDay;
+}
+
+QString DialogAppointment::getCategory()
+{
+    return this->category;
 }
 
 int DialogAppointment::getReminderRequested()
 {
-    return this->reminderRequested;
+    return reminderRequested;
 }
+
 
 bool DialogAppointment::getDeleteRequested()
 {
     return this->deleteRequested;
+}
+
+void DialogAppointment::setupComboBoxes()
+{
+    //Set up Category Combobox
+
+    ui->comboBoxCategory->addItem("Event");
+    ui->comboBoxCategory->addItem("Family");
+    ui->comboBoxCategory->addItem("Leisure");
+    ui->comboBoxCategory->addItem("Meeting");
+    ui->comboBoxCategory->addItem("Business");
+    ui->comboBoxCategory->addItem("Vacation");
+    ui->comboBoxCategory->addItem("Medical");
+
+
+    //Set up reminder days ComboBox
+    for (int i=1; i<8; i++)
+    {
+        QString dayReminderStr =QString::number(i)+" days before";
+        ui->comboBoxReminder->addItem(dayReminderStr);
+    }
+    ui->comboBoxReminder->setCurrentIndex(0);
 }
 
 void DialogAppointment::accept()
@@ -180,55 +204,20 @@ void DialogAppointment::accept()
 
 void DialogAppointment::on_dateEditAppointmentDate_userDateChanged(const QDate &date)
 {
-    this->appointmentDate=date;
-    ui->dateEditReminder->setDate(date);
+    this->appointmentDate=date;    
     ui->labelDateDisplay->setText(this->appointmentDate.toString());
 }
 
 void DialogAppointment::on_timeEditStartTime_userTimeChanged(const QTime &time)
 {
     this->startTime=time;
-    ui->timeEditEndTime->setTime(time);
-    ui->timeEditReminder->setTime(time);
+    //ui->timeEditEndTime->setTime(time);
 
 }
 
 void DialogAppointment::on_timeEditEndTime_userTimeChanged(const QTime &time)
 {
     this->endTime=time;
-}
-
-void DialogAppointment::on_dateEditReminder_userDateChanged(const QDate &date)
-{
-    this->reminderDate=date;
-}
-
-void DialogAppointment::on_checkBoxReminder_stateChanged(int arg1)
-{
-    if (arg1==Qt::Unchecked)
-    {
-        //enable reminder date time edit boxes
-        //            ui->dateEditReminder->setEnabled(false);
-        //            ui->timeEditReminder->setEnabled(false);
-        ui->dateEditReminder->hide();
-        ui->timeEditReminder->hide();
-
-        reminderRequested=0;
-    }
-    else if (arg1==Qt::Checked) {
-        //disable reminder date and time edit boxes
-        //ui->dateEditReminder->setEnabled(true);
-        //ui->timeEditReminder->setEnabled(true);
-        ui->dateEditReminder->show();
-        ui->timeEditReminder->show();
-        reminderRequested=1;
-    }
-    qDebug()<<"ReminderRequested = "<<reminderRequested;
-}
-
-void DialogAppointment::on_timeEditReminder_userTimeChanged(const QTime &time)
-{
-    this->reminderTime=time;
 }
 
 
@@ -241,4 +230,66 @@ void DialogAppointment::on_checkBoxDelete_stateChanged(int arg1)
     else if (arg1==Qt::Checked) {
         deleteRequested =true;
     }
+}
+
+
+void DialogAppointment::on_comboBoxCategory_activated(const QString &arg1)
+{
+     category=arg1;
+     qDebug()<<"Category = "<<category;
+
+}
+
+void DialogAppointment::on_checkBoxAllDay_stateChanged(int arg1)
+{
+    if (arg1==Qt::Unchecked)
+    {
+        isAllDay=0;
+        ui->timeEditStartTime->setEnabled(true);
+        ui->timeEditEndTime->setEnabled(true);
+        ui->labelStarts->setEnabled(true);
+        ui->labelEndTime->setEnabled(true);
+
+        //ui->timeEditStartTime->show();
+        //ui->timeEditEndTime->show();
+        //ui->labelStarts->show();
+        //ui->labelEndTime->show();
+
+
+    }
+    else if (arg1==Qt::Checked) {
+        isAllDay=1;
+        ui->timeEditStartTime->setEnabled(false);
+        ui->timeEditEndTime->setEnabled(false);
+        ui->labelStarts->setEnabled(false);
+        ui->labelEndTime->setEnabled(false);
+
+        //ui->timeEditStartTime->hide();
+        //ui->labelStarts->hide();
+        //ui->labelEndTime->hide();
+    }
+
+}
+
+void DialogAppointment::on_comboBoxReminder_activated(int index)
+{
+     reminderDays=index+1;
+     qDebug()<<"reminderDays = "<<reminderDays;
+}
+
+void DialogAppointment::on_checkBoxReminder_stateChanged(int arg1)
+{
+    if (arg1==Qt::Unchecked)
+    {
+
+        reminderRequested=0;
+        ui->comboBoxReminder->setEnabled(false);
+    }
+    else if(arg1==Qt::Checked)
+    {
+        reminderRequested=1;
+        reminderDays=1; //default
+        ui->comboBoxReminder->setEnabled(true);
+    }
+
 }

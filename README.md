@@ -1,9 +1,13 @@
-# lxqt-organizer
+# LXQt Organizer
 LXQt Organizer is a lightweight organizer for personal information management.
 
-![](lxqt-organizer-v003.png)
+![](lxqt-organizer-v004.png)
 
 ## Overview
+
+v004
+
+* custom calendar
 
 v002
 
@@ -31,6 +35,12 @@ v003
 * XML export of appointments and contacts
 
 * XML import of appointments and contacts
+
+v002
+
+* add and remove hour appointments
+
+* reminder notifications
 
 
 
