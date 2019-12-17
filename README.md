@@ -5,9 +5,11 @@ LXQt Organizer is a lightweight organizer for personal information management.
 
 ## Overview
 
-v004
+v004 alpha1
 
 * custom calendar
+
+* more options to follow ..
 
 v003 
 
@@ -125,7 +127,7 @@ ldd /path/to/lxqt-organizer
 *libbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x00007ff29a347000)
 
 
-## Installation
+## Installation from source (testing purposes only)
 Please don't do this on production systems
 
 ```
@@ -133,9 +135,18 @@ mkdir build
 cd build  
 cmake ..
 make
-su
+su (or sudo)
 make install
 ```
+
+LXQt Organizer is installed to /usr/local/bin
+
+Note: If upgrading from a previous version you need to remove the previous version (as root) located at
+
+/usr/local/bin/lxqt-organizer
+
+and rename (or remove) the 'organizerdb.sqlite' database in your home directory. Make sure to export contacts and then import them into the new version.
+
 
 #### Runtime Dependencies
 * ${misc:Depends},
