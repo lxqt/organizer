@@ -265,6 +265,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionCheck_For_Reminders_Today"/>
    <addaction name="actionNew_Appointment"/>
    <addaction name="actionNew_Contact"/>
   </widget>
