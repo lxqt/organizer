@@ -9,7 +9,7 @@ v004 alpha1
 
 * custom calendar
 
-* more options to follow ..
+* more options and updates to follow ..
 
 v003 
 
