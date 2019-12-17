@@ -110,6 +110,20 @@ QVariant DayListModel::data(const QModelIndex &index, int role) const
                     //+"\nCategory: "+appointment.m_category;
         }
 
+        if(appointment.m_category=="Birthday"
+                && appointment.m_addBirthday==0)
+        {
+            details="";
+        }
+        else if (appointment.m_category=="Birthday"
+                 && appointment.m_addBirthday==1) {
+
+            details=appointment.m_title
+                    +"\nLocation: "+appointment.m_location
+                    +"\nAll Day Event" +"\nBirthday: "+appointment.m_description;
+
+        }
+
         return details;
     }
 

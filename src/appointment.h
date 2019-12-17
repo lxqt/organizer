@@ -32,6 +32,7 @@ struct Appointment {
                 const QString& category=QString(),
                 int isFullDay =0,
                 int isRepeating=0,
+                int addBirthday =0,
                 int parentId=0,
                 int hasReminder=0
 
@@ -46,6 +47,7 @@ struct Appointment {
         m_category(category),
         m_isFullDay(isFullDay),
         m_isRepeating(isRepeating),
+        m_addBirthday(addBirthday),
         m_parentId(parentId),
         m_hasReminder(hasReminder)
     {
@@ -60,6 +62,7 @@ struct Appointment {
    QString m_category;
    int m_isFullDay;
    int m_isRepeating;
+   int m_addBirthday;
    int m_parentId;
    int m_hasReminder;   
 };

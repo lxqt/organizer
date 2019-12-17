@@ -57,6 +57,7 @@ void DbManager::createDatebaseTables()
     sql1.append("Category TEXT,");
     sql1.append("IsFullDay INTEGER,");
     sql1.append("IsRepeating INTEGER,");
+    sql1.append("AddBirthday INTEGER,");
     sql1.append("ParentId INTEGER,");
     sql1.append("HasReminder INTEGER");
     sql1.append(");");    
@@ -67,27 +68,22 @@ void DbManager::createDatebaseTables()
     sql2.append("ReminderTime TEXT");
     sql2.append(");");
 
-    QString sql3 = "CREATE TABLE holidays (HolidayId INTEGER PRIMARY KEY,";
-    sql3.append("Name TEXT,");
-    sql3.append("Date TEXT");
+    QString sql3 = "CREATE TABLE contacts (ContactId INTEGER PRIMARY KEY,";
+    sql3.append("FirstName TEXT,");
+    sql3.append("MidName TEXT,");
+    sql3.append("LastName TEXT,");
+    sql3.append("Email TEXT,");
+    sql3.append("Street TEXT,");
+    sql3.append("District TEXT,");
+    sql3.append("City TEXT,");
+    sql3.append("County TEXT,");
+    sql3.append("Postcode TEXT,");
+    sql3.append("Country TEXT,");
+    sql3.append("Telephone TEXT,");
+    sql3.append("BirthDate TEXT,");
+    sql3.append("AddBirthday INTEGER,");
+    sql3.append("AppointmentId INTEGER");
     sql3.append(");");
-
-
-    QString sql4 = "CREATE TABLE contacts (ContactId INTEGER PRIMARY KEY,";
-    sql4.append("FirstName TEXT,");
-    sql4.append("MidName TEXT,");
-    sql4.append("LastName TEXT,");
-    sql4.append("Email TEXT,");
-    sql4.append("Street TEXT,");
-    sql4.append("District TEXT,");
-    sql4.append("City TEXT,");
-    sql4.append("County TEXT,");
-    sql4.append("Postcode TEXT,");
-    sql4.append("Country TEXT,");
-    sql4.append("Telephone TEXT,");
-    sql4.append("BirthDate TEXT,");
-    sql4.append("BirthdayId INTEGER");
-    sql4.append(");");
 
     query.prepare(sql1);
     if(!query.exec())
@@ -100,22 +96,13 @@ void DbManager::createDatebaseTables()
     query.prepare(sql2);
     if(!query.exec())
     {
-        //qDebug()<<"Table reminders already exists";
+       //qDebug()<<"Table reminders already exists";
     }
     else {
-        //qDebug()<<"Table reminders successfully created";
+       //qDebug()<<"Table reminders successfully created";
     }
 
     query.prepare(sql3);
-    if(!query.exec())
-    {
-        //qDebug()<<"Table holidays already exists";
-    }
-    else {
-        //qDebug()<<"Table holidays successfully created";
-    }
-
-    query.prepare(sql4);
     if(!query.exec())
     {
         //qDebug()<<"Table contacts already exists";
@@ -187,7 +174,7 @@ bool DbManager::updateReminder(Reminder &reminder, int id)
     }
     else
     {
-      qDebug() << "SQL is broken"<<" sucess ="<<success;
+      //qDebug() << "SQL is broken"<<" success ="<<success;
       return success;
     }
 }
@@ -358,6 +345,7 @@ int DbManager::addAppointment(Appointment &appointment)
     QString category=appointment.m_category;
     int isFullDay=appointment.m_isFullDay;
     int isRepeating =appointment.m_isRepeating;
+    int addBirthday =appointment.m_addBirthday;
     int parentId=appointment.m_parentId;
     int hasreminder =appointment.m_hasReminder;
 
@@ -372,6 +360,7 @@ int DbManager::addAppointment(Appointment &appointment)
     sql.append("`Category`,");
     sql.append("`IsFullDay`,");
     sql.append("`IsRepeating`,");
+    sql.append("`AddBirthday`,");
     sql.append("`ParentId`,");
     sql.append("`HasReminder`)");
 
@@ -385,6 +374,7 @@ int DbManager::addAppointment(Appointment &appointment)
     sql.append(":catin,");
     sql.append(":isfulldayin,");
     sql.append(":isrepeatingin,");
+    sql.append(":addbirthdayin,");
     sql.append(":parentidin,");
     sql.append(":hasreminderin);");
 
@@ -401,6 +391,7 @@ int DbManager::addAppointment(Appointment &appointment)
     query.bindValue(":catin",category);
     query.bindValue(":isfulldayin",isFullDay);
     query.bindValue(":isrepeatingin",isRepeating);
+    query.bindValue(":addbirthdayin",addBirthday);
     query.bindValue(":parentidin",parentId);
     query.bindValue(":hasreminderin",hasreminder);
 
@@ -425,6 +416,7 @@ bool DbManager::updateAppointment(Appointment &appointment, int id)
     sql.append(", Category = :catin");
     sql.append(", IsFullDay = :isfdin");
     sql.append(", IsRepeating = :isrin");
+    sql.append(", AddBirthday = :addbin");
     sql.append(", ParentId = :pidin");
     sql.append(", HasReminder = :hrin");    
     sql.append(" WHERE AppointmentId =:idin");
@@ -441,6 +433,7 @@ bool DbManager::updateAppointment(Appointment &appointment, int id)
       qry.bindValue(":catin",appointment.m_category);
       qry.bindValue(":isfdin",appointment.m_isFullDay);
       qry.bindValue(":isrin",appointment.m_isRepeating);
+      qry.bindValue(":addbin",appointment.m_addBirthday);
       qry.bindValue(":pidin",appointment.m_parentId);
       qry.bindValue(":hrin",appointment.m_hasReminder);
 
@@ -448,18 +441,18 @@ bool DbManager::updateAppointment(Appointment &appointment, int id)
       success=qry.exec();
       if (success)
       {
-        //qDebug() << "Appointment updated" << " sucess ="<<success;
+        qDebug() << "Appointment updated" << " sucess ="<<success;
         return success;  //true
       }
       else
       {
-        //qDebug() << "Appointment update failed"<<" sucess ="<<success;
+        qDebug() << "Appointment update failed"<<" sucess ="<<success;
         return success;
       }
     }
     else
     {
-      //qDebug() << "SQL is broken"<<" sucess ="<<success;
+      qDebug() << "SQL is broken"<<" sucess ="<<success;
       return success;
     }
 }
@@ -496,6 +489,9 @@ QList<Appointment> DbManager::getAllAppointments()
         idName = query.record().indexOf("IsRepeating");
         int isRepeating = query.value(idName).toInt();
 
+        idName = query.record().indexOf("AddBirthday");
+        int addBirthday = query.value(idName).toInt();
+
 
         idName = query.record().indexOf("ParentId");
         int parentId = query.value(idName).toInt();
@@ -513,6 +509,7 @@ QList<Appointment> DbManager::getAllAppointments()
         tmp.m_category=category;
         tmp.m_isFullDay=isFullDay;
         tmp.m_isRepeating=isRepeating;
+        tmp.m_addBirthday=addBirthday;
         tmp.m_parentId=parentId;
         tmp.m_hasReminder=hasReminder;
 
@@ -553,6 +550,9 @@ Appointment DbManager::getAppointmentByID(int id)
     idName = query.record().indexOf("IsRepeating");
     int isRepeating = query.value(idName).toInt();
 
+    idName = query.record().indexOf("AddBirthday");
+    int addBirthday = query.value(idName).toInt();
+
 
     idName = query.record().indexOf("ParentId");
     int parentId = query.value(idName).toInt();
@@ -572,6 +572,7 @@ Appointment DbManager::getAppointmentByID(int id)
     appointment.m_category=category;
     appointment.m_isFullDay=isFullDay;
     appointment.m_isRepeating=isRepeating;
+    appointment.m_addBirthday=addBirthday;
     appointment.m_parentId=parentId;
     appointment.m_hasReminder=hasReminder;
 
@@ -613,6 +614,8 @@ QList<Appointment> DbManager::getAppointmentsOnDate(QDate &diaryDate)
         idName = query.record().indexOf("IsRepeating");
         int isRepeating = query.value(idName).toInt();
 
+        idName = query.record().indexOf("AddBirthday");
+        int addBirthday = query.value(idName).toInt();
 
         idName = query.record().indexOf("ParentId");
         int parentId = query.value(idName).toInt();
@@ -634,6 +637,7 @@ QList<Appointment> DbManager::getAppointmentsOnDate(QDate &diaryDate)
             tmp.m_category=category;
             tmp.m_isFullDay=isFullDay;
             tmp.m_isRepeating=isRepeating;
+            tmp.m_addBirthday=addBirthday;
             tmp.m_parentId=parentId;
             tmp.m_hasReminder=hasReminder;
 
@@ -663,8 +667,8 @@ bool DbManager::addContact(Contact &contact)
     QString country =contact.m_country;
     QString telephone = contact.m_telephone;    
     QString birthdate=contact.m_birthdate;
-
-    int birthdayid =contact.m_birthdayid;
+    int addbirthday =contact.m_addbirthday;
+    int appointmentid =contact.m_birthdayAppointmentId;
 
     QString sql="INSERT INTO contacts(`ContactId`,";
     sql.append("`FirstName`,");
@@ -679,7 +683,8 @@ bool DbManager::addContact(Contact &contact)
     sql.append("`Country`,");
     sql.append("`Telephone`,");
     sql.append("`BirthDate`,");
-    sql.append("`BirthdayId`)");
+    sql.append("`AddBirthday`,");
+    sql.append("`AppointmentId`)");
     sql.append("VALUES (:idin,");
     sql.append(":firstnamein,");
     sql.append(":midnamein,");
@@ -693,7 +698,8 @@ bool DbManager::addContact(Contact &contact)
     sql.append(":countryin,");
     sql.append(":telephonein,");    
     sql.append(":birthdatein,");
-    sql.append(":birthdayidin);");
+    sql.append(":addbirthdayin,");
+    sql.append(":appointmentidin);");
 
     QSqlQuery query;
     query.prepare(sql);
@@ -711,7 +717,8 @@ bool DbManager::addContact(Contact &contact)
     query.bindValue(":countryin", country);
     query.bindValue(":telephonein", telephone);    
     query.bindValue(":birthdatein", birthdate);
-    query.bindValue(":birthdayidin", birthdayid);
+    query.bindValue(":addbirthdayin", addbirthday);
+    query.bindValue(":appointmentidin", appointmentid);
     bool success = query.exec();
     if (success) {
         //qDebug() << "added new contact";
@@ -722,9 +729,10 @@ bool DbManager::addContact(Contact &contact)
     }
 }
 
-bool DbManager::updateContact(Contact &contact,int id)
+bool DbManager::updateContact(Contact &contact, int id)
 {
     bool success =false;
+
 
     QString sql ="UPDATE contacts SET ";
     sql.append(" FirstName = :fnin");
@@ -739,7 +747,8 @@ bool DbManager::updateContact(Contact &contact,int id)
     sql.append(", Country =:cin");
     sql.append(", Telephone =:tin");    
     sql.append(", BirthDate =:bdatein");
-    //sql.append(", BirthdayId =:bidin");
+    sql.append(", AddBirthday =:addbirthdayin");
+    //sql.append(", AppointmentId =:bidin");
     sql.append(" WHERE ContactId =:idin");
 
     //qDebug()<<"sql query = "<<sql;
@@ -759,7 +768,8 @@ bool DbManager::updateContact(Contact &contact,int id)
       qry.bindValue(":cin",contact.m_country);
       qry.bindValue(":tin",contact.m_telephone);      
       qry.bindValue(":bdatein",contact.m_birthdate);
-      //qry.bindValue(":bidin",contact.m_birthdayid);
+      qry.bindValue(":addbirthdayin",contact.m_addbirthday);
+      //qry.bindValue(":bidin",contact.m_birthdayAppointmentId);
       qry.bindValue(":idin", QString::number(id));
       success = qry.exec();
       if (success)
@@ -775,7 +785,7 @@ bool DbManager::updateContact(Contact &contact,int id)
     }
     else
     {
-      qDebug() << "SQL is broken";
+      //qDebug() << "SQL is broken";
       return success;
     }
 }
@@ -816,8 +826,12 @@ QList<Contact> DbManager::getAllContacts()
         QString telephone = query.value(idName).toString();
         idName = query.record().indexOf("BirthDate");
         QString birthdate = query.value(idName).toString();
-        idName = query.record().indexOf("BirthdayId");
-        int birthdayid= query.value(idName).toInt();
+
+        idName = query.record().indexOf("AddBirthday");
+        int addbirthday= query.value(idName).toInt();
+
+        idName = query.record().indexOf("AppointmentId");
+        int appointmentid= query.value(idName).toInt();
 
         Contact tmp;
         tmp.m_id=id;
@@ -833,7 +847,8 @@ QList<Contact> DbManager::getAllContacts()
         tmp.m_country=country;
         tmp.m_telephone=telephone;       
         tmp.m_birthdate=birthdate;
-        tmp.m_birthdayid=birthdayid;
+        tmp.m_addbirthday=addbirthday;
+        tmp.m_birthdayAppointmentId=appointmentid;
         contactList.append(tmp);
     }
     return contactList;
@@ -873,8 +888,11 @@ Contact DbManager::getContactByID(int id)
     QString telephone = query.value(idName).toString();
     idName = query.record().indexOf("BirthDate");
     QString birthdate = query.value(idName).toString();
-    idName = query.record().indexOf("BirthdayId");
-    int birthdayid= query.value(idName).toInt();
+
+    idName = query.record().indexOf("AddBirthday");
+    int addbirthday= query.value(idName).toInt();
+    idName = query.record().indexOf("AppointmentId");
+    int appointmentid= query.value(idName).toInt();
 
     Contact contact;
     contact.m_id=idd;
@@ -890,7 +908,8 @@ Contact DbManager::getContactByID(int id)
     contact.m_country=country;
     contact.m_telephone=telephone;    
     contact.m_birthdate=birthdate;
-    contact.m_birthdayid=birthdayid;
+    contact.m_addbirthday=addbirthday;
+    contact.m_birthdayAppointmentId=appointmentid;
     return contact;
 }
 
@@ -926,151 +945,5 @@ bool DbManager::removeContactById(const int id)
     return success;
 }
 
-//-------------------------------------------------------------
-// Holidays
-//--------------------------------------------------------------
-
-bool DbManager::addHoliday(Holiday &holiday)
-{
-    QString name =holiday.m_name;
-    QString date =holiday.m_date;
-
-    QString sql="INSERT INTO holidays(`HolidayId`,";
-    sql.append("`Name`,");
-    sql.append("`Date`)");
-    sql.append("VALUES (:idin,");
-    sql.append(":namein,");
-    sql.append(":datein);");
-
-    QSqlQuery query;
-    query.prepare(sql);
-    //query.bindValue(":idin", 1); //autoincrement as primary key
-    query.bindValue(":namein", name);
-    query.bindValue(":datein",date);
-
-    bool success = query.exec();
-    if (success) {
-        //qDebug() << "added new holiday";
-        return success;
-    } else {
-        //qDebug() << "new holiday add failed" << query.lastError();
-        return success;
-    }
-}
-
-QList<Holiday> DbManager::getAllHolidays()
-{
-    QList<Holiday> holidayList;
-    QSqlQuery query("SELECT * FROM holidays");
-    query.exec();
-
-    while (query.next())
-    {
-        int idName = query.record().indexOf("HolidayId");
-        int id = query.value(idName).toInt();
-        idName = query.record().indexOf("Name");
-        QString name = query.value(idName).toString();
-        idName = query.record().indexOf("Date");
-        QString date = query.value(idName).toString();
-
-        //Create a temporatory holiday
-        Holiday tmp;
-        tmp.m_id=id;
-        tmp.m_name=name;
-        tmp.m_date=date;
-        holidayList.append(tmp);
-    }
-    return holidayList;
-}
-
-Holiday DbManager::getHolidayByID(int id)
-{
-    QSqlQuery query;
-    query.prepare("SELECT * FROM holidays WHERE HolidayId = (:idin)");
-    query.bindValue(":idin", id);
-    query.exec();
-    query.first();
-
-    int idName = query.record().indexOf("HolidayId");
-    int idd = query.value(idName).toInt();
-    idName = query.record().indexOf("Name");
-    QString name = query.value(idName).toString();
-    idName = query.record().indexOf("Date");
-    QString date = query.value(idName).toString();
-
-    Holiday tmp;
-    tmp.m_id=idd;
-    tmp.m_name=name;
-    tmp.m_date=date;
-    return tmp;
-
-}
-
-QList<Holiday> DbManager::getHolidaysOnDate(QDate &diaryDate)
-{
-    QDate checkDate = QDate(diaryDate);
-
-       QList<Holiday> holidayList = QList<Holiday>(); //Construct an empty list
-       QSqlQuery query("SELECT * FROM holidays");
-       query.exec();
-
-       while (query.next())
-       {
-           int idName = query.record().indexOf("HolidayId");
-           int id = query.value(idName).toInt();
-           idName = query.record().indexOf("Name");
-           QString name = query.value(idName).toString();
-           idName = query.record().indexOf("LDate");
-           QString date = query.value(idName).toString();
-
-           QDate currentDate=QDate::currentDate();
-           QDate holidayDate=QDate::fromString(date);
-
-           if(holidayDate ==checkDate)
-           {
-               //Create a temporatory birthday
-               Holiday tmp;
-               tmp.m_id=id;
-               tmp.m_name=name;
-               tmp.m_date=holidayDate.toString();
-               holidayList.append(tmp);
-           }
-       }
-       return  holidayList;
-}
-
-bool DbManager::removeHolidayById(const int id)
-{
-    bool success = false;
-        QSqlQuery queryDelete;
-        queryDelete.prepare("DELETE FROM holidays WHERE HolidayId = (:idin)");
-        queryDelete.bindValue(":idin", id);
-        success = queryDelete.exec();
-        if(!success)
-        {
-            //qDebug() << "remove holiday failed: " << queryDelete.lastError();
-        }
-        //qDebug()<< "Remove holiday success = "<<success;
-        return success;
-
-}
-
-bool DbManager::removeAllHolidays()
-{
-    bool success = false;
-    QSqlQuery removeQuery;
-    removeQuery.prepare("DELETE FROM holidays");
-    if (removeQuery.exec())
-    {
-        //qDebug() << "remove all holidays succeeded";
-        success = true;
-    }
-    else
-    {
-        //qDebug() << "remove all holidays failed: " << removeQuery.lastError();
-    }
-    return success;
-
-}
 
 

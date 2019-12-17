@@ -35,7 +35,8 @@ struct Contact {
             const QString& country= QString(),
             const QString& telephone= QString(),           
             const QString& birthdate=QString(),
-            int birthdayid=0
+            int addBirthday=0,
+            int birthdayappointmentid=0
             ):
         m_id(id),
         m_firstname(firstname),
@@ -50,7 +51,8 @@ struct Contact {
         m_country(country),
         m_telephone(telephone),        
         m_birthdate(birthdate),
-        m_birthdayid(birthdayid)
+        m_addbirthday(addBirthday),
+        m_birthdayAppointmentId(birthdayappointmentid)
     {
     }
     int m_id;
@@ -66,7 +68,8 @@ struct Contact {
     QString m_country;
     QString m_telephone;    
     QString m_birthdate;
-    int m_birthdayid;
+    int m_addbirthday;
+    int m_birthdayAppointmentId;
 };
 
 

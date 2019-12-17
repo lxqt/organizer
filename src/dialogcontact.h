@@ -65,7 +65,7 @@ public:
     QString country="";
     QString phoneNumber; //could have + code
     bool deleteRequested=false;
-    int addToCalendar=1;
+    int addToCalendar=0;
 
     QString getStreet();
     QString getDistrict();
@@ -84,7 +84,9 @@ private slots:
 
     void on_checkBoxDelete_stateChanged(int arg1);
 
-    void on_checkBoxAddToCalendar_stateChanged(int arg1);
+
+
+    void on_checkBoxAddBirthdayToCal_stateChanged(int arg1);
 
 private:
     Ui::DialogContact *ui;

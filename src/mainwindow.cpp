@@ -81,12 +81,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     contactModel = new ContactModel; //stores all contacts
     proxyModelContacts= new ProxyModelContacts;
-    LoadContactsListFromDatabase();
+    LoadContactsListFromDatabase(); //loads contactlist
     DisplayContactsOnTableView();
 
     //Birthdays now  appointments
     RemoveAllBirthdayAppointmentsFromDatebase();
-    AddBirthdayAppointmentsToDatabase(selectedDate.year());
+    AddBirthdayAppointmentsToDatabase(selectedDate.year()); //uses contactlist
     //Holidays special appointments
     RemoveAllHolidayAppointmentsFromDatabase();
     AddHolidayAppointmentsToDatabase(selectedDate.year());
@@ -263,8 +263,9 @@ void MainWindow::NewContact()
         this->country=contactDialog->getCountry();
         this->phoneNumber=contactDialog->getPhoneNumber();
         this->birthDate=contactDialog->getBirthDate();
+        this->addBirthdayToCalendar=contactDialog->getAddToCalendar();
         //this->addToCalendar=contactDialog->getAddToCalendar();
-        this->birthDateId=contactDialog->getBirthDateId();
+        //this->birthDateAppointmentId=contactDialog->getBirthDateId();
 
         Contact c;
         c.m_firstname=contactFirstName;
@@ -279,35 +280,40 @@ void MainWindow::NewContact()
         c.m_country=country;
         c.m_telephone=phoneNumber;
         c.m_birthdate=birthDate.toString();
-        c.m_birthdayid=this->birthDateId;
+        c.m_addbirthday=addBirthdayToCalendar;
+        c.m_birthdayAppointmentId=0;
 
-       //Create a birthday appointment
+        //Create a birthday appointment
         Appointment ba;
         ba.m_title="Birthday";
         ba.m_location=c.m_city;
-        ba.m_description=c.m_firstname+" "+c.m_lastname+ " Birthday";
+        ba.m_description=c.m_firstname+" "+c.m_lastname;
         QDate currentDate =QDate::currentDate();
         QDate borndate =QDate::fromString(c.m_birthdate);
         QDate currentBDay =QDate(currentDate.year(), borndate.month(), borndate.day());
         ba.m_date=currentBDay.toString();
         ba.m_category="Birthday";
         ba.m_isFullDay=1;
+        ba.m_addBirthday=addBirthdayToCalendar;
 
         if (dbm.isOpen())
         {
             int appointmentId = dbm.addAppointment(ba);
 
-            c.m_birthdayid=appointmentId; //foreign link key (delete contact delete appointment)
-            bool success = dbm.addContact(c);
+            c.m_birthdayAppointmentId=appointmentId; //foreign link key (delete contact delete appointment)
+            dbm.addContact(c);
 
-            if(success) //check contact added to database
-            {
-                //qDebug()<<"contact added to database";
-            }
+//            if(success) //check contact added to database
+//            {
+//                //qDebug()<<"contact added to database";
+//            }
         }
     }
     LoadContactsListFromDatabase(); //refresh contactslist here
     DisplayContactsOnTableView(); //display
+
+    RemoveAllBirthdayAppointmentsFromDatebase();
+    AddBirthdayAppointmentsToDatabase(selectedDate.year()); //uses refreshed contactslist
 
     LoadAppointmentsListFromDatabase();
     updateCalendar();
@@ -318,6 +324,8 @@ void MainWindow::NewContact()
 void MainWindow::UpdateContact(int dbID)
 {
     Contact currentContact = dbm.getContactByID(dbID);
+    //qDebug()<<"currentContact ID = "<<currentContact.m_id;
+    //qDebug()<<"birthday appointment ID = "<<currentContact.m_birthdayAppointmentId;
        DialogContact *contactDialog = new  DialogContact(this,&currentContact); //(this,&selectedDate);
 
        contactDialog->setModal(true);
@@ -325,14 +333,16 @@ void MainWindow::UpdateContact(int dbID)
 
            if(contactDialog->getDeleteRequested())
            {
-               int appointmentkey = currentContact.m_birthdayid;
+               int appointmentlink = currentContact.m_birthdayAppointmentId;
                dbm.removeContactById(dbID);              
-               dbm.deleteAppointmentById(appointmentkey);
+               dbm.deleteAppointmentById(appointmentlink);
 
                RemoveAllBirthdayAppointmentsFromDatebase();
-               AddBirthdayAppointmentsToDatabase(selectedDate.year());
+
 
                LoadContactsListFromDatabase(); //clears and reloads contact lsit
+               AddBirthdayAppointmentsToDatabase(selectedDate.year());
+
                DisplayContactsOnTableView();
 
                LoadAppointmentsListFromDatabase();
@@ -353,8 +363,8 @@ void MainWindow::UpdateContact(int dbID)
            this->country=contactDialog->getCountry();
            this->phoneNumber=contactDialog->getPhoneNumber();
            this->birthDate=contactDialog->getBirthDate();
-           //this->addToCalendar=contactDialog->getAddToCalendar();
-           this->birthDateId=contactDialog->getBirthDateId();
+           this->addBirthdayToCalendar=contactDialog->getAddToCalendar();
+           this->birthDateAppointmentId=contactDialog->getBirthDateId();
 
            Contact c;
            c.m_firstname=contactFirstName;
@@ -369,24 +379,28 @@ void MainWindow::UpdateContact(int dbID)
            c.m_country=country;
            c.m_telephone=phoneNumber;
            c.m_birthdate=birthDate.toString();
+           c.m_addbirthday=addBirthdayToCalendar;
+
 
            if (dbm.isOpen())
            {
                 //Update Birthday Appointment
 
-               Appointment ba =dbm.getAppointmentByID(c.m_birthdayid);
+               Appointment ba =dbm.getAppointmentByID(c.m_birthdayAppointmentId);
                ba.m_title="Birthday";
                ba.m_location=c.m_city;
-               ba.m_description=c.m_firstname+" "+c.m_lastname+" Birthday";
+               ba.m_description=c.m_firstname+" "+c.m_lastname;
                QDate currentDate =QDate::currentDate();
                QDate borndate =QDate::fromString(c.m_birthdate);
                QDate currentBDay =QDate(currentDate.year(), borndate.month(), borndate.day());
                ba.m_date=currentBDay.toString();
                ba.m_category="Birthday";
                ba.m_isFullDay=1;
-               dbm.updateAppointment(ba,c.m_birthdayid);
+               ba.m_addBirthday=addBirthdayToCalendar;
 
-               if(dbm.updateContact(c, dbID)) //add contact to database
+               dbm.updateAppointment(ba,c.m_birthdayAppointmentId);
+
+               if(dbm.updateContact(c,dbID)) //add contact to database
                {
                    //qDebug()<<"contact update added to database";
                }
@@ -394,10 +408,13 @@ void MainWindow::UpdateContact(int dbID)
            }
        }
 
+       RemoveAllBirthdayAppointmentsFromDatebase();
        LoadContactsListFromDatabase(); //clears and reloads contactList
-       DisplayContactsOnTableView();
+       DisplayContactsOnTableView();       
+       AddBirthdayAppointmentsToDatabase(selectedDate.year());
        LoadAppointmentsListFromDatabase();
        updateCalendar();
+       ShowDayAppointments();
 }
 
 void MainWindow::DisplayContactsOnTableView()
@@ -485,10 +502,11 @@ void MainWindow::UpdateAppointment(int dbID)
         a.m_hasReminder =reminderRequested;
         a.m_isRepeating=0;
         a.m_parentId=0;
+        a.m_addBirthday=0;
 
         if (dbm.isOpen())
         {
-            bool success =dbm.updateAppointment(a,dbID);
+            dbm.updateAppointment(a,dbID);
             //qDebug()<<"Apointment update: success ="<<success;
         }
 
@@ -527,7 +545,7 @@ void MainWindow::UpdateAppointment(int dbID)
             if (dbm.isOpen())
             {
 
-                bool success =dbm.updateReminder(r,dbID);
+                dbm.updateReminder(r,dbID);
                 //qDebug()<<"Reminder update success = "<<success;
             }
         }
@@ -651,17 +669,6 @@ void MainWindow::checkForBirthdaysNextSevenDays()
     }
 }
 
-void MainWindow::LoadHolidayListFromDatabase()
-{
-    //initialisation - do at startup
-    holidayList.clear();
-    QList<Holiday> tmpList = dbm.getAllHolidays();
-    foreach(Holiday h, tmpList)
-    {
-        holidayList.append(h);
-    }
-
-}
 
 void MainWindow::RemoveAllHolidayAppointmentsFromDatabase()
 {
@@ -698,7 +705,7 @@ void MainWindow::AddHolidayAppointmentsToDatabase(int year)
     holidayList.append(h2);
 
     //Calculate Easter and add
-    QDate easterSunday =CalculateEaster2(year);
+    QDate easterSunday =CalculateEaster(year);
     //qDebug()<<"Easter Sunday 2019 = "<<easterSunday.toString();
     Holiday h3;
     h3.m_id=3;
@@ -738,14 +745,14 @@ void MainWindow::AddHolidayAppointmentsToDatabase(int year)
 }
 
 
-QDate MainWindow::CalculateEaster2(int year)
+QDate MainWindow::CalculateEaster(int year)
 {
     QDate easter;
 
-    int Y = year;
-    int a = Y % 19;
-    int b = Y / 100;
-    int c = Y % 100;
+    int Yr = year;
+    int a = Yr % 19;
+    int b = Yr / 100;
+    int c = Yr % 100;
     int d = b / 4;
     int e = b % 4;
     int f = (b + 8) / 25;
@@ -857,17 +864,41 @@ void MainWindow::importContactsXML()
                c.m_country=contact.attribute("Country");
                c.m_telephone=contact.attribute("Telephone");
                c.m_birthdate=contact.attribute("BirthDate");
-               c.m_birthdayid=0;
+               c.m_addbirthday=0;
+               c.m_birthdayAppointmentId=0;
+
+
+               //Create a birthday appointment
+               Appointment ba;
+               ba.m_title="Birthday";
+               ba.m_location=c.m_city;
+               ba.m_description=c.m_firstname+" "+c.m_lastname;
+               QDate currentDate =QDate::currentDate();
+               QDate borndate =QDate::fromString(c.m_birthdate);
+               QDate currentBDay =QDate(currentDate.year(), borndate.month(), borndate.day());
+               ba.m_date=currentBDay.toString();
+               ba.m_category="Birthday";
+               ba.m_isFullDay=1;
+               ba.m_addBirthday=0;
 
                if (dbm.isOpen())
                {
-                   bool success = dbm.addContact(c);
-                   if(success) //add contact to database
-                   {
-                       //qDebug()<<"contact added to database";
-                       contactsList.append(c);
-                   }
+                   int appointmentId = dbm.addAppointment(ba);
+
+                   c.m_birthdayAppointmentId=appointmentId; //foreign link key (delete contact delete appointment)
+                   dbm.addContact(c);
                }
+
+
+//               if (dbm.isOpen())
+//               {
+//                   bool success = dbm.addContact(c);
+//                   if(success) //add contact to database
+//                   {
+//                       //qDebug()<<"contact added to database";
+//                       contactsList.append(c);
+//                   }
+//               }
            }
        }
        file.close();
@@ -877,9 +908,9 @@ void MainWindow::importContactsXML()
        DisplayContactsOnTableView(); //display
 
        RemoveAllBirthdayAppointmentsFromDatebase(); //?just in case
-       AddBirthdayAppointmentsToDatabase(selectedDate.year());
+       AddBirthdayAppointmentsToDatabase(selectedDate.year());  //alos loads contacts again
        updateCalendar();
-       //showAllBirthdaysOnCalendar();
+
 }
 
 void MainWindow::exportAppointmentsXML()
@@ -1158,7 +1189,7 @@ void MainWindow::updateCalendar()
     //Now add appointments
     int dayVal=0;
     QDate loopDate;
-    QFont testFont =QFont( "lucida", 12, QFont::Bold);
+    //QFont testFont =QFont( "lucida", 12, QFont::Bold);
 
     for (int row=0; row<ui->tableWidget->rowCount(); ++row)
     {
@@ -1194,7 +1225,7 @@ void MainWindow::updateCalendar()
                         ui->tableWidget->setItem(row, col,appointmentItem);
 
                     }
-                    else if(a.m_category=="Birthday")
+                    else if((a.m_category=="Birthday") && (a.m_addBirthday==1))
                     {
 //
                         QString cellVal=ui->tableWidget->item(row,col)->text();                        
@@ -1350,7 +1381,7 @@ void MainWindow::on_tableViewContacts_doubleClicked(const QModelIndex &index)
     int selectedRowIdx=index.row();
     Contact tmp =contactModel->getContact(selectedRowIdx);
     int dbId =tmp.m_id;
-    UpdateContact(dbId);
+    UpdateContact(dbId);    
 }
 
 
@@ -1396,19 +1427,21 @@ void MainWindow::AddBirthdayAppointmentsToDatabase(int year)
 {
 
     //Create a birthday appointments and add
-    LoadContactsListFromDatabase();    
+    //LoadContactsListFromDatabase();
+    //Assumes contactlist uptodate
     Appointment ba;
 
     foreach(Contact c, contactsList)
     {
         ba.m_title="Birthday ";
         ba.m_location=c.m_city;
-        ba.m_description=c.m_firstname+" "+c.m_lastname+ " Birthday";
+        ba.m_description=c.m_firstname+" "+c.m_lastname;
         QDate borndate =QDate::fromString(c.m_birthdate);
         QDate currentBDay =QDate(year, borndate.month(), borndate.day());
         ba.m_date=currentBDay.toString();
         ba.m_isFullDay=1;
         ba.m_category="Birthday";
+        ba.m_addBirthday=c.m_addbirthday;
         if (dbm.isOpen())
         {
             appointmentId=dbm.addAppointment(ba);
@@ -1572,3 +1605,5 @@ void MainWindow::on_actionSystem_Notifications_triggered()
         this->notificationsFlag=false;
     }
 }
+
+

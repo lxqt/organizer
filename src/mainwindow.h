@@ -107,7 +107,8 @@ public:
     QString country ="";
     QString phoneNumber="";
     QDate birthDate=QDate(); //(0,0,0)
-    int birthDateId=0;
+    int birthDateAppointmentId=0;
+    int addBirthdayToCalendar =0;
 
     int selectedContactDbId=0;
     Contact selectedContact;
@@ -149,11 +150,11 @@ public:
     bool notificationsFlag=false;
 
     //Holidays
-    void LoadHolidayListFromDatabase();
+
     void RemoveAllHolidayAppointmentsFromDatabase();
     void AddHolidayAppointmentsToDatabase(int year);
 
-    QDate CalculateEaster2(int year);
+    QDate CalculateEaster(int year);
 
     //exports and imports
 
@@ -217,6 +218,8 @@ private slots:
     void on_actionCheck_For_Reminders_Today_triggered();
 
     void on_actionSystem_Notifications_triggered();
+
+
 
 private:
     Ui::MainWindow *ui;

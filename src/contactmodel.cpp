@@ -114,7 +114,7 @@ QVariant ContactModel::data(const QModelIndex &index, int role) const
            case 12:
                return birthdayDateStr;
            case 13:
-               return c.m_birthdayid;
+               return c.m_birthdayAppointmentId;
 
 
            default:

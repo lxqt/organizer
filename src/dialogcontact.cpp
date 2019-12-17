@@ -54,11 +54,11 @@ DialogContact::DialogContact(QWidget *parent, Contact *theContact):
     ui->lineEditTelephone->setText(theContact->m_telephone);
 
     this->birthDate=QDate::fromString(theContact->m_birthdate);
-    qDebug()<<"Contact Dialog (update): m_birthdate = "<<theContact->m_birthdate;
-    qDebug()<<"Contact Dialog (update): QDate birthdate = "<<this->birthDate;
+    qDebug()<<"Contact Dialog: (update): m_birthdate = "<<theContact->m_birthdate;
+    qDebug()<<"Contact Dialog: (update): QDate birthdate = "<<this->birthDate;
     ui->dateEditBirthDate->setDate(this->birthDate);
 
-    qDebug()<<"birthDateId = "<<theContact->m_birthdayid;
+    qDebug()<<"Contact Dialog: (update) birthday AppointmentId = "<<theContact->m_birthdayAppointmentId;
 
 }
 
@@ -187,7 +187,8 @@ void DialogContact::on_checkBoxDelete_stateChanged(int arg1)
     }
 }
 
-void DialogContact::on_checkBoxAddToCalendar_stateChanged(int arg1)
+
+void DialogContact::on_checkBoxAddBirthdayToCal_stateChanged(int arg1)
 {
     if (arg1==Qt::Unchecked)
     {
@@ -196,4 +197,5 @@ void DialogContact::on_checkBoxAddToCalendar_stateChanged(int arg1)
     else if (arg1==Qt::Checked) {
        addToCalendar=1;
     }
+
 }

@@ -113,6 +113,13 @@
         <widget class="QDateEdit" name="dateEditBirthDate"/>
        </item>
        <item>
+        <widget class="QCheckBox" name="checkBoxAddBirthdayToCal">
+         <property name="text">
+          <string>Add Birthday To Calendar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
