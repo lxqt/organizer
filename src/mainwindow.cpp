@@ -194,6 +194,115 @@ void MainWindow::newAppointment()
     ShowDayAppointments();
 }
 
+void MainWindow::UpdateAppointment(int dbID)
+{
+    Appointment currentAppointment = dbm.getAppointmentByID(dbID);
+
+    if (currentAppointment.m_category=="Birthday") return;
+
+    if (currentAppointment.m_category=="Holiday") return; //Holidays handled separately
+
+    DialogAppointment *appointmentDialog =
+            new  DialogAppointment(this,&currentAppointment);
+    appointmentDialog->setModal(true);
+
+    if (appointmentDialog->exec() == QDialog::Accepted ) {
+        //qDebug()<<"Delete request = "<<appointmentDialog->getDeleteRequested();
+
+        if(appointmentDialog->getDeleteRequested())
+        {
+            if(currentAppointment.m_hasReminder==1)
+            {
+                //int reminderKey = currentAppointment.m_reminderId;
+                dbm.removeReminderById(currentAppointment.m_id);
+            }
+
+            dbm.deleteAppointmentById(dbID);
+
+            LoadAppointmentsListFromDatabase();
+            LoadReminderListFromDatabase();
+            updateCalendar();
+            ShowDayAppointments();
+            return;
+        }
+
+        title =appointmentDialog->getTitle();
+        location =appointmentDialog->getLocation();
+        description= appointmentDialog->getDescription();
+        selectedDate=appointmentDialog->getAppointmentDate(); //appointment date
+        appointmentStartTime=appointmentDialog->getStartTime();
+        appointmentEndTime=appointmentDialog->getEndTime();
+        category=appointmentDialog->getCategory();
+        reminderRequested=appointmentDialog->getReminderRequested();
+        reminderDays=appointmentDialog->getReminderDays();
+        isAllDay=appointmentDialog->getAllDay();
+
+        Appointment a;
+        a.m_title=title;
+        a.m_location=location;
+        a.m_description=description;
+        a.m_date=selectedDate.toString();
+        a.m_startTime=appointmentStartTime.toString();
+        a.m_endTime=appointmentEndTime.toString();
+        a.m_category=category;
+        a.m_isFullDay=isAllDay;
+        a.m_hasReminder =reminderRequested;
+        a.m_isRepeating=0;
+        a.m_parentId=0;
+        a.m_addBirthday=0;
+
+        if (dbm.isOpen())
+        {
+            dbm.updateAppointment(a,dbID);
+            //qDebug()<<"Apointment update: success ="<<success;
+        }
+
+        if(reminderRequested==1)
+        {
+
+            //Reminder requested
+            QString dateStr="("+QString::number(selectedDate.day())+"/"
+                    +QString::number(selectedDate.month())+"/"
+                    +QString::number(selectedDate.year())+")";
+
+            QString reminderDetails=title
+                    +" ("+location
+                    + ") "+dateStr;
+
+            if(isAllDay==1)
+            {
+                reminderDetails.append(" All day event");
+            }
+            else {
+                QString minutesStartStr = QString("%1").arg(appointmentStartTime.minute(), 2, 10, QChar('0'));
+                QString startTimeStr=QString::number(appointmentStartTime.hour(),'f',0)
+                        +":"+minutesStartStr;
+                QString minutesEndStr = QString("%1").arg(appointmentEndTime.minute(), 2, 10, QChar('0'));
+                QString endTimeStr=QString::number(appointmentEndTime.hour(),'f',0)+
+                        ":"+minutesEndStr;
+                reminderDetails.append(" ("+startTimeStr+" to "+endTimeStr+")");
+            }
+
+            Reminder r;
+
+            r.m_details=reminderDetails;
+            r.m_reminderDate=selectedDate.addDays(-reminderDays).toString();
+            r.m_reminderTime=appointmentStartTime.toString();
+
+            if (dbm.isOpen())
+            {
+
+                dbm.updateReminder(r,dbID);
+                //qDebug()<<"Reminder update success = "<<success;
+            }
+        }
+        LoadAppointmentsListFromDatabase();
+        LoadReminderListFromDatabase();
+        ShowDayAppointments();
+        updateCalendar();
+    }
+}
+
 void MainWindow::LoadAppointmentsListFromDatabase()
 {
     //initialisation - do at startup
@@ -447,113 +556,7 @@ void MainWindow::DisplayContactsOnTableView()
 }
 
 
-void MainWindow::UpdateAppointment(int dbID)
-{
-    Appointment currentAppointment = dbm.getAppointmentByID(dbID);
 
-    if (currentAppointment.m_category=="Birthday") return;
-
-    if (currentAppointment.m_category=="Holiday") return; //Holidays handled separately
-
-    DialogAppointment *appointmentDialog =
-            new  DialogAppointment(this,&currentAppointment);
-    appointmentDialog->setModal(true);
-
-    if (appointmentDialog->exec() == QDialog::Accepted ) {
-        //qDebug()<<"Delete request = "<<appointmentDialog->getDeleteRequested();
-
-        if(appointmentDialog->getDeleteRequested())
-        {
-            if(currentAppointment.m_hasReminder==1)
-            {
-                //int reminderKey = currentAppointment.m_reminderId;
-                dbm.removeReminderById(currentAppointment.m_id);
-            }
-
-            dbm.deleteAppointmentById(dbID);
-
-            LoadAppointmentsListFromDatabase();
-            LoadReminderListFromDatabase();
-            updateCalendar();
-            ShowDayAppointments();
-            return;
-        }
-
-        title =appointmentDialog->getTitle();
-        location =appointmentDialog->getLocation();
-        description= appointmentDialog->getDescription();
-        selectedDate=appointmentDialog->getAppointmentDate(); //appointment date
-        appointmentStartTime=appointmentDialog->getStartTime();
-        appointmentEndTime=appointmentDialog->getEndTime();
-        category=appointmentDialog->getCategory();
-        reminderRequested=appointmentDialog->getReminderRequested();
-        reminderDays=appointmentDialog->getReminderDays();
-        isAllDay=appointmentDialog->getAllDay();
-
-        Appointment a;
-        a.m_title=title;
-        a.m_location=location;
-        a.m_description=description;
-        a.m_date=selectedDate.toString();
-        a.m_startTime=appointmentStartTime.toString();
-        a.m_endTime=appointmentEndTime.toString();
-        a.m_category=category;
-        a.m_isFullDay=isAllDay;
-        a.m_hasReminder =reminderRequested;
-        a.m_isRepeating=0;
-        a.m_parentId=0;
-        a.m_addBirthday=0;
-
-        if (dbm.isOpen())
-        {
-            dbm.updateAppointment(a,dbID);
-            //qDebug()<<"Apointment update: success ="<<success;
-        }
-
-        if(reminderRequested==1)
-        {
-
-            //Reminder requested
-            QString dateStr="("+QString::number(selectedDate.day())+"/"
-                    +QString::number(selectedDate.month())+"/"
-                    +QString::number(selectedDate.year())+")";
-
-            QString reminderDetails=title
-                    +" ("+location
-                    + ") "+dateStr;
-
-            if(isAllDay==1)
-            {
-                reminderDetails.append(" All day event");
-            }
-            else {
-                QString minutesStartStr = QString("%1").arg(appointmentStartTime.minute(), 2, 10, QChar('0'));
-                QString startTimeStr=QString::number(appointmentStartTime.hour(),'f',0)
-                        +":"+minutesStartStr;
-                QString minutesEndStr = QString("%1").arg(appointmentEndTime.minute(), 2, 10, QChar('0'));
-                QString endTimeStr=QString::number(appointmentEndTime.hour(),'f',0)+
-                        ":"+minutesEndStr;
-                reminderDetails.append(" ("+startTimeStr+" to "+endTimeStr+")");
-            }
-
-            Reminder r;
-
-            r.m_details=reminderDetails;
-            r.m_reminderDate=selectedDate.addDays(-reminderDays).toString();
-            r.m_reminderTime=appointmentStartTime.toString();
-
-            if (dbm.isOpen())
-            {
-
-                dbm.updateReminder(r,dbID);
-                //qDebug()<<"Reminder update success = "<<success;
-            }
-        }
-        LoadAppointmentsListFromDatabase();
-        LoadReminderListFromDatabase();
-        ShowDayAppointments();
-    }
-}
 
 bool MainWindow::compare(const Appointment &first, const Appointment &second)
 {
