@@ -1553,13 +1553,17 @@ void MainWindow::UpdateCalendar()
 void MainWindow::on_tableWidget_cellClicked(int row, int column)
 {
 
-    int day =dayArray[(7 * row) + column];    
-    QDate theDate =QDate(selectedDate.year(),selectedDate.month(),day);
-    //qDebug()<<"Selected Date = "<<theDate.toString();
-    selectedDate=theDate;
-    ui->labelSelectedDate->setText(theDate.toString());
-    ShowDayAppointmentsTableView();
+    int day =dayArray[(7 * row) + column];
+   // qDebug()<<"day = "<<day;
 
+    if (day>0 && day <=31)
+    {
+        QDate theDate =QDate(selectedDate.year(),selectedDate.month(),day);
+        //qDebug()<<"Selected Date = "<<theDate.toString();
+        selectedDate=theDate;
+        ui->labelSelectedDate->setText(theDate.toString());
+        ShowDayAppointmentsTableView();
+    }
 }
 
 void MainWindow::on_pushButtonNextMonth_clicked()
