@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -16,25 +16,44 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef HOLIDAY_H
-#define HOLIDAY_H
+#ifndef DAYMODEL_H
+#define DAYMODEL_H
 
-#include <QString>
-struct Holiday {
+#include <QAbstractTableModel>
+#include "appointment.h"
+#include <QColor>
+#include <QList>
+#include <QDate>
+#include <QDebug>
 
-    Holiday(int id=0,
-                const QString& name= QString(),
-                const QString& date=QString()
-                ):
-        m_id(id),
-        m_name(name),
-        m_date(date)
-    {
-    }
-   int m_id;
-   QString m_name;
-   QString m_date;
+class DayModel : public QAbstractTableModel
+{
+public:
+    //DayModel();
+
+    DayModel(QObject* parent = nullptr);
+    DayModel(const QList<Appointment>& appointmentList,
+                 QObject *parent = nullptr);
+
+    void AddAppointment(Appointment &appointment);
+    Appointment getAppointment(int index);
+    void clearAllAppointments();
+    void removeAppointment(int idx);
+
+    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+
+    QVariant data (const QModelIndex & index,
+                   int role = Qt::DisplayRole) const override;
+
+    QVariant headerData(int section, Qt::Orientation orientation,
+                        int role = Qt::DisplayRole) const override;
+private:
+    QList<Appointment> modelAppointmentList;
+
+
+
 };
 
-
-#endif // HOLIDAY_H
+#endif // DAYMODEL_H

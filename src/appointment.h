@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,6 +15,7 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
+
 
 #ifndef APPOINTMENT_H
 #define APPOINTMENT_H
@@ -32,10 +33,10 @@ struct Appointment {
                 const QString& category=QString(),
                 int isFullDay =0,
                 int isRepeating=0,
-                int addBirthday =0,
+                int showBirthday=0,
+                int contactId=0,
                 int parentId=0,
                 int hasReminder=0
-
                 ):
         m_id(id),
         m_title(title),
@@ -47,7 +48,8 @@ struct Appointment {
         m_category(category),
         m_isFullDay(isFullDay),
         m_isRepeating(isRepeating),
-        m_addBirthday(addBirthday),
+        m_showBirthday(showBirthday),
+        m_contactId(contactId),
         m_parentId(parentId),
         m_hasReminder(hasReminder)
     {
@@ -62,7 +64,8 @@ struct Appointment {
    QString m_category;
    int m_isFullDay;
    int m_isRepeating;
-   int m_addBirthday;
+   int m_showBirthday;
+   int m_contactId;
    int m_parentId;
    int m_hasReminder;   
 };

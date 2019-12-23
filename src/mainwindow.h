@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,6 +15,7 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
+
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
@@ -39,17 +40,19 @@
 #include "appointment.h"
 #include "reminder.h"
 #include "contact.h"
-#include "holiday.h"
+
 #include "dbmanager.h"
 
 #include "dialogappointment.h"
 #include "dialogcontact.h"
 #include "dialogshowreminders.h"
-#include "daylistmodel.h"
 #include "contactmodel.h"
 #include "proxymodelcontacts.h"
 #include "dbussessionmessage.h"
 #include "dialogabout.h"
+
+#include "daymodel.h"
+#include "proxymodelappointments.h"
 
 
 
@@ -68,6 +71,7 @@ public:
     DbManager dbm;
 
     int appointmentId =0;
+    int contactId=0;
     int parentId=1;
     Appointment parentAppointment;
 
@@ -119,42 +123,65 @@ public:
     ProxyModelContacts *proxyModelContacts;
 
     //Appointments    
-    void newAppointment();
-    void updateAppointment(int dbID);
-    void LoadAppointmentsListFromDatabase();
+    void NewAppointment();
     void UpdateAppointment(int dbID);
-    static bool compare(const Appointment& first, const Appointment& second);
-    void ShowDayAppointments();
+    void ShowDayAppointmentsTableView();
+
+    //AppointmentList methods
+    void LoadDatabaseAppointmentsToAppointmentList();
+    void UpdateAppointmentInAppointmentList(Appointment app, int appointmentId);
+    void RemoveAppointmentFromAppointmentList(int appointmentId);
+
+    //Update Lists
+    void UpdateAppointmentList();
+    void UpdateReminderList();
+
+    //ReminderList methods
+    void LoadDatabaseRemindersToRemindersList();
+    void UpdateReminderInReminderList(Reminder rem, int appointmentId);
+    void RemoveReminderFromReminderList(int appointmentId);
+
 
     void RemoveAllAppointments();
-    void RemoveAllBirthdayAppointmentsFromDatebase();
 
-    //Contacts
-    void LoadContactsListFromDatabase();
-    void NewContact();
-    void UpdateContact(int dbID);
-    void DisplayContactsOnTableView();
-    bool quickViewFlag=false;
-    bool sortOrderFlag=false;
-
-     void AddBirthdayAppointmentsToDatabase(int year); //uses contact birth
-
-
-    //Reminders
-    void LoadReminderListFromDatabase();
-    void checkForRemindersMidday();
+    void CheckForRemindersOnHour();
     void checkForReminders();
     void DisplayRemindersForDate(QDate date);
     void checkForBirthdaysNextSevenDays();
 
-    bool notificationsFlag=false;
+    //Flags
+    bool flagNotifications=false;
+    bool flagQuickView=false;
+    bool flagRemindersHourly =true;
+
+
+
+    //Contacts
+    void LoadDatebaseContactsToContactList();
+    void NewContact();
+    void UpdateContact(int dbID);
+    void DisplayContactsOnTableView();
+
+    //ContactList methods
+    void RemoveContactFromContactList(int contactId);
+
+    //Birthdays
+    void AddBirthdaysToAppointmentList(int year);
+    void UpdateBirthdaysInAppointmentList(int year);
+
+    void RemoveBirthdayFromAppointmentList(int contactId);
+    void UpdateBirthdayInAppointmentsList(Appointment b, int contactId);
+
+
+
 
     //Holidays
-
-    void RemoveAllHolidayAppointmentsFromDatabase();
-    void AddHolidayAppointmentsToDatabase(int year);
+    void AddHolidaysToAppointmentsList(int year);
+    void UpdateHolidaysInAppointmentList(int year);
+    void RemoveHolidaysFromAppointmentsList();
 
     QDate CalculateEaster(int year);
+
 
     //exports and imports
 
@@ -179,27 +206,17 @@ private slots:
 
     void on_actionNew_Appointment_triggered();    
 
-    void on_actionCheck_For_Reminders_triggered();
-
-    void on_listViewDay_doubleClicked(const QModelIndex &index);
+    void on_actionCheck_For_Reminders_triggered();    
 
     void on_actionNew_Contact_triggered();
 
-    void on_tableViewContacts_doubleClicked(const QModelIndex &index);
-
-    void on_actionClear_All_Appointments_triggered();
-
-    void on_action_Add_Current_Birthdays_triggered();
-
-    void on_actionRemove_All_Birthday_triggered();
+    void on_tableViewContacts_doubleClicked(const QModelIndex &index);    
 
     void on_pushButtonShowQuickFullDetails_clicked();
 
-    void on_pushButtonSort_clicked();
+   // void on_pushButtonSort_clicked();
 
     void on_pushButtonMailTo_clicked();
-
-    void on_tableViewContacts_clicked(const QModelIndex &index);
 
     void on_actionCheck_For_Upcoming_Birthdays_triggered();
 
@@ -219,19 +236,28 @@ private slots:
 
     void on_actionSystem_Notifications_triggered();
 
+    void on_tableViewDays_doubleClicked(const QModelIndex &index);
 
+    void on_actionDelete_All_Appointments_triggered();
+
+    void on_tableViewContacts_clicked(const QModelIndex &index);
+
+   // void on_pushButtonSortAscending_clicked();
+
+    void on_actionCheck_Reminders_Hourly_triggered();
 
 private:
     Ui::MainWindow *ui;
     void gotoNextMonth();
     void gotoPreviousMonth();
-    void updateCalendar();
+    void UpdateCalendar();
 
     const char *monthNames[12]= {"January", "February", "March", "April",
                                  "May", "June", "July", "August", "September",
                                  "October", "November", "December"};
     QTableWidgetItem* dayItem;
     QTableWidgetItem* appointmentItem;
+    QTableWidgetItem* birthdayItem;
 
     int columnCount=7;
     int rowCount=6;
@@ -245,10 +271,11 @@ private:
     QDate selectedDate;
     QList<Appointment> appointmentList;
     QList<Reminder> reminderList;
-    QList <Contact> contactsList;
-    QList<Holiday> holidayList;
+    QList <Contact> contactList;
     //Models
-    DayListModel *dayListModel;
+
+    DayModel *dayModel;
+    ProxyModelAppointments *proxyModelAppointments;
 
 };
 

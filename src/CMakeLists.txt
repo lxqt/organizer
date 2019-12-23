@@ -12,16 +12,14 @@ find_package ( Qt5Sql REQUIRED )
 find_package ( Qt5DBus REQUIRED )
 find_package(Qt5Svg REQUIRED)
 find_package(Qt5Xml REQUIRED)
-
 set ( lxqt-organizer_HDRS
 	appointment.h
 	contact.h
 	dbmanager.h
 	reminder.h
 	contactmodel.h
-	holiday.h
 	reminderslistmodel.h
-	daylistmodel.h
+	daymodel.h
 	)
 
 set ( lxqt-organizer_SRCS
@@ -35,8 +33,9 @@ set ( lxqt-organizer_SRCS
 	proxymodelcontacts.cpp
 	dialogcontact.cpp
 	reminderslistmodel.cpp
-	daylistmodel.cpp
 	dialogabout.cpp
+	daymodel.cpp
+	proxymodelappointments.cpp
 	)
 
 set ( lxqt-organizer_UIS
@@ -61,10 +60,11 @@ set ( lxqt-organizer_MOCS
 	proxymodelcontacts.h
 	dialogcontact.h
 	dialogabout.h
+	proxymodelappointments.h
 	)
 QT5_WRAP_CPP(MOCS ${lxqt-organizer_MOCS})
 
 add_executable ( lxqt-organizer ${lxqt-organizer_SRCS} ${UIS} ${RSCS} ${TRS} ${MOCS} )
-target_link_libraries ( lxqt-organizer  Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::DBus Qt5::Svg Qt5::Xml)
+target_link_libraries ( lxqt-organizer  Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::DBus Qt5::Svg Qt5::Xml )
 
 install(TARGETS lxqt-organizer DESTINATION ${CMAKE_INSTALL_PREFIX})

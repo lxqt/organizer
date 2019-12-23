@@ -16,18 +16,18 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef PROXYMODELCONTACTS_H
-#define PROXYMODELCONTACTS_H
+#include "proxymodelappointments.h"
 
-#include <QSortFilterProxyModel>
 
-class ProxyModelContacts : public QSortFilterProxyModel
+ProxyModelAppointments::ProxyModelAppointments(QObject *parent)
 {
-     Q_OBJECT
-public:
-    ProxyModelContacts(QObject* parent = nullptr);
-    QVariant headerData(int section, Qt::Orientation orientation,
-                                int role) const;
-};
+    Q_UNUSED(parent)
+}
 
-#endif // PROXYMODELCONTACTS_H
+QVariant ProxyModelAppointments::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    return sourceModel()->headerData(section, orientation,
+                                     role);
+}
+
+

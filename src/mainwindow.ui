@@ -132,29 +132,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QListView" name="listViewDay">
-            <property name="minimumSize">
-             <size>
-              <width>200</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>500</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string extracomment="Day Events"/>
-            </property>
-            <property name="lineWidth">
-             <number>3</number>
-            </property>
-            <property name="midLineWidth">
-             <number>2</number>
-            </property>
-           </widget>
+           <widget class="QTableView" name="tableViewDays"/>
           </item>
          </layout>
         </item>
@@ -174,13 +152,6 @@
            <widget class="QPushButton" name="pushButtonShowQuickFullDetails">
             <property name="text">
              <string>Quick/Full Details</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonSort">
-            <property name="text">
-             <string>Sort</string>
             </property>
            </widget>
           </item>
@@ -223,11 +194,9 @@
     <property name="title">
      <string>Edit</string>
     </property>
-    <addaction name="actionRemove_All_Birthday"/>
-    <addaction name="action_Add_Current_Birthdays"/>
     <addaction name="separator"/>
-    <addaction name="actionClear_All_Appointments"/>
     <addaction name="actionDelete_All_Contacts"/>
+    <addaction name="actionDelete_All_Appointments"/>
    </widget>
    <widget class="QMenu" name="menuAction">
     <property name="title">
@@ -251,6 +220,7 @@
      <string>Options</string>
     </property>
     <addaction name="actionSystem_Notifications"/>
+    <addaction name="actionCheck_Reminders_Hourly"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -367,6 +337,39 @@
    </property>
    <property name="text">
     <string>Check For Reminders Today</string>
+   </property>
+  </action>
+  <action name="actionShow_AppointmentsList">
+   <property name="text">
+    <string>Show AppointmentsList</string>
+   </property>
+  </action>
+  <action name="actionShow_ReminderList">
+   <property name="text">
+    <string>Show ReminderList</string>
+   </property>
+  </action>
+  <action name="actionShow_ContactsList">
+   <property name="text">
+    <string>Show ContactsList</string>
+   </property>
+  </action>
+  <action name="actionShow_BirthdayList">
+   <property name="text">
+    <string>Show BirthdayList</string>
+   </property>
+  </action>
+  <action name="actionDelete_All_Appointments">
+   <property name="text">
+    <string>Delete All Appointments</string>
+   </property>
+  </action>
+  <action name="actionCheck_Reminders_Hourly">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Check Reminders Hourly</string>
    </property>
   </action>
  </widget>

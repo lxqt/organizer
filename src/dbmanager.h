@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -16,6 +16,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
+
 #ifndef DBMANAGER_H
 #define DBMANAGER_H
 
@@ -30,7 +31,8 @@
 #include"appointment.h"
 #include "contact.h"
 #include "reminder.h"
-#include "holiday.h"
+
+
 
 
 
@@ -60,24 +62,16 @@ public:
     QList<Reminder> getAllReminders();
     Reminder getReminderByID(int id);
     QList<Reminder> getRemindersOnDate(QDate &diaryDate);
-    bool removeReminderById(const int appointmentId);
+    bool deleteReminderById(const int appointmentId);
     bool removeAllReminders();
 
     //Contacts
-    bool addContact(Contact &contact);
+    int addContact(Contact &contact);
     bool updateContact(Contact &contact, int id);
     QList<Contact> getAllContacts();
     Contact getContactByID(int id);
     bool removeAllContacts();
     bool removeContactById(const int id);
-
-    //Holidays
-     bool addHoliday(Holiday &holiday); //returns db index
-     QList<Holiday> getAllHolidays();
-     Holiday getHolidayByID(int id);
-     QList<Holiday> getHolidaysOnDate(QDate &diaryDate);
-     bool removeHolidayById(const int id);
-     bool removeAllHolidays();
 
 
 };

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,6 +15,7 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
+
 
 #ifndef CONTACT_H
 #define CONTACT_H
@@ -35,8 +36,7 @@ struct Contact {
             const QString& country= QString(),
             const QString& telephone= QString(),           
             const QString& birthdate=QString(),
-            int addBirthday=0,
-            int birthdayappointmentid=0
+            int addToCalendar=0
             ):
         m_id(id),
         m_firstname(firstname),
@@ -51,8 +51,7 @@ struct Contact {
         m_country(country),
         m_telephone(telephone),        
         m_birthdate(birthdate),
-        m_addbirthday(addBirthday),
-        m_birthdayAppointmentId(birthdayappointmentid)
+        m_addToCalendar(addToCalendar)
     {
     }
     int m_id;
@@ -68,8 +67,7 @@ struct Contact {
     QString m_country;
     QString m_telephone;    
     QString m_birthdate;
-    int m_addbirthday;
-    int m_birthdayAppointmentId;
+    int m_addToCalendar;
 };
 
 

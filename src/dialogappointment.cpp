@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -75,7 +75,16 @@ DialogAppointment::DialogAppointment(QWidget *parent, Appointment *theAppointmen
     ui->timeEditStartTime->setTime(startTime);
     ui->timeEditEndTime->setTime(endTime);
 
+    setupComboBoxes();
     category=theAppointment->m_category;
+    //qDebug()<<"Apppointment category ="<<category;
+    int index = ui->comboBoxCategory->findText(category);
+   // qDebug()<<"combobox index = "<<index;
+
+    if ( index != -1 ) { // -1 for not found must be >0
+       ui->comboBoxCategory->setCurrentIndex(index);
+    }
+
     isAllDay=theAppointment->m_isFullDay;
 
     if (isAllDay==1)
@@ -84,8 +93,6 @@ DialogAppointment::DialogAppointment(QWidget *parent, Appointment *theAppointmen
     }
 
     reminderRequested=theAppointment->m_hasReminder;
-
-
 
     if(reminderRequested==1)
     {
@@ -97,8 +104,6 @@ DialogAppointment::DialogAppointment(QWidget *parent, Appointment *theAppointmen
         ui->checkBoxReminder->setCheckState(Qt::Unchecked);
         ui->comboBoxReminder->setEnabled(false);
     }
-
-    setupComboBoxes();
 
 }
 
@@ -176,7 +181,6 @@ void DialogAppointment::setupComboBoxes()
     ui->comboBoxCategory->addItem("Vacation");
     ui->comboBoxCategory->addItem("Medical");
 
-
     //Set up reminder days ComboBox
     for (int i=1; i<8; i++)
     {
@@ -197,7 +201,7 @@ void DialogAppointment::accept()
     else {
         //        QMessageBox::information(this, tr("Success"),
         //                  tr("Data entered"));
-        qDebug()<<"Success title and location fields completed by user";
+        //qDebug()<<"Success title and location fields completed by user";
         QDialog::accept();
     }
 }

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -16,36 +16,20 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef DAYLISTMODEL_H
-#define DAYLISTMODEL_H
+#ifndef PROXYMODELAPPOINTMENTS_H
+#define PROXYMODELAPPOINTMENTS_H
 
-#include <QAbstractListModel>
-#include <QTime>
-#include "appointment.h"
-//#include "dialogappointment.h"
+#include <QSortFilterProxyModel>
 
 
-class DayListModel: public QAbstractListModel
+class ProxyModelAppointments : public QSortFilterProxyModel
 {
+    Q_OBJECT
 public:
-
-    DayListModel(QObject* parent = nullptr);
-    DayListModel(const QList<Appointment>& appointmentList,
-                        QObject *parent = nullptr);
-
-    void addAppointment(Appointment &appointment);
-    void updateAppointment(Appointment &appointment, int index);
-    Appointment getAppointment(int index);
-    void clearAllAppointment();
-    void removeAppointment(int idx);
-
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-
-    QVariant data (const QModelIndex & index,
-                   int role = Qt::DisplayRole) const override;
-private:
-    QList<Appointment> modelAppointmentList;
-
+    //ProxyModelAppointments();
+    ProxyModelAppointments(QObject* parent = nullptr);
+    QVariant headerData(int section, Qt::Orientation orientation,
+                                int role) const;
 };
 
-#endif // DAYLISTMODEL_H
+#endif // PROXYMODELAPPOINTMENTS_H

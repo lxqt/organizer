@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,6 +15,7 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
+
 
 #include "dialogcontact.h"
 #include "ui_dialogcontact.h"
@@ -58,7 +59,7 @@ DialogContact::DialogContact(QWidget *parent, Contact *theContact):
     qDebug()<<"Contact Dialog: (update): QDate birthdate = "<<this->birthDate;
     ui->dateEditBirthDate->setDate(this->birthDate);
 
-    qDebug()<<"Contact Dialog: (update) birthday AppointmentId = "<<theContact->m_birthdayAppointmentId;
+    //qDebug()<<"Contact Dialog: (update) birthday AppointmentId = "<<theContact->m_birthdayAppointmentId;
 
 }
 
