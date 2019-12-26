@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -16,6 +16,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
+
 #ifndef CONTACT_H
 #define CONTACT_H
 
@@ -24,43 +25,49 @@ struct Contact {
 
     Contact(int id=0,
             const QString& firstname= QString(),
+            const QString& midnames= QString(),
             const QString& lastname= QString(),
             const QString& email= QString(),
             const QString& street= QString(),
+            const QString& district= QString(),
             const QString& city= QString(),
             const QString& county= QString(),
             const QString& postcode= QString(),
             const QString& country= QString(),
             const QString& telephone= QString(),           
             const QString& birthdate=QString(),
-            int birthdayid=0
+            int addToCalendar=0
             ):
         m_id(id),
         m_firstname(firstname),
+        m_midnames(midnames),
         m_lastname(lastname),
         m_email(email),
         m_street(street),
+        m_district(district),
         m_city(city),
         m_county(county),
         m_postcode(postcode),
         m_country(country),
         m_telephone(telephone),        
         m_birthdate(birthdate),
-        m_birthdayid(birthdayid)
+        m_addToCalendar(addToCalendar)
     {
     }
     int m_id;
     QString m_firstname;
+    QString m_midnames;
     QString m_lastname;
     QString m_email;
     QString m_street;
+    QString m_district;
     QString m_city;
     QString m_county;
     QString m_postcode;
     QString m_country;
     QString m_telephone;    
     QString m_birthdate;
-    int m_birthdayid;
+    int m_addToCalendar;
 };
 
 

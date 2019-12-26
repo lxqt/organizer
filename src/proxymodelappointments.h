@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,40 +15,21 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#ifndef REMINDERMODEL_H
-#define REMINDERMODEL_H
 
-#include <QColor>
-#include <QList>
-#include <QDate>
-#include <QDebug>
-#include "reminder.h"
-#include <QAbstractListModel>
+#ifndef PROXYMODELAPPOINTMENTS_H
+#define PROXYMODELAPPOINTMENTS_H
 
-class ReminderModel: public QAbstractListModel
+#include <QSortFilterProxyModel>
+
+
+class ProxyModelAppointments : public QSortFilterProxyModel
 {
+    Q_OBJECT
 public:
-    ReminderModel(QObject* parent = nullptr);
-
-    ReminderModel(const QList<Reminder>& reminderList,
-                                  QObject *parent = nullptr);
-
-    void addReminder(Reminder &reminder);
-    Reminder getAReminder(int index);
-    void clearAllReminders();
-    void removeReminder(int idx);
-
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-
-    QVariant data (const QModelIndex & index,
-                           int role = Qt::DisplayRole) const override;
-
-
-private:
-    QList<Reminder> modelReminderList;
-
-
-
+    //ProxyModelAppointments();
+    ProxyModelAppointments(QObject* parent = nullptr);
+    QVariant headerData(int section, Qt::Orientation orientation,
+                                int role) const;
 };
 
-#endif // REMINDERMODEL_H
+#endif // PROXYMODELAPPOINTMENTS_H

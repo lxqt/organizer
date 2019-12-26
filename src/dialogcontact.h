@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,6 +15,7 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
+
 
 #ifndef DIALOGCONTACT_H
 #define DIALOGCONTACT_H
@@ -43,12 +44,14 @@ public:
     ~DialogContact();
 
     QString firstName="";
+    QString middleNames="";
     QString lastName="";
     QString email="";
     QDate birthDate =QDate();
     int birthDateId=0;
 
     QString getFirstName();
+    QString getMiddleNames();
     QString getLastName();
     QString getEmail();
     QDate getBirthDate();
@@ -56,15 +59,17 @@ public:
 
     //Contact details
     QString street="";
+    QString district="";
     QString city="";
     QString county="";
     QString postcode="";
     QString country="";
     QString phoneNumber; //could have + code
     bool deleteRequested=false;
-    int addToCalendar=1;
+    int addToCalendar=0;
 
     QString getStreet();
+    QString getDistrict();
     QString getCity();
     QString getCounty();
     QString getPostcode();
@@ -80,7 +85,9 @@ private slots:
 
     void on_checkBoxDelete_stateChanged(int arg1);
 
-    void on_checkBoxAddToCalendar_stateChanged(int arg1);
+
+
+    void on_checkBoxAddBirthdayToCal_stateChanged(int arg1);
 
 private:
     Ui::DialogContact *ui;

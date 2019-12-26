@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -16,38 +16,18 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef BIRTHDAYMODEL_H
-#define BIRTHDAYMODEL_H
-
-#include <QColor>
-#include <QList>
-#include <QDate>
-#include <QDebug>
-#include "birthday.h"
-#include <QAbstractListModel>
+#include "proxymodelappointments.h"
 
 
-class BirthdayModel: public QAbstractListModel
+ProxyModelAppointments::ProxyModelAppointments(QObject *parent)
 {
-public:
+    Q_UNUSED(parent)
+}
 
-    BirthdayModel(QObject* parent = nullptr);
+QVariant ProxyModelAppointments::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    return sourceModel()->headerData(section, orientation,
+                                     role);
+}
 
-    BirthdayModel(const QList<Birthday>& birthdayList,
-                  QObject *parent = nullptr);
 
-    void addBirthday(Birthday &birthday);
-    Birthday getABirthday(int index);
-    void clearAllBirthdays();
-    void removeBirthday(int idx);
-
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-
-    QVariant data (const QModelIndex & index,
-                   int role = Qt::DisplayRole) const override;
-
-private:
-    QList<Birthday> modelBirthdayList;
-};
-
-#endif // BIRTHDAYMODEL_H

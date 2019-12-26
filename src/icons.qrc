@@ -2,5 +2,6 @@
     <qresource prefix="/new/icons">
         <file>icons/appointment.svg</file>
         <file>icons/contact.svg</file>
+        <file>icons/reminders.svg</file>
     </qresource>
 </RCC>

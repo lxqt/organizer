@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -16,36 +16,45 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QTextCharFormat>
+#include <QMainWindow>
+#include <QMessageBox>
+#include <QTextEdit>
+#include <QDebug>
+#include <QDate>
 #include <QTimer>
-#include <QList>
+#include <QTableWidgetItem>
+#include <QTableWidget>
 #include <QDesktopServices>
 #include <QUrl>
 #include <QFile>
 #include <QFileDialog>
 #include <QXmlStreamWriter>
 #include <QDomDocument>
-#include<QLabel>
+
+
+#include "appointment.h"
+#include "reminder.h"
+#include "contact.h"
+
+#include "dbmanager.h"
 
 #include "dialogappointment.h"
 #include "dialogcontact.h"
-#include "dbmanager.h"
-#include "appointment.h"
-#include "contact.h"
-#include "appointmentmodel.h"
-#include "proxymodel.h"
+#include "dialogshowreminders.h"
 #include "contactmodel.h"
 #include "proxymodelcontacts.h"
-#include "remindermodel.h"
-#include "dialogabout.h"
 #include "dbussessionmessage.h"
-#include "birthday.h"
-#include "birthdaymodel.h"
-#include "reminder.h"
+#include "dialogabout.h"
+
+#include "daymodel.h"
+#include "proxymodelappointments.h"
+
+
 
 namespace Ui {
 class MainWindow;
@@ -61,7 +70,11 @@ public:
 
     DbManager dbm;
 
-    QDate selectedDate; //from clicking on calendar
+    int appointmentId =0;
+    int contactId=0;
+    int parentId=1;
+    Appointment parentAppointment;
+
 
     //Appointments
     QString title="";
@@ -70,31 +83,16 @@ public:
     QDate appointmentDate;
     QTime appointmentStartTime;
     QTime appointmentEndTime;
-    QDate appointmentReminderDate;
-    QTime appointmentReminderTime;
-    int appointmentReminderRequested=0;
-
+    QString category="";
+    int reminderDays=0;
+    int reminderRequested=0;
+    int isAllDay=0;
     int selectedAppointmentdDbId =0;
 
     Reminder reminderSingleShot;
 
-    //Birthday (Keep Appointment format for display purposes)
-    QString birthdayName="";
-    QString birthdayLocation="";
-    QString birthdayDescription="";
-    QDate birthdayDate;
-    int addToCalendar=1;
 
-
-    int selectedBirthdayDbId=0;// may just toggle birthday display
-
-    int selectedRowIdx=0;
-    bool notificationsFlag;
-
-    QTextCharFormat eventDayFormat;
-    QTextCharFormat weekDayFormat;
-    QTextCharFormat weekendFormat;
-
+    //Timers
     QLabel *statusDateLabel;
     QLabel *statusTimeLabel;
     QTimer *timer;
@@ -102,66 +100,95 @@ public:
 
     //Contacts
     QString contactFirstName ="";
+    QString contactMiddleNames="";
     QString contactLastName="";
-    QString contactEmail="";    
+    QString contactEmail="";
     QString street="";
+    QString district="";
     QString city="";
     QString county="";
     QString postcode ="";
     QString country ="";
     QString phoneNumber="";
     QDate birthDate=QDate(); //(0,0,0)
-    int birthDateId=0;
-
+    int birthDateAppointmentId=0;
+    int addBirthdayToCalendar =0;
 
     int selectedContactDbId=0;
     Contact selectedContact;
 
     //Models
 
-    AppointmentModel *dayModel;   
-    ReminderModel *reminderModel;
-
-    BirthdayModel *birthdayModel;
-    BirthdayModel *birthdayReminderModel;
-    ProxyModel *proxyModel;
     ContactModel *contactModel;
     ProxyModelContacts *proxyModelContacts;
 
-
+    //Appointments    
     void NewAppointment();
     void UpdateAppointment(int dbID);
+    void ShowDayAppointmentsTableView();
+
+    //AppointmentList methods
+    void LoadDatabaseAppointmentsToAppointmentList();
+    void UpdateAppointmentInAppointmentList(Appointment app, int appointmentId);
+    void RemoveAppointmentFromAppointmentList(int appointmentId);
+
+    //Update Lists
+    void UpdateAppointmentList();
+    void UpdateReminderList();
+
+    //ReminderList methods
+    void LoadDatabaseRemindersToRemindersList();
+    void UpdateReminderInReminderList(Reminder rem, int appointmentId);
+    void RemoveReminderFromReminderList(int appointmentId);
+
+
+    void RemoveAllAppointments();
+
+    void CheckForRemindersOnHour();
+    void checkForReminders();
+    void DisplayRemindersForDate(QDate date);
+    void checkForBirthdaysNextSevenDays();
+
+    //Flags
+    bool flagNotifications=false;
+    bool flagQuickView=false;
+    bool flagRemindersHourly =true;
+
+
+
+    //Contacts
+    void LoadDatebaseContactsToContactList();
     void NewContact();
     void UpdateContact(int dbID);
-
-    void LoadAppointmentsListFromDatabase(); //initialise AppointmentsList
-    void LoadContactsListFromDatabase(); //initialise contactsList
-    void LoadBirthdayListFromDatabase();
-    void LoadReminderListFromDatabase();
-
     void DisplayContactsOnTableView();
-    bool quickViewFlag=false;
-    bool sortOrderFlag=false;
 
-    void DisplayAppointmentsForDate(QDate theSelectedDate);
-    void DisplayBirthdaysForDate(QDate theSelectedDate);
+    //ContactList methods
+    void RemoveContactFromContactList(int contactId);
 
-    //Calendar
-    void setCalendarOptions();
-    void showAllAppointmentsOnCalendar();
-    void clearAllAppointmentsOnCalendar();
-    void showAllBirthdaysOnCalendar();
-    void clearAllBirthdaysOnCalendar();
+    //Birthdays
+    void AddBirthdaysToAppointmentList(int year);
+    void UpdateBirthdaysInAppointmentList(int year);
 
-    //Reminders
-    void checkForReminders();    
-    void checkForBirthdaysNextSevenDays();
+    void RemoveBirthdayFromAppointmentList(int contactId);
+    void UpdateBirthdayInAppointmentsList(Appointment b, int contactId);
+
+
+
+
+    //Holidays
+    void AddHolidaysToAppointmentsList(int year);
+    void UpdateHolidaysInAppointmentList(int year);
+    void RemoveHolidaysFromAppointmentsList();
+
+    QDate CalculateEaster(int year);
+
+
+    //exports and imports
 
     void exportContactsXML();
     void importContactsXML();
     void exportAppointmentsXML();
     void importAppointmentsXML();
-
 
 private slots:
 
@@ -169,61 +196,88 @@ private slots:
 
     void sendReminderMessage();
 
-    void on_tableView_clicked(const QModelIndex &index);
+    void on_actionExit_triggered();
 
-    void on_tableView_doubleClicked(const QModelIndex &index);
+    void on_tableWidget_cellClicked(int row, int column);
 
-    void on_calendarWidget_clicked(const QDate &date);
+    void on_pushButtonNextMonth_clicked();
 
-    void on_actionNew_Appointment_triggered();
+    void on_pushButtonPreviousMonth_clicked();
+
+    void on_actionNew_Appointment_triggered();    
+
+    void on_actionCheck_For_Reminders_triggered();    
 
     void on_actionNew_Contact_triggered();
 
-    void on_tableViewContacts_clicked(const QModelIndex &index);
+    void on_tableViewContacts_doubleClicked(const QModelIndex &index);    
 
-    void on_tableViewContacts_doubleClicked(const QModelIndex &index);
+    void on_pushButtonShowQuickFullDetails_clicked();
 
-    void on_pushButtonShowQuickDetails_clicked();   
+   // void on_pushButtonSort_clicked();
 
     void on_pushButtonMailTo_clicked();
 
-    void on_actionDelete_All_Contacts_triggered();
+    void on_actionCheck_For_Upcoming_Birthdays_triggered();
 
     void on_actionAbout_triggered();
 
-    void on_actionClear_All_Reminder_Messages_triggered();
-
-    void on_actionDelete_All_Appointments_2_triggered();
-
-    void on_actionExit_triggered();
-
-    void on_actionCalendar_Grid_triggered();   
-
-    void on_actionCheckForReminders_triggered();
-
-    void on_actionCheckForUpcomingBirthdays_triggered();
+    void on_actionDelete_All_Contacts_triggered();
 
     void on_actionExport_Contacts_XML_triggered();
 
     void on_actionExport_Appointments_XML_triggered();
 
-    void on_ActionImport_Contacts_XML_triggered();
+    void on_actionImport_Contacts_XML_triggered();
 
     void on_actionImport_Appointments_XML_triggered();
 
-    void on_actionCalendar_Weeks_triggered();
+    void on_actionCheck_For_Reminders_Today_triggered();
 
-    void on_pushButtonSortByFirstLastname_clicked();
+    void on_actionSystem_Notifications_triggered();
+
+    void on_tableViewDays_doubleClicked(const QModelIndex &index);
+
+    void on_actionDelete_All_Appointments_triggered();
+
+    void on_tableViewContacts_clicked(const QModelIndex &index);
+
+   // void on_pushButtonSortAscending_clicked();
+
+    void on_actionCheck_Reminders_Hourly_triggered();
 
 private:
     Ui::MainWindow *ui;
+    void gotoNextMonth();
+    void gotoPreviousMonth();
+    void UpdateCalendar();
 
-    QList<Appointment> appointmentsList;
-    QList<Reminder> reminderList;    
+    const char *monthNames[12]= {"January", "February", "March", "April",
+                                 "May", "June", "July", "August", "September",
+                                 "October", "November", "December"};
+    QTableWidgetItem* dayItem;
+    QTableWidgetItem* appointmentItem;
+    QTableWidgetItem* birthdayItem;
 
-    QList <Contact> contactsList;    
-    QList<Birthday> birthdayList;
+    int columnCount=7;
+    int rowCount=6;
+    //int dayArray[6][7];
+    int dayArray[6*7];
+    int selectedYear=0;
+    int selectedMonth=0;
+    int selectedDay=0;
+    int firstDay=1;
+    int fontSize=11;
+    QDate selectedDate;
+    QList<Appointment> appointmentList;
+    QList<Reminder> reminderList;
+    QList <Contact> contactList;
+    //Models
+
+    DayModel *dayModel;
+    ProxyModelAppointments *proxyModelAppointments;
 
 };
+
 
 #endif // MAINWINDOW_H

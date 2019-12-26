@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,20 +15,37 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#ifndef PROXYMODEL_H
-#define PROXYMODEL_H
 
-#include <QSortFilterProxyModel>
 
-class ProxyModel : public QSortFilterProxyModel
+#ifndef DIALOGSHOWREMINDERS_H
+#define DIALOGSHOWREMINDERS_H
+
+#include <QDialog>
+#include <reminder.h>
+#include <dbmanager.h>
+#include <reminderslistmodel.h>
+
+namespace Ui {
+class DialogShowReminders;
+}
+
+class DialogShowReminders : public QDialog
 {
-     Q_OBJECT
+    Q_OBJECT
 
 public:
-   ProxyModel(QObject* parent = nullptr);
+    explicit DialogShowReminders(QWidget *parent = nullptr,
+                                 QDate *theSelectedDate=nullptr,
+                                 DbManager *theDbm=nullptr);
+    ~DialogShowReminders();
+    QDate selectedDate;
+    remindersListModel *reminderListModel;
 
-   QVariant headerData(int section, Qt::Orientation orientation,
-                            int role) const;
+
+private:
+    Ui::DialogShowReminders *ui;
+    QList<Reminder> reminderList;
+    DbManager theDbm;
 };
 
-#endif // PROXYMODEL_H
+#endif // DIALOGSHOWREMINDERS_H

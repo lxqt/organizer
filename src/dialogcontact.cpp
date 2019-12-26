@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,6 +15,7 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
+
 
 #include "dialogcontact.h"
 #include "ui_dialogcontact.h"
@@ -42,9 +43,11 @@ DialogContact::DialogContact(QWidget *parent, Contact *theContact):
     ui->checkBoxDelete->show();
 
     ui->lineEditFirstName->setText(theContact->m_firstname);
+    ui->lineEditMiddleNames->setText(theContact->m_midnames);
     ui->lineEditLastName->setText(theContact->m_lastname);
     ui->lineEditEmail->setText(theContact->m_email);    
     ui->lineEditStreet->setText(theContact->m_street);
+    ui->lineEditDistrict->setText(theContact->m_district);
     ui->lineEditCity->setText(theContact->m_city);
     ui->lineEditCounty->setText(theContact->m_county);
     ui->lineEditPostcode->setText(theContact->m_postcode);
@@ -52,11 +55,11 @@ DialogContact::DialogContact(QWidget *parent, Contact *theContact):
     ui->lineEditTelephone->setText(theContact->m_telephone);
 
     this->birthDate=QDate::fromString(theContact->m_birthdate);
-    qDebug()<<"Contact Dialog (update): m_birthdate = "<<theContact->m_birthdate;
-    qDebug()<<"Contact Dialog (update): QDate birthdate = "<<this->birthDate;
+    qDebug()<<"Contact Dialog: (update): m_birthdate = "<<theContact->m_birthdate;
+    qDebug()<<"Contact Dialog: (update): QDate birthdate = "<<this->birthDate;
     ui->dateEditBirthDate->setDate(this->birthDate);
 
-    qDebug()<<"birthDateId = "<<theContact->m_birthdayid;
+    //qDebug()<<"Contact Dialog: (update) birthday AppointmentId = "<<theContact->m_birthdayAppointmentId;
 
 }
 
@@ -69,6 +72,12 @@ QString DialogContact::getFirstName()
 {
     firstName = ui->lineEditFirstName->text();
     return firstName;
+}
+
+QString DialogContact::getMiddleNames()
+{
+    middleNames=ui->lineEditMiddleNames->text();
+    return middleNames;
 }
 
 QString DialogContact::getLastName()
@@ -98,6 +107,12 @@ QString DialogContact::getStreet()
 {
     this->street=ui->lineEditStreet->text();
     return this->street;
+}
+
+QString DialogContact::getDistrict()
+{
+    this->district=ui->lineEditDistrict->text();
+    return this->district;
 }
 
 QString DialogContact::getCity()
@@ -173,7 +188,8 @@ void DialogContact::on_checkBoxDelete_stateChanged(int arg1)
     }
 }
 
-void DialogContact::on_checkBoxAddToCalendar_stateChanged(int arg1)
+
+void DialogContact::on_checkBoxAddBirthdayToCal_stateChanged(int arg1)
 {
     if (arg1==Qt::Unchecked)
     {
@@ -182,4 +198,5 @@ void DialogContact::on_checkBoxAddToCalendar_stateChanged(int arg1)
     else if (arg1==Qt::Checked) {
        addToCalendar=1;
     }
+
 }

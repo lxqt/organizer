@@ -12,39 +12,37 @@ find_package ( Qt5Sql REQUIRED )
 find_package ( Qt5DBus REQUIRED )
 find_package(Qt5Svg REQUIRED)
 find_package(Qt5Xml REQUIRED)
-
 set ( lxqt-organizer_HDRS
 	appointment.h
-	appointmentmodel.h
 	contact.h
-	contactmodel.h
 	dbmanager.h
-	remindermodel.h
-	birthday.h
-	birthdaymodel.h
 	reminder.h
+	contactmodel.h
+	reminderslistmodel.h
+	daymodel.h
 	)
 
 set ( lxqt-organizer_SRCS
 	main.cpp
 	mainwindow.cpp
-	dialogcontact.cpp
-	dialogappointment.cpp
-	appointmentmodel.cpp
-	contactmodel.cpp
 	dbmanager.cpp
+	dialogappointment.cpp
+	dialogshowreminders.cpp
 	dbussessionmessage.cpp
-	dialogabout.cpp
-	proxymodel.cpp
+	contactmodel.cpp
 	proxymodelcontacts.cpp
-	remindermodel.cpp
-	birthdaymodel.cpp
+	dialogcontact.cpp
+	reminderslistmodel.cpp
+	dialogabout.cpp
+	daymodel.cpp
+	proxymodelappointments.cpp
 	)
 
 set ( lxqt-organizer_UIS
 	mainwindow.ui
-	dialogcontact.ui
 	dialogappointment.ui
+	dialogshowreminders.ui
+	dialogcontact.ui
 	dialogabout.ui
 	)
 QT5_WRAP_UI(UIS ${lxqt-organizer_UIS})
@@ -56,12 +54,13 @@ QT5_ADD_RESOURCES(RSCS ${lxqt-organizer_RSCS})
 
 set ( lxqt-organizer_MOCS
 	mainwindow.h
-	dialogcontact.h
 	dialogappointment.h
+	dialogshowreminders.h
 	dbussessionmessage.h
-	dialogabout.h
-	proxymodel.h
 	proxymodelcontacts.h
+	dialogcontact.h
+	dialogabout.h
+	proxymodelappointments.h
 	)
 QT5_WRAP_CPP(MOCS ${lxqt-organizer_MOCS})
 

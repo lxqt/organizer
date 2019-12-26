@@ -1,5 +1,5 @@
 ﻿/***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,6 +15,7 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
+
 
 #include "dialogabout.h"
 #include "ui_dialogabout.h"
@@ -35,7 +36,7 @@ DialogAbout::~DialogAbout()
 void DialogAbout::SetAboutMessage()
 {
     QString descMsg = "LXQt Organizer is a lightweight organizer for personal information management.";
-    QString headerMsg = "LXQt Organizer (v0.003 Alpha2)";
+    QString headerMsg = "LXQt Organizer (v0.004 Alpha1)";
     QString authorMsg = "Author (Lead Developer): Alan Crispin  (aka. crispina)";
     QString lxqtMsg1 =  "LXQt desktop project.";
     QString lxqtLinkMsg ="<a href='https://github.com/lxqt'>LXQt</a>";

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author aka. crispina                 *
+ *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,42 +15,45 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-#ifndef APPOINTMENTMODEL_H
-#define APPOINTMENTMODEL_H
 
-#include <QAbstractTableModel>
-#include "appointment.h"
-#include <QColor>
-#include <QList>
-#include <QDate>
-#include <QDebug>
 
-class AppointmentModel : public QAbstractTableModel
+#include "dialogshowreminders.h"
+#include "ui_dialogshowreminders.h"
+
+DialogShowReminders::DialogShowReminders(QWidget *parent,
+                                         QDate *theSelectedDate,
+                                         DbManager *theDbm) :
+    QDialog(parent),
+    ui(new Ui::DialogShowReminders)
 {
-public:
-    AppointmentModel(QObject* parent = nullptr);
+    ui->setupUi(this);
+    setWindowTitle("Reminders");
+    ui->labelSelectedDate->setText(theSelectedDate->toString());
+
+    this->reminderList =theDbm->getAllReminders();
+
+    QList<Reminder> dayReminderList =QList<Reminder>();
+
+    foreach(Reminder r, reminderList)
+    {
+        QDate adate = QDate::fromString(r.m_reminderDate);
+
+        if(adate==*theSelectedDate)
+        {
+            qDebug()<<"Reminder: "<<r.m_details;
+            dayReminderList.append(r);
+
+        }
+    }
+    reminderListModel = new remindersListModel(dayReminderList);
 
 
-    AppointmentModel(const QList<Appointment>& appointmentList,
-                                  QObject *parent = nullptr);
+    ui->listView->setModel(reminderListModel);
 
-    void addAppointment(Appointment &appointment);
-    Appointment getAppointment(int index);
-    void clearAllAppointments();
-    void removeAppointment(int idx);
 
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+}
 
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
-
-    QVariant data (const QModelIndex & index,
-                           int role = Qt::DisplayRole) const override;
-
-    QVariant headerData(int section, Qt::Orientation orientation,
-                                int role = Qt::DisplayRole) const override;
-private:
-    QList<Appointment> modelAppointmentList;
-
-};
-
-#endif // APPOINTMENTMODEL_H
+DialogShowReminders::~DialogShowReminders()
+{
+    delete ui;
+}
