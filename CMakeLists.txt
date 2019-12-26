@@ -47,13 +47,6 @@ add_definitions("-DLXQT_ORGANIZER_VERSION=\"${LXQT_ORGANIZER_VERSION}\"")
 add_subdirectory(src)
 add_subdirectory(scripts)
 
-INSTALL(TARGETS
-    lxqt-organizer
-    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-    COMPONENT Runtime
-)
-
-
 # install(FILES
 #     man/lxqt-organzier.1
 #     DESTINATION "${CMAKE_INSTALL_MANDIR}/man1"
