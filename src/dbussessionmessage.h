@@ -35,7 +35,7 @@ struct MessageData {
     QString header;
     QString message;
 
-    MessageData(QString header, QString message)
+    MessageData(const QString &header, const QString &message)
     {
         this->header = header;
         this->message = message;

@@ -71,11 +71,11 @@ public:
 private slots:
     void accept();
 
-    void on_dateEditAppointmentDate_userDateChanged(const QDate &date);
+    void on_dateEditAppointmentDate_userDateChanged(const QDate date);
 
-    void on_timeEditStartTime_userTimeChanged(const QTime &time);
+    void on_timeEditStartTime_userTimeChanged(const QTime time);
 
-    void on_timeEditEndTime_userTimeChanged(const QTime &time);
+    void on_timeEditEndTime_userTimeChanged(const QTime time);
 
     void on_checkBoxDelete_stateChanged(int arg1);   
 

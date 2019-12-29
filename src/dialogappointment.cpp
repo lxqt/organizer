@@ -26,7 +26,7 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
 {
     ui->setupUi(this);
     //New appointment
-    setWindowTitle("New Appointment");
+    setWindowTitle(QStringLiteral("New Appointment"));
     ui->checkBoxDelete->hide();
     ui->dateEditAppointmentDate->setDate(*theAppointmentDate);
 
@@ -45,7 +45,7 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
     ui->timeEditEndTime->setTime(timeNow);
     this->reminderTime=timeNow;
 
-    category="Event";
+    category = QStringLiteral("Event");
     setupComboBoxes();
     ui->comboBoxReminder->setEnabled(false);
 
@@ -57,7 +57,7 @@ DialogAppointment::DialogAppointment(QWidget *parent, Appointment *theAppointmen
 {
     ui->setupUi(this);
     //Update an appointment    
-    setWindowTitle("Update Appointment");
+    setWindowTitle(QStringLiteral("Update Appointment"));
     ui->checkBoxDelete->show();
 
     ui->lineEditTitle->setText(theAppointment->m_title);
@@ -173,13 +173,13 @@ void DialogAppointment::setupComboBoxes()
 {
     //Set up Category Combobox
 
-    ui->comboBoxCategory->addItem("Event");
-    ui->comboBoxCategory->addItem("Family");
-    ui->comboBoxCategory->addItem("Leisure");
-    ui->comboBoxCategory->addItem("Meeting");
-    ui->comboBoxCategory->addItem("Business");
-    ui->comboBoxCategory->addItem("Vacation");
-    ui->comboBoxCategory->addItem("Medical");
+    ui->comboBoxCategory->addItem(QStringLiteral("Event"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Family"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Leisure"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Meeting"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Business"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Vacation"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Medical"));
 
     //Set up reminder days ComboBox
     for (int i=1; i<8; i++)
@@ -206,20 +206,20 @@ void DialogAppointment::accept()
     }
 }
 
-void DialogAppointment::on_dateEditAppointmentDate_userDateChanged(const QDate &date)
+void DialogAppointment::on_dateEditAppointmentDate_userDateChanged(const QDate date)
 {
     this->appointmentDate=date;    
     ui->labelDateDisplay->setText(this->appointmentDate.toString());
 }
 
-void DialogAppointment::on_timeEditStartTime_userTimeChanged(const QTime &time)
+void DialogAppointment::on_timeEditStartTime_userTimeChanged(const QTime time)
 {
     this->startTime=time;
     //ui->timeEditEndTime->setTime(time);
 
 }
 
-void DialogAppointment::on_timeEditEndTime_userTimeChanged(const QTime &time)
+void DialogAppointment::on_timeEditEndTime_userTimeChanged(const QTime time)
 {
     this->endTime=time;
 }

@@ -27,7 +27,7 @@ DialogContact::DialogContact(QWidget *parent, QDate *theBirthDate):
 {
      ui->setupUi(this);
      //New Contact
-     setWindowTitle("New Contact");
+     setWindowTitle(QStringLiteral("New Contact"));
      ui->checkBoxDelete->hide();
      ui->dateEditBirthDate->setDate(*theBirthDate);
 
@@ -39,7 +39,7 @@ DialogContact::DialogContact(QWidget *parent, Contact *theContact):
 {
     ui->setupUi(this);
     //Update Contact
-    setWindowTitle("Update Contact");
+    setWindowTitle(QStringLiteral("Update Contact"));
     ui->checkBoxDelete->show();
 
     ui->lineEditFirstName->setText(theContact->m_firstname);
@@ -170,7 +170,7 @@ void DialogContact::accept()
     }
 }
 
-void DialogContact::on_dateEditBirthDate_userDateChanged(const QDate &date)
+void DialogContact::on_dateEditBirthDate_userDateChanged(const QDate date)
 {
     this->birthDate=date;
 }

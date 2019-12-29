@@ -77,13 +77,13 @@ public:
 
 
     //Appointments
-    QString title="";
-    QString location="";
-    QString description="";
+    QString title=QLatin1String("");
+    QString location=QLatin1String("");
+    QString description=QLatin1String("");
     QDate appointmentDate;
     QTime appointmentStartTime;
     QTime appointmentEndTime;
-    QString category="";
+    QString category=QLatin1String("");
     int reminderDays=0;
     int reminderRequested=0;
     int isAllDay=0;
@@ -99,17 +99,17 @@ public:
     QTimer *timerSingleShot;
 
     //Contacts
-    QString contactFirstName ="";
-    QString contactMiddleNames="";
-    QString contactLastName="";
-    QString contactEmail="";
-    QString street="";
-    QString district="";
-    QString city="";
-    QString county="";
-    QString postcode ="";
-    QString country ="";
-    QString phoneNumber="";
+    QString contactFirstName =QLatin1String("");
+    QString contactMiddleNames=QLatin1String("");
+    QString contactLastName=QLatin1String("");
+    QString contactEmail=QLatin1String("");
+    QString street=QLatin1String("");
+    QString district=QLatin1String("");
+    QString city=QLatin1String("");
+    QString county=QLatin1String("");
+    QString postcode =QLatin1String("");
+    QString country =QLatin1String("");
+    QString phoneNumber=QLatin1String("");
     QDate birthDate=QDate(); //(0,0,0)
     int birthDateAppointmentId=0;
     int addBirthdayToCalendar =0;
@@ -129,7 +129,7 @@ public:
 
     //AppointmentList methods
     void LoadDatabaseAppointmentsToAppointmentList();
-    void UpdateAppointmentInAppointmentList(Appointment app, int appointmentId);
+    void UpdateAppointmentInAppointmentList(const Appointment &app, int appointmentId);
     void RemoveAppointmentFromAppointmentList(int appointmentId);
 
     //Update Lists
@@ -138,7 +138,7 @@ public:
 
     //ReminderList methods
     void LoadDatabaseRemindersToRemindersList();
-    void UpdateReminderInReminderList(Reminder rem, int appointmentId);
+    void UpdateReminderInReminderList(const Reminder &rem, int appointmentId);
     void RemoveReminderFromReminderList(int appointmentId);
 
 
@@ -170,7 +170,7 @@ public:
     void UpdateBirthdaysInAppointmentList(int year);
 
     void RemoveBirthdayFromAppointmentList(int contactId);
-    void UpdateBirthdayInAppointmentsList(Appointment b, int contactId);
+    void UpdateBirthdayInAppointmentsList(const Appointment &b, int contactId);
 
 
 

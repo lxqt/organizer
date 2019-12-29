@@ -29,11 +29,11 @@ bool DbManager::isOpen() const
 
 void DbManager::openDatabase()
 {
-    if(QSqlDatabase::isDriverAvailable("QSQLITE"))
+    if(QSqlDatabase::isDriverAvailable(QStringLiteral("QSQLITE")))
     {
-        db = QSqlDatabase::addDatabase("QSQLITE");
+        db = QSqlDatabase::addDatabase(QStringLiteral("QSQLITE"));
 
-        db.setDatabaseName("organizerdb.sqlite");
+        db.setDatabaseName(QStringLiteral("organizerdb.sqlite"));
         if(!db.open())
             qWarning() << "Database connection error: " << db.lastError().text();
     }
@@ -47,7 +47,7 @@ void DbManager::createDatebaseTables()
     QSqlQuery query;
    //QString sql1 = "CREATE TABLE IF NOT EXISTS appointments (AppointmentId INTEGER PRIMARY KEY,";
 
-    QString sql1 = "CREATE TABLE appointments (AppointmentId INTEGER PRIMARY KEY,";
+    QString sql1 = QStringLiteral("CREATE TABLE appointments (AppointmentId INTEGER PRIMARY KEY,");
     sql1.append("Title TEXT,");
     sql1.append("Location TEXT,");
     sql1.append("Description TEXT,");
@@ -60,15 +60,15 @@ void DbManager::createDatebaseTables()
     sql1.append("ShowBirthday INTEGER,");
     sql1.append("ParentId INTEGER,");
     sql1.append("HasReminder INTEGER");
-    sql1.append(");");    
+    sql1.append(");");
 
-    QString sql2 = "CREATE TABLE reminders (AppointmentId INTEGER PRIMARY KEY,";
+    QString sql2 = QStringLiteral("CREATE TABLE reminders (AppointmentId INTEGER PRIMARY KEY,");
     sql2.append("Details TEXT,");
     sql2.append("ReminderDate TEXT,");
     sql2.append("ReminderTime TEXT");
     sql2.append(");");
 
-    QString sql3 = "CREATE TABLE contacts (ContactId INTEGER PRIMARY KEY,";
+    QString sql3 = QStringLiteral("CREATE TABLE contacts (ContactId INTEGER PRIMARY KEY,");
     sql3.append("FirstName TEXT,");
     sql3.append("MidName TEXT,");
     sql3.append("LastName TEXT,");
@@ -133,7 +133,7 @@ int DbManager::addAppointment(Appointment &appointment)
     int hasreminder =appointment.m_hasReminder;
 
 
-    QString sql="INSERT INTO appointments(`AppointmentId`,";
+    QString sql = QStringLiteral("INSERT INTO appointments(`AppointmentId`,");
     sql.append("`Title`,");
     sql.append("`Location`,");
     sql.append("`Description`,");
@@ -164,18 +164,18 @@ int DbManager::addAppointment(Appointment &appointment)
     QSqlQuery query;
     query.prepare(sql);
     //query.bindValue(":idin", 1); //autoincrement as primary key
-    query.bindValue(":titlein", title);
-    query.bindValue(":locationin",location);
-    query.bindValue(":descriptionin",description);
-    query.bindValue(":datein",date);
-    query.bindValue(":starttimein",startTime);
-    query.bindValue(":endtimein",endTime);
-    query.bindValue(":catin",category);
-    query.bindValue(":isfulldayin",isFullDay);
-    query.bindValue(":isrepeatingin",isRepeating);
-    query.bindValue(":showbirthdayin",showBirthday);
-    query.bindValue(":parentidin",parentId);
-    query.bindValue(":hasreminderin",hasreminder);
+    query.bindValue(QStringLiteral(":titlein"), title);
+    query.bindValue(QStringLiteral(":locationin"),location);
+    query.bindValue(QStringLiteral(":descriptionin"),description);
+    query.bindValue(QStringLiteral(":datein"),date);
+    query.bindValue(QStringLiteral(":starttimein"),startTime);
+    query.bindValue(QStringLiteral(":endtimein"),endTime);
+    query.bindValue(QStringLiteral(":catin"),category);
+    query.bindValue(QStringLiteral(":isfulldayin"),isFullDay);
+    query.bindValue(QStringLiteral(":isrepeatingin"),isRepeating);
+    query.bindValue(QStringLiteral(":showbirthdayin"),showBirthday);
+    query.bindValue(QStringLiteral(":parentidin"),parentId);
+    query.bindValue(QStringLiteral(":hasreminderin"),hasreminder);
     query.exec();
 
 
@@ -186,9 +186,9 @@ int DbManager::addAppointment(Appointment &appointment)
 
 bool DbManager::updateAppointment(Appointment &appointment, int id)
 {
-    bool success =false;
+    bool success = false;
 
-    QString sql ="UPDATE appointments SET ";
+    QString sql = QStringLiteral("UPDATE appointments SET ");
     sql.append(" Title = :tin");
     sql.append(", Location = :lin");
     sql.append(", Description = :din");
@@ -206,21 +206,21 @@ bool DbManager::updateAppointment(Appointment &appointment, int id)
     QSqlQuery qry;
     if(qry.prepare(sql))
     {
-      qry.bindValue(":tin", appointment.m_title);
-      qry.bindValue(":lin", appointment.m_location);
-      qry.bindValue(":din", appointment.m_description);
-      qry.bindValue(":datein", appointment.m_date);
-      qry.bindValue(":stin",appointment.m_startTime);
-      qry.bindValue(":etin",appointment.m_endTime);
-      qry.bindValue(":catin",appointment.m_category);
-      qry.bindValue(":isfdin",appointment.m_isFullDay);
-      qry.bindValue(":isrin",appointment.m_isRepeating);
-      qry.bindValue(":showbin",appointment.m_showBirthday);
-      qry.bindValue(":pidin",appointment.m_parentId);
-      qry.bindValue(":hrin",appointment.m_hasReminder);
+      qry.bindValue(QStringLiteral(":tin"), appointment.m_title);
+      qry.bindValue(QStringLiteral(":lin"), appointment.m_location);
+      qry.bindValue(QStringLiteral(":din"), appointment.m_description);
+      qry.bindValue(QStringLiteral(":datein"), appointment.m_date);
+      qry.bindValue(QStringLiteral(":stin"),appointment.m_startTime);
+      qry.bindValue(QStringLiteral(":etin"),appointment.m_endTime);
+      qry.bindValue(QStringLiteral(":catin"),appointment.m_category);
+      qry.bindValue(QStringLiteral(":isfdin"),appointment.m_isFullDay);
+      qry.bindValue(QStringLiteral(":isrin"),appointment.m_isRepeating);
+      qry.bindValue(QStringLiteral(":showbin"),appointment.m_showBirthday);
+      qry.bindValue(QStringLiteral(":pidin"),appointment.m_parentId);
+      qry.bindValue(QStringLiteral(":hrin"),appointment.m_hasReminder);
 
-      qry.bindValue(":idin", QString::number(id));
-      success=qry.exec();
+      qry.bindValue(QStringLiteral(":idin"), QString::number(id));
+      success = qry.exec();
       if (success)
       {
         //qDebug() << "Appointment updated" << " sucess ="<<success;
@@ -243,41 +243,41 @@ QList<Appointment> DbManager::getAllAppointments()
 {
     QList<Appointment> appointmentList;
     //qDebug()<<"getting all appointments...";
-    QSqlQuery query("SELECT * FROM appointments");
+    QSqlQuery query(QStringLiteral("SELECT * FROM appointments"));
     query.exec();
 
     while (query.next())
     {
-        int idName = query.record().indexOf("AppointmentId");
+        int idName = query.record().indexOf(QStringLiteral("AppointmentId"));
         int aid = query.value(idName).toInt();
-        idName = query.record().indexOf("Title");
+        idName = query.record().indexOf(QStringLiteral("Title"));
         QString title = query.value(idName).toString();
-        idName = query.record().indexOf("Location");
+        idName = query.record().indexOf(QStringLiteral("Location"));
         QString location = query.value(idName).toString();
-        idName = query.record().indexOf("Description");
+        idName = query.record().indexOf(QStringLiteral("Description"));
         QString description = query.value(idName).toString();
-        idName = query.record().indexOf("Date");
+        idName = query.record().indexOf(QStringLiteral("Date"));
         QString date = query.value(idName).toString();
-        idName = query.record().indexOf("StartTime");
+        idName = query.record().indexOf(QStringLiteral("StartTime"));
         QString startTime = query.value(idName).toString();
-        idName = query.record().indexOf("EndTime");
+        idName = query.record().indexOf(QStringLiteral("EndTime"));
         QString endTime = query.value(idName).toString();
-        idName = query.record().indexOf("Category");
+        idName = query.record().indexOf(QStringLiteral("Category"));
         QString category = query.value(idName).toString();
 
-        idName = query.record().indexOf("IsFullDay");
+        idName = query.record().indexOf(QStringLiteral("IsFullDay"));
         int isFullDay = query.value(idName).toInt();
 
-        idName = query.record().indexOf("IsRepeating");
+        idName = query.record().indexOf(QStringLiteral("IsRepeating"));
         int isRepeating = query.value(idName).toInt();
 
-        idName = query.record().indexOf("ShowBirthday");
+        idName = query.record().indexOf(QStringLiteral("ShowBirthday"));
         int showBirthday = query.value(idName).toInt();
 
-        idName = query.record().indexOf("ParentId");
+        idName = query.record().indexOf(QStringLiteral("ParentId"));
         int parentId = query.value(idName).toInt();
 
-        idName = query.record().indexOf("HasReminder");
+        idName = query.record().indexOf(QStringLiteral("HasReminder"));
         int hasReminder = query.value(idName).toInt();
         Appointment tmp;
         tmp.m_id=aid;
@@ -303,42 +303,42 @@ QList<Appointment> DbManager::getAllAppointments()
 Appointment DbManager::getAppointmentByID(int id)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM appointments WHERE AppointmentId = (:idin)");
-    query.bindValue(":idin", id);
+    query.prepare(QStringLiteral("SELECT * FROM appointments WHERE AppointmentId = (:idin)"));
+    query.bindValue(QStringLiteral(":idin"), id);
     query.exec();
     query.first();
 
-    int idName = query.record().indexOf("AppointmentId");
+    int idName = query.record().indexOf(QStringLiteral("AppointmentId"));
     int idd = query.value(idName).toInt();
 
-    idName = query.record().indexOf("Title");
+    idName = query.record().indexOf(QStringLiteral("Title"));
     QString title = query.value(idName).toString();
-    idName = query.record().indexOf("Location");
+    idName = query.record().indexOf(QStringLiteral("Location"));
     QString location = query.value(idName).toString();
-    idName = query.record().indexOf("Description");
+    idName = query.record().indexOf(QStringLiteral("Description"));
     QString description = query.value(idName).toString();
-    idName = query.record().indexOf("Date");
+    idName = query.record().indexOf(QStringLiteral("Date"));
     QString date = query.value(idName).toString();
-    idName = query.record().indexOf("StartTime");
+    idName = query.record().indexOf(QStringLiteral("StartTime"));
     QString startTime = query.value(idName).toString();
-    idName = query.record().indexOf("EndTime");
+    idName = query.record().indexOf(QStringLiteral("EndTime"));
     QString endTime = query.value(idName).toString();
-    idName = query.record().indexOf("Category");
+    idName = query.record().indexOf(QStringLiteral("Category"));
     QString category = query.value(idName).toString();
 
-    idName = query.record().indexOf("IsFullDay");
+    idName = query.record().indexOf(QStringLiteral("IsFullDay"));
     int isFullDay = query.value(idName).toInt();
 
-    idName = query.record().indexOf("IsRepeating");
+    idName = query.record().indexOf(QStringLiteral("IsRepeating"));
     int isRepeating = query.value(idName).toInt();
 
-    idName = query.record().indexOf("ShowBirthday");
+    idName = query.record().indexOf(QStringLiteral("ShowBirthday"));
     int showBirthday = query.value(idName).toInt();
 
-    idName = query.record().indexOf("ParentId");
+    idName = query.record().indexOf(QStringLiteral("ParentId"));
     int parentId = query.value(idName).toInt();
 
-    idName = query.record().indexOf("HasReminder");
+    idName = query.record().indexOf(QStringLiteral("HasReminder"));
     int hasReminder = query.value(idName).toInt();
 
 
@@ -367,41 +367,41 @@ QList<Appointment> DbManager::getAppointmentsOnDate(QDate &diaryDate)
     QDate checkDate = QDate(diaryDate);
 
     QList<Appointment> appointmentList = QList<Appointment>(); //Construct an empty list
-    QSqlQuery query("SELECT * FROM appointments");
+    QSqlQuery query(QStringLiteral("SELECT * FROM appointments"));
     query.exec();
 
     while (query.next())
     {
-        int idName = query.record().indexOf("AppointmentId");
+        int idName = query.record().indexOf(QStringLiteral("AppointmentId"));
         int id = query.value(idName).toInt();
-        idName = query.record().indexOf("Title");
+        idName = query.record().indexOf(QStringLiteral("Title"));
         QString title = query.value(idName).toString();
-        idName = query.record().indexOf("Location");
+        idName = query.record().indexOf(QStringLiteral("Location"));
         QString location = query.value(idName).toString();
-        idName = query.record().indexOf("Description");
+        idName = query.record().indexOf(QStringLiteral("Description"));
         QString description = query.value(idName).toString();
-        idName = query.record().indexOf("Date");
+        idName = query.record().indexOf(QStringLiteral("Date"));
         QString date = query.value(idName).toString();
-        idName = query.record().indexOf("StartTime");
+        idName = query.record().indexOf(QStringLiteral("StartTime"));
         QString startTime = query.value(idName).toString();
-        idName = query.record().indexOf("EndTime");
+        idName = query.record().indexOf(QStringLiteral("EndTime"));
         QString endTime = query.value(idName).toString();
-        idName = query.record().indexOf("Category");
+        idName = query.record().indexOf(QStringLiteral("Category"));
         QString category = query.value(idName).toString();
 
-        idName = query.record().indexOf("IsFullDay");
+        idName = query.record().indexOf(QStringLiteral("IsFullDay"));
         int isFullDay = query.value(idName).toInt();
 
-        idName = query.record().indexOf("IsRepeating");
+        idName = query.record().indexOf(QStringLiteral("IsRepeating"));
         int isRepeating = query.value(idName).toInt();
 
-        idName = query.record().indexOf("ShowBirthday");
+        idName = query.record().indexOf(QStringLiteral("ShowBirthday"));
         int showBirthday = query.value(idName).toInt();
 
-        idName = query.record().indexOf("ParentId");
+        idName = query.record().indexOf(QStringLiteral("ParentId"));
         int parentId = query.value(idName).toInt();
 
-        idName = query.record().indexOf("HasReminder");
+        idName = query.record().indexOf(QStringLiteral("HasReminder"));
         int hasReminder = query.value(idName).toInt();
 
         QDate appointmentDate =QDate::fromString(date);
@@ -433,7 +433,7 @@ bool DbManager::deleteAllAppointments()
 {
     bool success = false;
     QSqlQuery removeQuery;
-    removeQuery.prepare("DELETE FROM appointments");
+    removeQuery.prepare(QStringLiteral("DELETE FROM appointments"));
     if (removeQuery.exec())
     {
         qDebug() << "remove all appointments succeeded";
@@ -453,8 +453,8 @@ bool DbManager::deleteAppointmentById(const int id)
     bool success = false;
     //qDebug() << "Appointment id = "<<id;
     QSqlQuery queryDelete;
-    queryDelete.prepare("DELETE FROM appointments WHERE AppointmentId = (:idin)");
-    queryDelete.bindValue(":idin", id);
+    queryDelete.prepare(QStringLiteral("DELETE FROM appointments WHERE AppointmentId = (:idin)"));
+    queryDelete.bindValue(QStringLiteral(":idin"), id);
     success = queryDelete.exec();
     if(!success)
     {
@@ -469,8 +469,8 @@ bool DbManager::deleteAppointmentByParentID(const int parentId)
     bool success = false;
     qDebug() << "Parent id = "<<parentId;
     QSqlQuery queryDelete;
-    queryDelete.prepare("DELETE FROM appointments WHERE ParentId = (:idin)");
-    queryDelete.bindValue(":idin", parentId);
+    queryDelete.prepare(QStringLiteral("DELETE FROM appointments WHERE ParentId = (:idin)"));
+    queryDelete.bindValue(QStringLiteral(":idin"), parentId);
     success = queryDelete.exec();
     if(!success)
     {
@@ -493,7 +493,7 @@ bool DbManager::addReminder(Reminder &reminder)
     QString reminderdate =reminder.m_reminderDate;
     QString remindertime =reminder.m_reminderTime;
 
-    QString sql="INSERT INTO reminders(`AppointmentId`,";
+    QString sql = QStringLiteral("INSERT INTO reminders(`AppointmentId`,");
     sql.append("`Details`,");
     sql.append("`ReminderDate`,");
     sql.append("`ReminderTime`)");
@@ -504,10 +504,10 @@ bool DbManager::addReminder(Reminder &reminder)
 
     QSqlQuery query;
     query.prepare(sql);
-    query.bindValue(":appointmentidin", appointmentId);
-    query.bindValue(":detailsin", details);
-    query.bindValue(":reminderdatein",reminderdate);
-    query.bindValue(":remindertimein",remindertime);
+    query.bindValue(QStringLiteral(":appointmentidin"), appointmentId);
+    query.bindValue(QStringLiteral(":detailsin"), details);
+    query.bindValue(QStringLiteral(":reminderdatein"),reminderdate);
+    query.bindValue(QStringLiteral(":remindertimein"),remindertime);
     query.exec();
     int id = query.lastInsertId().toInt();
     return id;
@@ -517,7 +517,7 @@ bool DbManager::updateReminder(Reminder &reminder, int id)
 {
     //qDebug()<<"Entering update reminder....";
     bool success =false;
-    QString sql ="UPDATE reminders SET ";
+    QString sql = QStringLiteral("UPDATE reminders SET ");
     sql.append(" Details = :din");
     sql.append(", ReminderDate = :rdin");
     sql.append(", ReminderTime = :rtin");
@@ -525,10 +525,10 @@ bool DbManager::updateReminder(Reminder &reminder, int id)
     QSqlQuery qry;
     if(qry.prepare(sql))
     {
-      qry.bindValue(":din", reminder.m_details);
-      qry.bindValue(":rdin", reminder.m_reminderDate);
-      qry.bindValue(":rtin", reminder.m_reminderTime);
-      qry.bindValue(":idin", QString::number(id));
+      qry.bindValue(QStringLiteral(":din"), reminder.m_details);
+      qry.bindValue(QStringLiteral(":rdin"), reminder.m_reminderDate);
+      qry.bindValue(QStringLiteral(":rtin"), reminder.m_reminderTime);
+      qry.bindValue(QStringLiteral(":idin"), QString::number(id));
       success=qry.exec();
       if (success)
       {
@@ -551,22 +551,22 @@ bool DbManager::updateReminder(Reminder &reminder, int id)
 QList<Reminder> DbManager::getAllReminders()
 {
     QList<Reminder> reminderList;
-    QSqlQuery query("SELECT * FROM reminders");
+    QSqlQuery query(QStringLiteral("SELECT * FROM reminders"));
     query.exec();
 
     while (query.next())
     {
         //int idName = query.record().indexOf("ReminderId");
         //int id = query.value(idName).toInt();
-        int idName = query.record().indexOf("AppointmentId");
+        int idName = query.record().indexOf(QStringLiteral("AppointmentId"));
         int aid = query.value(idName).toInt();
-        idName = query.record().indexOf("Details");
+        idName = query.record().indexOf(QStringLiteral("Details"));
         QString details = query.value(idName).toString();
-        idName = query.record().indexOf("ReminderDate");
+        idName = query.record().indexOf(QStringLiteral("ReminderDate"));
         QString reminderDate = query.value(idName).toString();
-        idName = query.record().indexOf("ReminderTime");
+        idName = query.record().indexOf(QStringLiteral("ReminderTime"));
         QString reminderTime = query.value(idName).toString();
-        idName = query.record().indexOf("ReminderRequest");
+        idName = query.record().indexOf(QStringLiteral("ReminderRequest"));
         //int reminderRequest = query.value(idName).toInt();
         //Create a temporary reminder
         Reminder r;
@@ -585,21 +585,21 @@ QList<Reminder> DbManager::getAllReminders()
 Reminder DbManager::getReminderByID(int id)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM reminders WHERE ReminderId = (:idin)");
-    query.bindValue(":idin", id);
+    query.prepare(QStringLiteral("SELECT * FROM reminders WHERE ReminderId = (:idin)"));
+    query.bindValue(QStringLiteral(":idin"), id);
     query.exec();
     query.first();
     //int idName = query.record().indexOf("ReminderId");
     //int idd = query.value(idName).toInt();
-    int idName = query.record().indexOf("AppointmentId");
+    int idName = query.record().indexOf(QStringLiteral("AppointmentId"));
     int aid = query.value(idName).toInt();
-    idName = query.record().indexOf("Details");
+    idName = query.record().indexOf(QStringLiteral("Details"));
     QString details = query.value(idName).toString();
-    idName = query.record().indexOf("ReminderDate");
+    idName = query.record().indexOf(QStringLiteral("ReminderDate"));
     QString reminderdate = query.value(idName).toString();
-    idName = query.record().indexOf("ReminderTime");
+    idName = query.record().indexOf(QStringLiteral("ReminderTime"));
     QString remindertime = query.value(idName).toString();
-    idName = query.record().indexOf("ReminderRequest");
+    idName = query.record().indexOf(QStringLiteral("ReminderRequest"));
     //int reminderrequest = query.value(idName).toInt();
     //Create a reminder and return it
     Reminder r;
@@ -617,8 +617,8 @@ bool DbManager::deleteReminderById(const int appointmentId)
 {
     bool success = false;
     QSqlQuery queryDelete;
-    queryDelete.prepare("DELETE FROM reminders WHERE AppointmentId = (:idin)");
-    queryDelete.bindValue(":idin", appointmentId);
+    queryDelete.prepare(QStringLiteral("DELETE FROM reminders WHERE AppointmentId = (:idin)"));
+    queryDelete.bindValue(QStringLiteral(":idin"), appointmentId);
     success = queryDelete.exec();
 //    if(!success)
 //    {
@@ -632,7 +632,7 @@ bool DbManager::removeAllReminders()
 {
     bool success = false;
     QSqlQuery removeQuery;
-    removeQuery.prepare("DELETE FROM reminders");
+    removeQuery.prepare(QStringLiteral("DELETE FROM reminders"));
     if (removeQuery.exec())
     {
         //qDebug() << "remove all reminders succeeded";
@@ -668,7 +668,7 @@ int DbManager::addContact(Contact &contact)
     QString birthdate=contact.m_birthdate;
     int addToCalendar=contact.m_addToCalendar;
 
-    QString sql="INSERT INTO contacts(`ContactId`,";
+    QString sql = QStringLiteral("INSERT INTO contacts(`ContactId`,");
     sql.append("`FirstName`,");
     sql.append("`MidName`,");
     sql.append("`LastName`,");
@@ -702,19 +702,19 @@ int DbManager::addContact(Contact &contact)
     query.prepare(sql);
 
     //query.bindValue(":idin", 1); //autoincrement as primary key
-    query.bindValue(":firstnamein", firstName);
-    query.bindValue(":midnamein", midName);
-    query.bindValue(":lastnamein", lastName);
-    query.bindValue(":emailin", email);
-    query.bindValue(":streetin", street);
-    query.bindValue(":districtin", district);
-    query.bindValue(":cityin", city);
-    query.bindValue(":countyin", county);
-    query.bindValue(":postcodein", postcode);
-    query.bindValue(":countryin", country);
-    query.bindValue(":telephonein", telephone);    
-    query.bindValue(":birthdatein", birthdate);
-    query.bindValue(":addtocalendarin", addToCalendar);
+    query.bindValue(QStringLiteral(":firstnamein"), firstName);
+    query.bindValue(QStringLiteral(":midnamein"), midName);
+    query.bindValue(QStringLiteral(":lastnamein"), lastName);
+    query.bindValue(QStringLiteral(":emailin"), email);
+    query.bindValue(QStringLiteral(":streetin"), street);
+    query.bindValue(QStringLiteral(":districtin"), district);
+    query.bindValue(QStringLiteral(":cityin"), city);
+    query.bindValue(QStringLiteral(":countyin"), county);
+    query.bindValue(QStringLiteral(":postcodein"), postcode);
+    query.bindValue(QStringLiteral(":countryin"), country);
+    query.bindValue(QStringLiteral(":telephonein"), telephone);
+    query.bindValue(QStringLiteral(":birthdatein"), birthdate);
+    query.bindValue(QStringLiteral(":addtocalendarin"), addToCalendar);
     query.exec();
     int id = query.lastInsertId().toInt();
     //qDebug() << "added new contact with ID = "<<id;
@@ -727,7 +727,7 @@ bool DbManager::updateContact(Contact &contact, int id)
     bool success =false;
 
 
-    QString sql ="UPDATE contacts SET ";
+    QString sql = QStringLiteral("UPDATE contacts SET ");
     sql.append(" FirstName = :fnin");
     sql.append(", MidName = :mnin");
     sql.append(", LastName = :lnin");
@@ -748,21 +748,21 @@ bool DbManager::updateContact(Contact &contact, int id)
     QSqlQuery qry;
     if(qry.prepare(sql))
     {
-      qry.bindValue(":fnin", contact.m_firstname);
-      qry.bindValue(":mnin",contact.m_midnames);
-      qry.bindValue(":lnin",contact.m_lastname);
-      qry.bindValue(":emin",contact.m_email);
-      qry.bindValue(":stin",contact.m_street);
-      qry.bindValue(":disin",contact.m_district);
-      qry.bindValue(":ctyin",contact.m_city);
-      qry.bindValue(":cntin",contact.m_county);
-      qry.bindValue(":pcin",contact.m_postcode);
-      qry.bindValue(":cin",contact.m_country);
-      qry.bindValue(":tin",contact.m_telephone);      
-      qry.bindValue(":bdatein",contact.m_birthdate);
-      qry.bindValue(":addtocalin",contact.m_addToCalendar);
-      //qry.bindValue(":bidin",contact.m_birthdayAppointmentId);
-      qry.bindValue(":idin", QString::number(id));
+      qry.bindValue(QStringLiteral(":fnin"), contact.m_firstname);
+      qry.bindValue(QStringLiteral(":mnin"),contact.m_midnames);
+      qry.bindValue(QStringLiteral(":lnin"),contact.m_lastname);
+      qry.bindValue(QStringLiteral(":emin"),contact.m_email);
+      qry.bindValue(QStringLiteral(":stin"),contact.m_street);
+      qry.bindValue(QStringLiteral(":disin"),contact.m_district);
+      qry.bindValue(QStringLiteral(":ctyin"),contact.m_city);
+      qry.bindValue(QStringLiteral(":cntin"),contact.m_county);
+      qry.bindValue(QStringLiteral(":pcin"),contact.m_postcode);
+      qry.bindValue(QStringLiteral(":cin"),contact.m_country);
+      qry.bindValue(QStringLiteral(":tin"),contact.m_telephone);
+      qry.bindValue(QStringLiteral(":bdatein"),contact.m_birthdate);
+      qry.bindValue(QStringLiteral(":addtocalin"),contact.m_addToCalendar);
+      //qry.bindValue(QStringLiteral(":bidin"),contact.m_birthdayAppointmentId);
+      qry.bindValue(QStringLiteral(":idin"), QString::number(id));
       success = qry.exec();
       if (success)
       {
@@ -787,39 +787,39 @@ bool DbManager::updateContact(Contact &contact, int id)
 QList<Contact> DbManager::getAllContacts()
 {
     QList<Contact> contactList;   
-    QSqlQuery query("SELECT * FROM contacts");
+    QSqlQuery query(QStringLiteral("SELECT * FROM contacts"));
     query.exec();
 
     while (query.next())
     {
-        int idName = query.record().indexOf("ContactId");
+        int idName = query.record().indexOf(QStringLiteral("ContactId"));
         int id = query.value(idName).toInt();
-        idName = query.record().indexOf("FirstName");
+        idName = query.record().indexOf(QStringLiteral("FirstName"));
         QString firstname = query.value(idName).toString();        
-        idName = query.record().indexOf("MidName");
+        idName = query.record().indexOf(QStringLiteral("MidName"));
         QString midname = query.value(idName).toString();
-        idName = query.record().indexOf("LastName");
+        idName = query.record().indexOf(QStringLiteral("LastName"));
         QString lastname = query.value(idName).toString();        
-        idName = query.record().indexOf("Email");
+        idName = query.record().indexOf(QStringLiteral("Email"));
         QString email = query.value(idName).toString();
-        idName = query.record().indexOf("Street");
+        idName = query.record().indexOf(QStringLiteral("Street"));
         QString street = query.value(idName).toString();        
-        idName = query.record().indexOf("District");
+        idName = query.record().indexOf(QStringLiteral("District"));
         QString district = query.value(idName).toString();
-        idName = query.record().indexOf("City");
+        idName = query.record().indexOf(QStringLiteral("City"));
         QString city = query.value(idName).toString();
-        idName = query.record().indexOf("County");
+        idName = query.record().indexOf(QStringLiteral("County"));
         QString county = query.value(idName).toString();
-        idName = query.record().indexOf("Postcode");
+        idName = query.record().indexOf(QStringLiteral("Postcode"));
         QString postcode = query.value(idName).toString();
-        idName = query.record().indexOf("Country");
+        idName = query.record().indexOf(QStringLiteral("Country"));
         QString country = query.value(idName).toString();
-        idName = query.record().indexOf("Telephone");
+        idName = query.record().indexOf(QStringLiteral("Telephone"));
         QString telephone = query.value(idName).toString();
-        idName = query.record().indexOf("BirthDate");
+        idName = query.record().indexOf(QStringLiteral("BirthDate"));
         QString birthdate = query.value(idName).toString();
 
-        idName = query.record().indexOf("AddToCalendar");
+        idName = query.record().indexOf(QStringLiteral("AddToCalendar"));
         int  addtocal = query.value(idName).toInt();
 
 
@@ -847,39 +847,39 @@ QList<Contact> DbManager::getAllContacts()
 Contact DbManager::getContactByID(int id)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM contacts WHERE ContactId = (:idin)");
-    query.bindValue(":idin", id);
+    query.prepare(QStringLiteral("SELECT * FROM contacts WHERE ContactId = (:idin)"));
+    query.bindValue(QStringLiteral(":idin"), id);
     query.exec();
     query.first();
 
-    int idName = query.record().indexOf("ContactId");
+    int idName = query.record().indexOf(QStringLiteral("ContactId"));
     int idd = query.value(idName).toInt();
-    idName = query.record().indexOf("FirstName");
+    idName = query.record().indexOf(QStringLiteral("FirstName"));
     QString firstname = query.value(idName).toString();
-    idName = query.record().indexOf("MidName");
+    idName = query.record().indexOf(QStringLiteral("MidName"));
     QString midname = query.value(idName).toString();
-    idName = query.record().indexOf("LastName");
+    idName = query.record().indexOf(QStringLiteral("LastName"));
     QString lastname = query.value(idName).toString();
-    idName = query.record().indexOf("Email");
+    idName = query.record().indexOf(QStringLiteral("Email"));
     QString email = query.value(idName).toString();
-    idName = query.record().indexOf("Street");
+    idName = query.record().indexOf(QStringLiteral("Street"));
     QString street = query.value(idName).toString();
-    idName = query.record().indexOf("District");
+    idName = query.record().indexOf(QStringLiteral("District"));
     QString district = query.value(idName).toString();
-    idName = query.record().indexOf("City");
+    idName = query.record().indexOf(QStringLiteral("City"));
     QString city = query.value(idName).toString();
-    idName = query.record().indexOf("County");
+    idName = query.record().indexOf(QStringLiteral("County"));
     QString county = query.value(idName).toString();
-    idName = query.record().indexOf("Postcode");
+    idName = query.record().indexOf(QStringLiteral("Postcode"));
     QString postcode = query.value(idName).toString();
-    idName = query.record().indexOf("Country");
+    idName = query.record().indexOf(QStringLiteral("Country"));
     QString country = query.value(idName).toString();
-    idName = query.record().indexOf("Telephone");
+    idName = query.record().indexOf(QStringLiteral("Telephone"));
     QString telephone = query.value(idName).toString();
-    idName = query.record().indexOf("BirthDate");
+    idName = query.record().indexOf(QStringLiteral("BirthDate"));
     QString birthdate = query.value(idName).toString();
 
-    idName = query.record().indexOf("AddToCalendar");
+    idName = query.record().indexOf(QStringLiteral("AddToCalendar"));
     int  addtocal = query.value(idName).toInt();
 
     Contact contact;
@@ -904,7 +904,7 @@ bool DbManager::removeAllContacts()
 {
     bool success = false;
     QSqlQuery removeQuery;
-    removeQuery.prepare("DELETE FROM contacts");
+    removeQuery.prepare(QStringLiteral("DELETE FROM contacts"));
     if (removeQuery.exec())
     {
         //qDebug() << "remove all contacts succeeded";
@@ -921,8 +921,8 @@ bool DbManager::removeContactById(const int id)
 {
     bool success = false;    
     QSqlQuery queryDelete;
-    queryDelete.prepare("DELETE FROM contacts WHERE ContactId = (:idin)");
-    queryDelete.bindValue(":idin", id);
+    queryDelete.prepare(QStringLiteral("DELETE FROM contacts WHERE ContactId = (:idin)"));
+    queryDelete.bindValue(QStringLiteral(":idin"), id);
     success = queryDelete.exec();
     if(!success)
     {

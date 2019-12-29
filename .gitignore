@@ -1,3 +1,5 @@
 build
+build-*
+*.user
 lxqt-organizer.kdev4
 *.pro

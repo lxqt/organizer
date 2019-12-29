@@ -91,7 +91,7 @@ QVariant DayModel::data(const QModelIndex &index, int role) const
            case 0:
                return a.m_id;
            case 1:
-               return starts.toString("hh:mm");
+               return starts.toString(QStringLiteral("hh:mm"));
            case 2:
                return a.m_title;
            case 3:

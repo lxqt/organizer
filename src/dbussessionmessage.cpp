@@ -31,14 +31,14 @@ DbusSessionMessage::DbusSessionMessage(QObject *parent) : QObject(parent)
        //qDebug() << "QDBus interface successfully created (it works!)";
 
        this->messageDuration=2000;
-       this->theIconPath="";
+       this->theIconPath = QLatin1String("");
 }
 
 void DbusSessionMessage::displayMessage(const MessageData &message)
 {
     QList<QVariant> n = prepareDbusMessage(message);
     if (!n.isEmpty()) {
-        QDBusReply<uint> reply = dbusNotifier->callWithArgumentList(QDBus::Block,QStringLiteral("Notify"),n);
+        QDBusReply<uint> reply = dbusNotifier->callWithArgumentList(QDBus::Block, QStringLiteral("Notify"), n);
     }
     deleteLater();
 }
@@ -46,7 +46,7 @@ void DbusSessionMessage::displayMessage(const MessageData &message)
 QList<QVariant> DbusSessionMessage::prepareDbusMessage(const MessageData &message)
 {
     QList<QVariant> arguments;
-    arguments << QLatin1Literal("LXQt Organizer");
+    arguments << QLatin1String("LXQt Organizer");
     arguments << QVariant(QVariant::UInt);  //the ID
     arguments << theIconPath; //path to icon (null)
     arguments << message.header; //message header

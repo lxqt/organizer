@@ -27,7 +27,7 @@ DialogShowReminders::DialogShowReminders(QWidget *parent,
     ui(new Ui::DialogShowReminders)
 {
     ui->setupUi(this);
-    setWindowTitle("Reminders");
+    setWindowTitle(QStringLiteral("Reminders"));
     ui->labelSelectedDate->setText(theSelectedDate->toString());
 
     this->reminderList =theDbm->getAllReminders();
