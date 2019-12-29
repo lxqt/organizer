@@ -329,8 +329,8 @@ void MainWindow::LoadDatabaseAppointmentsToAppointmentList()
 {
     //initialisation - do at startup
     //appointmentList.clear();
-    QList<Appointment> tmpList = dbm.getAllAppointments();
-    foreach(Appointment a, tmpList)
+    const QList<Appointment> tmpList = dbm.getAllAppointments();
+    for(Appointment a : tmpList)
     {
         appointmentList.append(a);
     }
@@ -371,8 +371,8 @@ void MainWindow::UpdateAppointmentList()
     AddHolidaysToAppointmentsList(selectedYear);
     AddBirthdaysToAppointmentList(selectedYear);
 
-    QList<Appointment> tmpList = dbm.getAllAppointments();
-    foreach(Appointment a, tmpList)
+    const QList<Appointment> tmpList = dbm.getAllAppointments();
+    for(const Appointment &a : tmpList)
     {
         appointmentList.append(a);
     }
@@ -382,8 +382,8 @@ void MainWindow::UpdateAppointmentList()
 void MainWindow::UpdateReminderList()
 {
     reminderList.clear();
-    QList<Reminder> tmpList = dbm.getAllReminders();
-    foreach(Reminder r, tmpList)
+    const QList<Reminder> tmpList = dbm.getAllReminders();
+    for(const Reminder &r : tmpList)
     {
         reminderList.append(r);
     }
@@ -392,8 +392,8 @@ void MainWindow::UpdateReminderList()
 void MainWindow::LoadDatabaseRemindersToRemindersList()
 {
     reminderList.clear();
-    QList<Reminder> tmpList = dbm.getAllReminders();
-    foreach(Reminder r, tmpList)
+    const QList<Reminder> tmpList = dbm.getAllReminders();
+    for(const Reminder &r : tmpList)
     {
         reminderList.append(r);
     }
@@ -476,8 +476,8 @@ void MainWindow::LoadDatebaseContactsToContactList()
 {
     //initialisation - do at startup
     contactList.clear();
-    QList<Contact> tmpList = dbm.getAllContacts();
-    foreach(Contact c, tmpList)
+    const QList<Contact> tmpList = dbm.getAllContacts();
+    for(const Contact &c : tmpList)
     {
         contactList.append(c);
     }
@@ -638,9 +638,9 @@ void MainWindow::DisplayContactsOnTableView()
 {
     contactModel->clearAllContacts();
 
-    QList<Contact> contactListDb =dbm.getAllContacts();
+    const QList<Contact> contactListDb =dbm.getAllContacts();
 
-    foreach(Contact c, contactListDb)
+    for(const Contact &c : contactListDb)
     {
         //qDebug()<<"Adding Contacts to contactModel >> "<<c.m_firstname<<" "<<c.m_lastname;
         contactModel->AddContact(c);
@@ -671,7 +671,7 @@ void MainWindow::AddBirthdaysToAppointmentList(int year)
 
     Appointment ba;
 
-    foreach(Contact c, contactList)
+    for(const Contact &c : qAsConst(contactList))
     {
         ba.m_title="Birthday";
         ba.m_location=c.m_city;
@@ -935,7 +935,7 @@ void MainWindow::CheckForRemindersOnHour()
     {
         //checkForBirthdaysNextSevenDays();
 
-        foreach(Reminder r, reminderList){
+        for(const Reminder &r : qAsConst(reminderList)){
 
             QDate reminderDate =QDate::fromString(r.m_reminderDate);
 
@@ -957,7 +957,7 @@ void MainWindow::CheckForRemindersOnHour()
 void MainWindow::checkForReminders()
 {
     QDate currentDate=QDate::currentDate();
-    foreach(Reminder r, reminderList){
+    for(const Reminder &r : qAsConst(reminderList)){
 
         QDate reminderDate =QDate::fromString(r.m_reminderDate);
 
@@ -986,7 +986,7 @@ void MainWindow::DisplayRemindersForDate(QDate date)
 
      if (flagNotifications){
 
-         foreach(Reminder r, reminderList){
+         for(const Reminder &r : qAsConst(reminderList)){
 
              QDate reminderDate =QDate::fromString(r.m_reminderDate);
 
@@ -1005,7 +1005,7 @@ void MainWindow::checkForBirthdaysNextSevenDays()
     QDate currentDate =QDate::currentDate();
     for(int i=1; i<8; i++)
     {
-        foreach(Contact c, contactList)  //use contacts!!
+        for(const Contact &c : qAsConst(contactList))  //use contacts!!
         {
             QDate bornDate = QDate::fromString(c.m_birthdate);
             QDate bdayDate=QDate(currentDate.year(),bornDate.month(),bornDate.day());
@@ -1050,8 +1050,8 @@ void MainWindow::exportContactsXML()
     QDomElement root = document.createElement("Contacts");
     document.appendChild(root);
 
-    QList<Contact> dbContactList =dbm.getAllContacts();
-    foreach(Contact c, dbContactList){
+    const QList<Contact> dbContactList = dbm.getAllContacts();
+    for(const Contact &c : dbContactList){
         QString firstName=c.m_firstname;
         QString midName =c.m_midnames;
         QString lastName=c.m_lastname;
@@ -1163,8 +1163,8 @@ void MainWindow::exportAppointmentsXML()
         QDomElement root = document.createElement("Appointments");
         document.appendChild(root);
 
-        QList<Appointment> dbAppointmentList =dbm.getAllAppointments();
-        foreach(Appointment a, dbAppointmentList){
+        const QList<Appointment> dbAppointmentList =dbm.getAllAppointments();
+        for(const Appointment &a : dbAppointmentList){
 
                 QString title=a.m_title;
                 QString location=a.m_location;
@@ -1418,7 +1418,7 @@ void MainWindow::UpdateCalendar()
             loopDate =QDate(selectedDate.year(),selectedDate.month(),dayVal);
             //qDebug()<<"updateCalendar: Add Appointment currentDate = "<<loopDate.toString();
 
-            foreach(Appointment a, appointmentList)
+            for(const Appointment &a : qAsConst(appointmentList))
             {
                 QDate d =QDate::fromString(a.m_date);
                 if(loopDate ==d)

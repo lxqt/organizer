@@ -34,7 +34,7 @@ DialogShowReminders::DialogShowReminders(QWidget *parent,
 
     QList<Reminder> dayReminderList =QList<Reminder>();
 
-    foreach(Reminder r, reminderList)
+    for(const Reminder &r : reminderList)
     {
         QDate adate = QDate::fromString(r.m_reminderDate);
 
