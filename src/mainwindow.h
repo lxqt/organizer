@@ -59,7 +59,6 @@ public:
 
     DbManager dbm;
 
-    //QTimer *timer;
 
     int appointmentId =0;
     int contactId=0;

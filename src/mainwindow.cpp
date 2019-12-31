@@ -494,7 +494,9 @@ void MainWindow::gotoToday()
     selectedDate=QDate::currentDate();
     selectedDay=selectedDate.day();
     selectedMonth=selectedDate.month();
-    selectedYear=selectedDate.year();UpdateCalendar();
+    selectedYear=selectedDate.year();
+    AddHolidaysToHolidayList(selectedYear);
+    UpdateCalendar();
     selectedDateLabel->setText(selectedDate.toString());
 }
 
