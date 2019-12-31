@@ -16,18 +16,38 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#include "proxymodelappointments.h"
+#ifndef SCHEDULELISTMODEL_H
+#define SCHEDULELISTMODEL_H
 
+#include <QAbstractListModel>
+#include <QTime>
+#include "appointment.h"
+//#include "dialogupcomingschedule.h"
 
-ProxyModelAppointments::ProxyModelAppointments(QObject *parent)
+class ScheduleListModel: public QAbstractListModel
 {
-    Q_UNUSED(parent)
-}
+public:
+    ScheduleListModel(QObject* parent = nullptr);
+    ScheduleListModel(const QList<Appointment>& appointmentList,
+                        QObject *parent = nullptr);
 
-QVariant ProxyModelAppointments::headerData(int section, Qt::Orientation orientation, int role) const
-{
-    return sourceModel()->headerData(section, orientation,
-                                     role);
-}
+    void addAppointment(Appointment &appointment);
+    void updateAppointment(Appointment &appointment, int index);
+    Appointment getAppointment(int index);
+    void clearAllAppointment();
+    void removeAppointment(int idx);
+
+    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+
+    QVariant data (const QModelIndex & index,
+                   int role = Qt::DisplayRole) const override;
+private:
+    QList<Appointment> modelAppointmentList;
 
 
+
+
+
+};
+
+#endif // SCHEDULELISTMODEL_H

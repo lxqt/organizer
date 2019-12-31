@@ -33,10 +33,8 @@ struct Appointment {
                 const QString& category=QString(),
                 int isFullDay =0,
                 int isRepeating=0,
-                int showBirthday=0,
-                int contactId=0,
-                int parentId=0,
-                int hasReminder=0
+                int parentId=0
+
                 ):
         m_id(id),
         m_title(title),
@@ -48,10 +46,8 @@ struct Appointment {
         m_category(category),
         m_isFullDay(isFullDay),
         m_isRepeating(isRepeating),
-        m_showBirthday(showBirthday),
-        m_contactId(contactId),
-        m_parentId(parentId),
-        m_hasReminder(hasReminder)
+        m_parentId(parentId)
+
     {
     }
    int m_id;
@@ -64,10 +60,8 @@ struct Appointment {
    QString m_category;
    int m_isFullDay;
    int m_isRepeating;
-   int m_showBirthday;
-   int m_contactId;
    int m_parentId;
-   int m_hasReminder;   
+
 };
 
 

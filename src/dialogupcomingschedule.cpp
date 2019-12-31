@@ -16,44 +16,47 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
+#include "dialogupcomingschedule.h"
+#include "ui_dialogupcomingschedule.h"
 
-#include "dialogshowreminders.h"
-#include "ui_dialogshowreminders.h"
 
-DialogShowReminders::DialogShowReminders(QWidget *parent,
-                                         QDate *theSelectedDate,
-                                         DbManager *theDbm) :
+DialogUpcomingSchedule::DialogUpcomingSchedule(QWidget *parent,
+                                               DbManager *theDbm) :
     QDialog(parent),
-    ui(new Ui::DialogShowReminders)
+    ui(new Ui::DialogUpcomingSchedule)
 {
-    ui->setupUi(this);
-    setWindowTitle("Reminders");
-    ui->labelSelectedDate->setText(theSelectedDate->toString());
+     ui->setupUi(this);
 
-    this->reminderList =theDbm->getAllReminders();
+     setWindowTitle("Upcoming Schedule (Next Seven Days)");
+     //ui->labelDate->setText(theSelectedDate->toString());
 
-    QList<Reminder> dayReminderList =QList<Reminder>();
+     this->appointmentList= theDbm->getAllAppointments();
+     this->theDbm=*theDbm;
 
-    foreach(Reminder r, reminderList)
-    {
-        QDate adate = QDate::fromString(r.m_reminderDate);
+     QList<Appointment> schedule =QList<Appointment>();
 
-        if(adate==*theSelectedDate)
-        {
-            qDebug()<<"Reminder: "<<r.m_details;
-            dayReminderList.append(r);
+     QDate currentDate =QDate::currentDate();
+     ui->labelDate->setText(currentDate.toString());
 
-        }
-    }
-    reminderListModel = new remindersListModel(dayReminderList);
+     for(int i=1; i<8; i++)
+     {
+         foreach(Appointment a, appointmentList)  //use contacts!!
+         {
+             QDate appdate = QDate::fromString(a.m_date);
+             if (appdate.addDays(-i)==currentDate) {
+                 //                 qDebug()<<"Upcoming Appointment: "<<a.m_title
+                 //                        <<" Date: "<<a.m_date
+                 //                       <<" Starts: "<<a.m_startTime;
+                 schedule.append(a);
+             }
+         }
+     }
+     scheduleListModel = new ScheduleListModel(schedule);
 
-
-    ui->listView->setModel(reminderListModel);
-
-
+     ui->listViewSchedule->setModel(scheduleListModel);
 }
 
-DialogShowReminders::~DialogShowReminders()
+DialogUpcomingSchedule::~DialogUpcomingSchedule()
 {
     delete ui;
 }

@@ -16,38 +16,54 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
+#ifndef DIALOGSHOWDAYDETAILS_H
+#define DIALOGSHOWDAYDETAILS_H
 
-#ifndef REMINDER_H
-#define REMINDER_H
+#include <QDialog>
+#include <QDate>
+#include <QDebug>
+#include <QMessageBox>
 
-#include <QString>
-struct Reminder {
+#include "appointment.h"
+#include "daylistmodel.h"
+#include "dbmanager.h"
 
-    Reminder( int appointmentId=0,
-                const QString& details= QString(),
-                const QString& reminderDate=QString(),
-                const QString& reminderTime=QString()
-                //int reminderRequest=0 //bool 0=no 1 =yes
-                ):
+namespace Ui {
+class DialogShowDayDetails;
+}
 
-        m_appointmentId(appointmentId),
-        m_details(details),
-        m_reminderDate(reminderDate),
-        m_reminderTime(reminderTime)
-        //m_reminderRequest(reminderRequest)
-    {
-    }
+class DialogShowDayDetails : public QDialog
+{
+    Q_OBJECT
 
-   int m_appointmentId;
-   QString m_details;
-   QString m_reminderDate;
-   QString m_reminderTime;
-   //int m_reminderRequest;
+public:
+    explicit DialogShowDayDetails(QWidget *parent = nullptr,
+                                  QDate *theSelectedDate=nullptr,
+                                  DbManager *theDbm=nullptr);
+    ~DialogShowDayDetails();
+    QDate selectedDate;
+    DayListModel *dayListModel;
+    //Appointments
+    QString title="";
+    QString location="";
+    QString description="";
+    QDate appointmentDate;
+    QTime appointmentStartTime;
+    QTime appointmentEndTime;
+    QString category="";
+    int isAllDay=0;
+
+
+private slots:
+    void on_listView_doubleClicked(const QModelIndex &index);
+
+private:
+    Ui::DialogShowDayDetails *ui;
+    QList<Appointment> appointmentList;
+    DbManager theDbm;
+    void UpdateAppointment(int dbID, int selectedRowindex);
+    static bool compare(const Appointment& first, const Appointment& second);
 
 };
 
-
-
-
-
-#endif // REMINDER_H
+#endif // DIALOGSHOWDAYDETAILS_H

@@ -16,36 +16,39 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-
-#ifndef DIALOGSHOWREMINDERS_H
-#define DIALOGSHOWREMINDERS_H
+#ifndef DIALOGUPCOMINGSCHEDULE_H
+#define DIALOGUPCOMINGSCHEDULE_H
 
 #include <QDialog>
-#include <reminder.h>
-#include <dbmanager.h>
-#include <reminderslistmodel.h>
+#include <QDate>
+#include <QDebug>
+#include <QMessageBox>
+
+#include "appointment.h"
+#include "schedulelistmodel.h"
+#include "dbmanager.h"
 
 namespace Ui {
-class DialogShowReminders;
+class DialogUpcomingSchedule;
 }
 
-class DialogShowReminders : public QDialog
+class DialogUpcomingSchedule : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit DialogShowReminders(QWidget *parent = nullptr,
-                                 QDate *theSelectedDate=nullptr,
-                                 DbManager *theDbm=nullptr);
-    ~DialogShowReminders();
-    QDate selectedDate;
-    remindersListModel *reminderListModel;
+    //explicit DialogUpcomingSchedule(QWidget *parent = nullptr);
 
+
+    explicit DialogUpcomingSchedule(QWidget *parent = nullptr,
+                                  DbManager *theDbm=nullptr);
+    ~DialogUpcomingSchedule();
 
 private:
-    Ui::DialogShowReminders *ui;
-    QList<Reminder> reminderList;
+    Ui::DialogUpcomingSchedule *ui;
+    QList<Appointment> appointmentList;
     DbManager theDbm;
+    ScheduleListModel *scheduleListModel;
 };
 
-#endif // DIALOGSHOWREMINDERS_H
+#endif // DIALOGUPCOMINGSCHEDULE_H

@@ -5,11 +5,29 @@ LXQt Organizer is a lightweight organizer for personal information management.
 
 ## Overview
 
-v004 alpha1
+v004 alpha1 build3
 
 * custom calendar
 
-* more options and updates to follow ..
+* calendar keyboard navigation
+
+```
+right arrow = next day
+left arrow = previous day
+up arrow = next month
+down arrow = previous month
+return (enter) = show day events
+spacebar = back to today
+```
+
+* event category colours
+
+* calendar font resizing
+
+* double click contacts and events to edit
+
+* replaced reminders with show upcoming schedule
+
 
 v003 
 
@@ -21,15 +39,13 @@ v003
 
 * current birthdays added to calendar
 
-* single shot reminder notifications
-
 * checking for upcoming birthdays (next 7 days)
 
 * reminder today messages
 
-* XML export of appointments and contacts
+* XML export contacts
 
-* XML import of appointments and contacts
+* XML import contacts
 
 v002
 

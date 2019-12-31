@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DialogShowReminders</class>
- <widget class="QDialog" name="DialogShowReminders">
+ <class>DialogUpcomingSchedule</class>
+ <widget class="QDialog" name="DialogUpcomingSchedule">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>494</width>
-    <height>347</height>
+    <width>660</width>
+    <height>422</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,14 +19,14 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLabel" name="InfoDate">
+        <widget class="QLabel" name="labelSchedule">
          <property name="text">
-          <string>Reminders for :</string>
+          <string>Upcoming  Schedule For: </string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="labelSelectedDate">
+        <widget class="QLabel" name="labelDate">
          <property name="font">
           <font>
            <weight>75</weight>
@@ -34,7 +34,7 @@
           </font>
          </property>
          <property name="text">
-          <string>the Date</string>
+          <string>Date</string>
          </property>
         </widget>
        </item>
@@ -54,7 +54,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QListView" name="listView"/>
+      <widget class="QListView" name="listViewSchedule"/>
      </item>
     </layout>
    </item>
@@ -75,7 +75,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DialogShowReminders</receiver>
+   <receiver>DialogUpcomingSchedule</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -91,7 +91,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DialogShowReminders</receiver>
+   <receiver>DialogUpcomingSchedule</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

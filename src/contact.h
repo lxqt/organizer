@@ -37,6 +37,7 @@ struct Contact {
             const QString& telephone= QString(),           
             const QString& birthdate=QString(),
             int addToCalendar=0
+
             ):
         m_id(id),
         m_firstname(firstname),
@@ -52,6 +53,7 @@ struct Contact {
         m_telephone(telephone),        
         m_birthdate(birthdate),
         m_addToCalendar(addToCalendar)
+
     {
     }
     int m_id;

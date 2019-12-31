@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author Alan Crispin aka. crispina                 *
+ *   Author aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -16,34 +16,29 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
+#ifndef HOLIDAY_H
+#define HOLIDAY_H
 
-#ifndef REMINDERSLISTMODEL_H
-#define REMINDERSLISTMODEL_H
+#include <QString>
+struct Holiday {
 
-#include <QAbstractListModel>
-#include "reminder.h"
+    Holiday(int id=0,
+                const QString& name= QString(),
+                const QString& date=QString(),
+                int addToCalendar=0
+                ):
+        m_id(id),
+        m_name(name),
+        m_date(date),
+        m_addToCalendar(addToCalendar)
 
-
-class remindersListModel: public QAbstractListModel
-{
-public:
-    remindersListModel(QObject* parent = nullptr);
-    remindersListModel(const QList<Reminder>& reminderList,QObject* parent = nullptr);
-   // ~remindersListModel();
-    void addReminder(Reminder &reminder);
-    void updateReminder(Reminder &reminder, int index);
-    Reminder getReminder(int index);
-    void clearAllReminders();
-    void removeReminder(int idx);
-
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-
-    QVariant data (const QModelIndex & index,
-                            int role = Qt::DisplayRole) const override;
-
-private:
-    QList<Reminder> modelReminderList;
-
+    {
+    }
+   int m_id;
+   QString m_name;
+   QString m_date;
+   int m_addToCalendar;
 };
 
-#endif // REMINDERSLISTMODEL_H
+
+#endif // HOLIDAY_H

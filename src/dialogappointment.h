@@ -26,7 +26,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include "appointment.h"
-#include "reminder.h"
+
 
 
 namespace Ui {
@@ -44,12 +44,7 @@ public:
     QDate appointmentDate;
     QTime startTime;
     QTime endTime;
-    QString category;
-
-    QDate reminderDate;
-    QTime reminderTime;
-    int reminderDays=1;
-    int reminderRequested=0;
+    QString category;    
 
     int isAllDay=0; //no
     bool deleteRequested=false;
@@ -59,11 +54,9 @@ public:
     QString getDescription();
     QDate getAppointmentDate();
     QTime getStartTime();
-    QTime getEndTime();
-    int getReminderDays();
+    QTime getEndTime(); 
     int getAllDay();
     QString getCategory();
-    int getReminderRequested();
 
     bool getDeleteRequested();
     void setupComboBoxes();
@@ -83,9 +76,9 @@ private slots:
 
     void on_checkBoxAllDay_stateChanged(int arg1);
 
-    void on_comboBoxReminder_activated(int index);
 
-    void on_checkBoxReminder_stateChanged(int arg1);
+
+
 
 private:
     Ui::DialogAppointment *ui;

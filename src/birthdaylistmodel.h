@@ -16,48 +16,28 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
+#ifndef BIRTHDAYLISTMODEL_H
+#define BIRTHDAYLISTMODEL_H
 
-#ifndef DBUSSESSIONMESSAGE_H
-#define DBUSSESSIONMESSAGE_H
+#include <QAbstractListModel>
+#include <QString>
 
-#include <QDBusConnection>
-#include <QDBusConnectionInterface>
-#include <QDBusInterface>
-#include <QObject>
-#include <QTimer>
-#include <QDebug>
-
-#define SERVICE_FREEDESKTOP "org.freedesktop.Notifications"
-#define PATH_FREEDESKTOP "/org/freedesktop/Notifications"
-#define INTERFACE_FREEDESKTOP "org.freedesktop.Notifications"
-
-struct MessageData {
-    QString header;
-    QString message;
-
-    MessageData(QString header, QString message)
-    {
-        this->header = header;
-        this->message = message;
-    }
-};
-
-class QDBusInterface; //declare the interface
-
-class DbusSessionMessage: public QObject
+class BirthdayListModel : public QAbstractListModel
 {
-    Q_OBJECT
-
-
 public:
-    explicit DbusSessionMessage(QObject *parent = nullptr);
-    void displayMessage(const MessageData& message);
+    BirthdayListModel(QObject* parent = nullptr);
+    BirthdayListModel(const QList<QString>& birthdayList,
+                      QObject *parent = nullptr);
 
+    void addBirthday(QString &birthday);
+
+    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+
+    QVariant data (const QModelIndex & index,
+                   int role = Qt::DisplayRole) const override;
 private:
-    QList<QVariant> prepareDbusMessage(const MessageData& message);
-    QDBusInterface *dbusNotifier;
-    int messageDuration;
-    QString theIconPath;
+    QList<QString> modelBirthdayList;
+
 };
 
-#endif // DBUSSESSIONMESSAGE_H
+#endif // BIRTHDAYLISTMODEL_H

@@ -150,10 +150,12 @@ bool DialogContact::getDeleteRequested()
     return this->deleteRequested;
 }
 
-int DialogContact::getAddToCalendar()
+int DialogContact::getAddToCal()
 {
-    return addToCalendar;
+    return this->addToCalendar;
 }
+
+
 
 void DialogContact::accept()
 {

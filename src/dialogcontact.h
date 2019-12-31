@@ -56,6 +56,7 @@ public:
     QString getEmail();
     QDate getBirthDate();
     int getBirthDateId();
+    int getAddToCalendar();
 
     //Contact details
     QString street="";
@@ -76,17 +77,12 @@ public:
     QString getCountry();
     QString getPhoneNumber();
     bool getDeleteRequested();
-    int getAddToCalendar();
+    int  getAddToCal();
 
 private slots:
     void accept();
     void on_dateEditBirthDate_userDateChanged(const QDate &date);
-
-
     void on_checkBoxDelete_stateChanged(int arg1);
-
-
-
     void on_checkBoxAddBirthdayToCal_stateChanged(int arg1);
 
 private:

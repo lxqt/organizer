@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Author Alan Crispin aka. crispina                 *
+ *   Author aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -16,51 +16,36 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
+#ifndef DAYLISTMODEL_H
+#define DAYLISTMODEL_H
 
-#ifndef DBMANAGER_H
-#define DBMANAGER_H
-
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QSqlRecord>
-#include <QStringListModel>
-#include <QDebug>
-#include <QDate>
-#include <QList>
-#include"appointment.h"
-#include "contact.h"
+#include <QAbstractListModel>
+#include <QTime>
+#include "appointment.h"
+#include "dialogappointment.h"
 
 
-class DbManager
+class DayListModel: public QAbstractListModel
 {
 public:
-    DbManager();
-    QSqlDatabase db;
-    bool isOpen() const;
-    void openDatabase();    
-    void createDatebaseTables();
 
-    //Appointments
-    int addAppointment(Appointment &appointment);
-    bool updateAppointment(Appointment &appointment, int id);
-    QList<Appointment> getAllAppointments();
-    Appointment getAppointmentByID(int id);
-    QList<Appointment> getAppointmentsOnDate(QDate &diaryDate);    
-    bool deleteAppointmentById(const int id);
-    bool deleteAppointmentByParentID(const int parentId);
-    bool deleteAllAppointments();
+    DayListModel(QObject* parent = nullptr);
+    DayListModel(const QList<Appointment>& appointmentList,
+                        QObject *parent = nullptr);
 
+    void addAppointment(Appointment &appointment);
+    void updateAppointment(Appointment &appointment, int index);
+    Appointment getAppointment(int index);
+    void clearAllAppointment();
+    void removeAppointment(int idx);
 
-    //Contacts
-    int addContact(Contact &contact);
-    bool updateContact(Contact &contact, int id);
-    QList<Contact> getAllContacts();
-    Contact getContactByID(int id);
-    bool removeAllContacts();
-    bool removeContactById(const int id);
+    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
+    QVariant data (const QModelIndex & index,
+                   int role = Qt::DisplayRole) const override;
+private:
+    QList<Appointment> modelAppointmentList;
 
 };
 
-#endif // DBMANAGER_H
+#endif // DAYLISTMODEL_H

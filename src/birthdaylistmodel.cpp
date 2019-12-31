@@ -16,20 +16,47 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef PROXYMODELAPPOINTMENTS_H
-#define PROXYMODELAPPOINTMENTS_H
+#include "birthdaylistmodel.h"
 
-#include <QSortFilterProxyModel>
-
-
-class ProxyModelAppointments : public QSortFilterProxyModel
+BirthdayListModel::BirthdayListModel(QObject *parent)
 {
-    Q_OBJECT
-public:
-    //ProxyModelAppointments();
-    ProxyModelAppointments(QObject* parent = nullptr);
-    QVariant headerData(int section, Qt::Orientation orientation,
-                                int role) const;
-};
+    Q_UNUSED(parent)
+    this->modelBirthdayList= QList<QString>();
+}
 
-#endif // PROXYMODELAPPOINTMENTS_H
+BirthdayListModel::BirthdayListModel(const QList<QString> &birthdayList, QObject *parent)
+{
+    Q_UNUSED(parent)
+    this->modelBirthdayList=birthdayList;
+
+}
+
+void BirthdayListModel::addBirthday(QString &birthday)
+{
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    this->modelBirthdayList.append(birthday);
+    endInsertRows();
+}
+
+int BirthdayListModel::rowCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent)
+    return modelBirthdayList.size();
+
+}
+
+QVariant BirthdayListModel::data(const QModelIndex &index, int role) const
+{
+    if (!index.isValid())
+        return QVariant();
+    if (index.row() >= modelBirthdayList.size() || index.row() < 0)
+        return QVariant();
+
+    if (role == Qt::DisplayRole) {
+
+        QString details="";
+        details = modelBirthdayList.at(index.row());
+        return details;
+    }
+    return QVariant();
+}

@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>800</height>
+    <width>1046</width>
+    <height>671</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout_2">
+   <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
@@ -24,115 +24,57 @@
        <attribute name="title">
         <string>Calendar</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout">
+       <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout">
+           <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout">
-              <item>
-               <widget class="QPushButton" name="pushButtonPreviousMonth">
-                <property name="text">
-                 <string>Prev Month</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QLabel" name="labelMonthYear">
-                <property name="font">
-                 <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Month Year</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_3">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButtonNextMonth">
-                <property name="text">
-                 <string>Next Month</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_2">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QLabel" name="labelDateInfo">
-                <property name="text">
-                 <string>Selected Date:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="labelSelectedDate">
-                <property name="font">
-                 <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>theDate</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
             <item>
-             <widget class="QTableWidget" name="tableWidget">
-              <property name="styleSheet">
-               <string notr="true"/>
+             <widget class="QLabel" name="labelMonthYear">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
               </property>
-              <property name="lineWidth">
-               <number>2</number>
+              <property name="text">
+               <string>Month Year</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
              </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </item>
           <item>
-           <widget class="QTableView" name="tableViewDays"/>
+           <widget class="QTextBrowser" name="textBrowserCalendar"/>
           </item>
          </layout>
         </item>
@@ -144,23 +86,27 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
-         <widget class="QTableView" name="tableViewContacts"/>
-        </item>
-        <item row="1" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QPushButton" name="pushButtonShowQuickFullDetails">
-            <property name="text">
-             <string>Quick/Full Details</string>
-            </property>
-           </widget>
+           <widget class="QTableView" name="tableViewContacts"/>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButtonMailTo">
-            <property name="text">
-             <string>Mail To:</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QPushButton" name="pushButtonShowQuickFullView">
+              <property name="text">
+               <string>Quick/Full View</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonMailTo">
+              <property name="text">
+               <string>Mail To:</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
@@ -175,7 +121,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1200</width>
+     <width>1046</width>
      <height>29</height>
     </rect>
    </property>
@@ -184,19 +130,17 @@
      <string>File</string>
     </property>
     <addaction name="actionExport_Contacts_XML"/>
-    <addaction name="actionExport_Appointments_XML"/>
-    <addaction name="separator"/>
     <addaction name="actionImport_Contacts_XML"/>
-    <addaction name="actionImport_Appointments_XML"/>
+    <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
      <string>Edit</string>
     </property>
+    <addaction name="actionDelete_All_Appointments"/>
     <addaction name="separator"/>
     <addaction name="actionDelete_All_Contacts"/>
-    <addaction name="actionDelete_All_Appointments"/>
    </widget>
    <widget class="QMenu" name="menuAction">
     <property name="title">
@@ -205,9 +149,18 @@
     <addaction name="actionNew_Appointment"/>
     <addaction name="actionNew_Contact"/>
     <addaction name="separator"/>
-    <addaction name="actionCheck_For_Reminders_Today"/>
-    <addaction name="actionCheck_For_Reminders"/>
-    <addaction name="actionCheck_For_Upcoming_Birthdays"/>
+    <addaction name="actionUpcoming_Schedule"/>
+    <addaction name="actionCheck_For_Birthdays"/>
+   </widget>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="actionShow_Birthdays_on_Calendar"/>
+    <addaction name="actionShow_Holidays_on_Calendar"/>
+    <addaction name="action_Increase_Font"/>
+    <addaction name="actionDecrease_Font"/>
+    <addaction name="actionReset_Calendar_Font_Size"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -215,16 +168,21 @@
     </property>
     <addaction name="actionAbout"/>
    </widget>
-   <widget class="QMenu" name="menuOptions">
+   <widget class="QMenu" name="menuNaviagation">
     <property name="title">
-     <string>Options</string>
+     <string>Navigation</string>
     </property>
-    <addaction name="actionSystem_Notifications"/>
-    <addaction name="actionCheck_Reminders_Hourly"/>
+    <addaction name="actionNext_Day"/>
+    <addaction name="actionPrevious_Day"/>
+    <addaction name="actionNext_Month"/>
+    <addaction name="actionPrevious_Month"/>
+    <addaction name="actionShow_Day_Events"/>
+    <addaction name="actionToday"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuAction"/>
+   <addaction name="menuNaviagation"/>
    <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -235,9 +193,20 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionCheck_For_Reminders_Today"/>
    <addaction name="actionNew_Appointment"/>
+   <addaction name="separator"/>
    <addaction name="actionNew_Contact"/>
+   <addaction name="separator"/>
+   <addaction name="separator"/>
+   <addaction name="actionPrevious_Month"/>
+   <addaction name="actionPrevious_Day"/>
+   <addaction name="actionNext_Day"/>
+   <addaction name="actionNext_Month"/>
+   <addaction name="actionShow_Day_Events"/>
+   <addaction name="actionToday"/>
+   <addaction name="separator"/>
+   <addaction name="separator"/>
+   <addaction name="actionUpcoming_Schedule"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionExit">
@@ -248,43 +217,89 @@
   <action name="actionNew_Appointment">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/appointment.svg</normaloff>:/new/icons/icons/appointment.svg</iconset>
+     <normaloff>:/new/toolbar/icons/appointment.svg</normaloff>:/new/toolbar/icons/appointment.svg</iconset>
    </property>
    <property name="text">
     <string>New Appointment</string>
    </property>
   </action>
-  <action name="actionCheck_For_Reminders">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/reminders.svg</normaloff>:/new/icons/icons/reminders.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Check For Reminders Selected Date</string>
-   </property>
-  </action>
   <action name="actionNew_Contact">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/contact.svg</normaloff>:/new/icons/icons/contact.svg</iconset>
+     <normaloff>:/new/toolbar/icons/contact.svg</normaloff>:/new/toolbar/icons/contact.svg</iconset>
    </property>
    <property name="text">
     <string>New Contact</string>
    </property>
   </action>
-  <action name="actionClear_All_Appointments">
+  <action name="actionNext_Day">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/icon-rightarrow.svg</normaloff>:/new/toolbar/icons/icon-rightarrow.svg</iconset>
+   </property>
    <property name="text">
-    <string>Delete All Appointments</string>
+    <string>Next Day</string>
    </property>
   </action>
-  <action name="action_Add_Current_Birthdays">
+  <action name="actionPrevious_Day">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/icon-leftarrow.svg</normaloff>:/new/toolbar/icons/icon-leftarrow.svg</iconset>
+   </property>
    <property name="text">
-    <string>Add All Birthdays </string>
+    <string>Previous Day</string>
    </property>
   </action>
-  <action name="actionRemove_All_Birthday">
+  <action name="actionNext_Month">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/icon-uparrow.svg</normaloff>:/new/toolbar/icons/icon-uparrow.svg</iconset>
+   </property>
    <property name="text">
-    <string>Clear All Birthdays</string>
+    <string>Next Month</string>
+   </property>
+  </action>
+  <action name="actionPrevious_Month">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/icon-downarrow.svg</normaloff>:/new/toolbar/icons/icon-downarrow.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Previous Month </string>
+   </property>
+  </action>
+  <action name="actionUpcoming_Schedule">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/schedule.svg</normaloff>:/new/toolbar/icons/schedule.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Upcoming Schedule</string>
+   </property>
+  </action>
+  <action name="actionCheck_For_Birthdays">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/birthdaycheck.svg</normaloff>:/new/toolbar/icons/birthdaycheck.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Check For Birthdays</string>
+   </property>
+  </action>
+  <action name="actionShow_Birthdays_on_Calendar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Birthdays on Calendar</string>
+   </property>
+  </action>
+  <action name="actionShow_Holidays_on_Calendar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Holidays on Calendar</string>
    </property>
   </action>
   <action name="actionExport_Contacts_XML">
@@ -292,19 +307,9 @@
     <string>Export Contacts (XML)</string>
    </property>
   </action>
-  <action name="actionExport_Appointments_XML">
-   <property name="text">
-    <string>Export Appointments (XML)</string>
-   </property>
-  </action>
   <action name="actionImport_Contacts_XML">
    <property name="text">
     <string>Import Contacts (XML)</string>
-   </property>
-  </action>
-  <action name="actionImport_Appointments_XML">
-   <property name="text">
-    <string>Import Appointments (XML)</string>
    </property>
   </action>
   <action name="actionDelete_All_Contacts">
@@ -312,64 +317,56 @@
     <string>Delete All Contacts</string>
    </property>
   </action>
-  <action name="actionAbout">
-   <property name="text">
-    <string>About</string>
-   </property>
-  </action>
-  <action name="actionCheck_For_Upcoming_Birthdays">
-   <property name="text">
-    <string>Check For Upcoming Birthdays</string>
-   </property>
-  </action>
-  <action name="actionSystem_Notifications">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>System Notifications</string>
-   </property>
-  </action>
-  <action name="actionCheck_For_Reminders_Today">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/reminders.svg</normaloff>:/new/icons/icons/reminders.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Check For Reminders Today</string>
-   </property>
-  </action>
-  <action name="actionShow_AppointmentsList">
-   <property name="text">
-    <string>Show AppointmentsList</string>
-   </property>
-  </action>
-  <action name="actionShow_ReminderList">
-   <property name="text">
-    <string>Show ReminderList</string>
-   </property>
-  </action>
-  <action name="actionShow_ContactsList">
-   <property name="text">
-    <string>Show ContactsList</string>
-   </property>
-  </action>
-  <action name="actionShow_BirthdayList">
-   <property name="text">
-    <string>Show BirthdayList</string>
-   </property>
-  </action>
   <action name="actionDelete_All_Appointments">
    <property name="text">
     <string>Delete All Appointments</string>
    </property>
   </action>
-  <action name="actionCheck_Reminders_Hourly">
-   <property name="checkable">
-    <bool>true</bool>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionRefresh_Calendar">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/refresh.svg</normaloff>:/new/toolbar/icons/refresh.svg</iconset>
    </property>
    <property name="text">
-    <string>Check Reminders Hourly</string>
+    <string>Today</string>
+   </property>
+  </action>
+  <action name="actionShow_Day_Events">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/icon-enter.svg</normaloff>:/new/toolbar/icons/icon-enter.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Show Day Events</string>
+   </property>
+  </action>
+  <action name="action_Increase_Font">
+   <property name="text">
+    <string>Increase Calendar Font Size</string>
+   </property>
+  </action>
+  <action name="actionDecrease_Font">
+   <property name="text">
+    <string>Decrease Calendar Font Size</string>
+   </property>
+  </action>
+  <action name="actionReset_Calendar_Font_Size">
+   <property name="text">
+    <string>Reset Calendar Font Size</string>
+   </property>
+  </action>
+  <action name="actionToday">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/icon-spacebar.svg</normaloff>:/new/toolbar/icons/icon-spacebar.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Today (Spacebar)</string>
    </property>
   </action>
  </widget>

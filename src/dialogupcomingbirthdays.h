@@ -16,44 +16,34 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef DAYMODEL_H
-#define DAYMODEL_H
+#ifndef DIALOGUPCOMINGBIRTHDAYS_H
+#define DIALOGUPCOMINGBIRTHDAYS_H
 
-#include <QAbstractTableModel>
-#include "appointment.h"
-#include <QColor>
+#include <QDialog>
 #include <QList>
 #include <QDate>
 #include <QDebug>
+#include "contact.h"
+#include "birthdaylistmodel.h"
 
-class DayModel : public QAbstractTableModel
+namespace Ui {
+class DialogUpcomingBirthdays;
+}
+
+class DialogUpcomingBirthdays : public QDialog
 {
+    Q_OBJECT
+
 public:
-    //DayModel();
+    explicit DialogUpcomingBirthdays(QWidget *parent = nullptr,
+                                     QList<Contact> *contactList=nullptr);
+    ~DialogUpcomingBirthdays();
 
-    DayModel(QObject* parent = nullptr);
-    DayModel(const QList<Appointment>& appointmentList,
-                 QObject *parent = nullptr);
-
-    void AddAppointment(Appointment &appointment);
-    Appointment getAppointment(int index);
-    void clearAllAppointments();
-    void removeAppointment(int idx);
-
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
-
-    QVariant data (const QModelIndex & index,
-                   int role = Qt::DisplayRole) const override;
-
-    QVariant headerData(int section, Qt::Orientation orientation,
-                        int role = Qt::DisplayRole) const override;
 private:
-    QList<Appointment> modelAppointmentList;
-
-
-
+    Ui::DialogUpcomingBirthdays *ui;
+    QList<Contact> dialogContactList;
+    QList<QString> birthdayList;
+    BirthdayListModel *birthdayListModel;
 };
 
-#endif // DAYMODEL_H
+#endif // DIALOGUPCOMINGBIRTHDAYS_H
