@@ -24,7 +24,15 @@ spacebar = back to today
 
 * calendar font resizing
 
-* double click contacts and events to edit
+```
+key_a = increase font size
+key_z = decrease font size
+key_s = reset font size
+```
+
+* double click contacts to edit
+
+* double click appointments (in day view) to edit
 
 * replaced reminders with show upcoming schedule
 
