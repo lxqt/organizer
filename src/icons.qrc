@@ -13,6 +13,9 @@
         <file>icons/icon-downarrow.svg</file>
         <file>icons/icon-h.svg</file>
         <file>icons/icon-spacebar.svg</file>
+        <file>icons/icon-a.svg</file>
+        <file>icons/icon-s.svg</file>
+        <file>icons/icon-z.svg</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

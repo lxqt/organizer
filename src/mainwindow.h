@@ -125,23 +125,33 @@ public:
      void checkForBirthdaysNextSevenDays();
      void checkAppointmentsNextSevenDays();
 
-   //Navigation
-    void gotoNextDay();
-    void gotoPreviousDay();
-    void gotoNextMonth();
-    void gotoPreviousMonth();
-    void gotoToday();
-    void showDayEvents();
+     //Font
+     void increaseFont();
+     void decreaseFont();
+     void resetFont();
 
-    QAction *gotoNextDayAction;
-    QAction *gotoPreviousDayAction;
-    QAction *gotoNextMonthAction;
-    QAction *gotoPreviousMonthAction;
-    QAction *gotoTodayAction;
-    QAction *showAppointmentDetailsAction;
+     QAction *increaseFontAction;
+     QAction *decreaseFontAction;
+     QAction *resetFontAction;
 
-    QLabel *selectedDateLabel;
-    QLabel *dateInfoLabel;
+
+     //Navigation
+     void gotoNextDay();
+     void gotoPreviousDay();
+     void gotoNextMonth();
+     void gotoPreviousMonth();
+     void gotoToday();
+     void showDayEvents();
+
+     QAction *gotoNextDayAction;
+     QAction *gotoPreviousDayAction;
+     QAction *gotoNextMonthAction;
+     QAction *gotoPreviousMonthAction;
+     QAction *gotoTodayAction;
+     QAction *showAppointmentDetailsAction;
+
+     QLabel *selectedDateLabel;
+     QLabel *dateInfoLabel;
 
     //Export Import
     void ExportContactsXML();
@@ -156,6 +166,10 @@ private slots:
     void gotoPreviousMonthSlot();
     void gotoTodaySlot();
     void showAppointmentDetailsSlot();
+
+    void increaseFontSlot();
+    void decreaseFontSlot();
+    void resetFontSlot();
 
     void on_actionExit_triggered();
 

@@ -96,6 +96,24 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(showAppointmentDetailsSlot()));
     this->addAction(showAppointmentDetailsAction);
 
+    increaseFontAction=new QAction(this);
+    increaseFontAction->setShortcut(Qt::Key_A);
+    connect(increaseFontAction, SIGNAL(triggered()),
+            this, SLOT(increaseFontSlot()));
+    this->addAction(increaseFontAction);
+
+    resetFontAction=new QAction(this);
+    resetFontAction->setShortcut(Qt::Key_Z);
+    connect(resetFontAction, SIGNAL(triggered()),
+            this, SLOT(decreaseFontSlot()));
+    this->addAction(resetFontAction);
+
+    decreaseFontAction=new QAction(this);
+    decreaseFontAction->setShortcut(Qt::Key_S);
+    connect(decreaseFontAction, SIGNAL(triggered()),
+            this, SLOT(resetFontSlot()));
+    this->addAction(decreaseFontAction);
+
     //Setup empty lists
     appointmentList= QList<Appointment>();
     holidayList=QList<Holiday>();
@@ -398,6 +416,26 @@ void MainWindow::checkAppointmentsNextSevenDays()
     }
 }
 
+void MainWindow::increaseFont()
+{
+    fontSize =fontSize+1;
+    if (fontSize >30) fontSize =30;
+    UpdateCalendar();
+}
+
+void MainWindow::decreaseFont()
+{
+    fontSize=fontSize-1;
+    if (fontSize<8) fontSize=8;
+    UpdateCalendar();
+}
+
+void MainWindow::resetFont()
+{
+    fontSize=12;
+    UpdateCalendar();
+}
+
 void MainWindow::gotoNextDay()
 {
     int daysInMonth=selectedDate.daysInMonth();
@@ -648,6 +686,21 @@ void MainWindow::gotoTodaySlot()
 void MainWindow::showAppointmentDetailsSlot()
 {
     showDayEvents();
+}
+
+void MainWindow::increaseFontSlot()
+{
+    increaseFont();
+}
+
+void MainWindow::decreaseFontSlot()
+{
+    decreaseFont();
+}
+
+void MainWindow::resetFontSlot()
+{
+    resetFont();
 }
 
 void MainWindow::on_actionExit_triggered()
@@ -1060,22 +1113,21 @@ void MainWindow::on_actionShow_Day_Events_triggered()
 
 void MainWindow::on_action_Increase_Font_triggered()
 {
-    fontSize =fontSize+1;
-    if (fontSize >24) fontSize =24;
-    UpdateCalendar();
+    increaseFont();
+
 }
 
 void MainWindow::on_actionDecrease_Font_triggered()
 {
-    fontSize=fontSize-1;
-    if (fontSize<8) fontSize=8;
-    UpdateCalendar();
+    decreaseFont();
+
+
 }
 
 void MainWindow::on_actionReset_Calendar_Font_Size_triggered()
 {
-    fontSize =12;
-    UpdateCalendar();
+    resetFont();
+
 }
 
 void MainWindow::on_actionUpcoming_Schedule_triggered()

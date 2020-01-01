@@ -346,16 +346,28 @@
    </property>
   </action>
   <action name="action_Increase_Font">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/icon-a.svg</normaloff>:/new/toolbar/icons/icon-a.svg</iconset>
+   </property>
    <property name="text">
     <string>Increase Calendar Font Size</string>
    </property>
   </action>
   <action name="actionDecrease_Font">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/icon-z.svg</normaloff>:/new/toolbar/icons/icon-z.svg</iconset>
+   </property>
    <property name="text">
     <string>Decrease Calendar Font Size</string>
    </property>
   </action>
   <action name="actionReset_Calendar_Font_Size">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/icon-s.svg</normaloff>:/new/toolbar/icons/icon-s.svg</iconset>
+   </property>
    <property name="text">
     <string>Reset Calendar Font Size</string>
    </property>
