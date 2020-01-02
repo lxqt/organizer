@@ -30,21 +30,16 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
     ui->checkBoxDelete->hide();
     ui->dateEditAppointmentDate->setDate(*theAppointmentDate);
 
-
-
-    QTime timeNow =QTime::currentTime();
-
     this->appointmentDate=*theAppointmentDate;
-
-
     ui->labelDateDisplay->setText(this->appointmentDate.toString());
 
+    QTime timeNow =QTime::currentTime();
     this->startTime=timeNow;
     this->endTime=timeNow;
     ui->timeEditStartTime->setTime(timeNow);
     ui->timeEditEndTime->setTime(timeNow);
 
-    category="Event";
+    category="General";
     setupComboBoxes();
 }
 
@@ -87,12 +82,14 @@ DialogAppointment::DialogAppointment(QWidget *parent, Appointment *theAppointmen
     {
         ui->checkBoxAllDay->setCheckState(Qt::Checked);
     }
+
 }
 
 DialogAppointment::~DialogAppointment()
 {
     delete ui;
 }
+
 
 QString DialogAppointment::getTitle()
 {
@@ -144,7 +141,7 @@ void DialogAppointment::setupComboBoxes()
 {
     //Set up Category Combobox
 
-    ui->comboBoxCategory->addItem("Event");
+    ui->comboBoxCategory->addItem("General");
     ui->comboBoxCategory->addItem("Family");
     ui->comboBoxCategory->addItem("Leisure");
     ui->comboBoxCategory->addItem("Meeting");
@@ -162,9 +159,7 @@ void DialogAppointment::accept()
         return;
     }
     else {
-        //        QMessageBox::information(this, tr("Success"),
-        //                  tr("Data entered"));
-        //qDebug()<<"Success title and location fields completed by user";
+
         QDialog::accept();
     }
 }
@@ -225,7 +220,4 @@ void DialogAppointment::on_checkBoxAllDay_stateChanged(int arg1)
         ui->labelEndTime->setEnabled(false);
     }
 }
-
-
-
 

@@ -82,9 +82,9 @@ QVariant ContactModel::data(const QModelIndex &index, int role) const
            const Contact& c = modelContactList.at(index.row());
            QDate birthdayDate =QDate::fromString(c.m_birthdate);
 
-           QString birthdayDateStr="("+QString::number(birthdayDate.day())+"/"
-                   +QString::number(birthdayDate.month())+"/"
-                   +QString::number(birthdayDate.year())+")";
+           QString birthdayDateStr=QLatin1Char('(')+QString::number(birthdayDate.day())+QLatin1Char('/')
+                              +QString::number(birthdayDate.month())+QLatin1Char('/')
+                              +QString::number(birthdayDate.year())+QLatin1Char(')');
 
 
            switch (index.column()) {

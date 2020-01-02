@@ -28,7 +28,6 @@ DialogUpcomingSchedule::DialogUpcomingSchedule(QWidget *parent,
      ui->setupUi(this);
 
      setWindowTitle("Upcoming Schedule (Next Seven Days)");
-     //ui->labelDate->setText(theSelectedDate->toString());
 
      this->appointmentList= theDbm->getAllAppointments();
      this->theDbm=*theDbm;
@@ -43,16 +42,12 @@ DialogUpcomingSchedule::DialogUpcomingSchedule(QWidget *parent,
          foreach(Appointment a, appointmentList)  //use contacts!!
          {
              QDate appdate = QDate::fromString(a.m_date);
-             if (appdate.addDays(-i)==currentDate) {
-                 //                 qDebug()<<"Upcoming Appointment: "<<a.m_title
-                 //                        <<" Date: "<<a.m_date
-                 //                       <<" Starts: "<<a.m_startTime;
+             if (appdate.addDays(-i)==currentDate) {                
                  schedule.append(a);
              }
          }
      }
      scheduleListModel = new ScheduleListModel(schedule);
-
      ui->listViewSchedule->setModel(scheduleListModel);
 }
 

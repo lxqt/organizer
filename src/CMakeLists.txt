@@ -19,7 +19,7 @@ set ( lxqt-organizer_HDRS
 	contact.h
 	contactmodel.h
 	schedulelistmodel.h
-	birthdaylistmodel.h
+	birthdaylistmodel.h	
 	)
 
 set ( lxqt-organizer_SRCS
@@ -37,6 +37,7 @@ set ( lxqt-organizer_SRCS
 	dialogupcomingbirthdays.cpp
 	schedulelistmodel.cpp
 	birthdaylistmodel.cpp
+	dialogrepeatappointment.cpp
 	)
 
 set ( lxqt-organizer_UIS
@@ -47,6 +48,7 @@ set ( lxqt-organizer_UIS
 	dialogabout.ui
 	dialogupcomingschedule.ui
 	dialogupcomingbirthdays.ui
+	dialogrepeatappointment.ui
 	)
 QT5_WRAP_UI(UIS ${lxqt-organizer_UIS})
 
@@ -64,16 +66,17 @@ set ( lxqt-organizer_MOCS
 	dialogabout.h
 	dialogupcomingschedule.h
 	dialogupcomingbirthdays.h
+	dialogrepeatappointment.h
 	)
 QT5_WRAP_CPP(MOCS ${lxqt-organizer_MOCS})
 
 add_executable ( lxqt-organizer ${lxqt-organizer_SRCS} ${UIS} ${RSCS} ${TRS} ${MOCS} )
 target_link_libraries ( lxqt-organizer  Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Svg Qt5::Xml )
 
-#install(TARGETS lxqt-organizer DESTINATION ${CMAKE_INSTALL_PREFIX})
 
 INSTALL(TARGETS
     lxqt-organizer
     RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
     COMPONENT Runtime
 )
+

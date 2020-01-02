@@ -55,10 +55,8 @@ void DbManager::createDatebaseTables()
     sql1.append("StartTime TEXT,");
     sql1.append("EndTime TEXT,");
     sql1.append("Category TEXT,");
-    sql1.append("IsFullDay INTEGER,");
-    sql1.append("IsRepeating INTEGER,");
-    sql1.append("ParentId INTEGER");
-    sql1.append(");");    
+    sql1.append("IsFullDay INTEGER");
+    sql1.append(");");
 
 
     QString sql2 = "CREATE TABLE contacts (ContactId INTEGER PRIMARY KEY,";
@@ -80,7 +78,7 @@ void DbManager::createDatebaseTables()
     query.prepare(sql1);
     if(!query.exec())
     {
-       // qDebug()<<"Table appointments already exists";
+       //qDebug()<<"Table appointments already exists";
     }
     else {
         //qDebug()<<"Table appointments successfully created";
@@ -88,13 +86,11 @@ void DbManager::createDatebaseTables()
     query.prepare(sql2);
     if(!query.exec())
     {
-      // qDebug()<<"Table contacts already exists";
+      //qDebug()<<"Table contacts already exists";
     }
     else {
        //qDebug()<<"Table contacts successfully created";
-    }
-
-
+    }   
 
 }
 
@@ -112,9 +108,6 @@ int DbManager::addAppointment(Appointment &appointment)
     QString endTime=appointment.m_endTime;
     QString category=appointment.m_category;
     int isFullDay=appointment.m_isFullDay;
-    int isRepeating =appointment.m_isRepeating;
-    int parentId=appointment.m_parentId;
-
 
 
     QString sql="INSERT INTO appointments(`AppointmentId`,";
@@ -125,9 +118,8 @@ int DbManager::addAppointment(Appointment &appointment)
     sql.append("`StartTime`,");
     sql.append("`EndTime`,");
     sql.append("`Category`,");
-    sql.append("`IsFullDay`,");
-    sql.append("`IsRepeating`,");
-    sql.append("`ParentId`)");
+    sql.append("`IsFullDay`)");
+
 
     sql.append("VALUES (:idin,");
     sql.append(":titlein,");
@@ -137,11 +129,7 @@ int DbManager::addAppointment(Appointment &appointment)
     sql.append(":starttimein,");
     sql.append(":endtimein,");
     sql.append(":catin,");
-    sql.append(":isfulldayin,");
-    sql.append(":isrepeatingin,");
-    sql.append(":parentidin);");
-
-
+    sql.append(":isfulldayin);");
 
     QSqlQuery query;
     query.prepare(sql);
@@ -153,12 +141,8 @@ int DbManager::addAppointment(Appointment &appointment)
     query.bindValue(":starttimein",startTime);
     query.bindValue(":endtimein",endTime);
     query.bindValue(":catin",category);
-    query.bindValue(":isfulldayin",isFullDay);
-    query.bindValue(":isrepeatingin",isRepeating);
-    query.bindValue(":parentidin",parentId);
-
+    query.bindValue(":isfulldayin",isFullDay);    
     query.exec();
-
 
     int id = query.lastInsertId().toInt();
     //qDebug() << "added new appointment with ID = "<<id;
@@ -177,9 +161,7 @@ bool DbManager::updateAppointment(Appointment &appointment, int id)
     sql.append(", StartTime = :stin");
     sql.append(", EndTime = :etin");
     sql.append(", Category = :catin");
-    sql.append(", IsFullDay = :isfdin");
-    sql.append(", IsRepeating = :isrin");
-    sql.append(", ParentId = :pidin");
+    sql.append(", IsFullDay = :isfdin");  
 
     sql.append(" WHERE AppointmentId =:idin");
 
@@ -194,9 +176,6 @@ bool DbManager::updateAppointment(Appointment &appointment, int id)
       qry.bindValue(":etin",appointment.m_endTime);
       qry.bindValue(":catin",appointment.m_category);
       qry.bindValue(":isfdin",appointment.m_isFullDay);
-      qry.bindValue(":isrin",appointment.m_isRepeating);
-      qry.bindValue(":pidin",appointment.m_parentId);
-
 
       qry.bindValue(":idin", QString::number(id));
       success=qry.exec();
@@ -247,13 +226,6 @@ QList<Appointment> DbManager::getAllAppointments()
         idName = query.record().indexOf("IsFullDay");
         int isFullDay = query.value(idName).toInt();
 
-        idName = query.record().indexOf("IsRepeating");
-        int isRepeating = query.value(idName).toInt();
-
-        idName = query.record().indexOf("ParentId");
-        int parentId = query.value(idName).toInt();
-
-
         Appointment tmp;
         tmp.m_id=aid;
         tmp.m_title=title;
@@ -264,8 +236,7 @@ QList<Appointment> DbManager::getAllAppointments()
         tmp.m_endTime=endTime;
         tmp.m_category=category;
         tmp.m_isFullDay=isFullDay;
-        tmp.m_isRepeating=isRepeating;
-        tmp.m_parentId=parentId;
+
 
         appointmentList.append(tmp);
 }
@@ -301,12 +272,6 @@ Appointment DbManager::getAppointmentByID(int id)
     idName = query.record().indexOf("IsFullDay");
     int isFullDay = query.value(idName).toInt();
 
-    idName = query.record().indexOf("IsRepeating");
-    int isRepeating = query.value(idName).toInt();
-
-    idName = query.record().indexOf("ParentId");
-    int parentId = query.value(idName).toInt();
-
 
     Appointment appointment;
     appointment.m_id=idd;
@@ -318,8 +283,6 @@ Appointment DbManager::getAppointmentByID(int id)
     appointment.m_endTime=endTime;
     appointment.m_category=category;
     appointment.m_isFullDay=isFullDay;
-    appointment.m_isRepeating=isRepeating;
-    appointment.m_parentId=parentId;
 
     return appointment;
 
@@ -355,11 +318,6 @@ QList<Appointment> DbManager::getAppointmentsOnDate(QDate &diaryDate)
         idName = query.record().indexOf("IsFullDay");
         int isFullDay = query.value(idName).toInt();
 
-        idName = query.record().indexOf("IsRepeating");
-        int isRepeating = query.value(idName).toInt();
-
-        idName = query.record().indexOf("ParentId");
-        int parentId = query.value(idName).toInt();
 
         QDate appointmentDate =QDate::fromString(date);
         if(appointmentDate ==checkDate)
@@ -374,8 +332,6 @@ QList<Appointment> DbManager::getAppointmentsOnDate(QDate &diaryDate)
             tmp.m_endTime=endTime;
             tmp.m_category=category;
             tmp.m_isFullDay=isFullDay;
-            tmp.m_isRepeating=isRepeating;
-            tmp.m_parentId=parentId;
 
             appointmentList.append(tmp);
         }
@@ -416,23 +372,6 @@ bool DbManager::deleteAppointmentById(const int id)
     }
    // qDebug()<< "Remove appointment success = "<<success;
     return success;
-}
-
-bool DbManager::deleteAppointmentByParentID(const int parentId)
-{
-    bool success = false;
-    qDebug() << "Parent id = "<<parentId;
-    QSqlQuery queryDelete;
-    queryDelete.prepare("DELETE FROM appointments WHERE ParentId = (:idin)");
-    queryDelete.bindValue(":idin", parentId);
-    success = queryDelete.exec();
-    if(!success)
-    {
-      // qDebug() << "delete appointment by parentID failed: " << queryDelete.lastError();
-    }
-    //qDebug()<< "Deleted appointment by parentID success = "<<success;
-    return success;
-
 }
 
 
@@ -519,7 +458,6 @@ bool DbManager::updateContact(Contact &contact, int id)
 {
     bool success =false;
 
-
     QString sql ="UPDATE contacts SET ";
     sql.append(" FirstName = :fnin");
     sql.append(", MidName = :mnin");
@@ -536,8 +474,6 @@ bool DbManager::updateContact(Contact &contact, int id)
     sql.append(", AddToCalendar =:addtocalin");
 
     sql.append(" WHERE ContactId =:idin");
-
-    //qDebug()<<"sql query = "<<sql;
 
     QSqlQuery qry;
     if(qry.prepare(sql))

@@ -38,10 +38,7 @@ DialogShowDayDetails::DialogShowDayDetails(QWidget *parent,
 
         if(adate==*theSelectedDate)
         {
-//            qDebug()<<"Appointment: "<<a.m_id<<" "<<a.m_title
-//                   <<" "<<a.m_date<<" "<<a.m_category;
             dayList.append(a);
-
         }
     }
 
@@ -61,39 +58,6 @@ void DialogShowDayDetails::on_listView_doubleClicked(const QModelIndex &index)
     Appointment tmp =dayListModel->getAppointment(selectedRowIdx);
     int dbId =tmp.m_id;
     UpdateAppointment(dbId,selectedRowIdx);
-
-//    int selectedRowIdx=index.row();
-
-//    Appointment tmp =dayListModel->getAppointment(selectedRowIdx);
-
-//    int dbId =tmp.m_id;
-//    qDebug()<<"Selected Appointment details...";
-
-//    qDebug()<<"Appointment ID = "<<tmp.m_id;
-//    qDebug()<<"Appointment Title = "<<tmp.m_title;
-//    qDebug()<<"Appointment Location = "<<tmp.m_location;
-
-//        QMessageBox msgBox;
-//        msgBox.setWindowTitle("Delete Appointment");
-//        msgBox.setText("Are you sure you want to delete appointment?");
-//        msgBox.setStandardButtons(QMessageBox::Yes);
-//        msgBox.addButton(QMessageBox::No);
-//        msgBox.setDefaultButton(QMessageBox::No);
-//        if(msgBox.exec() == QMessageBox::Yes){
-//            //remove from model
-//            dayListModel->removeAppointment(selectedRowIdx);
-//            //remove from database
-//            theDbm.deleteAppointmentById(dbId);
-
-
-//        }else {
-//            qDebug()<<"abort delete reminder";
-//        }
-//        //update reminder listview
-//        ui->listView->setModel(dayListModel);
-
-
-
 }
 
 void DialogShowDayDetails::UpdateAppointment(int dbID, int selectedRowindex)
@@ -135,8 +99,7 @@ void DialogShowDayDetails::UpdateAppointment(int dbID, int selectedRowindex)
         a.m_endTime=appointmentEndTime.toString();
         a.m_category=category;
         a.m_isFullDay=isAllDay;
-        a.m_isRepeating=0;
-        a.m_parentId=0;
+
 
         if (theDbm.isOpen())
         {

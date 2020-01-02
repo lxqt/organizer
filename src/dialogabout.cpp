@@ -36,7 +36,7 @@ DialogAbout::~DialogAbout()
 void DialogAbout::SetAboutMessage()
 {
     QString descMsg = "LXQt Organizer is a lightweight organizer for personal information management.";
-    QString headerMsg = "LXQt Organizer (v0.004 Alpha1 Build3)";
+    QString headerMsg = "LXQt Organizer (v0.004 Beta Build1)";
     QString authorMsg = "Author (Lead Developer): Alan Crispin  (aka. crispina)";
     QString lxqtMsg1 =  "LXQt desktop project.";
     QString lxqtLinkMsg ="<a href='https://github.com/lxqt'>LXQt</a>";

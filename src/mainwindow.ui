@@ -147,6 +147,8 @@
      <string>Action</string>
     </property>
     <addaction name="actionNew_Appointment"/>
+    <addaction name="actionGenerate_Repeat_Appointments"/>
+    <addaction name="separator"/>
     <addaction name="actionNew_Contact"/>
     <addaction name="separator"/>
     <addaction name="actionUpcoming_Schedule"/>
@@ -157,10 +159,18 @@
      <string>Options</string>
     </property>
     <addaction name="actionShow_Birthdays_on_Calendar"/>
+    <addaction name="separator"/>
     <addaction name="actionShow_Holidays_on_Calendar"/>
-    <addaction name="action_Increase_Font"/>
-    <addaction name="actionDecrease_Font"/>
-    <addaction name="actionReset_Calendar_Font_Size"/>
+    <addaction name="separator"/>
+    <addaction name="actionColour_Code_Appointments"/>
+    <addaction name="separator"/>
+    <addaction name="actionShow_General_Events"/>
+    <addaction name="actionShow_Family_Events"/>
+    <addaction name="actionShow_Leisure_Events"/>
+    <addaction name="actionShow_Meetings"/>
+    <addaction name="actionShow_Work"/>
+    <addaction name="actionShow_Vacations"/>
+    <addaction name="actionShow_Medical"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -178,6 +188,9 @@
     <addaction name="actionPrevious_Month"/>
     <addaction name="actionShow_Day_Events"/>
     <addaction name="actionToday"/>
+    <addaction name="action_Increase_Font"/>
+    <addaction name="actionDecrease_Font"/>
+    <addaction name="actionReset_Calendar_Font_Size"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -206,7 +219,6 @@
    <addaction name="actionToday"/>
    <addaction name="separator"/>
    <addaction name="separator"/>
-   <addaction name="actionUpcoming_Schedule"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionExit">
@@ -329,7 +341,7 @@
   </action>
   <action name="actionRefresh_Calendar">
    <property name="icon">
-    <iconset resource="icons.qrc">
+    <iconset>
      <normaloff>:/new/toolbar/icons/refresh.svg</normaloff>:/new/toolbar/icons/refresh.svg</iconset>
    </property>
    <property name="text">
@@ -348,7 +360,7 @@
   <action name="action_Increase_Font">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/icon-a.svg</normaloff>:/new/toolbar/icons/icon-a.svg</iconset>
+     <normaloff>:/new/toolbar/icons/icon-f.svg</normaloff>:/new/toolbar/icons/icon-f.svg</iconset>
    </property>
    <property name="text">
     <string>Increase Calendar Font Size</string>
@@ -357,7 +369,7 @@
   <action name="actionDecrease_Font">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/icon-z.svg</normaloff>:/new/toolbar/icons/icon-z.svg</iconset>
+     <normaloff>:/new/toolbar/icons/icon-d.svg</normaloff>:/new/toolbar/icons/icon-d.svg</iconset>
    </property>
    <property name="text">
     <string>Decrease Calendar Font Size</string>
@@ -366,7 +378,7 @@
   <action name="actionReset_Calendar_Font_Size">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/icon-s.svg</normaloff>:/new/toolbar/icons/icon-s.svg</iconset>
+     <normaloff>:/new/toolbar/icons/icon-r.svg</normaloff>:/new/toolbar/icons/icon-r.svg</iconset>
    </property>
    <property name="text">
     <string>Reset Calendar Font Size</string>
@@ -379,6 +391,79 @@
    </property>
    <property name="text">
     <string>Today (Spacebar)</string>
+   </property>
+  </action>
+  <action name="actionGenerate_Repeat_Appointments">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/toolbar/icons/repeats.svg</normaloff>:/new/toolbar/icons/repeats.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Generate Repeat Appointments</string>
+   </property>
+  </action>
+  <action name="actionShow_General_Events">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show General </string>
+   </property>
+  </action>
+  <action name="actionShow_Family_Events">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Family</string>
+   </property>
+  </action>
+  <action name="actionShow_Leisure_Events">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Leisure</string>
+   </property>
+  </action>
+  <action name="actionShow_Meetings">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Meetings</string>
+   </property>
+  </action>
+  <action name="actionShow_Work">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Work</string>
+   </property>
+  </action>
+  <action name="actionShow_Vacations">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Vacations</string>
+   </property>
+  </action>
+  <action name="actionShow_Medical">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Medical</string>
+   </property>
+  </action>
+  <action name="actionColour_Code_Appointments">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Colour Code Appointments</string>
    </property>
   </action>
  </widget>

@@ -100,22 +100,21 @@ QVariant ScheduleListModel::data(const QModelIndex &index, int role) const
 
         if (appointment.m_isFullDay==1)
         {
-            details ="----------------------"
-                    "\nTitle: "+appointment.m_title
+            details ="Title: "+appointment.m_title
                     +"\nDate: "+appointment.m_date
                     +"\nLocation: "+appointment.m_location
-                    +"\nAll Day Event" +"\nNotes: "+appointment.m_description;
-                    //+"\nCategory: "+appointment.m_category;
+                    +"\nAll Day Event" +"\nNotes: "+appointment.m_description
+                    +"\n----------------------";
+
         }
         else {
-            details ="----------------------"
-                    "\nTitle: "+appointment.m_title
+            details ="Title: "+appointment.m_title
                     +"\nDate: "+appointment.m_date
                     +"\nLocation: "+appointment.m_location
                     + "\nStart Time: "
                     +starts.toString("hh:mm")+" End Time: "+ends.toString("hh:mm")
-                    +"\nNotes: "+appointment.m_description;
-                    //+"\nCategory: "+appointment.m_category;
+                    +"\nNotes: "+appointment.m_description
+                    +"\n----------------------";
         }
 
         return details;

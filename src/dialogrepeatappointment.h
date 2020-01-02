@@ -16,9 +16,8 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-
-#ifndef DIALOGAPPOINTMENT_H
-#define DIALOGAPPOINTMENT_H
+#ifndef DIALOGREPEATAPPOINTMENT_H
+#define DIALOGREPEATAPPOINTMENT_H
 
 #include <QDialog>
 #include <QDate>
@@ -28,55 +27,60 @@
 #include "appointment.h"
 
 namespace Ui {
-class DialogAppointment;
+class DialogRepeatAppointment;
 }
 
-class DialogAppointment : public QDialog
+class DialogRepeatAppointment : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit DialogAppointment(QWidget *parent = nullptr, QDate *theAppointmentDate=nullptr);
-    explicit DialogAppointment(QWidget *parent = nullptr, Appointment *theAppointment=nullptr);
-    ~DialogAppointment();
+
+
+    explicit DialogRepeatAppointment(QWidget *parent = nullptr, QDate *theAppointmentDate=nullptr);
+    ~DialogRepeatAppointment();
+
+
     QDate appointmentDate;
     QTime startTime;
     QTime endTime;
-    QString category;    
+    QString category;
 
     int isAllDay=0; //no
-    bool deleteRequested=false;
+    int repeatDayInterval=0;
+    int repeatNumber=0;
+
+    int getRepeatDayInterval();
+    int getRepeatNumber();
 
     QString getTitle();
     QString getLocation();
     QString getDescription();
     QDate getAppointmentDate();
     QTime getStartTime();
-    QTime getEndTime(); 
+    QTime getEndTime();
     int getAllDay();
     QString getCategory();
-
-    bool getDeleteRequested();
     void setupComboBoxes();
+
 
 private slots:
     void accept();
 
-    void on_dateEditAppointmentDate_userDateChanged(const QDate &date);
-
-    void on_timeEditStartTime_userTimeChanged(const QTime &time);
-
-    void on_timeEditEndTime_userTimeChanged(const QTime &time);
-
-    void on_checkBoxDelete_stateChanged(int arg1);   
-
     void on_comboBoxCategory_activated(const QString &arg1);
 
-    void on_checkBoxAllDay_stateChanged(int arg1);
+    void on_timeEditStarts_userTimeChanged(const QTime &time);
 
+    void on_timeEditEnds_userTimeChanged(const QTime &time);
+
+    void on_checkBox_stateChanged(int arg1);
+
+    void on_spinBoxDays_valueChanged(int arg1);
+
+    void on_spinBoxRepeatNumber_valueChanged(int arg1);
 
 private:
-    Ui::DialogAppointment *ui;
+    Ui::DialogRepeatAppointment *ui;
 };
 
-#endif // DIALOGAPPOINTMENT_H
+#endif // DIALOGREPEATAPPOINTMENT_H

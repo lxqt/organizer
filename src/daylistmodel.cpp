@@ -102,8 +102,6 @@ QVariant DayListModel::data(const QModelIndex &index, int role) const
                     "Title: "+appointment.m_title+"\nLocation: "+appointment.m_location
                     +"\nAll Day Event" +"\nNotes: "+appointment.m_description
                     +"\n---------------------";
-
-            //+"\nCategory: "+appointment.m_category;
         }
         else {
             details =
@@ -113,8 +111,6 @@ QVariant DayListModel::data(const QModelIndex &index, int role) const
                     +"\nNotes: "+appointment.m_description
                     +"\n---------------------";
 
-
-            //+"\nCategory: "+appointment.m_category;
         }
 
         return details;

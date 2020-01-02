@@ -43,6 +43,7 @@
 #include "dialogabout.h"
 #include "dialogupcomingschedule.h"
 #include "dialogupcomingbirthdays.h"
+#include "dialogrepeatappointment.h"
 
 
 namespace Ui {
@@ -76,11 +77,16 @@ public:
     QString category="";    
     int isAllDay=0;
 
+    int isRepeating=0;
+    int repeatDayInterval=0;
+    int repeatNumber=0;
+
     int selectedAppointmentdDbId =0;
 
     //Appointments
     void NewAppointment();
-
+    void GenerateRepeatAppointments();
+    static bool compare(const Appointment& first, const Appointment& second);
     //AppointmentList methods
     void LoadDatabaseAppointmentsToAppointmentList();
 
@@ -114,9 +120,23 @@ public:
     void RemoveContactFromContactList(int contactId);
 
 
+    QAction *newAppointmentAction;
+    QAction *newContactAction;
+
     //Flags
     bool flagShowBirthdays=true;
     bool flagShowHolidays =true;
+    bool flagShowGeneralEvents=true;
+    bool flagShowFamilyEvents =true;
+    bool flagShowLeisureEvents =true;
+    bool flagShowMeetings=true;
+    bool flagShowWorkEvents =true;
+    bool flagShowVacations=true;
+    bool flagShowMedical=true;
+    bool flagColourCoding=true;
+
+
+
     bool flagQuickView=false;
 
 
@@ -171,6 +191,9 @@ private slots:
     void decreaseFontSlot();
     void resetFontSlot();
 
+    void newAppointmentSlot();
+    void newContactSlot();
+
     void on_actionExit_triggered();
 
     void on_actionNext_Day_triggered();
@@ -221,6 +244,24 @@ private slots:
 
     void on_actionToday_triggered();
 
+    void on_actionGenerate_Repeat_Appointments_triggered();
+
+    void on_actionShow_General_Events_triggered();
+
+    void on_actionShow_Family_Events_triggered();
+
+    void on_actionShow_Leisure_Events_triggered();
+
+    void on_actionShow_Meetings_triggered();
+
+    void on_actionShow_Work_triggered();
+
+    void on_actionShow_Vacations_triggered();
+
+    void on_actionShow_Medical_triggered();
+
+    void on_actionColour_Code_Appointments_triggered();
+
 private:
     Ui::MainWindow *ui;
 
@@ -235,7 +276,7 @@ private:
     int selectedMonth=0;
     int selectedDay=0;
 
-    QList<Appointment> appointmentList;
+    QList<Appointment> appointmentList;    
     QList<Holiday> holidayList;
     QList <Contact> contactList;
 

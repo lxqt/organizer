@@ -28,7 +28,7 @@
 #include <QDebug>
 #include <QDate>
 #include <QList>
-#include"appointment.h"
+#include "appointment.h"
 #include "contact.h"
 
 
@@ -47,10 +47,8 @@ public:
     QList<Appointment> getAllAppointments();
     Appointment getAppointmentByID(int id);
     QList<Appointment> getAppointmentsOnDate(QDate &diaryDate);    
-    bool deleteAppointmentById(const int id);
-    bool deleteAppointmentByParentID(const int parentId);
+    bool deleteAppointmentById(const int id);    
     bool deleteAllAppointments();
-
 
     //Contacts
     int addContact(Contact &contact);

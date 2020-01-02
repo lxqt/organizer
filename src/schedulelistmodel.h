@@ -22,7 +22,6 @@
 #include <QAbstractListModel>
 #include <QTime>
 #include "appointment.h"
-//#include "dialogupcomingschedule.h"
 
 class ScheduleListModel: public QAbstractListModel
 {
@@ -43,10 +42,6 @@ public:
                    int role = Qt::DisplayRole) const override;
 private:
     QList<Appointment> modelAppointmentList;
-
-
-
-
 
 };
 

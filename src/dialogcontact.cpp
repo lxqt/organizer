@@ -155,8 +155,6 @@ int DialogContact::getAddToCal()
     return this->addToCalendar;
 }
 
-
-
 void DialogContact::accept()
 {
     if (this->getFirstName().isEmpty() || this->getLastName().isEmpty())
@@ -176,8 +174,6 @@ void DialogContact::on_dateEditBirthDate_userDateChanged(const QDate &date)
 {
     this->birthDate=date;
 }
-
-
 
 void DialogContact::on_checkBoxDelete_stateChanged(int arg1)
 {
@@ -200,5 +196,4 @@ void DialogContact::on_checkBoxAddBirthdayToCal_stateChanged(int arg1)
     else if (arg1==Qt::Checked) {
        addToCalendar=1;
     }
-
 }

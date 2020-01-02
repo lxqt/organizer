@@ -63,6 +63,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->actionShow_Birthdays_on_Calendar->setChecked(true);
     ui->actionShow_Holidays_on_Calendar->setChecked(true);
+    ui->actionShow_General_Events->setChecked(true);
+    ui->actionShow_Family_Events->setChecked(true);
+    ui->actionShow_Leisure_Events->setChecked(true);
+    ui->actionShow_Meetings->setChecked(true);
+    ui->actionShow_Work->setChecked(true);
+    ui->actionShow_Vacations->setChecked(true);
+    ui->actionShow_Medical->setChecked(true);
+    ui->actionColour_Code_Appointments->setChecked(true);
 
     //Keyboard QActions (shortcuts)
     gotoNextDayAction= new QAction(this);
@@ -97,25 +105,39 @@ MainWindow::MainWindow(QWidget *parent) :
     this->addAction(showAppointmentDetailsAction);
 
     increaseFontAction=new QAction(this);
-    increaseFontAction->setShortcut(Qt::Key_A);
+    increaseFontAction->setShortcut(Qt::Key_F);
     connect(increaseFontAction, SIGNAL(triggered()),
             this, SLOT(increaseFontSlot()));
     this->addAction(increaseFontAction);
 
     resetFontAction=new QAction(this);
-    resetFontAction->setShortcut(Qt::Key_Z);
+    resetFontAction->setShortcut(Qt::Key_R);
     connect(resetFontAction, SIGNAL(triggered()),
-            this, SLOT(decreaseFontSlot()));
+            this, SLOT(resetFontSlot()));
     this->addAction(resetFontAction);
 
     decreaseFontAction=new QAction(this);
-    decreaseFontAction->setShortcut(Qt::Key_S);
+    decreaseFontAction->setShortcut(Qt::Key_D);
     connect(decreaseFontAction, SIGNAL(triggered()),
-            this, SLOT(resetFontSlot()));
+            this, SLOT(decreaseFontSlot()));
     this->addAction(decreaseFontAction);
+
+    newAppointmentAction=new QAction(this);
+    newAppointmentAction->setShortcut(Qt::Key_A);
+    connect(newAppointmentAction, SIGNAL(triggered()),
+            this, SLOT(newAppointmentSlot()));
+    this->addAction(newAppointmentAction);
+
+    newContactAction=new QAction(this);
+    newContactAction->setShortcut(Qt::Key_C);
+    connect(newContactAction, SIGNAL(triggered()),
+            this, SLOT(newContactSlot()));
+    this->addAction(newContactAction);
+
 
     //Setup empty lists
     appointmentList= QList<Appointment>();
+
     holidayList=QList<Holiday>();
 
     contactList =QList<Contact>();
@@ -147,7 +169,6 @@ void MainWindow::NewAppointment()
 
     if (appointmentDialog->exec() == QDialog::Accepted ) {
 
-
         title =appointmentDialog->getTitle();
         location =appointmentDialog->getLocation();
         description= appointmentDialog->getDescription();
@@ -166,9 +187,6 @@ void MainWindow::NewAppointment()
         a.m_endTime=appointmentEndTime.toString();
         a.m_category=category;
         a.m_isFullDay=isAllDay;
-        a.m_isRepeating=0;
-        a.m_parentId=0;
-
 
         if (dbm.isOpen())
         {
@@ -176,8 +194,86 @@ void MainWindow::NewAppointment()
             appointmentList.append(a);
             //qDebug()<<"Added Appointment: Appointment ID = "<<appointmentId;
             UpdateCalendar();
-        }
+        }        
     }
+}
+
+void MainWindow::GenerateRepeatAppointments()
+{
+    DialogRepeatAppointment *repeatDialog = new  DialogRepeatAppointment(this,&selectedDate);
+    repeatDialog->setModal(true);
+
+    if (repeatDialog->exec() == QDialog::Accepted ) {
+
+        title =repeatDialog->getTitle();
+        location =repeatDialog->getLocation();
+        description= repeatDialog->getDescription();
+        selectedDate=repeatDialog->getAppointmentDate(); //appointment date
+        appointmentStartTime=repeatDialog->getStartTime();
+        appointmentEndTime=repeatDialog->getEndTime();
+        category=repeatDialog->getCategory();
+        isAllDay=repeatDialog->getAllDay();
+
+        repeatDayInterval=repeatDialog->getRepeatDayInterval();
+        repeatNumber=repeatDialog->getRepeatNumber();
+
+        Appointment a;
+        a.m_title=title;
+        a.m_location=location;
+        a.m_description=description;
+        a.m_date=selectedDate.toString();
+        a.m_startTime=appointmentStartTime.toString();
+        a.m_endTime=appointmentEndTime.toString();
+        a.m_category=category;
+        a.m_isFullDay=isAllDay;
+
+
+        Appointment tmp;
+        QDate repeatDate=QDate::fromString(a.m_date);
+
+        for (int i=0;i<repeatNumber;i+= 1)
+        {
+            tmp.m_title=a.m_title;
+            //tmp.m_title=a.m_title;
+            tmp.m_location=a.m_location;
+            tmp.m_description=a.m_description;
+            tmp.m_date=repeatDate.addDays(repeatDayInterval*(i)).toString();
+            tmp.m_startTime=a.m_startTime;
+            tmp.m_endTime=a.m_endTime;
+            tmp.m_category=a.m_category;
+            tmp.m_isFullDay=a.m_isFullDay;
+
+
+            if (dbm.isOpen())
+            {
+                appointmentId=dbm.addAppointment(tmp);
+                //qDebug()<<"Repeat Appointment ID = "<<appointmentId;
+                appointmentList.append(tmp);
+                //qDebug()<<"Added Appointment: Appointment ID = "<<appointmentId;
+
+            }
+        }
+        UpdateCalendar();
+    }
+}
+
+bool MainWindow::compare(const Appointment &first, const Appointment &second)
+{
+    QTime firstStarts =QTime::fromString(first.m_startTime);
+    QTime secondStarts =QTime::fromString(second.m_startTime);
+
+    int fx=60*60*firstStarts.hour()+60*firstStarts.minute(); //seconds
+    int sx=60*60*secondStarts.hour()+60*secondStarts.minute();
+
+    if (fx < sx)
+    {
+        return true;
+    }
+    else if (fx > sx)
+    {
+        return false;
+    }
+    return false;
 }
 
 
@@ -189,6 +285,7 @@ void MainWindow::LoadDatabaseAppointmentsToAppointmentList()
     foreach(Appointment a, tmpList)
     {
         appointmentList.append(a);
+        //qDebug()<<"LoadDBAppointmentToAppointmentList: "<<a.m_title<<a.m_date;
     }
 }
 
@@ -239,9 +336,7 @@ void MainWindow::NewContact()
            c.m_country=country;
            c.m_telephone=phoneNumber;
            c.m_birthdate=birthDate.toString();
-           c.m_addToCalendar=addBirthdayToCalendar;
-
-           qDebug()<<"Update Contact: AddToCal = "<<c.m_addToCalendar;
+           c.m_addToCalendar=addBirthdayToCalendar;           
 
            if (dbm.isOpen())
            {
@@ -251,13 +346,9 @@ void MainWindow::NewContact()
                contactList.append(c);
                //qDebug()<<"Added contact contactId = "<<contactId;
            }
-
-
        }
-
        DisplayContactsOnTableView(); //display
        UpdateCalendar();
-
 }
 
 void MainWindow::UpdateContact(int dbID)
@@ -271,7 +362,6 @@ void MainWindow::UpdateContact(int dbID)
 
         if(contactDialog->getDeleteRequested())
         {
-
             dbm.removeContactById(dbID);
             RemoveContactFromContactList(dbID);
             DisplayContactsOnTableView();
@@ -309,8 +399,7 @@ void MainWindow::UpdateContact(int dbID)
 
         if (dbm.isOpen())
         {
-            dbm.updateContact(c,dbID);
-            //UpdateContactInContactList(c,dbID);
+            dbm.updateContact(c,dbID);            
             LoadDatebaseContactsToContactList();
         }
 
@@ -360,14 +449,6 @@ void MainWindow::RemoveContactFromContactList(int contactId)
         {
             contactList.removeAt(i);
         }
-    }
-
-    //Check contactList
-    qDebug()<<"ContactList Size = "<<contactList.size();
-
-    foreach(Contact c, contactList)
-    {
-        qDebug()<<"ContactList: "<<c.m_lastname<<" AddToCal = "<<c.m_addToCalendar;
     }
 }
 
@@ -703,6 +784,16 @@ void MainWindow::resetFontSlot()
     resetFont();
 }
 
+void MainWindow::newAppointmentSlot()
+{
+    NewAppointment();
+}
+
+void MainWindow::newContactSlot()
+{
+    NewContact();
+}
+
 void MainWindow::on_actionExit_triggered()
 {
     QApplication::quit();
@@ -745,9 +836,13 @@ void MainWindow::UpdateCalendar()
        formatBlue.setFontPointSize(fontSize);
        formatBlue.setForeground(Qt::blue);
 
-//       QTextCharFormat formatDarkBlue = cursor.charFormat();
-//       formatDarkBlue.setFontPointSize(fontSize);
-//       formatDarkBlue.setForeground(Qt::darkBlue);
+//       QTextCharFormat formatDarkGray = cursor.charFormat();
+//       formatDarkGray.setFontPointSize(fontSize);
+//       formatDarkGray.setForeground(Qt::darkGray);
+
+       QTextCharFormat formatDarkBlue = cursor.charFormat();
+       formatDarkBlue.setFontPointSize(fontSize);
+       formatDarkBlue.setForeground(Qt::darkBlue);
 
        QTextCharFormat formatDarkMagenta = cursor.charFormat();
        formatDarkMagenta.setFontPointSize(fontSize);
@@ -774,9 +869,9 @@ void MainWindow::UpdateCalendar()
        formatDarkCyan .setFontPointSize(fontSize);
        formatDarkCyan .setForeground(Qt::darkCyan);
 
-//       QTextCharFormat formatCyan = cursor.charFormat();
-//       formatCyan.setFontPointSize(fontSize);
-//       formatCyan.setForeground(Qt::cyan);
+       QTextCharFormat formatBlack = cursor.charFormat();
+       formatBlack.setFontPointSize(fontSize);
+       formatBlack.setForeground(Qt::black);
 
        QTextCharFormat formatRed = cursor.charFormat();
        formatRed.setFontPointSize(fontSize);
@@ -858,39 +953,86 @@ void MainWindow::UpdateCalendar()
            //-----------------------------------------------------
            //Add appointments to calendar
            //-----------------------------------------------------
+
+           QList<Appointment> dayList = *new QList<Appointment>();
+
            foreach(Appointment a, appointmentList)
            {
                QDate d =QDate::fromString(a.m_date);
+
                if(date ==d)
                {
-                   if(a.m_category=="Event")
-                   {
-                       //cellCursor.insertText(QString("%1").arg(date.day()), format);
-                       cellCursor.insertText("\n"+a.m_title, formatBlue);
-                   }
-                   else if(a.m_category=="Family"){
-                       cellCursor.insertText("\n"+a.m_title, formatDarkYellow);
-                   }
-                   else if(a.m_category=="Leisure"){
-                       cellCursor.insertText("\n"+a.m_title, formatDarkYellow);
-                   }
+                dayList.append(a);
+               }
 
-                   else if(a.m_category=="Meeting"){
-                       cellCursor.insertText("\n"+a.m_title, formatBlue);
-                   }
-                   else if(a.m_category=="Work"){
-                       cellCursor.insertText("\n"+a.m_title, formatBlue);
-                   }
-                   else if(a.m_category=="Vacation"){
-                       cellCursor.insertText("\n"+a.m_title, formatDarkGreen);
-                   }
+           }
 
-                   else if(a.m_category=="Medical"){
-                       cellCursor.insertText("\n"+a.m_title, formatRed);
+           std::sort(dayList.begin(), dayList.end(), compare);
+
+           foreach(Appointment a, dayList)
+           {
+               if(a.m_category=="General" && flagShowGeneralEvents)
+               {
+                   if(flagColourCoding){
+                       cellCursor.insertText("\n"+a.m_title, formatDarkBlue);
+                   }
+                   else {
+                       cellCursor.insertText("\n"+a.m_title, formatBlack);
                    }
                }
-          }
+               else if(a.m_category=="Family" && flagShowFamilyEvents){
 
+                   if(flagColourCoding) {
+                       cellCursor.insertText("\n"+a.m_title, formatMagenta);
+                   }
+                   else {
+                       cellCursor.insertText("\n"+a.m_title, formatBlack);
+                   }
+               }
+               else if(a.m_category=="Leisure" && flagShowLeisureEvents){
+                   if(flagColourCoding){
+                       cellCursor.insertText("\n"+a.m_title, formatDarkYellow);
+                   }
+                   else {
+                       cellCursor.insertText("\n"+a.m_title, formatBlack);
+                   }
+               }
+
+               else if(a.m_category=="Meeting" && flagShowMeetings){
+                   if(flagColourCoding){
+                       cellCursor.insertText("\n"+a.m_title, formatBlue);
+                   }
+                   else {
+                       cellCursor.insertText("\n"+a.m_title, formatBlack);
+                   }
+               }
+               else if(a.m_category=="Work" && flagShowWorkEvents){
+                   if(flagColourCoding){
+                       cellCursor.insertText("\n"+a.m_title, formatBlue);
+                   }
+                   else {
+                       cellCursor.insertText("\n"+a.m_title, formatBlack);
+                   }
+               }
+               else if(a.m_category=="Vacation" && flagShowVacations){
+                   if(flagColourCoding){
+                       cellCursor.insertText("\n"+a.m_title, formatDarkGreen);
+                   }
+                   else {
+                       cellCursor.insertText("\n"+a.m_title, formatBlack);
+                   }
+               }
+
+               else if(a.m_category=="Medical" && flagShowMedical){
+                   if(flagColourCoding){
+                       cellCursor.insertText("\n"+a.m_title, formatRed);
+                   }
+                   else {
+                       cellCursor.insertText("\n"+a.m_title, formatBlack);
+                   }
+               }
+
+           }
 
            date = date.addDays(1);
            if (weekDay == 7 && date.month() == selectedDate.month())
@@ -1137,6 +1279,132 @@ void MainWindow::on_actionUpcoming_Schedule_triggered()
 
 void MainWindow::on_actionToday_triggered()
 {
-    //fontSize=12;
     gotoToday();
+}
+
+void MainWindow::on_actionGenerate_Repeat_Appointments_triggered()
+{
+    GenerateRepeatAppointments();
+}
+
+
+void MainWindow::on_actionShow_General_Events_triggered()
+{
+
+
+    if(ui->actionShow_General_Events->isChecked())
+    {
+        ui->actionShow_General_Events->setChecked(true);
+        flagShowGeneralEvents=true;
+    }
+    else {
+        ui->actionShow_General_Events->setChecked(false);
+        flagShowGeneralEvents=false;
+    }
+    UpdateCalendar();
+}
+
+void MainWindow::on_actionShow_Family_Events_triggered()
+{
+    if(ui->actionShow_Family_Events->isChecked())
+    {
+        ui->actionShow_Family_Events->setChecked(true);
+        flagShowFamilyEvents=true;
+    }
+    else {
+        ui->actionShow_Family_Events->setChecked(false);
+        flagShowFamilyEvents=false;
+    }
+    UpdateCalendar();
+
+}
+
+void MainWindow::on_actionShow_Leisure_Events_triggered()
+{
+    if(ui->actionShow_Leisure_Events->isChecked())
+    {
+        ui->actionShow_Leisure_Events->setChecked(true);
+        flagShowLeisureEvents=true;
+    }
+    else {
+        ui->actionShow_Leisure_Events->setChecked(false);
+        flagShowLeisureEvents=false;
+    }
+    UpdateCalendar();
+
+}
+
+void MainWindow::on_actionShow_Meetings_triggered()
+{
+    if(ui->actionShow_Meetings->isChecked())
+    {
+        ui->actionShow_Meetings->setChecked(true);
+        flagShowMeetings=true;
+    }
+    else {
+        ui->actionShow_Meetings->setChecked(false);
+        flagShowMeetings=false;
+    }
+    UpdateCalendar();
+
+}
+
+void MainWindow::on_actionShow_Work_triggered()
+{
+    if(ui->actionShow_Work->isChecked())
+    {
+        ui->actionShow_Work->setChecked(true);
+        flagShowWorkEvents=true;
+    }
+    else {
+        ui->actionShow_Work->setChecked(false);
+        flagShowWorkEvents=false;
+    }
+    UpdateCalendar();
+
+}
+
+void MainWindow::on_actionShow_Vacations_triggered()
+{
+    if(ui->actionShow_Vacations->isChecked())
+    {
+        ui->actionShow_Vacations->setChecked(true);
+        flagShowVacations=true;
+    }
+    else {
+        ui->actionShow_Vacations->setChecked(false);
+        flagShowVacations=false;
+    }
+    UpdateCalendar();
+
+}
+
+void MainWindow::on_actionShow_Medical_triggered()
+{
+    if(ui->actionShow_Medical->isChecked())
+    {
+        ui->actionShow_Medical->setChecked(true);
+        flagShowMedical=true;
+    }
+    else {
+        ui->actionShow_Medical->setChecked(false);
+        flagShowMedical=false;
+    }
+    UpdateCalendar();
+
+}
+
+void MainWindow::on_actionColour_Code_Appointments_triggered()
+{
+    if(ui->actionColour_Code_Appointments->isChecked())
+    {
+        ui->actionColour_Code_Appointments->setChecked(true);
+        flagColourCoding=true;
+    }
+    else {
+        ui->actionColour_Code_Appointments->setChecked(false);
+        flagColourCoding=false;
+    }
+    UpdateCalendar();
+
 }
