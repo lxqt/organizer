@@ -5,7 +5,7 @@ LXQt Organizer is a lightweight organizer for personal information management.
 
 ## Overview
 
-v004 beta ** build2 **
+v004 beta **build2**
 
 * custom calendar
 
