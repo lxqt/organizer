@@ -5,7 +5,7 @@ LXQt Organizer is a lightweight organizer for personal information management.
 
 ## Overview
 
-v004 beta build1
+v004 beta ** build2 **
 
 * custom calendar
 
@@ -40,11 +40,11 @@ key_c = new contact
 
 * double click appointments (in day view) to edit
 
-* generate repeat appointments
+* repeat appointments generator
 
 * replaced reminders with show upcoming schedule
 
-* to do: testing & code refactoring 
+* **to do:** testing for v004 release shortly
 
 
 v003 
