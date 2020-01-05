@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle("LXQt Organizer");
+    setWindowTitle(tr("LXQt Organizer"));
     //set layout first
     QMainWindow::centralWidget()->layout()->setContentsMargins(0, 0, 0, 0);
 
@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     selectedDate = QDate::currentDate();
 
     dateInfoLabel =new QLabel(this);
-    dateInfoLabel->setText("Selected Date: ");
+    dateInfoLabel->setText(tr("Selected Date: "));
     selectedDateLabel = new QLabel(this);
     QFont font1 = selectedDateLabel->font();
     font1.setWeight(QFont::Bold);
@@ -61,8 +61,117 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableViewContacts->horizontalHeader()->setStretchLastSection(true);
     ui->tableViewContacts->verticalHeader()->setVisible(false);
 
+
+    //Code refactoring - translations
+
+    //File menu
+    ui->menuFile->setTitle(tr("&File"));
+    //ui->menuFile->setToolTip(tr("File"));
+    ui->actionExport_Contacts_XML->setText(tr("Export Contacts XML"));
+    ui->actionExport_Contacts_XML->setToolTip(tr("Export Contacts XML"));
+    ui->actionImport_Contacts_XML->setText(tr("Import Contacts XML"));
+    ui->actionImport_Contacts_XML->setToolTip(tr("Import Contacts XML"));
+    ui->actionExit->setText(tr("Exit"));
+    ui->actionExit->setToolTip(tr("Exit"));
+
+    //Edit menu
+    ui->menuEdit->setTitle(tr("&Edit"));
+    //ui->menuEdit->setToolTip(tr("Edit"));
+    ui->actionDelete_All_Appointments->setText(tr("Delete All Appointments"));
+    ui->actionDelete_All_Appointments->setToolTip(tr("Delete All Appointments"));
+    ui->actionDelete_All_Contacts->setText(tr("Delete All Contacts"));
+    ui->actionDelete_All_Contacts->setToolTip(tr("Delete All Contacts"));
+
+    //Action menu
+    ui->menuAction->setTitle(tr("&Action"));
+    ui->menuAction->setToolTip(tr("Action"));
+
+    ui->actionNew_Appointment->setText(tr("New Appointment"));
+    ui->actionNew_Appointment->setToolTip(tr("New Appointment"));
+    ui->actionGenerate_Repeat_Appointments->setText(tr("Generate Repeat Appointments"));
+    ui->actionGenerate_Repeat_Appointments->setToolTip(tr("Generate Repeat Appointments"));
+    ui->actionNew_Contact->setText(tr("New Contact"));
+    ui->actionNew_Contact->setToolTip(tr("New Contact"));
+    ui->actionUpcoming_Schedule->setText(tr("Upcoming Schedule"));
+    ui->actionUpcoming_Schedule->setToolTip(tr("Upcoming Schedule"));
+    ui->actionCheck_For_Birthdays->setText(tr("Check For Birthdays"));
+    ui->actionCheck_For_Birthdays->setToolTip(tr("Check For Birthdays"));
+
+    //Navigation menu
+    ui->menuNaviagation->setTitle(tr("&Navigation"));
+    //ui->menuNaviagation->setToolTip(tr("Navigation"));
+
+    ui->actionNext_Day->setText(tr("Next Day"));
+    ui->actionNext_Day->setToolTip(tr("Next Day"));
+
+    ui->actionPrevious_Day->setText(tr("Previous Day"));
+    ui->actionPrevious_Day->setToolTip(tr("Previous Day"));
+
+    ui->actionNext_Month->setText(tr("Next Month"));
+    ui->actionNext_Month->setToolTip(tr("Next Month"));
+
+    ui->actionPrevious_Month->setText(tr("Previous Month"));
+    ui->actionPrevious_Month->setToolTip(tr("Previous Month"));
+
+    ui->actionShow_Day_Events->setText(tr("Show Day Events"));
+    ui->actionShow_Day_Events->setToolTip(tr("Show Day Events"));
+
+    ui->actionToday->setText(tr("Today (Spacebar)"));
+    ui->actionToday->setToolTip(tr("Today"));
+
+    ui->action_Increase_Font->setText(tr("Increase Calendar Font Size"));
+    ui->action_Increase_Font->setToolTip(tr("Increase Calendar Font Size"));
+
+    ui->actionDecrease_Font->setText(tr("Decrease Calendar Font Size"));
+    ui->actionDecrease_Font->setToolTip(tr("Decrease Calendar Font Size"));
+
+    ui->actionReset_Calendar_Font_Size->setText(tr("Reset Calendar Font Size"));
+    ui->actionReset_Calendar_Font_Size->setToolTip(tr("Reset Calendar Font Size"));
+
+    //Options menu
+
+    ui->menuOptions->setTitle(tr("&Options"));
+   // ui->menuOptions->setToolTip(tr("Options"));
+
+
+    ui->actionShow_Birthdays_on_Calendar->setText(tr("Show Birthdays On Calendar"));
+    ui->actionShow_Birthdays_on_Calendar->setToolTip(tr("Show Birthdays On Calendar"));
+
+    ui->actionShow_Holidays_on_Calendar->setText(tr("Show Holidays On Calendar"));
+    ui->actionShow_Holidays_on_Calendar->setToolTip(tr("Show Holidays On Calendar"));
+
+    ui->actionColour_Code_Appointments->setText(tr("Colour Code Appointments"));
+    ui->actionColour_Code_Appointments->setToolTip(tr("Colour Code Appointments"));
+
+    ui->actionShow_General_Events->setText(tr("Show General"));
+    ui->actionShow_General_Events->setToolTip(tr("Show General"));
+
+    ui->actionShow_Family_Events->setText(tr("Show Family"));
+    ui->actionShow_Family_Events->setToolTip(tr("Show Family"));
+
+    ui->actionShow_Leisure_Events->setText(tr("Show Leisure"));
+    ui->actionShow_Leisure_Events->setToolTip(tr("Show Leisure"));
+
+    ui->actionShow_Meetings->setText(tr("Show Meetings"));
+    ui->actionShow_Meetings->setToolTip(tr("Show Meetings"));
+
+    ui->actionShow_Work->setText(tr("Show Work"));
+    ui->actionShow_Work->setToolTip(tr("Show Work"));
+
+    ui->actionShow_Vacations->setText(tr("Show Vacations"));
+    ui->actionShow_Vacations->setToolTip(tr("Show Vacations"));
+
+    ui->actionShow_Medical->setText(tr("Show Medical"));
+    ui->actionShow_Medical->setToolTip(tr("Show Medical"));
+
+    ui->actionShow_Fitness->setText(tr("Show Fitness"));
+    ui->actionShow_Fitness->setToolTip(tr("Show Fitness"));
+
+
+
     ui->actionShow_Birthdays_on_Calendar->setChecked(true);
     ui->actionShow_Holidays_on_Calendar->setChecked(true);
+    ui->actionColour_Code_Appointments->setChecked(true);
     ui->actionShow_General_Events->setChecked(true);
     ui->actionShow_Family_Events->setChecked(true);
     ui->actionShow_Leisure_Events->setChecked(true);
@@ -70,7 +179,22 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionShow_Work->setChecked(true);
     ui->actionShow_Vacations->setChecked(true);
     ui->actionShow_Medical->setChecked(true);
+    ui->actionShow_Fitness->setChecked(true);
     ui->actionColour_Code_Appointments->setChecked(true);
+
+    //Help menu
+
+    ui->menuHelp->setTitle(tr("&Help"));
+    //ui->menuHelp->setToolTip(tr("Help"));
+
+    ui->actionAbout->setText(tr("About"));
+    ui->actionAbout->setToolTip(tr("About"));
+
+    ui->pushButtonShowQuickFullView->setText(tr("Quick/Full View"));
+    ui->pushButtonShowQuickFullView->setToolTip(tr("Quick/Full View"));
+
+    ui->pushButtonMailTo->setText(tr("Mail To:"));
+    ui->pushButtonMailTo->setToolTip(tr("Mail To:"));
 
     //Keyboard QActions (shortcuts)
     gotoNextDayAction= new QAction(this);
@@ -250,7 +374,6 @@ void MainWindow::GenerateRepeatAppointments()
                 //qDebug()<<"Repeat Appointment ID = "<<appointmentId;
                 appointmentList.append(tmp);
                 //qDebug()<<"Added Appointment: Appointment ID = "<<appointmentId;
-
             }
         }
         UpdateCalendar();
@@ -298,64 +421,63 @@ void MainWindow::LoadDatebaseContactsToContactList()
     {
         contactList.append(c);
     }
-
 }
 
 void MainWindow::NewContact()
 {
     //Add new contact
-       DialogContact *contactDialog = new  DialogContact(this, &selectedDate);
-       contactDialog->setModal(true);
-       if (contactDialog->exec() == QDialog::Accepted ) {
-
-           this->contactFirstName=contactDialog->getFirstName();
-           this->contactMiddleNames=contactDialog->getMiddleNames();
-           this->contactLastName=contactDialog->getLastName();
-           this->contactEmail=contactDialog->getEmail();
-           this->street=contactDialog->getStreet();
-           this->city=contactDialog->getCity();
-           this->district=contactDialog->getDistrict();
-           this->county=contactDialog->getCounty();
-           this->postcode=contactDialog->getPostcode();
-           this->country=contactDialog->getCountry();
-           this->phoneNumber=contactDialog->getPhoneNumber();
-           this->birthDate=contactDialog->getBirthDate();
-           this->addBirthdayToCalendar=contactDialog->getAddToCal();
 
 
-           Contact c;
-           c.m_firstname=contactFirstName;
-           c.m_midnames=contactMiddleNames;
-           c.m_lastname=contactLastName;
-           c.m_email=contactEmail;
-           c.m_street=street;
-           c.m_district=district;
-           c.m_city=city;
-           c.m_county=county;
-           c.m_postcode=postcode;
-           c.m_country=country;
-           c.m_telephone=phoneNumber;
-           c.m_birthdate=birthDate.toString();
-           c.m_addToCalendar=addBirthdayToCalendar;           
+    DialogContact *contactDialog = new DialogContact(this);
+    contactDialog->setModal(true);
+    if (contactDialog->exec() == QDialog::Accepted ) {
 
-           if (dbm.isOpen())
-           {
-               contactId=dbm.addContact(c);
+        this->contactFirstName=contactDialog->getFirstName();
+        this->contactMiddleNames=contactDialog->getMiddleNames();
+        this->contactLastName=contactDialog->getLastName();
+        this->contactEmail=contactDialog->getEmail();
+        this->street=contactDialog->getStreet();
+        this->city=contactDialog->getCity();
+        this->district=contactDialog->getDistrict();
+        this->county=contactDialog->getCounty();
+        this->postcode=contactDialog->getPostcode();
+        this->country=contactDialog->getCountry();
+        this->phoneNumber=contactDialog->getPhoneNumber();
+        this->birthDate=contactDialog->getBirthDate();
+        this->addBirthdayToCalendar=contactDialog->getAddToCalendar();
 
-               c.m_id=contactId;
-               contactList.append(c);
-               //qDebug()<<"Added contact contactId = "<<contactId;
-           }
-       }
-       DisplayContactsOnTableView(); //display
-       UpdateCalendar();
+        Contact c;
+        c.m_firstname=contactFirstName;
+        c.m_midnames=contactMiddleNames;
+        c.m_lastname=contactLastName;
+        c.m_email=contactEmail;
+        c.m_street=street;
+        c.m_district=district;
+        c.m_city=city;
+        c.m_county=county;
+        c.m_postcode=postcode;
+        c.m_country=country;
+        c.m_telephone=phoneNumber;
+        c.m_birthdate=birthDate.toString();
+        c.m_addToCalendar=addBirthdayToCalendar;
+
+        if (dbm.isOpen())
+        {
+            contactId=dbm.addContact(c);
+            c.m_id=contactId;
+            contactList.append(c);
+            //qDebug()<<"Added contact contactId = "<<contactId;
+        }
+    }
+    DisplayContactsOnTableView(); //display
+    UpdateCalendar();
 }
 
 void MainWindow::UpdateContact(int dbID)
 {
 
     Contact currentContact = dbm.getContactByID(dbID);    
-    DialogContact *contactDialog = new  DialogContact(this,&currentContact);
+    DialogContact *contactDialog = new  DialogContact(&currentContact,this);
 
     contactDialog->setModal(true);
     if (contactDialog->exec() == QDialog::Accepted ) {
@@ -380,7 +502,7 @@ void MainWindow::UpdateContact(int dbID)
         this->country=contactDialog->getCountry();
         this->phoneNumber=contactDialog->getPhoneNumber();
         this->birthDate=contactDialog->getBirthDate();
-        this->addBirthdayToCalendar=contactDialog->getAddToCal();
+        this->addBirthdayToCalendar=contactDialog->getAddToCalendar();
 
         Contact c;
         c.m_firstname=contactFirstName;
@@ -402,9 +524,7 @@ void MainWindow::UpdateContact(int dbID)
             dbm.updateContact(c,dbID);            
             LoadDatebaseContactsToContactList();
         }
-
     }
-
     DisplayContactsOnTableView();
     UpdateCalendar(); //Birthdays
 }
@@ -434,9 +554,9 @@ void MainWindow::DisplayContactsOnTableView()
     ui->tableViewContacts->hideColumn(8); //county
     ui->tableViewContacts->hideColumn(9); //postcode
     ui->tableViewContacts->hideColumn(10); //country
-    ui->tableViewContacts->hideColumn(11); //telephone
+   // ui->tableViewContacts->hideColumn(11); //telephone
     //birthday
-    ui->tableViewContacts->hideColumn(13); //birthID
+    ui->tableViewContacts->hideColumn(12); //birthday
 }
 
 void MainWindow::RemoveContactFromContactList(int contactId)
@@ -836,9 +956,9 @@ void MainWindow::UpdateCalendar()
        formatBlue.setFontPointSize(fontSize);
        formatBlue.setForeground(Qt::blue);
 
-//       QTextCharFormat formatDarkGray = cursor.charFormat();
-//       formatDarkGray.setFontPointSize(fontSize);
-//       formatDarkGray.setForeground(Qt::darkGray);
+       QTextCharFormat formatDarkGray = cursor.charFormat();
+       formatDarkGray.setFontPointSize(fontSize);
+       formatDarkGray.setForeground(Qt::darkGray);
 
        QTextCharFormat formatDarkBlue = cursor.charFormat();
        formatDarkBlue.setFontPointSize(fontSize);
@@ -916,7 +1036,7 @@ void MainWindow::UpdateCalendar()
                cellCursor.insertText(QString("%1").arg(date.day()), format);
 
            //-----------------------------------------------------
-           // Add UK holidays to calendar
+           // Add holidays to calendar
            //-----------------------------------------------------
            if(flagShowHolidays){
 
@@ -944,7 +1064,7 @@ void MainWindow::UpdateCalendar()
 
                    if((date ==birthday) && (c.m_addToCalendar ==1))
                    {
-                       cellCursor.insertText("\nBirthday: "+name, formatDarkCyan);
+                       cellCursor.insertText(tr("\nBirthday: ")+name, formatDarkCyan);
                    }
                }
            }
@@ -980,6 +1100,22 @@ void MainWindow::UpdateCalendar()
                        cellCursor.insertText("\n"+a.m_title, formatBlack);
                    }
                }
+               else if(a.m_category=="Meeting" && flagShowMeetings){
+                   if(flagColourCoding){
+                       cellCursor.insertText("\n"+a.m_title, formatBlue);
+                   }
+                   else {
+                       cellCursor.insertText("\n"+a.m_title, formatBlack);
+                   }
+               }
+               else if(a.m_category=="Work" && flagShowWorkEvents){
+                   if(flagColourCoding){
+                       cellCursor.insertText("\n"+a.m_title, formatBlue);
+                   }
+                   else {
+                       cellCursor.insertText("\n"+a.m_title, formatBlack);
+                   }
+               }
                else if(a.m_category=="Family" && flagShowFamilyEvents){
 
                    if(flagColourCoding) {
@@ -997,26 +1133,19 @@ void MainWindow::UpdateCalendar()
                        cellCursor.insertText("\n"+a.m_title, formatBlack);
                    }
                }
-
-               else if(a.m_category=="Meeting" && flagShowMeetings){
-                   if(flagColourCoding){
-                       cellCursor.insertText("\n"+a.m_title, formatBlue);
-                   }
-                   else {
-                       cellCursor.insertText("\n"+a.m_title, formatBlack);
-                   }
-               }
-               else if(a.m_category=="Work" && flagShowWorkEvents){
-                   if(flagColourCoding){
-                       cellCursor.insertText("\n"+a.m_title, formatBlue);
-                   }
-                   else {
-                       cellCursor.insertText("\n"+a.m_title, formatBlack);
-                   }
-               }
-               else if(a.m_category=="Vacation" && flagShowVacations){
+               else if(a.m_category=="Fitness" && flagShowFitness){
                    if(flagColourCoding){
                        cellCursor.insertText("\n"+a.m_title, formatDarkGreen);
+                   }
+                   else {
+                       cellCursor.insertText("\n"+a.m_title, formatBlack);
+                   }
+               }
+
+
+               else if(a.m_category=="Vacation" && flagShowVacations){
+                   if(flagColourCoding){
+                       cellCursor.insertText("\n"+a.m_title, formatDarkGray);
                    }
                    else {
                        cellCursor.insertText("\n"+a.m_title, formatBlack);
@@ -1031,9 +1160,7 @@ void MainWindow::UpdateCalendar()
                        cellCursor.insertText("\n"+a.m_title, formatBlack);
                    }
                }
-
            }
-
            date = date.addDays(1);
            if (weekDay == 7 && date.month() == selectedDate.month())
                table->insertRows(table->rows(), 1);
@@ -1053,21 +1180,21 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h1;
     h1.m_id=1;
-    h1.m_name="Christmas";
+    h1.m_name=tr("Christmas");
     h1.m_date=QDate(year,12,25).toString();
     h1.m_addToCalendar=1;
     holidayList.append(h1);
 
     Holiday h2;
     h2.m_id=2;
-    h2.m_name="Boxing Day";
+    h2.m_name=tr("Boxing Day");
     h2.m_date=QDate(year,12,26).toString();
     h2.m_addToCalendar=1;
     holidayList.append(h2);
 
     Holiday h3;
     h3.m_id=3;
-    h3.m_name="New Years Day";
+    h3.m_name=tr("New Years Day");
     h3.m_date=QDate(year,1,1).toString();
     h3.m_addToCalendar=1;
     holidayList.append(h3);
@@ -1076,21 +1203,21 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h4;
     h4.m_id=4;
-    h4.m_name="Easter";
+    h4.m_name=tr("Easter");
     h4.m_date=easterSunday.toString();
     h4.m_addToCalendar=1;
     holidayList.append(h4);
 
     Holiday h5;
     h5.m_id=5;
-    h5.m_name="Good Friday";
+    h5.m_name=tr("Good Friday");
     h5.m_date=easterSunday.addDays(-2).toString();
     h5.m_addToCalendar=1;
     holidayList.append(h5);
 
     Holiday h6;
     h6.m_id=6;
-    h6.m_name="Easter Monday";
+    h6.m_name=tr("Easter Monday");
     h6.m_date=easterSunday.addDays(1).toString();
     h6.m_addToCalendar=1;
     holidayList.append(h6);
@@ -1153,7 +1280,8 @@ void MainWindow::on_pushButtonShowQuickFullView_clicked()
         ui->tableViewContacts->hideColumn(8); //county
         ui->tableViewContacts->hideColumn(9); //postcode
         ui->tableViewContacts->hideColumn(10); //country
-        ui->tableViewContacts->hideColumn(11); //telephone
+        //ui->tableViewContacts->hideColumn(11); //telephone
+        ui->tableViewContacts->hideColumn(12); //birthday
         flagQuickView=false;
     }
     else {
@@ -1165,7 +1293,7 @@ void MainWindow::on_pushButtonShowQuickFullView_clicked()
         ui->tableViewContacts->showColumn(8); //county
         ui->tableViewContacts->showColumn(9); //postcode
         ui->tableViewContacts->showColumn(10); //country
-        ui->tableViewContacts->showColumn(11); //telephone
+        ui->tableViewContacts->showColumn(12); //birthday
         flagQuickView=true;
     }
 }
@@ -1407,4 +1535,18 @@ void MainWindow::on_actionColour_Code_Appointments_triggered()
     }
     UpdateCalendar();
 
+}
+
+void MainWindow::on_actionShow_Fitness_triggered()
+{
+    if(ui->actionShow_Fitness->isChecked()){
+
+        ui->actionShow_Fitness->setChecked(true);
+        flagShowFitness=true;
+    }
+    else {
+        ui->actionShow_Fitness->setChecked(false);
+        flagShowFitness=false;
+    }
+    UpdateCalendar();
 }

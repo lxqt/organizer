@@ -25,8 +25,22 @@ DialogRepeatAppointment::DialogRepeatAppointment(QWidget *parent, QDate *theAppo
 {
     ui->setupUi(this);
 
-    setWindowTitle("Generate Repeat Appointments");
+    setWindowTitle(tr("Generate Repeat Appointments"));
     this->appointmentDate=*theAppointmentDate;
+
+    //Translation refactoring
+    ui->labelInfo->setText((tr("Appointment Start Date: ")));
+    ui->labelTitle->setText(tr("Title: "));
+    ui->labelLocation->setText(tr("Location: "));
+    ui->labelNotes->setText(tr("Notes: "));
+    ui->checkBox->setText(tr("All Day "));
+    ui->labelStartTime->setText(tr("Start Time: "));
+    ui->labelEndTime->setText(tr("End Time: "));
+    ui->labelCategory->setText(tr("Category"));
+    ui->labelRepeatEvery->setText(tr("Repeat Every: "));
+    ui->labelDays->setText(tr("Days "));
+    ui->labelOccurrences->setText(tr("Occurrences"));
+
     ui->labelDate->setText(appointmentDate.toString());
     ui->dateEdit->setDate(*theAppointmentDate);
 
@@ -106,13 +120,13 @@ void DialogRepeatAppointment::setupComboBoxes()
 {
     //Set up Category Combobox
 
-    ui->comboBoxCategory->addItem("General");
-    ui->comboBoxCategory->addItem("Family");
-    ui->comboBoxCategory->addItem("Leisure");
-    ui->comboBoxCategory->addItem("Meeting");
-    ui->comboBoxCategory->addItem("Work");
-    ui->comboBoxCategory->addItem("Vacation");
-    ui->comboBoxCategory->addItem("Medical");
+    ui->comboBoxCategory->addItem(tr("General"));
+    ui->comboBoxCategory->addItem(tr("Family"));
+    ui->comboBoxCategory->addItem(tr("Leisure"));
+    ui->comboBoxCategory->addItem(tr("Meeting"));
+    ui->comboBoxCategory->addItem(tr("Work"));
+    ui->comboBoxCategory->addItem(tr("Vacation"));
+    ui->comboBoxCategory->addItem(tr("Medical"));
 }
 
 void DialogRepeatAppointment::accept()

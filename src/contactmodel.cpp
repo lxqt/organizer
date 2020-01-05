@@ -141,29 +141,29 @@ QVariant ContactModel::headerData(int section, Qt::Orientation orientation, int 
         case 0:
             return "ContactId";
         case 1:
-            return "First Name";
+            return tr("First Name");
         case 2:
-            return "Mid Names";
+            return tr("Mid Names");
         case 3:
-            return "Last Name";
+            return tr("Last Name");
         case 4:
-            return "Email";
+            return tr("Email");
         case 5:
-            return "Street";
+            return tr("Street");
         case 6:
-            return "District";
+            return tr("District");
         case 7:
-            return "City";
+            return tr("City");
         case 8:
-            return "County";
+            return tr("County");
         case 9:
-            return "Postcode";
+            return tr("Postcode");
         case 10:
-            return "Country";
+            return tr("Country");
         case 11:
-            return "Telephone";       
+            return tr("Telephone");
         case 12:
-            return "Birthday";       
+            return tr("Birthday");
         default:
             return QVariant();
         }

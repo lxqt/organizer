@@ -134,6 +134,7 @@ public:
     bool flagShowVacations=true;
     bool flagShowMedical=true;
     bool flagColourCoding=true;
+    bool flagShowFitness=true;
 
 
 
@@ -261,6 +262,8 @@ private slots:
     void on_actionShow_Medical_triggered();
 
     void on_actionColour_Code_Appointments_triggered();
+
+    void on_actionShow_Fitness_triggered();
 
 private:
     Ui::MainWindow *ui;

@@ -26,7 +26,7 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
 {
     ui->setupUi(this);
     //New appointment
-    setWindowTitle("New Appointment");
+    setWindowTitle(tr("New Appointment"));
     ui->checkBoxDelete->hide();
     ui->dateEditAppointmentDate->setDate(*theAppointmentDate);
 
@@ -39,6 +39,16 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
     ui->timeEditStartTime->setTime(timeNow);
     ui->timeEditEndTime->setTime(timeNow);
 
+    //Translation refactoring
+    ui->labelDate->setText((tr("AppointmentDate: ")));
+    ui->labelTitle->setText(tr("Title: "));
+    ui->labelLocation->setText(tr("Location: "));
+    ui->labelDescription->setText(tr("Notes: "));
+    ui->checkBoxAllDay->setText(tr("All Day"));
+    ui->labelStarts->setText(tr("Start Time: "));
+    ui->labelEndTime->setText(tr("End Time: "));
+    ui->labelCategory->setText(tr("Category "));
+
     category="General";
     setupComboBoxes();
 }
@@ -49,7 +59,7 @@ DialogAppointment::DialogAppointment(QWidget *parent, Appointment *theAppointmen
 {
     ui->setupUi(this);
     //Update an appointment    
-    setWindowTitle("Update Appointment");
+    setWindowTitle(tr("Update Appointment"));
     ui->checkBoxDelete->show();
 
     ui->lineEditTitle->setText(theAppointment->m_title);
@@ -82,6 +92,16 @@ DialogAppointment::DialogAppointment(QWidget *parent, Appointment *theAppointmen
     {
         ui->checkBoxAllDay->setCheckState(Qt::Checked);
     }
+
+    //Translation refactoring
+    ui->labelDate->setText((tr("AppointmentDate: ")));
+    ui->labelTitle->setText(tr("Title: "));
+    ui->labelLocation->setText(tr("Location: "));
+    ui->labelDescription->setText(tr("Notes: "));
+    ui->checkBoxAllDay->setText(tr("All Day"));
+    ui->labelStarts->setText(tr("Start Time: "));
+    ui->labelEndTime->setText(tr("End Time: "));
+    ui->labelCategory->setText(tr("Category "));
 
 }
 
@@ -141,13 +161,14 @@ void DialogAppointment::setupComboBoxes()
 {
     //Set up Category Combobox
 
-    ui->comboBoxCategory->addItem("General");
-    ui->comboBoxCategory->addItem("Family");
-    ui->comboBoxCategory->addItem("Leisure");
-    ui->comboBoxCategory->addItem("Meeting");
-    ui->comboBoxCategory->addItem("Work");
-    ui->comboBoxCategory->addItem("Vacation");
-    ui->comboBoxCategory->addItem("Medical");    
+    ui->comboBoxCategory->addItem(tr("General"));    
+    ui->comboBoxCategory->addItem(tr("Meeting"));
+    ui->comboBoxCategory->addItem(tr("Work"));    
+    ui->comboBoxCategory->addItem(tr("Family"));
+    ui->comboBoxCategory->addItem(tr("Leisure"));
+    ui->comboBoxCategory->addItem(tr("Fitness"));
+    ui->comboBoxCategory->addItem(tr("Vacation"));
+    ui->comboBoxCategory->addItem(tr("Medical"));
 }
 
 void DialogAppointment::accept()

@@ -165,10 +165,11 @@
     <addaction name="actionColour_Code_Appointments"/>
     <addaction name="separator"/>
     <addaction name="actionShow_General_Events"/>
-    <addaction name="actionShow_Family_Events"/>
-    <addaction name="actionShow_Leisure_Events"/>
     <addaction name="actionShow_Meetings"/>
     <addaction name="actionShow_Work"/>
+    <addaction name="actionShow_Family_Events"/>
+    <addaction name="actionShow_Leisure_Events"/>
+    <addaction name="actionShow_Fitness"/>
     <addaction name="actionShow_Vacations"/>
     <addaction name="actionShow_Medical"/>
    </widget>
@@ -232,6 +233,9 @@
      <normaloff>:/new/toolbar/icons/appointment.svg</normaloff>:/new/toolbar/icons/appointment.svg</iconset>
    </property>
    <property name="text">
+    <string>New Appointment</string>
+   </property>
+   <property name="toolTip">
     <string>New Appointment</string>
    </property>
   </action>
@@ -337,15 +341,6 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
-   </property>
-  </action>
-  <action name="actionRefresh_Calendar">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/new/toolbar/icons/refresh.svg</normaloff>:/new/toolbar/icons/refresh.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Today</string>
    </property>
   </action>
   <action name="actionShow_Day_Events">
@@ -464,6 +459,14 @@
    </property>
    <property name="text">
     <string>Colour Code Appointments</string>
+   </property>
+  </action>
+  <action name="actionShow_Fitness">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Fitness</string>
    </property>
   </action>
  </widget>

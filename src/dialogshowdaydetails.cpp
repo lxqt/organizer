@@ -26,7 +26,7 @@ DialogShowDayDetails::DialogShowDayDetails(QWidget *parent,
     ui(new Ui::DialogShowDayDetails)
 {
     ui->setupUi(this);
-    setWindowTitle("Day Events");
+    setWindowTitle(tr("Day Events"));
     ui->labelSelectedDate->setText(theSelectedDate->toString());
     this->appointmentList= theDbm->getAllAppointments();
     this->theDbm=*theDbm;

@@ -26,7 +26,7 @@ DialogUpcomingBirthdays::DialogUpcomingBirthdays(QWidget *parent,
     ui(new Ui::DialogUpcomingBirthdays)
 {
     ui->setupUi(this);
-    setWindowTitle("Upcoming Birthdays (Next Seven Days)");
+    setWindowTitle(tr("Upcoming Birthdays (Next Seven Days)"));
     dialogContactList=*contactList;
 
    birthdayList =QList<QString>();
@@ -37,6 +37,9 @@ DialogUpcomingBirthdays::DialogUpcomingBirthdays(QWidget *parent,
    {
        //qDebug()<<"Contact:"<<c.m_lastname;
        QDate bornDate = QDate::fromString(c.m_birthdate);
+
+       if (!bornDate.isNull())
+       {
        QDate bdayDate=QDate(currentDate.year(),bornDate.month(),bornDate.day());
 
        QDate d1 =bdayDate.addDays(1); //can change year
@@ -60,6 +63,7 @@ DialogUpcomingBirthdays::DialogUpcomingBirthdays(QWidget *parent,
            str.append(" ("+bdayDate.toString()+")");           
            birthdayList.append(str);
        }
+      }
    }
     birthdayListModel = new BirthdayListModel(birthdayList);
     ui->listViewBirthdays->setModel(birthdayListModel);

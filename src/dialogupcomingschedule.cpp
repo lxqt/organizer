@@ -27,7 +27,7 @@ DialogUpcomingSchedule::DialogUpcomingSchedule(QWidget *parent,
 {
      ui->setupUi(this);
 
-     setWindowTitle("Upcoming Schedule (Next Seven Days)");
+     setWindowTitle(tr("Upcoming Schedule (Next Seven Days)"));
 
      this->appointmentList= theDbm->getAllAppointments();
      this->theDbm=*theDbm;
