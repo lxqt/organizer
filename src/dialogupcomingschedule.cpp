@@ -46,100 +46,41 @@ DialogUpcomingSchedule::DialogUpcomingSchedule(QWidget *parent,
      QDate currentDatePlusSix=currentDate.addDays(6);
      QDate currentDatePlusSeven=currentDate.addDays(7);
 
-     //Get the dayslist for currentDatePlusOne
-     QList<Appointment> dayList1 =QList<Appointment>();
-     foreach(Appointment a, appointmentList)
-     {
-         QDate adate = QDate::fromString(a.m_date);
+     QList<Appointment> dayList1 =getSortedDayList(currentDatePlusOne);
+     QList<Appointment> dayList2 =getSortedDayList(currentDatePlusTwo);
+     QList<Appointment> dayList3 =getSortedDayList(currentDatePlusThree);
+     QList<Appointment> dayList4 =getSortedDayList(currentDatePlusFour);
+     QList<Appointment> dayList5 =getSortedDayList(currentDatePlusFive);
+     QList<Appointment> dayList6 =getSortedDayList(currentDatePlusSix);
+     QList<Appointment> dayList7 =getSortedDayList(currentDatePlusSeven);
 
-         if(adate==currentDatePlusOne)
-         {
-             dayList1.append(a);
-         }
-     }
-     std::sort(dayList1.begin(), dayList1.end(), compare);
      schedule.append(dayList1);
-
-     QList<Appointment> dayList2 =QList<Appointment>();
-     foreach(Appointment a, appointmentList)
-     {
-         QDate adate = QDate::fromString(a.m_date);
-
-         if(adate==currentDatePlusTwo)
-         {
-             dayList2.append(a);
-         }
-     }
-     std::sort(dayList2.begin(), dayList2.end(), compare);
      schedule.append(dayList2);
-
-     QList<Appointment> dayList3 =QList<Appointment>();
-     foreach(Appointment a, appointmentList)
-     {
-         QDate adate = QDate::fromString(a.m_date);
-
-         if(adate==currentDatePlusThree)
-         {
-             dayList3.append(a);
-         }
-     }
-     std::sort(dayList3.begin(), dayList3.end(), compare);
      schedule.append(dayList3);
-
-     QList<Appointment> dayList4 =QList<Appointment>();
-     foreach(Appointment a, appointmentList)
-     {
-         QDate adate = QDate::fromString(a.m_date);
-
-         if(adate==currentDatePlusFour)
-         {
-             dayList4.append(a);
-         }
-     }
-     std::sort(dayList4.begin(), dayList4.end(), compare);
      schedule.append(dayList4);
-
-     QList<Appointment> dayList5 =QList<Appointment>();
-     foreach(Appointment a, appointmentList)
-     {
-         QDate adate = QDate::fromString(a.m_date);
-
-         if(adate==currentDatePlusFive)
-         {
-             dayList5.append(a);
-         }
-     }
-     std::sort(dayList5.begin(), dayList5.end(), compare);
      schedule.append(dayList5);
-
-     QList<Appointment> dayList6 =QList<Appointment>();
-     foreach(Appointment a, appointmentList)
-     {
-         QDate adate = QDate::fromString(a.m_date);
-
-         if(adate==currentDatePlusSix)
-         {
-             dayList6.append(a);
-         }
-     }
-     std::sort(dayList6.begin(), dayList6.end(), compare);
      schedule.append(dayList6);
-
-     QList<Appointment> dayList7 =QList<Appointment>();
-     foreach(Appointment a, appointmentList)
-     {
-         QDate adate = QDate::fromString(a.m_date);
-
-         if(adate==currentDatePlusSeven)
-         {
-             dayList7.append(a);
-         }
-     }
-     std::sort(dayList7.begin(), dayList7.end(), compare);
      schedule.append(dayList7);
 
      scheduleListModel = new ScheduleListModel(schedule);
      ui->listViewSchedule->setModel(scheduleListModel);
+}
+
+QList<Appointment> DialogUpcomingSchedule::getSortedDayList(QDate theDate)
+{
+    QList<Appointment> dayList =QList<Appointment>();
+    foreach(Appointment a, appointmentList)
+    {
+        QDate adate = QDate::fromString(a.m_date);
+
+        if(adate==theDate)
+        {
+            dayList.append(a);
+        }
+    }
+    std::sort(dayList.begin(), dayList.end(), compare);
+   return dayList;
+
 }
 
 bool DialogUpcomingSchedule::compare(const Appointment &first, const Appointment &second)

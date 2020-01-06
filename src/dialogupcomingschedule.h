@@ -42,7 +42,8 @@ public:
 
     explicit DialogUpcomingSchedule(QWidget *parent = nullptr,
                                   DbManager *theDbm=nullptr);
-     static bool compare(const Appointment& first, const Appointment& second);
+     QList<Appointment> getSortedDayList(QDate theDate);
+    static bool compare(const Appointment& first, const Appointment& second);
     ~DialogUpcomingSchedule();
 
 private:
