@@ -129,6 +129,9 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionExport_Appointments_XML"/>
+    <addaction name="actionImport_Appointments_XML"/>
+    <addaction name="separator"/>
     <addaction name="actionExport_Contacts_XML"/>
     <addaction name="actionImport_Contacts_XML"/>
     <addaction name="separator"/>
@@ -467,6 +470,16 @@
    </property>
    <property name="text">
     <string>Show Fitness</string>
+   </property>
+  </action>
+  <action name="actionExport_Appointments_XML">
+   <property name="text">
+    <string>Export Appointments (XML)</string>
+   </property>
+  </action>
+  <action name="actionImport_Appointments_XML">
+   <property name="text">
+    <string>Import Appointments (XML)</string>
    </property>
   </action>
  </widget>

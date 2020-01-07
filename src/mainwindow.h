@@ -177,6 +177,8 @@ public:
     //Export Import
     void ExportContactsXML();
     void ImportContactsXML();
+    void ExportAppointmentsXML();
+    void ImportAppointmentsXML();
 
 
 private slots:
@@ -264,6 +266,10 @@ private slots:
     void on_actionColour_Code_Appointments_triggered();
 
     void on_actionShow_Fitness_triggered();
+
+    void on_actionExport_Appointments_XML_triggered();
+
+    void on_actionImport_Appointments_XML_triggered();
 
 private:
     Ui::MainWindow *ui;

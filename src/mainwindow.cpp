@@ -772,6 +772,7 @@ void MainWindow::ExportContactsXML()
         QString country =c.m_country;
         QString telephone =c.m_telephone;
         QString birthdate =c.m_birthdate;
+        QString addToCal =QString::number(c.m_addToCalendar);
 
         QDomElement contact = document.createElement("Contact");
         contact.setAttribute("FirstName",firstName );
@@ -786,6 +787,7 @@ void MainWindow::ExportContactsXML()
         contact.setAttribute("Country",country);
         contact.setAttribute("Telephone",telephone);
         contact.setAttribute("BirthDate",birthdate);
+        contact.setAttribute("AddToCal",addToCal);
         root.appendChild(contact);
     }
 
@@ -845,6 +847,7 @@ void MainWindow::ImportContactsXML()
             c.m_country=contact.attribute("Country");
             c.m_telephone=contact.attribute("Telephone");
             c.m_birthdate=contact.attribute("BirthDate");
+            c.m_addToCalendar=contact.attribute("AddToCal").toInt();
 
             if (dbm.isOpen())
             {
@@ -857,6 +860,105 @@ void MainWindow::ImportContactsXML()
     LoadDatebaseContactsToContactList(); //refresh contactslist here
     DisplayContactsOnTableView(); //display
     UpdateCalendar(); //show birthdays
+}
+
+void MainWindow::ExportAppointmentsXML()
+{
+    QDomDocument document;
+    QDomElement root = document.createElement("Appointments");
+    document.appendChild(root);
+
+    QList<Appointment> dbAppointmentList =dbm.getAllAppointments();
+    foreach(Appointment a, dbAppointmentList){
+
+        QString title=a.m_title;
+        QString location=a.m_location;
+        QString description =a.m_description;
+        QString date =a.m_date;
+        QString startTime =a.m_startTime;
+        QString endTime=a.m_endTime;
+        QString category=a.m_category;
+        QString allDay =QString::number(a.m_isFullDay);
+
+        QDomElement appointment = document.createElement("Appointment");
+        appointment.setAttribute("Title",title);
+        appointment.setAttribute("Location", location);
+        appointment.setAttribute("Description",description);
+        appointment.setAttribute("Date",date);
+        appointment.setAttribute("StartTime",startTime);
+        appointment.setAttribute("EndTime",endTime);
+        appointment.setAttribute("Category",category);
+        appointment.setAttribute("IsAllDay",allDay);
+        root.appendChild(appointment);
+
+    }
+
+    QString filename = QFileDialog::getSaveFileName(this, "Save Appointments Xml", ".", "Xml files (*.xml)");
+    QFile file(filename);
+    if (!file.open(QFile::WriteOnly | QFile::Text)){
+
+        //qDebug() << "Error saving XML file.";
+        return;
+    }
+    else {
+        QTextStream stream(&file);
+        stream << document.toString();
+        file.close();
+        //qDebug() << "Finished";
+    }
+}
+
+void MainWindow::ImportAppointmentsXML()
+{
+    QDomDocument document;
+    QString filename = QFileDialog::getOpenFileName(this, "Open Appointments Xml", ".", "Xml files (*.xml)");
+    QFile file(filename);
+    if (!file.open(QFile::ReadOnly | QFile::Text))
+    {
+        //qDebug() << "Failed to open XML file.";
+        return;
+    }
+    else
+    {
+        if(!document.setContent(&file))
+        {
+            // qDebug() << "Failed to load document";
+            return;
+        }
+        file.close();
+    }
+
+    QDomElement root = document.firstChildElement();
+    QDomNodeList appointment = root.elementsByTagName("Appointment");
+
+    for(int i = 0; i < appointment.count(); i++)
+    {
+        QDomNode appointmentnode = appointment.at(i);
+        if(appointmentnode.isElement())
+        {
+            QDomElement appointment = appointmentnode.toElement();
+
+            Appointment a;
+            a.m_title=appointment.attribute("Title");
+            a.m_location=appointment.attribute("Location");
+            a.m_description=appointment.attribute("Description");
+            a.m_date=appointment.attribute("Date");
+            a.m_startTime=appointment.attribute("StartTime");
+            a.m_endTime=appointment.attribute("EndTime");
+            a.m_category=appointment.attribute("Category");
+            a.m_isFullDay=appointment.attribute("IsAllDay").toInt();
+
+            if (dbm.isOpen())
+            {
+                dbm.addAppointment(a);
+            }
+        }
+    }
+
+    file.close();
+    //qDebug() << "Import Finished";
+    LoadDatabaseAppointmentsToAppointmentList();
+    UpdateCalendar();
 }
 
 void MainWindow::gotoNextDaySlot()
@@ -1549,4 +1651,14 @@ void MainWindow::on_actionShow_Fitness_triggered()
         flagShowFitness=false;
     }
     UpdateCalendar();
+}
+
+void MainWindow::on_actionExport_Appointments_XML_triggered()
+{
+    ExportAppointmentsXML();
+}
+
+void MainWindow::on_actionImport_Appointments_XML_triggered()
+{
+    ImportAppointmentsXML();
 }
