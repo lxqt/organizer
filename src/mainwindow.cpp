@@ -1148,7 +1148,12 @@ void MainWindow::UpdateCalendar()
 
                    if(date ==d)
                    {
-                       cellCursor.insertText("\n"+h.m_name, formatDarkMagenta);
+                       if(flagColourCoding){
+                           cellCursor.insertText("\n"+h.m_name, formatDarkMagenta);
+                       }
+                       else {
+                           cellCursor.insertText("\n"+h.m_name, formatBlack);
+                       }
                    }
                }
            }
@@ -1166,7 +1171,14 @@ void MainWindow::UpdateCalendar()
 
                    if((date ==birthday) && (c.m_addToCalendar ==1))
                    {
-                       cellCursor.insertText(tr("\nBirthday: ")+name, formatDarkCyan);
+
+                       if(flagColourCoding){
+                           cellCursor.insertText(tr("\nBirthday: ")+name, formatDarkCyan);
+                       }
+                       else {
+                           cellCursor.insertText(tr("\nBirthday: ")+name, formatBlack);
+                       }
+
                    }
                }
            }
@@ -1323,6 +1335,37 @@ void MainWindow::AddHolidaysToHolidayList(int year)
     h6.m_date=easterSunday.addDays(1).toString();
     h6.m_addToCalendar=1;
     holidayList.append(h6);
+
+    Holiday h7;
+    h7.m_id=7;
+    h7.m_name=tr("Early May Bank Holiday");
+    QDate mayDate =QDate(year,5,1);
+    int dayOfWeek = mayDate.dayOfWeek();
+    int firstMonday = mayDate.day()-dayOfWeek+1;
+    firstMonday = (firstMonday <= 0) ? firstMonday + 7 : firstMonday % 7;
+    h7.m_date=QDate(year,5,firstMonday).toString();
+    h7.m_addToCalendar=1;
+    holidayList.append(h7);
+
+
+    Holiday h8;
+    h8.m_id=8;
+    h8.m_name=tr("Spring Bank Holiday");
+    h8.m_date=QDate(year,5,firstMonday).addDays(21).toString();
+    h8.m_addToCalendar=1;
+    holidayList.append(h8);
+
+
+    Holiday h9;
+    h9.m_id=9;
+    h9.m_name=tr("Summer Bank Holiday");
+    QDate augustDate =QDate(year,8,1);
+    int dayOfWeekAug = augustDate.dayOfWeek();
+    int firstMondayAug = mayDate.day()-dayOfWeekAug+1;
+    firstMondayAug = (firstMondayAug <= 0) ? firstMondayAug + 7 : firstMondayAug % 7;
+    h9.m_date=QDate(year,8,firstMondayAug).addDays(28).toString();
+    h9.m_addToCalendar=1;
+    holidayList.append(h9);
 }
 
 

@@ -310,7 +310,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Show Birthdays on Calendar</string>
+    <string>Show Birthdays On Calendar</string>
    </property>
   </action>
   <action name="actionShow_Holidays_on_Calendar">
@@ -318,7 +318,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Show Holidays on Calendar</string>
+    <string>Show UK Holidays On Calendar</string>
    </property>
   </action>
   <action name="actionExport_Contacts_XML">
@@ -461,7 +461,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Colour Code Appointments</string>
+    <string>Colour Code Calendar</string>
    </property>
   </action>
   <action name="actionShow_Fitness">
