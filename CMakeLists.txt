@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.1.0 FATAL_ERROR)
 # The cmake_minimum_required(VERSION) command implicitly invokes the cmake_policy(VERSION)
 # command to specify that the current project code is written for the given range of CMake
 # versions.
-project( lxqt-organizer )
+project( organizer )
 
 include(GNUInstallDirs)
 
@@ -33,8 +33,8 @@ set(LXQT_ORGANIZER_MAJOR_VERSION 0)
 set(LXQT_ORGANIZER_MINOR_VERSION 0)
 set(LXQT_ORGANIZER_PATCH_VERSION 1)
 
-set(LXQT_ORGANIZER_VERSION ${LXQT_ORGANIZER_MAJOR_VERSION}.${LXQT_ORGANIZER_MINOR_VERSION}.${LXQT_ORGANIZER_PATCH_VERSION})
-add_definitions("-DLXQT_ORGANIZER_VERSION=\"${LXQT_ORGANIZER_VERSION}\"")
+set(ORGANIZER_VERSION ${ORGANIZER_MAJOR_VERSION}.${ORGANIZER_MINOR_VERSION}.${ORGANIZER_PATCH_VERSION})
+add_definitions("-DORGANIZER_VERSION=\"${ORGANIZER_VERSION}\"")
 
 # include(LXQtPreventInSourceBuilds)
 

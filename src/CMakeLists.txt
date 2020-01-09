@@ -1,4 +1,4 @@
-project( lxqt-organizer )
+project( organizer )
 cmake_minimum_required( VERSION 3.1 )
 set( CMAKE_CXX_STANDARD 14 )
 set( CMAKE_INCLUDE_CURRENT_DIR ON )
@@ -11,7 +11,7 @@ find_package ( Qt5Gui REQUIRED )
 find_package ( Qt5Sql REQUIRED )
 find_package(Qt5Svg REQUIRED)
 find_package(Qt5Xml REQUIRED)
-set ( lxqt-organizer_HDRS
+set (organizer_HDRS
 	appointment.h
 	holiday.h
 	daylistmodel.h
@@ -22,7 +22,7 @@ set ( lxqt-organizer_HDRS
 	birthdaylistmodel.h	
 	)
 
-set ( lxqt-organizer_SRCS
+set ( organizer_SRCS
 	main.cpp
 	mainwindow.cpp
 	dialogshowdaydetails.cpp
@@ -40,7 +40,7 @@ set ( lxqt-organizer_SRCS
 	dialogrepeatappointment.cpp
 	)
 
-set ( lxqt-organizer_UIS
+set (organizer_UIS
 	mainwindow.ui
 	dialogshowdaydetails.ui
 	dialogappointment.ui
@@ -50,14 +50,14 @@ set ( lxqt-organizer_UIS
 	dialogupcomingbirthdays.ui
 	dialogrepeatappointment.ui
 	)
-QT5_WRAP_UI(UIS ${lxqt-organizer_UIS})
+QT5_WRAP_UI(UIS ${organizer_UIS})
 
-set ( lxqt-organizer_RSCS
+set ( organizer_RSCS
 	icons.qrc
 	)
-QT5_ADD_RESOURCES(RSCS ${lxqt-organizer_RSCS})
+QT5_ADD_RESOURCES(RSCS ${organizer_RSCS})
 
-set ( lxqt-organizer_MOCS
+set ( organizer_MOCS
 	mainwindow.h
 	dialogshowdaydetails.h
 	dialogappointment.h
@@ -68,14 +68,14 @@ set ( lxqt-organizer_MOCS
 	dialogupcomingbirthdays.h
 	dialogrepeatappointment.h
 	)
-QT5_WRAP_CPP(MOCS ${lxqt-organizer_MOCS})
+QT5_WRAP_CPP(MOCS ${organizer_MOCS})
 
-add_executable ( lxqt-organizer ${lxqt-organizer_SRCS} ${UIS} ${RSCS} ${TRS} ${MOCS} )
-target_link_libraries ( lxqt-organizer  Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Svg Qt5::Xml )
+add_executable ( organizer ${organizer_SRCS} ${UIS} ${RSCS} ${TRS} ${MOCS} )
+target_link_libraries ( organizer  Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Svg Qt5::Xml )
 
 
 INSTALL(TARGETS
-    lxqt-organizer
+    organizer
     RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
     COMPONENT Runtime
 )

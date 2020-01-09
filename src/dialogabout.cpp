@@ -36,15 +36,15 @@ DialogAbout::~DialogAbout()
 
 void DialogAbout::SetAboutMessage()
 {
-    QString descMsg = tr("LXQt Organizer is a lightweight organizer for personal information management.");
-    QString headerMsg = tr("LXQt Organizer (v0.004 Beta Build2d)");
+    QString descMsg = tr("Organizer is a lightweight organizer for personal information management.");
+    QString headerMsg = tr("Organizer (v0.004)");
     QString authorMsg =tr("Author (Lead Developer): Alan Crispin  (aka. crispina)");
-    QString lxqtMsg1 = tr("LXQt desktop project.");
+    QString lxqtMsg1 = tr("Desktop project.");
     QString lxqtLinkMsg ="<a href='https://github.com/lxqt'>LXQt</a>";
-    QString license1 ="LXQt Organizer is free software: you can redistribute it and/or modify it under the terms "
+    QString license1 ="Organizer is free software: you can redistribute it and/or modify it under the terms "
                       "of the GNU General Public License as published by the Free Software Foundation.";
     QString
-            license2="LXQt Organizer is distributed in the hope that it will be useful, "
+            license2="Organizer is distributed in the hope that it will be useful, "
                      "but WITHOUT ANY WARRANTY; without even the implied warranty of"
                      " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. "
                      "See the GNU General Public License for more details.";

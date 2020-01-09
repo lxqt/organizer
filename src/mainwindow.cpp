@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("LXQt Organizer"));
+    setWindowTitle(tr("Organizer"));
     //set layout first
     QMainWindow::centralWidget()->layout()->setContentsMargins(0, 0, 0, 0);
 
@@ -140,8 +140,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionShow_Holidays_on_Calendar->setText(tr("Show Holidays On Calendar"));
     ui->actionShow_Holidays_on_Calendar->setToolTip(tr("Show Holidays On Calendar"));
 
-    ui->actionColour_Code_Appointments->setText(tr("Colour Code Appointments"));
-    ui->actionColour_Code_Appointments->setToolTip(tr("Colour Code Appointments"));
+    ui->actionColour_Code_Appointments->setText(tr("Colour Code Calendar"));
+    ui->actionColour_Code_Appointments->setToolTip(tr("Colour Code Calendar"));
 
     ui->actionShow_General_Events->setText(tr("Show General"));
     ui->actionShow_General_Events->setToolTip(tr("Show General"));
@@ -1053,6 +1053,7 @@ void MainWindow::UpdateCalendar()
 
        QTextCharFormat format = cursor.charFormat();
        format.setFontPointSize(fontSize);
+       format.setForeground(Qt::black);
 
        QTextCharFormat formatBlue = cursor.charFormat();
        formatBlue.setFontPointSize(fontSize);
@@ -1108,6 +1109,7 @@ void MainWindow::UpdateCalendar()
 
        QTextCharFormat boldFormat = format;
        boldFormat.setFontWeight(QFont::Bold);
+       boldFormat.setForeground(Qt::black);
 
        QTextCharFormat highlightedFormat = boldFormat;
        highlightedFormat.setBackground(Qt::yellow);
@@ -1128,14 +1130,14 @@ void MainWindow::UpdateCalendar()
 
            if (date == QDate::currentDate())
            {
-               cellCursor.insertText(QString("%1").arg(date.day()), highlightedFormat);
+               cellCursor.insertText(QString(tr("%1")).arg(date.day()), highlightedFormat);
 
            }
            else if(date==selectedDate){
-               cellCursor.insertText(QString("%1").arg(date.day()), formatSelectedDay);
+               cellCursor.insertText(QString(tr("%1")).arg(date.day()), formatSelectedDay);
            }
            else
-               cellCursor.insertText(QString("%1").arg(date.day()), format);
+               cellCursor.insertText(QString(tr("%1")).arg(date.day()), format);
 
            //-----------------------------------------------------
            // Add holidays to calendar
@@ -1336,36 +1338,6 @@ void MainWindow::AddHolidaysToHolidayList(int year)
     h6.m_addToCalendar=1;
     holidayList.append(h6);
 
-    Holiday h7;
-    h7.m_id=7;
-    h7.m_name=tr("Early May Bank Holiday");
-    QDate mayDate =QDate(year,5,1);
-    int dayOfWeek = mayDate.dayOfWeek();
-    int firstMonday = mayDate.day()-dayOfWeek+1;
-    firstMonday = (firstMonday <= 0) ? firstMonday + 7 : firstMonday % 7;
-    h7.m_date=QDate(year,5,firstMonday).toString();
-    h7.m_addToCalendar=1;
-    holidayList.append(h7);
-
-
-    Holiday h8;
-    h8.m_id=8;
-    h8.m_name=tr("Spring Bank Holiday");
-    h8.m_date=QDate(year,5,firstMonday).addDays(21).toString();
-    h8.m_addToCalendar=1;
-    holidayList.append(h8);
-
-
-    Holiday h9;
-    h9.m_id=9;
-    h9.m_name=tr("Summer Bank Holiday");
-    QDate augustDate =QDate(year,8,1);
-    int dayOfWeekAug = augustDate.dayOfWeek();
-    int firstMondayAug = mayDate.day()-dayOfWeekAug+1;
-    firstMondayAug = (firstMondayAug <= 0) ? firstMondayAug + 7 : firstMondayAug % 7;
-    h9.m_date=QDate(year,8,firstMondayAug).addDays(28).toString();
-    h9.m_addToCalendar=1;
-    holidayList.append(h9);
 }
 
 

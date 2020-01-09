@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=LXQt Organizer
+Name=Organizer
 GenericName=Personal Information Manager 
 GenericName[de]=Personal Information Manager
 GenericName[es]=Gerente de información personal
@@ -18,8 +18,8 @@ Comment[pl]=Śledzi terminy i zadania
 Comment[pt]=Mantém o controle de compromissos e tarefas
 Comment[tr]=Randevuları ve görevleri takip eder
 Comment[zh_CN]=跟踪约会和任务
-TryExec=lxqt-organizer
-Exec=lxqt-organizer %F
+TryExec=organizer
+Exec=organizer %F
 Icon=plan
 Terminal=false
 Type=Application
@@ -33,5 +33,5 @@ Actions=new-window;
 Name=New Window
 Name[de]=Neues Fenster
 Name[ja_JP]=新しいウィンドウ
-Exec=/usr/local/lxqt-organizer --win
+Exec=/usr/local/organizer --win
 
