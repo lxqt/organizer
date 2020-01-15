@@ -36,7 +36,11 @@ DialogAbout::~DialogAbout()
 
 void DialogAbout::SetAboutMessage()
 {
-    QString descMsg = tr("Organizer is a lightweight organizer for personal information management.");
+    QString descMsg = tr("Organizer is a lightweight personal information manager consisting of a calendar and contacts list.");
+    descMsg.append(tr(" Data is stored locally in the user account and not online."));
+    descMsg.append(tr(" Appointments are added and displayed in the calendar using an entry form allowing the date, "
+                      "start and end times, description and category to be set. "
+                      "Repeating appointments can be generated. Organizer is a Qt based project."));
     QString headerMsg = tr("Organizer (v0.004)");
     QString authorMsg =tr("Author (Lead Developer): Alan Crispin  (aka. crispina)");
     QString lxqtMsg1 = tr("Desktop project.");

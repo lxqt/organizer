@@ -318,7 +318,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Show UK Holidays On Calendar</string>
+    <string>Show Holidays On Calendar</string>
    </property>
   </action>
   <action name="actionExport_Contacts_XML">

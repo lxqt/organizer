@@ -1338,6 +1338,77 @@ void MainWindow::AddHolidaysToHolidayList(int year)
     h6.m_addToCalendar=1;
     holidayList.append(h6);
 
+    Holiday h7;
+    h7.m_id=7;
+    h7.m_name=tr("May Bank Holiday");
+    QDate mayDate =QDate(year,5,1);
+    int dayOfWeek = mayDate.dayOfWeek();
+    int firstMonday = mayDate.day()-dayOfWeek+1;
+    firstMonday = (firstMonday <= 0) ? firstMonday + 7 : firstMonday % 7;
+    h7.m_date=QDate(year,5,firstMonday).toString();
+    h7.m_addToCalendar=1;
+    holidayList.append(h7);
+
+    //Days in May
+
+    int daysInMay = mayDate.daysInMonth();
+    int plusDays=0;
+
+    if (firstMonday+28<=daysInMay){
+
+        plusDays =28;
+    }
+    else {
+        plusDays=21;
+    }
+
+
+    Holiday h8;
+    h8.m_id=8;
+    h8.m_name=tr("Spring Bank Holiday");
+    QDate springbank =QDate(year,5,firstMonday).addDays(plusDays);
+
+    if (springbank.isValid())
+    {
+    h8.m_date=springbank.toString();
+    h8.m_addToCalendar=1;
+    holidayList.append(h8);
+    }
+
+//    int weeksInMay = QDate(year, 5, daysInMonth).weekNumber()
+//        - QDate(year, 5, 1).weekNumber() + 1;
+
+
+    Holiday h9;
+    h9.m_id=9;
+    h9.m_name=tr("Summer Bank Holiday");
+    QDate augustDate =QDate(year,8,1);
+    int dayOfWeekAug = augustDate.dayOfWeek();
+    int firstMondayAug = mayDate.day()-dayOfWeekAug+1;
+    firstMondayAug = (firstMondayAug <= 0) ? firstMondayAug + 7 : firstMondayAug % 7;
+
+    //Days in May
+
+    int daysInAugust = augustDate.daysInMonth();
+    plusDays=0;
+
+    if (firstMondayAug+28<=daysInAugust){
+
+        plusDays =28;
+    }
+    else {
+        plusDays=21;
+    }
+
+    QDate summerBankHol =QDate(year,8,firstMondayAug).addDays(plusDays);
+
+    if(summerBankHol.isValid())
+    {
+        h9.m_date=summerBankHol.toString();
+        h9.m_addToCalendar=1;
+        holidayList.append(h9);
+
+    }
 }
 
 
