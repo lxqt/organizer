@@ -1,5 +1,5 @@
 # Organizer
-Organizer is a lightweight personal information manager consisting of a calendar and contacts list. Data is stored locally in the user account and not online. Appointments are added and displayed in the calendar using an entry form allowing the date, start and end times, description and category to be set. Repeating appointments can be generated. Organizer is a Qt based project.
+Organizer is a lightweight personal information manager consisting of a calendar and contacts list. Data is stored locally in the user account and not online. Appointments are added and displayed in the calendar using an entry form allowing the date, start and end times, description and category to be set. Repeating appointments can be generated. Organizer is a Qt based application for the LXQt desktop project.
 
 ![](organizer.png)
 
