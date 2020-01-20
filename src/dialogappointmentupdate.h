@@ -16,33 +16,30 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
 
-#ifndef DIALOGSHOWDAYDETAILS_H
-#define DIALOGSHOWDAYDETAILS_H
+#ifndef DIALOGAPPOINTMENTUPDATE_H
+#define DIALOGAPPOINTMENTUPDATE_H
 
 #include <QDialog>
+#include <QDialog>
 #include <QDate>
+#include <QTime>
 #include <QDebug>
 #include <QMessageBox>
-
 #include "appointment.h"
-#include "daylistmodel.h"
-#include "dbmanager.h"
-
 namespace Ui {
-class DialogShowDayDetails;
+class DialogAppointmentUpdate;
 }
 
-class DialogShowDayDetails : public QDialog
+class DialogAppointmentUpdate : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit DialogShowDayDetails(QWidget *parent = nullptr,
-                                  QDate *theSelectedDate=nullptr,
-                                  DbManager *theDbm=nullptr);
-    ~DialogShowDayDetails();
-    QDate selectedDate;
-    DayListModel *dayListModel;
+
+    explicit DialogAppointmentUpdate(QWidget *parent = nullptr, Appointment *theAppointment=nullptr);
+    ~DialogAppointmentUpdate();
+
+
     //Appointments
     QString title="";
     QString location="";
@@ -51,19 +48,55 @@ public:
     QTime appointmentStartTime;
     QTime appointmentEndTime;
     QString category="";
+    int categoryIndex=0;
     int isAllDay=0;
 
+    QTime startTime;
+    QTime endTime;
+
+    bool deleteRequested=false;
+    bool valid =false;
+
+    QString currentTitle="";
+    QString getTitle();
+    QString getLocation();
+    QString getDescription();
+    QDate getAppointmentDate();
+    QTime getStartTime();
+    QTime getEndTime();
+    int getAllDay();
+    QString getCategory();
+
+    bool getDeleteRequested();
+    void setupComboBoxes();
 
 private slots:
-    void on_listView_doubleClicked(const QModelIndex &index);
+
+    void accept();
+    void reject();
+
+
+
+    void on_comboBoxCategory_activated(int index);
+
+    void on_lineEditTitle_textChanged(const QString &arg1);
+
+    void on_lineEditLocation_textChanged(const QString &arg1);
+
+    void on_textEditDescription_textChanged();
+
+    void on_checkBoxAllDay_stateChanged(int arg1);
+
+    void on_timeEditStartTime_userTimeChanged(const QTime &time);
+
+    void on_timeEditEndTime_userTimeChanged(const QTime &time);
+
+    void on_checkBoxDelete_stateChanged(int arg1);
+
+    void on_comboBoxCategory_currentIndexChanged(const QString &arg1);
 
 private:
-    Ui::DialogShowDayDetails *ui;
-    QList<Appointment> appointmentList;
-    DbManager theDbm;
-    void UpdateAppointment(int dbID, int selectedRowindex);
-    static bool compare(const Appointment& first, const Appointment& second);
-
+    Ui::DialogAppointmentUpdate *ui;
 };
 
-#endif // DIALOGSHOWDAYDETAILS_H
+#endif // DIALOGAPPOINTMENTUPDATE_H

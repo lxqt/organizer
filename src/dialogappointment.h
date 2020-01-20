@@ -37,7 +37,7 @@ class DialogAppointment : public QDialog
 
 public:
     explicit DialogAppointment(QWidget *parent = nullptr, QDate *theAppointmentDate=nullptr);
-    explicit DialogAppointment(QWidget *parent = nullptr, Appointment *theAppointment=nullptr);
+   // explicit DialogAppointment(QWidget *parent = nullptr, Appointment *theAppointment=nullptr);
     ~DialogAppointment();
     QDate appointmentDate;
     QTime startTime;
@@ -47,6 +47,7 @@ public:
     int isAllDay=0; //no
     bool deleteRequested=false;
 
+    QString currentTitle="";
     QString getTitle();
     QString getLocation();
     QString getDescription();
@@ -60,15 +61,15 @@ public:
     void setupComboBoxes();
 
 private slots:
+
     void accept();
+    void reject();
 
     void on_dateEditAppointmentDate_userDateChanged(const QDate &date);
 
     void on_timeEditStartTime_userTimeChanged(const QTime &time);
 
     void on_timeEditEndTime_userTimeChanged(const QTime &time);
-
-    void on_checkBoxDelete_stateChanged(int arg1);   
 
     void on_comboBoxCategory_activated(const QString &arg1);
 

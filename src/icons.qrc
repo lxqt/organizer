@@ -1,20 +1,14 @@
 <RCC>
-    <qresource prefix="/new/toolbar">
-        <file>icons/appointment.svg</file>
-        <file>icons/contact.svg</file>
-        <file>icons/birthdaycheck.svg</file>
-        <file>icons/schedule.svg</file>
-        <file>icons/icon-enter.svg</file>
-        <file>icons/icon-leftarrow.svg</file>
-        <file>icons/icon-rightarrow.svg</file>
-        <file>icons/icon-uparrow.svg</file>
+    <qresource prefix="/new/icons">
+        <file>icons/icon-a.svg</file>
+        <file>icons/icon-c.svg</file>
         <file>icons/icon-downarrow.svg</file>
         <file>icons/icon-spacebar.svg</file>
-        <file>icons/icon-a.svg</file>
+        <file>icons/icon-uparrow.svg</file>
         <file>icons/repeats.svg</file>
-        <file>icons/icon-r.svg</file>
-        <file>icons/icon-d.svg</file>
-        <file>icons/icon-f.svg</file>
+        <file>icons/schedule.svg</file>
+        <file>icons/appointment.svg</file>
+        <file>icons/birthdaycheck.svg</file>
+        <file>icons/contact.svg</file>
     </qresource>
-    <qresource prefix="/"/>
 </RCC>

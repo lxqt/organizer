@@ -19,18 +19,21 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("Organizer"));
+    setWindowTitle(tr("Organizer"));    
     //set layout first
     QMainWindow::centralWidget()->layout()->setContentsMargins(0, 0, 0, 0);
 
     //Setup database
     dbm.openDatabase();
     dbm.createDatebaseTables();
+
 
     selectedDate = QDate::currentDate();
 
@@ -48,13 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     selectedMonth=selectedDate.month();
     selectedYear=selectedDate.year();
 
-    QFont font = ui->labelMonthYear->font();
-    font.setWeight(QFont::Bold);
-    ui->labelMonthYear->setFont(font);
-    QString monthName=monthNames[selectedMonth-1];
-    QString monthYear=monthName+" "+QString::number(selectedYear);
-    ui->labelMonthYear->setText(monthYear);
-
+    //Set Contacts TableView
     ui->tableViewContacts->horizontalHeader()->setVisible(true);
     ui->tableViewContacts->horizontalHeader()->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableViewContacts->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
@@ -62,15 +59,158 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableViewContacts->verticalHeader()->setVisible(false);
 
 
-    //Code refactoring - translations
+    //Setup widget Calendar
+    ui->tableWidgetCalendar->setColumnCount(columnCount);
+    ui->tableWidgetCalendar->setRowCount(rowCount);
+    ui->tableWidgetCalendar->horizontalHeader()->setVisible(true);
+    ui->tableWidgetCalendar->verticalHeader()->setVisible(false);
+    ui->tableWidgetCalendar->setShowGrid(true);
+    ui->tableWidgetCalendar->setGridStyle(Qt::SolidLine);
 
-    //File menu
+    ui->tableWidgetCalendar->horizontalHeader()
+            ->setSectionResizeMode(QHeaderView::ResizeToContents);
+
+
+    //Calendar Resizing
+
+    ui->tableWidgetCalendar->setWordWrap(true);
+    ui->tableWidgetCalendar->setTextElideMode(Qt::ElideRight);
+    ui->tableWidgetCalendar->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    ui->tableWidgetCalendar->setSelectionMode(QAbstractItemView::NoSelection);
+
+    ui->tableWidgetCalendar->horizontalHeader()->setMinimumSectionSize(120);
+
+    ui->tableWidgetCalendar->verticalHeader()->setMinimumSectionSize(60);
+
+    QString style12(
+                "QTableWidget {"
+                "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4f4f6, stop:1 #ceced6);"
+                "border-width: 2px;"
+                "border-style: solid;"
+                "border-color: black;"
+                " gridline-color: black;"
+                "font-size: 12pt;"
+                "selection-color: darkblue"
+                "}"
+                "QTableWidget::item {"
+                "background: none;"
+                "}"
+                );
+
+    ui->tableWidgetCalendar->setStyleSheet(style12);
+    QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
+    font.setPointSize(fontSize+1);
+    ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
+    QFont font3 = ui->listViewDay->font();
+    font3.setPointSize(fontSize);
+    ui->listViewDay->setFont(font3);
+
+
+
+    for (int row=0; row<ui->tableWidgetCalendar->rowCount(); ++row)
+    {
+        //ui->tableWidgetCalendar->verticalHeader()->setSectionResizeMode(row, QHeaderView::Stretch);
+        ui->tableWidgetCalendar->verticalHeader()
+                ->setSectionResizeMode(row, QHeaderView::ResizeToContents);
+    }
+
+    for(int col=0; col<ui->tableWidgetCalendar->columnCount(); ++col)
+    {
+        ui->tableWidgetCalendar->horizontalHeader()->
+                setSectionResizeMode(col, QHeaderView::Stretch);
+
+        //ui->tableWidgetCalendar->horizontalHeader()->setSizeAdjustPolicy(QHeaderView::AdjustToContents);
+
+        //ui->tableWidgetCalendar->setItemDelegateForColumn(col, &elideLeftItem);
+    }
+
+    firstDay = Qt::Monday;
+
+    ui->labelMonthYear->setText
+            (tr("%1 %2"
+                ).arg(QLocale::system().monthName(selectedDate.month())
+                      ).arg(selectedDate.year()));
+
+
+    QFont font2 = ui->labelMonthYear->font();
+    font2.setPointSize(fontSize+2);
+    font2.setBold(true);
+    ui->labelMonthYear->setFont(font2);
+
+
+    ui->actionShow_Birthdays->setChecked(true);
+    flagShowBirthdays=true;
+
+    ui->actionShow_Holidays->setChecked(true);
+    flagShowHolidays=true;
+
+    ui->actionShow_General->setChecked(true);
+    ui->actionShow_Family->setChecked(true);
+    ui->actionShow_Leisure->setChecked(true);
+    ui->actionShow_Meetings->setChecked(true);
+    ui->actionShow_Work->setChecked(true);
+    ui->actionShow_Vacations->setChecked(true);
+    ui->actionShow_Medical->setChecked(true);
+    ui->actionShow_Fitness->setChecked(true);
+
+
+    //Keyboard QActions (shortcuts)
+    gotoNextMonthAction= new QAction(this);
+    gotoNextMonthAction->setShortcut(Qt::Key_Up);
+    connect(gotoNextMonthAction, SIGNAL(triggered()), this, SLOT(gotoNextMonthSlot()));
+    this->addAction(gotoNextMonthAction);
+
+    gotoPreviousMonthAction= new QAction(this);
+    gotoPreviousMonthAction->setShortcut(Qt::Key_Down);
+    connect(gotoPreviousMonthAction, SIGNAL(triggered()), this, SLOT(gotoPreviousMonthSlot()));
+    this->addAction(gotoPreviousMonthAction);
+
+    gotoTodayAction= new QAction(this);
+    gotoTodayAction->setShortcut(Qt::Key_Space);
+    connect(gotoTodayAction, SIGNAL(triggered()), this, SLOT(gotoTodaySlot()));
+    this->addAction(gotoTodayAction);
+
+    newContactAction=new QAction(this);
+    newContactAction->setShortcut(Qt::Key_C);
+    connect(newContactAction, SIGNAL(triggered()),
+            this, SLOT(newContactSlot()));
+    this->addAction(newContactAction);
+
+
+    //Setup empty lists
+    appointmentList= QList<Appointment>();
+    holidayList=QList<Holiday>();
+    contactList =QList<Contact>();
+    //set up models
+    dayListModel= new DayListModel;
+    contactModel =new ContactModel;
+    proxyModelContacts = new ProxyModelContacts;
+
+    //AddHolidaysToHolidayList(selectedYear);
+
+    //Add contacts to contactList
+    LoadDatebaseContactsToContactList(); //loads contactlist
+    DisplayContactsOnTableView();
+    AddHolidaysToHolidayList(selectedYear);
+    LoadDatabaseAppointmentsToAppointmentList();
+    UpdateCalendar();
+    ShowAppointmentsOnListView(selectedDate);
+
+    //Translations (to do..)
     ui->menuFile->setTitle(tr("&File"));
     //ui->menuFile->setToolTip(tr("File"));
-    ui->actionExport_Contacts_XML->setText(tr("Export Contacts XML"));
-    ui->actionExport_Contacts_XML->setToolTip(tr("Export Contacts XML"));
-    ui->actionImport_Contacts_XML->setText(tr("Import Contacts XML"));
-    ui->actionImport_Contacts_XML->setToolTip(tr("Import Contacts XML"));
+    ui->actionExport_Contacts->setText(tr("Export Contacts XML"));
+    ui->actionExport_Contacts->setToolTip(tr("Export Contacts XML"));
+    ui->actionImport_Contacts->setText(tr("Import Contacts XML"));
+    ui->actionImport_Contacts->setToolTip(tr("Import Contacts XML"));
+
+    ui->actionExport_Appointments->setText(tr("Export Appointments XML"));
+    ui->actionExport_Appointments->setToolTip(tr("Export Appointments XML"));
+    ui->actionImport_Appointments->setText(tr("Import Appointments XML"));
+    ui->actionImport_Appointments->setToolTip(tr("Import Appointments XML"));
+
+
     ui->actionExit->setText(tr("Exit"));
     ui->actionExit->setToolTip(tr("Exit"));
 
@@ -82,75 +222,57 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionDelete_All_Contacts->setText(tr("Delete All Contacts"));
     ui->actionDelete_All_Contacts->setToolTip(tr("Delete All Contacts"));
 
-    //Action menu
-    ui->menuAction->setTitle(tr("&Action"));
-    ui->menuAction->setToolTip(tr("Action"));
+    //Appointments
+    ui->menuAppointments->setTitle(tr("&Appointments"));
+    ui->menuAppointments->setToolTip(tr("Appointments"));
 
     ui->actionNew_Appointment->setText(tr("New Appointment"));
     ui->actionNew_Appointment->setToolTip(tr("New Appointment"));
-    ui->actionGenerate_Repeat_Appointments->setText(tr("Generate Repeat Appointments"));
-    ui->actionGenerate_Repeat_Appointments->setToolTip(tr("Generate Repeat Appointments"));
-    ui->actionNew_Contact->setText(tr("New Contact"));
-    ui->actionNew_Contact->setToolTip(tr("New Contact"));
+    ui->actionGeneerate_Repeat_Appointments->setText(tr("Generate Repeat Appointments"));
+    ui->actionGeneerate_Repeat_Appointments->setToolTip(tr("Generate Repeat Appointments"));
     ui->actionUpcoming_Schedule->setText(tr("Upcoming Schedule"));
     ui->actionUpcoming_Schedule->setToolTip(tr("Upcoming Schedule"));
+
+    //Contacts
+    ui->menuContacts->setTitle(tr("&Contacts"));
+    ui->menuContacts->setToolTip(tr("Contacts"));
+    ui->actionNew_Contact->setText(tr("New Contact"));
+    ui->actionNew_Contact->setToolTip(tr("New Contact"));
     ui->actionCheck_For_Birthdays->setText(tr("Check For Birthdays"));
     ui->actionCheck_For_Birthdays->setToolTip(tr("Check For Birthdays"));
 
-    //Navigation menu
-    ui->menuNaviagation->setTitle(tr("&Navigation"));
-    //ui->menuNaviagation->setToolTip(tr("Navigation"));
-
-    ui->actionNext_Day->setText(tr("Next Day"));
-    ui->actionNext_Day->setToolTip(tr("Next Day"));
-
-    ui->actionPrevious_Day->setText(tr("Previous Day"));
-    ui->actionPrevious_Day->setToolTip(tr("Previous Day"));
-
+    ui->menuNavigation->setTitle(tr("&Navigation"));
+    ui->menuNavigation->setToolTip(tr("Navigation"));
     ui->actionNext_Month->setText(tr("Next Month"));
     ui->actionNext_Month->setToolTip(tr("Next Month"));
-
     ui->actionPrevious_Month->setText(tr("Previous Month"));
     ui->actionPrevious_Month->setToolTip(tr("Previous Month"));
-
-    ui->actionShow_Day_Events->setText(tr("Show Day Events"));
-    ui->actionShow_Day_Events->setToolTip(tr("Show Day Events"));
-
     ui->actionToday->setText(tr("Today (Spacebar)"));
     ui->actionToday->setToolTip(tr("Today"));
 
-    ui->action_Increase_Font->setText(tr("Increase Calendar Font Size"));
-    ui->action_Increase_Font->setToolTip(tr("Increase Calendar Font Size"));
-
-    ui->actionDecrease_Font->setText(tr("Decrease Calendar Font Size"));
-    ui->actionDecrease_Font->setToolTip(tr("Decrease Calendar Font Size"));
-
-    ui->actionReset_Calendar_Font_Size->setText(tr("Reset Calendar Font Size"));
-    ui->actionReset_Calendar_Font_Size->setToolTip(tr("Reset Calendar Font Size"));
+    //Themes (more to do..)
+    ui->menuThemes->setTitle(tr("&Themes"));
+    ui->menuThemes->setToolTip(tr("Calendar Themes"));
 
     //Options menu
-
     ui->menuOptions->setTitle(tr("&Options"));
-   // ui->menuOptions->setToolTip(tr("Options"));
+    ui->menuOptions->setToolTip(tr("Options"));
+
+    ui->actionShow_Birthdays->setText(tr("Show Birthdays On Calendar"));
+    ui->actionShow_Birthdays->setToolTip(tr("Show Birthdays On Calendar"));
+
+    ui->actionShow_Holidays->setText(tr("Show Holidays On Calendar"));
+    ui->actionShow_Holidays->setToolTip(tr("Show Holidays On Calendar"));
 
 
-    ui->actionShow_Birthdays_on_Calendar->setText(tr("Show Birthdays On Calendar"));
-    ui->actionShow_Birthdays_on_Calendar->setToolTip(tr("Show Birthdays On Calendar"));
+    ui->actionShow_General->setText(tr("Show General"));
+    ui->actionShow_General->setToolTip(tr("Show General"));
 
-    ui->actionShow_Holidays_on_Calendar->setText(tr("Show Holidays On Calendar"));
-    ui->actionShow_Holidays_on_Calendar->setToolTip(tr("Show Holidays On Calendar"));
+    ui->actionShow_Family->setText(tr("Show Family"));
+    ui->actionShow_Family->setToolTip(tr("Show Family"));
 
-    ui->actionColour_Code_Appointments->setText(tr("Colour Code Calendar"));
-    ui->actionColour_Code_Appointments->setToolTip(tr("Colour Code Calendar"));
-
-    ui->actionShow_General_Events->setText(tr("Show General"));
-    ui->actionShow_General_Events->setToolTip(tr("Show General"));
-
-    ui->actionShow_Family_Events->setText(tr("Show Family"));
-    ui->actionShow_Family_Events->setToolTip(tr("Show Family"));
-
-    ui->actionShow_Leisure_Events->setText(tr("Show Leisure"));
-    ui->actionShow_Leisure_Events->setToolTip(tr("Show Leisure"));
+    ui->actionShow_Leisure->setText(tr("Show Leisure"));
+    ui->actionShow_Leisure->setToolTip(tr("Show Leisure"));
 
     ui->actionShow_Meetings->setText(tr("Show Meetings"));
     ui->actionShow_Meetings->setToolTip(tr("Show Meetings"));
@@ -167,117 +289,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionShow_Fitness->setText(tr("Show Fitness"));
     ui->actionShow_Fitness->setToolTip(tr("Show Fitness"));
 
-
-
-    ui->actionShow_Birthdays_on_Calendar->setChecked(true);
-    ui->actionShow_Holidays_on_Calendar->setChecked(true);
-    ui->actionColour_Code_Appointments->setChecked(true);
-    ui->actionShow_General_Events->setChecked(true);
-    ui->actionShow_Family_Events->setChecked(true);
-    ui->actionShow_Leisure_Events->setChecked(true);
-    ui->actionShow_Meetings->setChecked(true);
-    ui->actionShow_Work->setChecked(true);
-    ui->actionShow_Vacations->setChecked(true);
-    ui->actionShow_Medical->setChecked(true);
-    ui->actionShow_Fitness->setChecked(true);
-    ui->actionColour_Code_Appointments->setChecked(true);
-
-    //Help menu
-
+    //Help
     ui->menuHelp->setTitle(tr("&Help"));
-    //ui->menuHelp->setToolTip(tr("Help"));
-
-    ui->actionAbout->setText(tr("About"));
+    ui->actionAbout->setText(tr("&About"));
     ui->actionAbout->setToolTip(tr("About"));
-
-    ui->pushButtonShowQuickFullView->setText(tr("Quick/Full View"));
-    ui->pushButtonShowQuickFullView->setToolTip(tr("Quick/Full View"));
-
-    ui->pushButtonMailTo->setText(tr("Mail To:"));
-    ui->pushButtonMailTo->setToolTip(tr("Mail To:"));
-
-    //Keyboard QActions (shortcuts)
-    gotoNextDayAction= new QAction(this);
-    gotoNextDayAction->setShortcut(Qt::Key_Right);
-    connect(gotoNextDayAction, SIGNAL(triggered()), this, SLOT(gotoNextDaySlot()));
-    this->addAction(gotoNextDayAction);
-
-    gotoPreviousDayAction= new QAction(this);
-    gotoPreviousDayAction->setShortcut(Qt::Key_Left);
-    connect(gotoPreviousDayAction, SIGNAL(triggered()), this, SLOT(gotoPreviousDaySlot()));
-    this->addAction(gotoPreviousDayAction);
-
-    gotoNextMonthAction= new QAction(this);
-    gotoNextMonthAction->setShortcut(Qt::Key_Up);
-    connect(gotoNextMonthAction, SIGNAL(triggered()), this, SLOT(gotoNextMonthSlot()));
-    this->addAction(gotoNextMonthAction);
-
-    gotoPreviousMonthAction= new QAction(this);
-    gotoPreviousMonthAction->setShortcut(Qt::Key_Down);
-    connect(gotoPreviousMonthAction, SIGNAL(triggered()), this, SLOT(gotoPreviousMonthSlot()));
-    this->addAction(gotoPreviousMonthAction);
-
-    gotoTodayAction= new QAction(this);
-    gotoTodayAction->setShortcut(Qt::Key_Space);
-    connect(gotoTodayAction, SIGNAL(triggered()), this, SLOT(gotoTodaySlot()));
-    this->addAction(gotoTodayAction);
-
-    showAppointmentDetailsAction= new QAction(this);
-    showAppointmentDetailsAction->setShortcut(Qt::Key_Return);
-    connect(showAppointmentDetailsAction, SIGNAL(triggered()),
-            this, SLOT(showAppointmentDetailsSlot()));
-    this->addAction(showAppointmentDetailsAction);
-
-    increaseFontAction=new QAction(this);
-    increaseFontAction->setShortcut(Qt::Key_F);
-    connect(increaseFontAction, SIGNAL(triggered()),
-            this, SLOT(increaseFontSlot()));
-    this->addAction(increaseFontAction);
-
-    resetFontAction=new QAction(this);
-    resetFontAction->setShortcut(Qt::Key_R);
-    connect(resetFontAction, SIGNAL(triggered()),
-            this, SLOT(resetFontSlot()));
-    this->addAction(resetFontAction);
-
-    decreaseFontAction=new QAction(this);
-    decreaseFontAction->setShortcut(Qt::Key_D);
-    connect(decreaseFontAction, SIGNAL(triggered()),
-            this, SLOT(decreaseFontSlot()));
-    this->addAction(decreaseFontAction);
-
-    newAppointmentAction=new QAction(this);
-    newAppointmentAction->setShortcut(Qt::Key_A);
-    connect(newAppointmentAction, SIGNAL(triggered()),
-            this, SLOT(newAppointmentSlot()));
-    this->addAction(newAppointmentAction);
-
-    newContactAction=new QAction(this);
-    newContactAction->setShortcut(Qt::Key_C);
-    connect(newContactAction, SIGNAL(triggered()),
-            this, SLOT(newContactSlot()));
-    this->addAction(newContactAction);
-
-
-    //Setup empty lists
-    appointmentList= QList<Appointment>();
-
-    holidayList=QList<Holiday>();
-
-    contactList =QList<Contact>();
-
-    AddHolidaysToHolidayList(selectedYear);
-
-    LoadDatabaseAppointmentsToAppointmentList();
-
-    //Add contacts to contactList
-    contactModel = new ContactModel; //model view
-    proxyModelContacts= new ProxyModelContacts;
-    LoadDatebaseContactsToContactList(); //loads contactlist
-    DisplayContactsOnTableView();
-
-    fontSize = 12;
-    UpdateCalendar();
 
 }
 
@@ -299,7 +314,7 @@ void MainWindow::NewAppointment()
         selectedDate=appointmentDialog->getAppointmentDate(); //appointment date
         appointmentStartTime=appointmentDialog->getStartTime();
         appointmentEndTime=appointmentDialog->getEndTime();
-        category=appointmentDialog->getCategory();     
+        category=appointmentDialog->getCategory();
         isAllDay=appointmentDialog->getAllDay();
 
         Appointment a;
@@ -314,92 +329,143 @@ void MainWindow::NewAppointment()
 
         if (dbm.isOpen())
         {
-            appointmentId=dbm.addAppointment(a);           
+            appointmentId=dbm.addAppointment(a);
+            a.m_id =appointmentId;
+
             appointmentList.append(a);
-            //qDebug()<<"Added Appointment: Appointment ID = "<<appointmentId;
+            //dayListModel->addAppointment(a);
+            //LoadDatabaseAppointmentsToAppointmentList(); //sync
+
             UpdateCalendar();
-        }        
+            ShowAppointmentsOnListView(selectedDate);
+        }
     }
+ UpdateCalendar();
+}
+
+void MainWindow::UpdateAppointment(int dbID, int selectedRowindex)
+{
+    Appointment currentAppointment = dbm.getAppointmentByID(dbID);
+
+        DialogAppointmentUpdate *appointmentDialog =
+                new  DialogAppointmentUpdate(this,&currentAppointment);
+        appointmentDialog->setModal(true);
+
+
+        if (appointmentDialog->exec() == QDialog::Accepted ) {
+            //qDebug()<<"Delete request = "<<appointmentDialog->getDeleteRequested();
+
+            if(appointmentDialog->getDeleteRequested())
+            {
+
+                RemoveAppointmentFromAppointmentList(dbID);
+                dbm.deleteAppointmentById(dbID);
+                //update reminder listview
+                dayListModel->removeAppointment(selectedRowindex);
+                // may have to remove reminder from modellist
+
+                ui->listViewDay->setModel(dayListModel);
+                UpdateCalendar();
+                return;
+            }
+
+            title =appointmentDialog->getTitle();
+            location =appointmentDialog->getLocation();
+            description= appointmentDialog->getDescription();
+            selectedDate=appointmentDialog->getAppointmentDate(); //appointment date
+            appointmentStartTime=appointmentDialog->getStartTime();
+            appointmentEndTime=appointmentDialog->getEndTime();
+            category=appointmentDialog->getCategory();
+            isAllDay=appointmentDialog->getAllDay();
+
+            Appointment a;
+            a.m_title=title;
+            a.m_location=location;
+            a.m_description=description;
+            a.m_date=selectedDate.toString();
+            a.m_startTime=appointmentStartTime.toString();
+            a.m_endTime=appointmentEndTime.toString();
+            a.m_category=category;
+            a.m_isFullDay=isAllDay;
+
+
+            if (dbm.isOpen())
+            {
+                bool success =dbm.updateAppointment(a,dbID);
+                //qDebug()<<"Apointment update: success ="<<success;
+
+                LoadDatabaseAppointmentsToAppointmentList(); //sync with db
+                UpdateCalendar();
+                ShowAppointmentsOnListView(selectedDate);
+            }
+
+
+        }
+
 }
 
 void MainWindow::GenerateRepeatAppointments()
 {
     DialogRepeatAppointment *repeatDialog = new  DialogRepeatAppointment(this,&selectedDate);
-    repeatDialog->setModal(true);
+        repeatDialog->setModal(true);
 
-    if (repeatDialog->exec() == QDialog::Accepted ) {
+        if (repeatDialog->exec() == QDialog::Accepted ) {
 
-        title =repeatDialog->getTitle();
-        location =repeatDialog->getLocation();
-        description= repeatDialog->getDescription();
-        selectedDate=repeatDialog->getAppointmentDate(); //appointment date
-        appointmentStartTime=repeatDialog->getStartTime();
-        appointmentEndTime=repeatDialog->getEndTime();
-        category=repeatDialog->getCategory();
-        isAllDay=repeatDialog->getAllDay();
+            title =repeatDialog->getTitle();
+            location =repeatDialog->getLocation();
+            description= repeatDialog->getDescription();
+            selectedDate=repeatDialog->getAppointmentDate(); //appointment date
+            appointmentStartTime=repeatDialog->getStartTime();
+            appointmentEndTime=repeatDialog->getEndTime();
+            category=repeatDialog->getCategory();
+            isAllDay=repeatDialog->getAllDay();
 
-        repeatDayInterval=repeatDialog->getRepeatDayInterval();
-        repeatNumber=repeatDialog->getRepeatNumber();
+            repeatDayInterval=repeatDialog->getRepeatDayInterval();
+            repeatNumber=repeatDialog->getRepeatNumber();
 
-        Appointment a;
-        a.m_title=title;
-        a.m_location=location;
-        a.m_description=description;
-        a.m_date=selectedDate.toString();
-        a.m_startTime=appointmentStartTime.toString();
-        a.m_endTime=appointmentEndTime.toString();
-        a.m_category=category;
-        a.m_isFullDay=isAllDay;
-
-
-        Appointment tmp;
-        QDate repeatDate=QDate::fromString(a.m_date);
-
-        for (int i=0;i<repeatNumber;i+= 1)
-        {
-            tmp.m_title=a.m_title;
-            //tmp.m_title=a.m_title;
-            tmp.m_location=a.m_location;
-            tmp.m_description=a.m_description;
-            tmp.m_date=repeatDate.addDays(repeatDayInterval*(i)).toString();
-            tmp.m_startTime=a.m_startTime;
-            tmp.m_endTime=a.m_endTime;
-            tmp.m_category=a.m_category;
-            tmp.m_isFullDay=a.m_isFullDay;
+            Appointment a;
+            a.m_title=title;
+            a.m_location=location;
+            a.m_description=description;
+            a.m_date=selectedDate.toString();
+            a.m_startTime=appointmentStartTime.toString();
+            a.m_endTime=appointmentEndTime.toString();
+            a.m_category=category;
+            a.m_isFullDay=isAllDay;
 
 
-            if (dbm.isOpen())
+            Appointment tmp;
+            QDate repeatDate=QDate::fromString(a.m_date);
+
+            for (int i=0;i<repeatNumber;i+= 1)
             {
-                appointmentId=dbm.addAppointment(tmp);
-                //qDebug()<<"Repeat Appointment ID = "<<appointmentId;
-                appointmentList.append(tmp);
-                //qDebug()<<"Added Appointment: Appointment ID = "<<appointmentId;
+                tmp.m_title=a.m_title;
+                //tmp.m_title=a.m_title;
+                tmp.m_location=a.m_location;
+                tmp.m_description=a.m_description;
+                tmp.m_date=repeatDate.addDays(repeatDayInterval*(i)).toString();
+                tmp.m_startTime=a.m_startTime;
+                tmp.m_endTime=a.m_endTime;
+                tmp.m_category=a.m_category;
+                tmp.m_isFullDay=a.m_isFullDay;
+
+
+                if (dbm.isOpen())
+                {
+                    appointmentId=dbm.addAppointment(tmp);
+                    //qDebug()<<"Repeat Appointment ID = "<<appointmentId;
+                    tmp.m_id=appointmentId;
+                    appointmentList.append(tmp);
+
+                    UpdateCalendar();
+                    ShowAppointmentsOnListView(selectedDate);
+                    //qDebug()<<"Added Appointment: Appointment ID = "<<appointmentId;
+                }
             }
+            UpdateCalendar();
         }
-        UpdateCalendar();
-    }
+
 }
-
-bool MainWindow::compare(const Appointment &first, const Appointment &second)
-{
-    QTime firstStarts =QTime::fromString(first.m_startTime);
-    QTime secondStarts =QTime::fromString(second.m_startTime);
-
-    int fx=60*60*firstStarts.hour()+60*firstStarts.minute(); //seconds
-    int sx=60*60*secondStarts.hour()+60*secondStarts.minute();
-
-    if (fx < sx)
-    {
-        return true;
-    }
-    else if (fx > sx)
-    {
-        return false;
-    }
-    return false;
-}
-
-
 
 void MainWindow::LoadDatabaseAppointmentsToAppointmentList()
 {
@@ -412,6 +478,492 @@ void MainWindow::LoadDatabaseAppointmentsToAppointmentList()
     }
 }
 
+void MainWindow::UpdateAppointmentInAppointmentList(Appointment app, int appointmentId)
+{
+    for(int i=0; i<appointmentList.count(); i++)
+    {
+        Appointment a =appointmentList.at(i);
+
+        if(a.m_id==appointmentId)
+        {
+            appointmentList.removeAt(i);
+            appointmentList.insert(i,app);
+        }
+    }
+}
+
+void MainWindow::RemoveAppointmentFromAppointmentList(int appointmentId)
+{
+    for(int i=0; i<appointmentList.count(); i++)
+    {
+        Appointment a =appointmentList.at(i);
+
+        if (a.m_id ==appointmentId)
+        {
+            appointmentList.removeAt(i);
+        }
+    }
+}
+
+void MainWindow::ShowAppointmentsOnListView(QDate theSelectedDate)
+{
+    dayListModel->clearAllAppointment();
+    QList<Appointment> sortedDayList =getSortedDayList(theSelectedDate);
+
+    QList<Appointment> sortedDayList2= QList<Appointment>();
+
+    if (!sortedDayList.empty())
+    {
+        foreach(Appointment a, sortedDayList)
+        {
+            if(a.m_category=="General" && flagShowGeneralEvents)
+            {
+                sortedDayList2.append(a);
+            }
+            else if(a.m_category=="Meeting" && flagShowMeetings){
+                sortedDayList2.append(a);
+            }
+            else if(a.m_category=="Work" && flagShowWorkEvents){
+                sortedDayList2.append(a);
+            }
+            else if(a.m_category=="Family" && flagShowFamilyEvents){
+
+                sortedDayList2.append(a);
+            }
+            else if(a.m_category=="Leisure" && flagShowLeisureEvents){
+                sortedDayList2.append(a);
+
+            }
+            else if(a.m_category=="Fitness" && flagShowFitness){
+                sortedDayList2.append(a);
+            }
+
+
+            else if(a.m_category=="Vacation" && flagShowVacations){
+                sortedDayList2.append(a);
+            }
+
+            else if(a.m_category=="Medical" && flagShowMedical){
+                sortedDayList2.append(a);
+            }
+        }
+    }
+
+
+        dayListModel = new DayListModel(sortedDayList2);
+        ui->listViewDay->setModel(dayListModel);
+}
+
+bool MainWindow::compare(const Appointment &first, const Appointment &second)
+{
+    QTime firstStarts =QTime::fromString(first.m_startTime);
+        QTime secondStarts =QTime::fromString(second.m_startTime);
+
+        int fx=60*60*firstStarts.hour()+60*firstStarts.minute(); //seconds
+        int sx=60*60*secondStarts.hour()+60*secondStarts.minute();
+
+        if (fx < sx)
+        {
+            return true;
+        }
+        else if (fx > sx)
+        {
+            return false;
+        }
+        return false;
+
+}
+
+QList<Appointment> MainWindow::getSortedDayList(QDate theDate)
+{
+    QList<Appointment> dayList =QList<Appointment>();
+        foreach(Appointment a, appointmentList)
+        {
+            QDate adate = QDate::fromString(a.m_date);
+
+            if(adate==theDate)
+            {
+                dayList.append(a);
+            }
+        }
+        std::sort(dayList.begin(), dayList.end(), compare);
+
+        return dayList;
+
+}
+
+void MainWindow::UpdateCalendar()
+{
+    int cellIndex=0;
+    ui->tableWidgetCalendar->clearContents();
+    //Initialise with empty cells
+    for (int row=0; row<ui->tableWidgetCalendar->rowCount(); ++row)
+    {
+        for(int col=0; col<ui->tableWidgetCalendar->columnCount(); ++col)
+        {
+            ui->tableWidgetCalendar->setItem(row, col,
+                                     new QTableWidgetItem(""));
+            cellIndex = (7 * row) + col;
+            dayArray[cellIndex]=0;
+        }
+    }
+
+    QStringList days;
+    for (int weekDay = 1; weekDay <= 7; ++weekDay) {
+        QString day =QLocale::system().dayName(weekDay); //boldFormat
+        days.append(day);
+    }
+    ui->tableWidgetCalendar->setHorizontalHeaderLabels(days);
+
+    ui->tableWidgetCalendar->setHorizontalHeaderLabels(days);
+
+    QDate date(selectedDate.year(), selectedDate.month(), 1);
+
+    int row=0;
+    int dayValue=0;
+    while (date.month() == selectedDate.month()) {
+        int weekDay = date.dayOfWeek();       
+        dayValue= date.day();       
+        cellIndex = (7 * row) + weekDay-1;       
+        dayArray[cellIndex]=dayValue;
+        dayItem = new QTableWidgetItem(QString::number(dayValue));
+
+        ui->tableWidgetCalendar->setItem(row, weekDay-1,dayItem);
+
+        if (date==QDate::currentDate())        {
+
+            dayItem->setBackgroundColor(Qt::yellow);
+        }
+
+        QString str="";
+        //-----------------------------------------------------
+        // Add holidays to calendar
+        //-----------------------------------------------------
+        if(flagShowHolidays){
+
+            foreach (Holiday h, holidayList)
+            {
+                QDate d =QDate::fromString(h.m_date);
+
+                if(date ==d)
+                {
+                    //add holiday to calendar
+                    str.append("\n"+h.m_name);
+
+                }
+            }
+        }
+
+        //-----------------------------------------------------
+        //Add birthdays using contactList
+        //-----------------------------------------------------
+        if(flagShowBirthdays)
+        {
+            foreach (Contact c, contactList)
+            {
+                QDate birth =QDate::fromString(c.m_birthdate);
+                QDate birthday =QDate(selectedYear,birth.month(),birth.day());
+                QString name =c.m_firstname+" "+c.m_lastname;
+
+                if((date ==birthday) && (c.m_addToCalendar ==1))
+                {
+                    str.append("\nBirthday: "+name);
+                }
+            }
+        }
+
+        //---------------------------------------------------------
+        // Add Appointments
+        //----------------------------------------------------------
+
+        QList<Appointment> sortedDayList =getSortedDayList(date);
+
+        if (!sortedDayList.empty())
+        {
+            foreach(Appointment a, sortedDayList)
+            {
+                if(a.m_category=="General" && flagShowGeneralEvents)
+                {
+                    str.append("\n"+a.m_title);
+                }
+                else if(a.m_category=="Meeting" && flagShowMeetings){
+                    str.append("\n"+a.m_title);
+                }
+                else if(a.m_category=="Work" && flagShowWorkEvents){
+                    str.append("\n"+a.m_title);
+                }
+                else if(a.m_category=="Family" && flagShowFamilyEvents){
+
+                    str.append("\n"+a.m_title);
+                }
+                else if(a.m_category=="Leisure" && flagShowLeisureEvents){
+                    str.append("\n"+a.m_title);
+
+                }
+                else if(a.m_category=="Fitness" && flagShowFitness){
+                    str.append("\n"+a.m_title);
+                }
+
+
+                else if(a.m_category=="Vacation" && flagShowVacations){
+                    str.append("\n"+a.m_title);
+                }
+
+                else if(a.m_category=="Medical" && flagShowMedical){
+                    str.append("\n"+a.m_title);
+                }                
+
+            }
+            //Display on calendar
+        }
+
+           calendarItem = new QTableWidgetItem(QString::number(dayValue)
+                                                  +str);
+
+           calendarItem->setTextColor(Qt::black);
+            ui->tableWidgetCalendar->setItem(row,weekDay-1, calendarItem);
+
+            if (date==QDate::currentDate())
+            {
+                ui->tableWidgetCalendar->item(row, weekDay-1)->setData(
+                        Qt::BackgroundRole,
+                        QBrush(Qt::yellow)
+                    );
+
+            }
+
+
+        //Move on ...
+        date = date.addDays(1); //move to next day
+        if (weekDay == 7 && date.month() == selectedDate.month())
+        {
+            row=row+1;
+        }
+
+    }//selected month
+
+
+    ui->labelMonthYear->setText
+              (tr("%1 %2"
+                  ).arg(QLocale::system().monthName(selectedDate.month())
+                        ).arg(selectedDate.year()));
+}
+
+QDate MainWindow::CalculateEaster(int year)
+{
+    QDate easter;
+
+    int Yr = year;
+    int a = Yr % 19;
+    int b = Yr / 100;
+    int c = Yr % 100;
+    int d = b / 4;
+    int e = b % 4;
+    int f = (b + 8) / 25;
+    int g = (b - f + 1) / 3;
+    int h = (19 * a + b - d - g + 15) % 30;
+    int i = c / 4;
+    int k = c % 4;
+    int L = (32 + 2 * e + 2 * i - h - k) % 7;
+    int m = (a + 11 * h + 22 * L) / 451;
+    int month = (h + L - 7 * m + 114) / 31;
+    int day = ((h + L - 7 * m + 114) % 31) + 1;
+
+    easter.setDate(year,month,day);
+    return easter;
+}
+
+void MainWindow::checkForBirthdaysNextSevenDays()
+{
+    DialogUpcomingBirthdays  *birthdayDialog =
+            new  DialogUpcomingBirthdays(this,&contactList);
+    birthdayDialog->setModal(true);
+
+    if (birthdayDialog->exec() == QDialog::Accepted ) {
+    }
+}
+
+void MainWindow::checkAppointmentsNextSevenDays()
+{
+    DialogUpcomingSchedule  *scheduleDialog =
+            new  DialogUpcomingSchedule(this, &dbm);
+    scheduleDialog->setModal(true);
+
+    if (scheduleDialog->exec() == QDialog::Accepted ) {
+    }
+}
+
+
+void MainWindow::gotoNextMonth()
+{
+    selectedMonth =selectedDate.month()+1;
+    selectedYear =selectedDate.year();
+    selectedDay=1;
+
+    if (selectedMonth >= 13) {
+        selectedMonth = 1;
+        selectedYear =selectedYear+1;
+        AddHolidaysToHolidayList(selectedYear);
+        UpdateCalendar();
+        selectedDate.setDate(selectedYear,selectedMonth,selectedDay);
+        selectedDateLabel->setText(selectedDate.toString());
+    }
+    selectedDate.setDate(selectedYear,selectedMonth,selectedDay);
+
+    ShowAppointmentsOnListView(selectedDate);
+    selectedDateLabel->setText(selectedDate.toString());
+    UpdateCalendar();
+}
+
+void MainWindow::gotoPreviousMonth()
+{
+    selectedMonth =selectedDate.month()-1;
+    selectedYear =selectedDate.year();
+    selectedDay=1;
+
+    if (selectedMonth < 1)
+    {
+        selectedMonth = 12;
+        selectedYear=selectedYear-1;
+        AddHolidaysToHolidayList(selectedYear);
+        UpdateCalendar();
+        selectedDate.setDate(selectedYear,selectedMonth,selectedDay);
+        selectedDateLabel->setText(selectedDate.toString());
+    }
+    selectedDate.setDate(selectedYear,selectedMonth,selectedDay);
+    UpdateCalendar();
+    ShowAppointmentsOnListView(selectedDate);
+    selectedDateLabel->setText(selectedDate.toString());
+}
+
+void MainWindow::gotoToday()
+{
+    selectedDate=QDate::currentDate();
+    selectedDay=selectedDate.day();
+    selectedMonth=selectedDate.month();
+    selectedYear=selectedDate.year();
+    AddHolidaysToHolidayList(selectedYear);
+    UpdateCalendar();
+    ShowAppointmentsOnListView(selectedDate);
+    selectedDateLabel->setText(selectedDate.toString());
+}
+
+void MainWindow::AddHolidaysToHolidayList(int year)
+{
+    holidayList.clear();
+
+    Holiday h1;
+    h1.m_id=1;
+    h1.m_name=tr("Christmas");
+    h1.m_date=QDate(year,12,25).toString();
+    h1.m_addToCalendar=1;
+    holidayList.append(h1);
+
+    Holiday h2;
+    h2.m_id=2;
+    h2.m_name=tr("Boxing Day");
+    h2.m_date=QDate(year,12,26).toString();
+    h2.m_addToCalendar=1;
+    holidayList.append(h2);
+
+    Holiday h3;
+    h3.m_id=3;
+    h3.m_name=tr("New Years Day");
+    h3.m_date=QDate(year,1,1).toString();
+    h3.m_addToCalendar=1;
+    holidayList.append(h3);
+
+    QDate easterSunday =CalculateEaster(year);
+
+    Holiday h4;
+    h4.m_id=4;
+    h4.m_name=tr("Easter");
+    h4.m_date=easterSunday.toString();
+    h4.m_addToCalendar=1;
+    holidayList.append(h4);
+
+    Holiday h5;
+    h5.m_id=5;
+    h5.m_name=tr("Good Friday");
+    h5.m_date=easterSunday.addDays(-2).toString();
+    h5.m_addToCalendar=1;
+    holidayList.append(h5);
+
+    Holiday h6;
+    h6.m_id=6;
+    h6.m_name=tr("Easter Monday");
+    h6.m_date=easterSunday.addDays(1).toString();
+    h6.m_addToCalendar=1;
+    holidayList.append(h6);
+
+    Holiday h7;
+    h7.m_id=7;
+    h7.m_name=tr("May Bank Holiday");
+
+    QDate firstMondayMay(year, 5, 1);
+
+    while (firstMondayMay.dayOfWeek() != Qt::Monday)
+            firstMondayMay = firstMondayMay.addDays(1);
+
+    h7.m_date=firstMondayMay.toString();
+    h7.m_addToCalendar=1;
+    holidayList.append(h7);
+
+    //Days in May
+
+    int daysInMay = QDate(year,5,1).daysInMonth();
+    int plusDays=0;
+
+    if (firstMondayMay.day()+28<=daysInMay){
+
+        plusDays =28;
+    }
+    else {
+        plusDays=21;
+    }
+
+
+    Holiday h8;
+    h8.m_id=8;
+    h8.m_name=tr("Spring Bank Holiday");
+    QDate springbank =firstMondayMay.addDays(plusDays);
+
+    if (springbank.isValid())
+    {
+        h8.m_date=springbank.toString();
+        h8.m_addToCalendar=1;
+        holidayList.append(h8);
+    }   
+
+    Holiday h9;
+    h9.m_id=9;
+    h9.m_name=tr("Summer Bank Holiday");
+
+    QDate firstMondayAug(year, 8, 1);
+
+    while (firstMondayAug.dayOfWeek() != Qt::Monday)
+            firstMondayAug = firstMondayAug.addDays(1);
+
+    int daysInAugust = QDate(year,8,1).daysInMonth();
+    plusDays=0;
+
+    if (firstMondayAug.day()+28<=daysInAugust){
+
+        plusDays =28;
+    }
+    else {
+        plusDays=21;
+    }
+
+    QDate summerBankHol =firstMondayAug.addDays(plusDays);
+
+    if(summerBankHol.isValid())
+    {
+        h9.m_date=summerBankHol.toString();
+        h9.m_addToCalendar=1;
+        holidayList.append(h9);
+    }
+}
 
 void MainWindow::LoadDatebaseContactsToContactList()
 {
@@ -426,7 +978,6 @@ void MainWindow::LoadDatebaseContactsToContactList()
 void MainWindow::NewContact()
 {
     //Add new contact
-
 
     DialogContact *contactDialog = new DialogContact(this);
     contactDialog->setModal(true);
@@ -471,12 +1022,12 @@ void MainWindow::NewContact()
     }
     DisplayContactsOnTableView(); //display
     UpdateCalendar();
+
 }
 
 void MainWindow::UpdateContact(int dbID)
 {
-
-    Contact currentContact = dbm.getContactByID(dbID);    
+    Contact currentContact = dbm.getContactByID(dbID);
     DialogContact *contactDialog = new  DialogContact(&currentContact,this);
 
     contactDialog->setModal(true);
@@ -521,7 +1072,7 @@ void MainWindow::UpdateContact(int dbID)
 
         if (dbm.isOpen())
         {
-            dbm.updateContact(c,dbID);            
+            dbm.updateContact(c,dbID);
             LoadDatebaseContactsToContactList();
         }
     }
@@ -554,7 +1105,7 @@ void MainWindow::DisplayContactsOnTableView()
     ui->tableViewContacts->hideColumn(8); //county
     ui->tableViewContacts->hideColumn(9); //postcode
     ui->tableViewContacts->hideColumn(10); //country
-   // ui->tableViewContacts->hideColumn(11); //telephone
+    // ui->tableViewContacts->hideColumn(11); //telephone
     //birthday
     ui->tableViewContacts->hideColumn(12); //birthday
 }
@@ -570,186 +1121,6 @@ void MainWindow::RemoveContactFromContactList(int contactId)
             contactList.removeAt(i);
         }
     }
-}
-
-
-QDate MainWindow::CalculateEaster(int year)
-{
-    QDate easter;
-
-       int Yr = year;
-       int a = Yr % 19;
-       int b = Yr / 100;
-       int c = Yr % 100;
-       int d = b / 4;
-       int e = b % 4;
-       int f = (b + 8) / 25;
-       int g = (b - f + 1) / 3;
-       int h = (19 * a + b - d - g + 15) % 30;
-       int i = c / 4;
-       int k = c % 4;
-       int L = (32 + 2 * e + 2 * i - h - k) % 7;
-       int m = (a + 11 * h + 22 * L) / 451;
-       int month = (h + L - 7 * m + 114) / 31;
-       int day = ((h + L - 7 * m + 114) % 31) + 1;
-
-       easter.setDate(year,month,day);
-       return easter;
-}
-
-void MainWindow::checkForBirthdaysNextSevenDays()
-{
-    DialogUpcomingBirthdays  *birthdayDialog =
-            new  DialogUpcomingBirthdays(this,&contactList);
-    birthdayDialog->setModal(true);
-
-    if (birthdayDialog->exec() == QDialog::Accepted ) {
-    }
-}
-
-void MainWindow::checkAppointmentsNextSevenDays()
-{
-    DialogUpcomingSchedule  *scheduleDialog =
-            new  DialogUpcomingSchedule(this, &dbm);
-    scheduleDialog->setModal(true);
-
-    if (scheduleDialog->exec() == QDialog::Accepted ) {
-    }
-}
-
-void MainWindow::increaseFont()
-{
-    fontSize =fontSize+1;
-    if (fontSize >30) fontSize =30;
-    UpdateCalendar();
-}
-
-void MainWindow::decreaseFont()
-{
-    fontSize=fontSize-1;
-    if (fontSize<8) fontSize=8;
-    UpdateCalendar();
-}
-
-void MainWindow::resetFont()
-{
-    fontSize=12;
-    UpdateCalendar();
-}
-
-void MainWindow::gotoNextDay()
-{
-    int daysInMonth=selectedDate.daysInMonth();
-    selectedMonth =selectedDate.month();
-    selectedYear =selectedDate.year();
-    selectedDay =selectedDate.day()+1; //add day move forward
-
-    if (selectedDay > daysInMonth) {
-        selectedMonth =selectedMonth+1;
-        selectedDay=1;
-        if (selectedMonth >= 13) {
-            selectedMonth = 1;
-            selectedYear =selectedYear+1;
-            AddHolidaysToHolidayList(selectedYear);
-            UpdateCalendar();
-            selectedDate.setDate(selectedYear,selectedMonth,selectedDay);
-            selectedDateLabel->setText(selectedDate.toString());
-        }
-    }
-
-    selectedDate.setDate(selectedYear,selectedMonth,selectedDay);   
-    UpdateCalendar();
-    selectedDateLabel->setText(selectedDate.toString());
-}
-
-void MainWindow::gotoPreviousDay()
-{
-    selectedMonth =selectedDate.month();
-    selectedYear =selectedDate.year();
-    selectedDay =selectedDate.day()-1;
-
-    if (selectedDay < 1) {
-        selectedMonth = selectedMonth-1;
-        if (selectedMonth <= 1)
-        {
-            selectedMonth = 12;
-            selectedYear=selectedYear-1;
-            AddHolidaysToHolidayList(selectedYear);
-            UpdateCalendar();
-            selectedDate.setDate(selectedYear,selectedMonth,selectedDay);
-            selectedDateLabel->setText(selectedDate.toString());
-        }
-
-        QDate tmp =QDate(selectedYear, selectedMonth,1);
-        int daysInMonth =tmp.daysInMonth();
-        selectedDay=daysInMonth;
-    }
-    selectedDate.setDate(selectedYear,selectedMonth,selectedDay);
-    UpdateCalendar();
-    selectedDateLabel->setText(selectedDate.toString()); 
-}
-
-void MainWindow::gotoNextMonth()
-{
-    selectedMonth =selectedDate.month()+1;
-    selectedYear =selectedDate.year();    
-    selectedDay=1;
-
-    if (selectedMonth >= 13) {
-        selectedMonth = 1;
-        selectedYear =selectedYear+1;
-        AddHolidaysToHolidayList(selectedYear);
-        UpdateCalendar();
-        selectedDate.setDate(selectedYear,selectedMonth,selectedDay);
-        selectedDateLabel->setText(selectedDate.toString());
-    }
-    selectedDate.setDate(selectedYear,selectedMonth,selectedDay);
-    UpdateCalendar();
-    selectedDateLabel->setText(selectedDate.toString());
-}
-
-void MainWindow::gotoPreviousMonth()
-{
-    selectedMonth =selectedDate.month()-1;
-    selectedYear =selectedDate.year();    
-    selectedDay=1;
-
-    if (selectedMonth < 1)
-    {
-        selectedMonth = 12;
-        selectedYear=selectedYear-1;
-        AddHolidaysToHolidayList(selectedYear);
-        UpdateCalendar();
-        selectedDate.setDate(selectedYear,selectedMonth,selectedDay);
-        selectedDateLabel->setText(selectedDate.toString());
-    }
-    selectedDate.setDate(selectedYear,selectedMonth,selectedDay);
-    UpdateCalendar();
-    selectedDateLabel->setText(selectedDate.toString()); 
-}
-
-void MainWindow::gotoToday()
-{
-    selectedDate=QDate::currentDate();
-    selectedDay=selectedDate.day();
-    selectedMonth=selectedDate.month();
-    selectedYear=selectedDate.year();
-    AddHolidaysToHolidayList(selectedYear);
-    UpdateCalendar();
-    selectedDateLabel->setText(selectedDate.toString());
-}
-
-void MainWindow::showDayEvents()
-{
-    DialogShowDayDetails *showDetailsDialog =
-            new  DialogShowDayDetails(this,&selectedDate, &dbm);
-    showDetailsDialog->setModal(true);
-
-    if (showDetailsDialog->exec() == QDialog::Accepted ) {
-
-    }    
-    LoadDatabaseAppointmentsToAppointmentList();
-    UpdateCalendar();
 }
 
 void MainWindow::ExportContactsXML()
@@ -803,6 +1174,7 @@ void MainWindow::ExportContactsXML()
         file.close();
         //qDebug() << "Finished";
     }
+
 }
 
 void MainWindow::ImportContactsXML()
@@ -856,10 +1228,11 @@ void MainWindow::ImportContactsXML()
             }
         }
     }
-    file.close();    
+    file.close();
     LoadDatebaseContactsToContactList(); //refresh contactslist here
     DisplayContactsOnTableView(); //display
     UpdateCalendar(); //show birthdays
+
 }
 
 void MainWindow::ExportAppointmentsXML()
@@ -906,6 +1279,7 @@ void MainWindow::ExportAppointmentsXML()
         file.close();
         //qDebug() << "Finished";
     }
+
 }
 
 void MainWindow::ImportAppointmentsXML()
@@ -961,19 +1335,11 @@ void MainWindow::ImportAppointmentsXML()
     UpdateCalendar();
 }
 
-void MainWindow::gotoNextDaySlot()
-{
-    gotoNextDay();
-}
-
-void MainWindow::gotoPreviousDaySlot()
-{
-    gotoPreviousDay();
-}
 
 void MainWindow::gotoNextMonthSlot()
 {
     gotoNextMonth();
+
 }
 
 void MainWindow::gotoPreviousMonthSlot()
@@ -986,450 +1352,33 @@ void MainWindow::gotoTodaySlot()
     gotoToday();
 }
 
-void MainWindow::showAppointmentDetailsSlot()
-{
-    showDayEvents();
-}
-
-void MainWindow::increaseFontSlot()
-{
-    increaseFont();
-}
-
-void MainWindow::decreaseFontSlot()
-{
-    decreaseFont();
-}
-
-void MainWindow::resetFontSlot()
-{
-    resetFont();
-}
-
-void MainWindow::newAppointmentSlot()
-{
-    NewAppointment();
-}
-
 void MainWindow::newContactSlot()
 {
     NewContact();
 }
+
+
 
 void MainWindow::on_actionExit_triggered()
 {
     QApplication::quit();
 }
 
-void MainWindow::UpdateCalendar()
+void MainWindow::on_tableWidgetCalendar_cellClicked(int row, int column)
 {
-    ui->textBrowserCalendar->clear();
 
-       QTextCursor cursor = ui->textBrowserCalendar->textCursor();
-       cursor.beginEditBlock();
-       QDate date(selectedDate.year(), selectedDate.month(), 1);
+    int day =dayArray[(7 * row) + column];
+    //check if dayVal>0
 
-       QTextTableFormat tableFormat;
-       tableFormat.setAlignment(Qt::AlignHCenter);
-       tableFormat.setBackground(QColor("#f0f0f0"));
-       tableFormat.setCellPadding(2);
-       tableFormat.setCellSpacing(4);
-       QVector<QTextLength> constraints;
-       constraints << QTextLength(QTextLength::PercentageLength, 14)
-                   << QTextLength(QTextLength::PercentageLength, 14)
-                   << QTextLength(QTextLength::PercentageLength, 14)
-                   << QTextLength(QTextLength::PercentageLength, 14)
-                   << QTextLength(QTextLength::PercentageLength, 14)
-                   << QTextLength(QTextLength::PercentageLength, 14)
-                   << QTextLength(QTextLength::PercentageLength, 14);
-       tableFormat.setColumnWidthConstraints(constraints);
+    if((day<1) || (day>selectedDate.daysInMonth()) ) return;
 
-       QTextTable *table = cursor.insertTable(1, 7, tableFormat);
-       QTextFrame *frame = cursor.currentFrame();
+    selectedDate =QDate(selectedYear,selectedMonth,day);
+    //qDebug()<<"Selected Date = "<<theDate.toString();
 
-       QTextFrameFormat frameFormat = frame->frameFormat();
-       frameFormat.setBorder(1);
-       frame->setFrameFormat(frameFormat);
+    selectedDateLabel->setText(selectedDate.toString());
+    ShowAppointmentsOnListView(selectedDate);
 
-       QTextCharFormat format = cursor.charFormat();
-       format.setFontPointSize(fontSize);
-       format.setForeground(Qt::black);
 
-       QTextCharFormat formatBlue = cursor.charFormat();
-       formatBlue.setFontPointSize(fontSize);
-       formatBlue.setForeground(Qt::blue);
-
-       QTextCharFormat formatDarkGray = cursor.charFormat();
-       formatDarkGray.setFontPointSize(fontSize);
-       formatDarkGray.setForeground(Qt::darkGray);
-
-       QTextCharFormat formatDarkBlue = cursor.charFormat();
-       formatDarkBlue.setFontPointSize(fontSize);
-       formatDarkBlue.setForeground(Qt::darkBlue);
-
-       QTextCharFormat formatDarkMagenta = cursor.charFormat();
-       formatDarkMagenta.setFontPointSize(fontSize);
-       formatDarkMagenta.setForeground(Qt::darkMagenta);
-
-       QTextCharFormat formatMagenta = cursor.charFormat();
-       formatMagenta.setFontPointSize(fontSize);
-       formatMagenta.setForeground(Qt::magenta);
-
-       QTextCharFormat formatDarkYellow = cursor.charFormat();
-       formatDarkYellow.setFontPointSize(fontSize);
-       formatDarkYellow.setForeground(Qt::darkYellow);
-
-
-       QTextCharFormat formatDarkGreen = cursor.charFormat();
-       formatDarkGreen.setFontPointSize(fontSize);
-       formatDarkGreen.setForeground(Qt::darkGreen);
-
-//       QTextCharFormat formatGreen = cursor.charFormat();
-//       formatGreen.setFontPointSize(fontSize);
-//       formatGreen.setForeground(Qt::green);
-
-       QTextCharFormat formatDarkCyan = cursor.charFormat();
-       formatDarkCyan .setFontPointSize(fontSize);
-       formatDarkCyan .setForeground(Qt::darkCyan);
-
-       QTextCharFormat formatBlack = cursor.charFormat();
-       formatBlack.setFontPointSize(fontSize);
-       formatBlack.setForeground(Qt::black);
-
-       QTextCharFormat formatRed = cursor.charFormat();
-       formatRed.setFontPointSize(fontSize);
-       //formatBirthday.setForeground(Qt::darkGreen);
-       formatRed.setForeground(Qt::red);
-
-
-       QTextCharFormat formatSelectedDay = cursor.charFormat();
-       formatSelectedDay.setFontPointSize(fontSize);
-       formatSelectedDay.setBackground(Qt::green);
-
-
-       QTextCharFormat boldFormat = format;
-       boldFormat.setFontWeight(QFont::Bold);
-       boldFormat.setForeground(Qt::black);
-
-       QTextCharFormat highlightedFormat = boldFormat;
-       highlightedFormat.setBackground(Qt::yellow);
-
-       for (int weekDay = 1; weekDay <= 7; ++weekDay) {
-           QTextTableCell cell = table->cellAt(0, weekDay-1);
-           QTextCursor cellCursor = cell.firstCursorPosition();
-           cellCursor.insertText(QLocale::system().dayName(weekDay), boldFormat);
-
-       }
-
-       table->insertRows(table->rows(), 1);
-
-       while (date.month() == selectedDate.month()) {
-           int weekDay = date.dayOfWeek();
-           QTextTableCell cell = table->cellAt(table->rows()-1, weekDay-1);
-           QTextCursor cellCursor = cell.firstCursorPosition();
-
-           if (date == QDate::currentDate())
-           {
-               cellCursor.insertText(QString(tr("%1")).arg(date.day()), highlightedFormat);
-
-           }
-           else if(date==selectedDate){
-               cellCursor.insertText(QString(tr("%1")).arg(date.day()), formatSelectedDay);
-           }
-           else
-               cellCursor.insertText(QString(tr("%1")).arg(date.day()), format);
-
-           //-----------------------------------------------------
-           // Add holidays to calendar
-           //-----------------------------------------------------
-           if(flagShowHolidays){
-
-               foreach (Holiday h, holidayList)
-               {
-                   QDate d =QDate::fromString(h.m_date);
-
-                   if(date ==d)
-                   {
-                       if(flagColourCoding){
-                           cellCursor.insertText("\n"+h.m_name, formatDarkMagenta);
-                       }
-                       else {
-                           cellCursor.insertText("\n"+h.m_name, formatBlack);
-                       }
-                   }
-               }
-           }
-
-            //-----------------------------------------------------
-           //Add birthdays using contactList
-           //-----------------------------------------------------
-           if(flagShowBirthdays)
-           {
-               foreach (Contact c, contactList)
-               {
-                   QDate birth =QDate::fromString(c.m_birthdate);
-                   QDate birthday =QDate(selectedYear,birth.month(),birth.day());
-                   QString name =c.m_firstname+" "+c.m_lastname;
-
-                   if((date ==birthday) && (c.m_addToCalendar ==1))
-                   {
-
-                       if(flagColourCoding){
-                           cellCursor.insertText(tr("\nBirthday: ")+name, formatDarkCyan);
-                       }
-                       else {
-                           cellCursor.insertText(tr("\nBirthday: ")+name, formatBlack);
-                       }
-
-                   }
-               }
-           }
-
-
-           //-----------------------------------------------------
-           //Add appointments to calendar
-           //-----------------------------------------------------
-
-           QList<Appointment> dayList = *new QList<Appointment>();
-
-           foreach(Appointment a, appointmentList)
-           {
-               QDate d =QDate::fromString(a.m_date);
-
-               if(date ==d)
-               {
-                dayList.append(a);
-               }
-
-           }
-
-           std::sort(dayList.begin(), dayList.end(), compare);
-
-           foreach(Appointment a, dayList)
-           {
-               if(a.m_category=="General" && flagShowGeneralEvents)
-               {
-                   if(flagColourCoding){
-                       cellCursor.insertText("\n"+a.m_title, formatDarkBlue);
-                   }
-                   else {
-                       cellCursor.insertText("\n"+a.m_title, formatBlack);
-                   }
-               }
-               else if(a.m_category=="Meeting" && flagShowMeetings){
-                   if(flagColourCoding){
-                       cellCursor.insertText("\n"+a.m_title, formatBlue);
-                   }
-                   else {
-                       cellCursor.insertText("\n"+a.m_title, formatBlack);
-                   }
-               }
-               else if(a.m_category=="Work" && flagShowWorkEvents){
-                   if(flagColourCoding){
-                       cellCursor.insertText("\n"+a.m_title, formatBlue);
-                   }
-                   else {
-                       cellCursor.insertText("\n"+a.m_title, formatBlack);
-                   }
-               }
-               else if(a.m_category=="Family" && flagShowFamilyEvents){
-
-                   if(flagColourCoding) {
-                       cellCursor.insertText("\n"+a.m_title, formatMagenta);
-                   }
-                   else {
-                       cellCursor.insertText("\n"+a.m_title, formatBlack);
-                   }
-               }
-               else if(a.m_category=="Leisure" && flagShowLeisureEvents){
-                   if(flagColourCoding){
-                       cellCursor.insertText("\n"+a.m_title, formatDarkYellow);
-                   }
-                   else {
-                       cellCursor.insertText("\n"+a.m_title, formatBlack);
-                   }
-               }
-               else if(a.m_category=="Fitness" && flagShowFitness){
-                   if(flagColourCoding){
-                       cellCursor.insertText("\n"+a.m_title, formatDarkGreen);
-                   }
-                   else {
-                       cellCursor.insertText("\n"+a.m_title, formatBlack);
-                   }
-               }
-
-
-               else if(a.m_category=="Vacation" && flagShowVacations){
-                   if(flagColourCoding){
-                       cellCursor.insertText("\n"+a.m_title, formatDarkGray);
-                   }
-                   else {
-                       cellCursor.insertText("\n"+a.m_title, formatBlack);
-                   }
-               }
-
-               else if(a.m_category=="Medical" && flagShowMedical){
-                   if(flagColourCoding){
-                       cellCursor.insertText("\n"+a.m_title, formatRed);
-                   }
-                   else {
-                       cellCursor.insertText("\n"+a.m_title, formatBlack);
-                   }
-               }
-           }
-           date = date.addDays(1);
-           if (weekDay == 7 && date.month() == selectedDate.month())
-               table->insertRows(table->rows(), 1);
-       }
-       cursor.endEditBlock();
-
-       ui->labelMonthYear->setText
-               (tr("%1 %2"
-                   ).arg(QLocale::system().monthName(selectedDate.month())
-                         ).arg(selectedDate.year()));
-
-}
-
-void MainWindow::AddHolidaysToHolidayList(int year)
-{
-    holidayList.clear();
-
-    Holiday h1;
-    h1.m_id=1;
-    h1.m_name=tr("Christmas");
-    h1.m_date=QDate(year,12,25).toString();
-    h1.m_addToCalendar=1;
-    holidayList.append(h1);
-
-    Holiday h2;
-    h2.m_id=2;
-    h2.m_name=tr("Boxing Day");
-    h2.m_date=QDate(year,12,26).toString();
-    h2.m_addToCalendar=1;
-    holidayList.append(h2);
-
-    Holiday h3;
-    h3.m_id=3;
-    h3.m_name=tr("New Years Day");
-    h3.m_date=QDate(year,1,1).toString();
-    h3.m_addToCalendar=1;
-    holidayList.append(h3);
-
-    QDate easterSunday =CalculateEaster(year);
-
-    Holiday h4;
-    h4.m_id=4;
-    h4.m_name=tr("Easter");
-    h4.m_date=easterSunday.toString();
-    h4.m_addToCalendar=1;
-    holidayList.append(h4);
-
-    Holiday h5;
-    h5.m_id=5;
-    h5.m_name=tr("Good Friday");
-    h5.m_date=easterSunday.addDays(-2).toString();
-    h5.m_addToCalendar=1;
-    holidayList.append(h5);
-
-    Holiday h6;
-    h6.m_id=6;
-    h6.m_name=tr("Easter Monday");
-    h6.m_date=easterSunday.addDays(1).toString();
-    h6.m_addToCalendar=1;
-    holidayList.append(h6);
-
-    Holiday h7;
-    h7.m_id=7;
-    h7.m_name=tr("May Bank Holiday");
-    QDate mayDate =QDate(year,5,1);
-    int dayOfWeek = mayDate.dayOfWeek();
-    int firstMonday = mayDate.day()-dayOfWeek+1;
-    firstMonday = (firstMonday <= 0) ? firstMonday + 7 : firstMonday % 7;
-    h7.m_date=QDate(year,5,firstMonday).toString();
-    h7.m_addToCalendar=1;
-    holidayList.append(h7);
-
-    //Days in May
-
-    int daysInMay = mayDate.daysInMonth();
-    int plusDays=0;
-
-    if (firstMonday+28<=daysInMay){
-
-        plusDays =28;
-    }
-    else {
-        plusDays=21;
-    }
-
-
-    Holiday h8;
-    h8.m_id=8;
-    h8.m_name=tr("Spring Bank Holiday");
-    QDate springbank =QDate(year,5,firstMonday).addDays(plusDays);
-
-    if (springbank.isValid())
-    {
-    h8.m_date=springbank.toString();
-    h8.m_addToCalendar=1;
-    holidayList.append(h8);
-    }
-
-//    int weeksInMay = QDate(year, 5, daysInMonth).weekNumber()
-//        - QDate(year, 5, 1).weekNumber() + 1;
-
-
-    Holiday h9;
-    h9.m_id=9;
-    h9.m_name=tr("Summer Bank Holiday");
-    QDate augustDate =QDate(year,8,1);
-    int dayOfWeekAug = augustDate.dayOfWeek();
-    int firstMondayAug = mayDate.day()-dayOfWeekAug+1;
-    firstMondayAug = (firstMondayAug <= 0) ? firstMondayAug + 7 : firstMondayAug % 7;
-
-    //Days in May
-
-    int daysInAugust = augustDate.daysInMonth();
-    plusDays=0;
-
-    if (firstMondayAug+28<=daysInAugust){
-
-        plusDays =28;
-    }
-    else {
-        plusDays=21;
-    }
-
-    QDate summerBankHol =QDate(year,8,firstMondayAug).addDays(plusDays);
-
-    if(summerBankHol.isValid())
-    {
-        h9.m_date=summerBankHol.toString();
-        h9.m_addToCalendar=1;
-        holidayList.append(h9);
-
-    }
-}
-
-
-void MainWindow::on_actionNext_Day_triggered()
-{
-    gotoNextDay();
-}
-
-void MainWindow::on_actionPrevious_Day_triggered()
-{
-    gotoPreviousDay();
-}
-
-void MainWindow::on_actionNext_Month_triggered()
-{
-    gotoNextMonth();
-}
-
-void MainWindow::on_actionPrevious_Month_triggered()
-{
-    gotoPreviousMonth();
 }
 
 void MainWindow::on_actionNew_Appointment_triggered()
@@ -1437,22 +1386,79 @@ void MainWindow::on_actionNew_Appointment_triggered()
     NewAppointment();
 }
 
+void MainWindow::on_listViewDay_doubleClicked(const QModelIndex &index)
+{
+    int selectedRowIdx=index.row();
+    Appointment tmp =dayListModel->getAppointment(selectedRowIdx);
+    int dbId =tmp.m_id;
+    qDebug()<<"dbID = "<<dbId;
+    UpdateAppointment(dbId,selectedRowIdx);
+}
+
+void MainWindow::on_tableWidgetCalendar_cellDoubleClicked(int row, int column)
+{
+
+    int day =dayArray[(7 * row) + column];
+    if((day<1) || (day>selectedDate.daysInMonth()) ) return;
+    selectedDate =QDate(selectedYear,selectedMonth,day);
+    //qDebug()<<"Selected Date = "<<theDate.toString();
+    selectedDateLabel->setText(selectedDate.toString());
+    ShowAppointmentsOnListView(selectedDate);
+    NewAppointment();
+}
+
+void MainWindow::on_actionGeneerate_Repeat_Appointments_triggered()
+{
+    GenerateRepeatAppointments();
+}
+
+void MainWindow::on_actionUpcoming_Schedule_triggered()
+{
+    checkAppointmentsNextSevenDays();
+}
+
 void MainWindow::on_actionNew_Contact_triggered()
 {
     NewContact();
 }
 
-void MainWindow::on_tableViewContacts_doubleClicked(const QModelIndex &index)
+void MainWindow::on_actionDelete_All_Appointments_triggered()
+{
+    dbm.deleteAllAppointments();
+    appointmentList.clear();
+    UpdateCalendar();
+    ShowAppointmentsOnListView(selectedDate);
+}
+
+
+
+void MainWindow::on_actionDelete_All_Contacts_triggered()
+{
+    dbm.removeAllContacts();
+    contactList.clear();
+    DisplayContactsOnTableView();
+    UpdateCalendar(); //remove birthdays
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    DialogAbout *aboutDialog = new DialogAbout(this);
+    aboutDialog->setModal(false);
+    aboutDialog->exec();
+}
+
+void MainWindow::on_tableViewContacts_clicked(const QModelIndex &index)
 {
     QVariant idd = index.sibling(index.row(),0).data();
     selectedContactDbId =idd.toInt();
-    //qDebug()<<"SelectedContactId = "<<selectedContactDbId;
-    UpdateContact(selectedContactDbId);
+    //qDebug()<<"SelectedContactId = "<<selectedCont
+    selectedContact=dbm.getContactByID(selectedContactDbId);
 }
 
-void MainWindow::on_actionCheck_For_Birthdays_triggered()
+void MainWindow::on_pushButtonMailTo_clicked()
 {
-    checkForBirthdaysNextSevenDays();
+    QString url="mailto:?to="+selectedContact.m_email+"&subject=Enter the subject&body=Enter message";
+    QDesktopServices::openUrl(QUrl(url, QUrl::TolerantMode));
 }
 
 void MainWindow::on_pushButtonShowQuickFullView_clicked()
@@ -1486,111 +1492,22 @@ void MainWindow::on_pushButtonShowQuickFullView_clicked()
     }
 }
 
-void MainWindow::on_pushButtonMailTo_clicked()
-{
-    QString url="mailto:?to="+selectedContact.m_email+"&subject=Enter the subject&body=Enter message";
-    QDesktopServices::openUrl(QUrl(url, QUrl::TolerantMode));
-}
-
-void MainWindow::on_tableViewContacts_clicked(const QModelIndex &index)
+void MainWindow::on_tableViewContacts_doubleClicked(const QModelIndex &index)
 {
     QVariant idd = index.sibling(index.row(),0).data();
     selectedContactDbId =idd.toInt();
-    //qDebug()<<"SelectedContactId = "<<selectedCont
-    selectedContact=dbm.getContactByID(selectedContactDbId);
+    //qDebug()<<"SelectedContactId = "<<selectedContactDbId;
+    UpdateContact(selectedContactDbId);
 }
 
-void MainWindow::on_actionShow_Birthdays_on_Calendar_triggered()
+void MainWindow::on_actionNext_Month_triggered()
 {
-    if(ui->actionShow_Birthdays_on_Calendar->isChecked())
-    {
-        ui->actionShow_Birthdays_on_Calendar->setChecked(true);
-        flagShowBirthdays=true;
-
-    }
-    else {
-        ui->actionShow_Birthdays_on_Calendar->setChecked(false);
-        flagShowBirthdays=false;
-    }
-    UpdateCalendar();
+    gotoNextMonth();
 }
 
-void MainWindow::on_actionShow_Holidays_on_Calendar_triggered()
+void MainWindow::on_actionPrevious_Month_triggered()
 {
-    if(ui->actionShow_Holidays_on_Calendar->isChecked())
-    {
-       ui->actionShow_Holidays_on_Calendar->setChecked(true);
-       flagShowHolidays=true;
-    }
-    else {
-       ui->actionShow_Holidays_on_Calendar->setChecked(false);
-       flagShowHolidays=false;
-    }
-
-    UpdateCalendar();
-
-}
-
-void MainWindow::on_actionExport_Contacts_XML_triggered()
-{
-    ExportContactsXML();
-}
-
-void MainWindow::on_actionImport_Contacts_XML_triggered()
-{
-    ImportContactsXML();
-}
-
-void MainWindow::on_actionDelete_All_Appointments_triggered()
-{
-    dbm.deleteAllAppointments();
-    appointmentList.clear();
-    UpdateCalendar();
-
-}
-
-void MainWindow::on_actionDelete_All_Contacts_triggered()
-{
-    dbm.removeAllContacts();
-    contactList.clear();
-    DisplayContactsOnTableView();
-    UpdateCalendar();
-}
-
-void MainWindow::on_actionAbout_triggered()
-{
-    DialogAbout *aboutDialog = new DialogAbout(this);
-    aboutDialog->setModal(false);
-    aboutDialog->exec();
-}
-
-void MainWindow::on_actionShow_Day_Events_triggered()
-{
-   showDayEvents();
-}
-
-void MainWindow::on_action_Increase_Font_triggered()
-{
-    increaseFont();
-
-}
-
-void MainWindow::on_actionDecrease_Font_triggered()
-{
-    decreaseFont();
-
-
-}
-
-void MainWindow::on_actionReset_Calendar_Font_Size_triggered()
-{
-    resetFont();
-
-}
-
-void MainWindow::on_actionUpcoming_Schedule_triggered()
-{
-    checkAppointmentsNextSevenDays();
+    gotoPreviousMonth();
 }
 
 void MainWindow::on_actionToday_triggered()
@@ -1598,55 +1515,56 @@ void MainWindow::on_actionToday_triggered()
     gotoToday();
 }
 
-void MainWindow::on_actionGenerate_Repeat_Appointments_triggered()
+void MainWindow::on_actionCheck_For_Birthdays_triggered()
 {
-    GenerateRepeatAppointments();
+    checkForBirthdaysNextSevenDays();
 }
 
-
-void MainWindow::on_actionShow_General_Events_triggered()
+void MainWindow::on_actionShow_Birthdays_triggered()
 {
+    if(ui->actionShow_Birthdays->isChecked())
 
+       {
+            ui->actionShow_Birthdays->setChecked(true);
+            flagShowBirthdays=true;
 
-    if(ui->actionShow_General_Events->isChecked())
+        }
+        else {
+            ui->actionShow_Birthdays->setChecked(false);
+            flagShowBirthdays=false;
+        }
+        UpdateCalendar();
+}
+
+void MainWindow::on_actionShow_Holidays_triggered()
+{
+    if(ui->actionShow_Holidays->isChecked())
+       {
+          ui->actionShow_Holidays->setChecked(true);
+          flagShowHolidays=true;
+       }
+       else {
+          ui->actionShow_Holidays->setChecked(false);
+          flagShowHolidays=false;
+       }
+
+       UpdateCalendar();
+       ShowAppointmentsOnListView(selectedDate);
+}
+
+void MainWindow::on_actionShow_General_triggered()
+{
+    if(ui->actionShow_General->isChecked())
     {
-        ui->actionShow_General_Events->setChecked(true);
+        ui->actionShow_General->setChecked(true);
         flagShowGeneralEvents=true;
     }
     else {
-        ui->actionShow_General_Events->setChecked(false);
+        ui->actionShow_General->setChecked(false);
         flagShowGeneralEvents=false;
     }
     UpdateCalendar();
-}
-
-void MainWindow::on_actionShow_Family_Events_triggered()
-{
-    if(ui->actionShow_Family_Events->isChecked())
-    {
-        ui->actionShow_Family_Events->setChecked(true);
-        flagShowFamilyEvents=true;
-    }
-    else {
-        ui->actionShow_Family_Events->setChecked(false);
-        flagShowFamilyEvents=false;
-    }
-    UpdateCalendar();
-
-}
-
-void MainWindow::on_actionShow_Leisure_Events_triggered()
-{
-    if(ui->actionShow_Leisure_Events->isChecked())
-    {
-        ui->actionShow_Leisure_Events->setChecked(true);
-        flagShowLeisureEvents=true;
-    }
-    else {
-        ui->actionShow_Leisure_Events->setChecked(false);
-        flagShowLeisureEvents=false;
-    }
-    UpdateCalendar();
+    ShowAppointmentsOnListView(selectedDate);
 
 }
 
@@ -1662,6 +1580,7 @@ void MainWindow::on_actionShow_Meetings_triggered()
         flagShowMeetings=false;
     }
     UpdateCalendar();
+    ShowAppointmentsOnListView(selectedDate);
 
 }
 
@@ -1677,6 +1596,40 @@ void MainWindow::on_actionShow_Work_triggered()
         flagShowWorkEvents=false;
     }
     UpdateCalendar();
+    ShowAppointmentsOnListView(selectedDate);
+
+}
+
+void MainWindow::on_actionShow_Leisure_triggered()
+{
+    if(ui->actionShow_Leisure->isChecked())
+    {
+        ui->actionShow_Leisure->setChecked(true);
+        flagShowLeisureEvents=true;
+    }
+    else {
+        ui->actionShow_Leisure->setChecked(false);
+        flagShowLeisureEvents=false;
+    }
+    UpdateCalendar();
+    ShowAppointmentsOnListView(selectedDate);
+
+
+}
+
+void MainWindow::on_actionShow_Fitness_triggered()
+{
+    if(ui->actionShow_Fitness->isChecked()){
+
+        ui->actionShow_Fitness->setChecked(true);
+        flagShowFitness=true;
+    }
+    else {
+        ui->actionShow_Fitness->setChecked(false);
+        flagShowFitness=false;
+    }
+    UpdateCalendar();
+    ShowAppointmentsOnListView(selectedDate);
 
 }
 
@@ -1707,44 +1660,153 @@ void MainWindow::on_actionShow_Medical_triggered()
         flagShowMedical=false;
     }
     UpdateCalendar();
+    ShowAppointmentsOnListView(selectedDate);
+
 
 }
 
-void MainWindow::on_actionColour_Code_Appointments_triggered()
+void MainWindow::on_actionShow_Family_triggered()
 {
-    if(ui->actionColour_Code_Appointments->isChecked())
+    if(ui->actionShow_Family->isChecked())
     {
-        ui->actionColour_Code_Appointments->setChecked(true);
-        flagColourCoding=true;
+        ui->actionShow_Family->setChecked(true);
+        flagShowFamilyEvents=true;
     }
     else {
-        ui->actionColour_Code_Appointments->setChecked(false);
-        flagColourCoding=false;
+        ui->actionShow_Family->setChecked(false);
+        flagShowFamilyEvents=false;
     }
     UpdateCalendar();
+    ShowAppointmentsOnListView(selectedDate);
 
 }
 
-void MainWindow::on_actionShow_Fitness_triggered()
+void MainWindow::on_actionStandard_Theme_triggered()
 {
-    if(ui->actionShow_Fitness->isChecked()){
+    fontSize=12;
+    QString style12(
+                "QTableWidget {"
+                "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4f4f6, stop:1 #ceced6);"
+                "border-width: 2px;"
+                "border-style: solid;"
+                "border-color: black;"
+                " gridline-color: black;"
+                "font-size: 12pt;"
+                "selection-color: darkblue"
+                "}"
+                "QTableWidget::item {"
+                "background: none;"
+                "}"
+                );
 
-        ui->actionShow_Fitness->setChecked(true);
-        flagShowFitness=true;
-    }
-    else {
-        ui->actionShow_Fitness->setChecked(false);
-        flagShowFitness=false;
-    }
-    UpdateCalendar();
+     ui->tableWidgetCalendar->setStyleSheet(style12);
+     QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
+     font.setPointSize(fontSize+1);
+     ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
+     QFont font3 = ui->listViewDay->font();
+     font3.setPointSize(fontSize);
+     ui->listViewDay->setFont(font3);
+
+
 }
 
-void MainWindow::on_actionExport_Appointments_XML_triggered()
+void MainWindow::on_actionStandard_Theme_LargeText_triggered()
+{
+    //larger font
+    QString style14(
+                "QTableWidget {"
+                "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4f4f6, stop:1 #ceced6);"
+                "border-width: 2px;"
+                "border-style: solid;"
+                "border-color: black;"
+                " gridline-color: black;"
+                "font-size: 14pt;"
+                "selection-color: darkblue"
+                "}"
+                "QTableWidget::item {"
+                "background: none;"
+                "}"
+                );
+     fontSize=14;
+     ui->tableWidgetCalendar->setStyleSheet(style14);
+     QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
+     font.setPointSize(fontSize+2);
+     ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
+     QFont font3 = ui->listViewDay->font();
+     font3.setPointSize(fontSize+1);
+     ui->listViewDay->setFont(font3);
+}
+
+void MainWindow::on_actionGarish_Theme_triggered()
+{
+    QString styleGarish(
+                "QTableWidget {"
+                "background-color: qradialgradient(cx:0, cy:0, radius: 1, fx:0.5, fy:0.5, stop:0 white, stop:1 green);"
+                "border-width: 2px;"
+                "border-style: solid;"
+                "border-color: red;"
+                " gridline-color: red;"
+                "font-size: 12pt;"
+                "selection-color: darkblue"
+                "}"
+                "QTableWidget::item {"
+                "background: none;"
+                "}"
+                );
+    fontSize=12;
+    ui->tableWidgetCalendar->setStyleSheet(styleGarish);
+    QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
+    font.setPointSize(fontSize+2);
+    ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
+    QFont font3 = ui->listViewDay->font();
+    font3.setPointSize(fontSize+1);
+    ui->listViewDay->setFont(font3);
+}
+
+void MainWindow::on_actionGarish_Blue_triggered()
+{
+
+    QString styleGarishBlue(
+                "QTableWidget {"
+                "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 white, stop:1 blue);"
+                "border-width: 2px;"
+                "border-style: solid;"
+                "border-color: red;"
+                " gridline-color: red;"
+                "font-size: 12pt;"
+                "selection-color: darkblue"
+                "}"
+                "QTableWidget::item {"
+                "background: none;"
+                "}"
+                );
+    fontSize=12;
+    ui->tableWidgetCalendar->setStyleSheet(styleGarishBlue);
+    QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
+    font.setPointSize(fontSize+2);
+    ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
+    QFont font3 = ui->listViewDay->font();
+    font3.setPointSize(fontSize+1);
+    ui->listViewDay->setFont(font3);
+
+}
+
+void MainWindow::on_actionExport_Appointments_triggered()
 {
     ExportAppointmentsXML();
 }
 
-void MainWindow::on_actionImport_Appointments_XML_triggered()
+void MainWindow::on_actionImport_Appointments_triggered()
 {
     ImportAppointmentsXML();
+}
+
+void MainWindow::on_actionExport_Contacts_triggered()
+{
+    ExportContactsXML();
+}
+
+void MainWindow::on_actionImport_Contacts_triggered()
+{
+    ImportContactsXML();
 }

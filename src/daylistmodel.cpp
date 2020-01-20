@@ -74,6 +74,8 @@ void DayListModel::removeAppointment(int idx)
     endRemoveRows();
 }
 
+
+
 int DayListModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
@@ -87,10 +89,10 @@ QVariant DayListModel::data(const QModelIndex &index, int role) const
         return QVariant();
     if (index.row() >= modelAppointmentList.size() || index.row() < 0)
         return QVariant();
-
+    const Appointment& appointment = modelAppointmentList.at(index.row());
     if (role == Qt::DisplayRole) {
 
-        const Appointment& appointment = modelAppointmentList.at(index.row());
+
         QString details="default";
         //More to do..
         QTime starts =QTime::fromString(appointment.m_startTime);
@@ -98,22 +100,29 @@ QVariant DayListModel::data(const QModelIndex &index, int role) const
 
         if (appointment.m_isFullDay==1)
         {
-            details =
-                    "Title: "+appointment.m_title+"\nLocation: "+appointment.m_location
-                    +"\nAll Day Event" +"\nNotes: "+appointment.m_description
-                    +"\n---------------------";
+
+            details="All Day Event: "+appointment.m_title
+                    + " ("+appointment.m_location+") "
+                    +appointment.m_description+"\n";
         }
         else {
-            details =
-                     "Title: "+appointment.m_title+"\nLocation: "+appointment.m_location
-                    + "\nStart Time: "
-                    +starts.toString("hh:mm")+" End Time: "+ends.toString("hh:mm")
-                    +"\nNotes: "+appointment.m_description
-                    +"\n---------------------";
+
+
+            details =starts.toString("hh:mm")+" to "+ends.toString("hh:mm")
+                    + " "+appointment.m_title+" ("+appointment.m_location+ ") "
+                    + appointment.m_description+"\n";
+
 
         }
 
         return details;
+    }
+
+    if (role == Qt::ForegroundRole)
+    {
+        QColor col= Qt::black;
+
+        return col;
     }
 
     return QVariant();

@@ -29,9 +29,9 @@ find_package(lxqt ${LXQT_MINIMUM_VERSION} REQUIRED)
 message(STATUS "Building with Qt${Qt5Core_VERSION}")
 
 # Version
-set(LXQT_ORGANIZER_MAJOR_VERSION 0)
-set(LXQT_ORGANIZER_MINOR_VERSION 0)
-set(LXQT_ORGANIZER_PATCH_VERSION 1)
+set(ORGANIZER_MAJOR_VERSION 0)
+set(ORGANIZER_MINOR_VERSION 0)
+set(ORGANIZER_PATCH_VERSION 1)
 
 set(ORGANIZER_VERSION ${ORGANIZER_MAJOR_VERSION}.${ORGANIZER_MINOR_VERSION}.${ORGANIZER_PATCH_VERSION})
 add_definitions("-DORGANIZER_VERSION=\"${ORGANIZER_VERSION}\"")
@@ -48,8 +48,8 @@ add_subdirectory(src)
 add_subdirectory(scripts)
 
 # install(FILES
-#     man/lxqt-organzier.1
+#     man/organzier.1
 #     DESTINATION "${CMAKE_INSTALL_MANDIR}/man1"
-#     COMPONENT Runtime
+#    COMPONENT Runtime
 # )
 

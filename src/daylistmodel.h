@@ -21,8 +21,10 @@
 
 #include <QAbstractListModel>
 #include <QTime>
+#include <QColor>
+#include <QFont>
 #include "appointment.h"
-#include "dialogappointment.h"
+
 
 
 class DayListModel: public QAbstractListModel
@@ -38,6 +40,9 @@ public:
     Appointment getAppointment(int index);
     void clearAllAppointment();
     void removeAppointment(int idx);
+
+
+
 
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 

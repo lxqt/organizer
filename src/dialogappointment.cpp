@@ -27,7 +27,7 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
     ui->setupUi(this);
     //New appointment
     setWindowTitle(tr("New Appointment"));
-    ui->checkBoxDelete->hide();
+
     ui->dateEditAppointmentDate->setDate(*theAppointmentDate);
 
     this->appointmentDate=*theAppointmentDate;
@@ -48,62 +48,10 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
     ui->labelStarts->setText(tr("Start Time: "));
     ui->labelEndTime->setText(tr("End Time: "));
     ui->labelCategory->setText(tr("Category "));
-
     category="General";
     setupComboBoxes();
 }
 
-DialogAppointment::DialogAppointment(QWidget *parent, Appointment *theAppointment) :
-    QDialog(parent),
-    ui(new Ui::DialogAppointment)
-{
-    ui->setupUi(this);
-    //Update an appointment    
-    setWindowTitle(tr("Update Appointment"));
-    ui->checkBoxDelete->show();
-
-    ui->lineEditTitle->setText(theAppointment->m_title);
-    ui->lineEditLocation->setText(theAppointment->m_location);
-    ui->textEditDescription->setText(theAppointment->m_description);
-
-    this->appointmentDate=QDate::fromString(theAppointment->m_date);
-    //QDate appointmentDate=QDate::fromString(theAppointment->m_appointmentDate);
-    ui->dateEditAppointmentDate->setDate(this->appointmentDate);
-    ui->labelDateDisplay->setText(this->appointmentDate.toString());
-
-    this->startTime=QTime::fromString(theAppointment->m_startTime);
-    this->endTime =QTime::fromString(theAppointment->m_endTime);
-
-    ui->timeEditStartTime->setTime(startTime);
-    ui->timeEditEndTime->setTime(endTime);
-
-    setupComboBoxes();
-    category=theAppointment->m_category;
-
-    int index = ui->comboBoxCategory->findText(category);   
-
-    if ( index != -1 ) { // -1 for not found must be >0
-       ui->comboBoxCategory->setCurrentIndex(index);
-    }
-
-    isAllDay=theAppointment->m_isFullDay;
-
-    if (isAllDay==1)
-    {
-        ui->checkBoxAllDay->setCheckState(Qt::Checked);
-    }
-
-    //Translation refactoring
-    ui->labelDate->setText((tr("AppointmentDate: ")));
-    ui->labelTitle->setText(tr("Title: "));
-    ui->labelLocation->setText(tr("Location: "));
-    ui->labelDescription->setText(tr("Notes: "));
-    ui->checkBoxAllDay->setText(tr("All Day"));
-    ui->labelStarts->setText(tr("Start Time: "));
-    ui->labelEndTime->setText(tr("End Time: "));
-    ui->labelCategory->setText(tr("Category "));
-
-}
 
 DialogAppointment::~DialogAppointment()
 {
@@ -113,6 +61,7 @@ DialogAppointment::~DialogAppointment()
 
 QString DialogAppointment::getTitle()
 {
+    //currentTitle=ui->lineEditTitle->text();
     return ui->lineEditTitle->text();
 }
 
@@ -173,6 +122,10 @@ void DialogAppointment::setupComboBoxes()
 
 void DialogAppointment::accept()
 {
+
+    qDebug("ok button pressed");
+
+
     if (this->getTitle().isEmpty() || this->getLocation().isEmpty())
     {
         QMessageBox::information(this, tr("Empty Details"),
@@ -180,9 +133,18 @@ void DialogAppointment::accept()
         return;
     }
     else {
-
+        //ui->buttonBox->setEnabled(true);
         QDialog::accept();
     }
+}
+
+void DialogAppointment::reject()
+{
+    //keep all the old vararialbes
+
+    qDebug("rejecting ... Cancel button pressed");
+
+    QDialog::reject();
 }
 
 void DialogAppointment::on_dateEditAppointmentDate_userDateChanged(const QDate &date)
@@ -202,17 +164,6 @@ void DialogAppointment::on_timeEditEndTime_userTimeChanged(const QTime &time)
     this->endTime=time;
 }
 
-
-void DialogAppointment::on_checkBoxDelete_stateChanged(int arg1)
-{
-    if (arg1==Qt::Unchecked)
-    {
-        deleteRequested=false;
-    }
-    else if (arg1==Qt::Checked) {
-        deleteRequested =true;
-    }
-}
 
 
 void DialogAppointment::on_comboBoxCategory_activated(const QString &arg1)

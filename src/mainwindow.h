@@ -15,12 +15,15 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ***************************************************************************/
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+#include <QTextEdit>
+#include <QDebug>
 #include <QDate>
+#include <QLabel>
 #include <QtWidgets>
 #include <QKeyEvent>
 #include <QDesktopServices>
@@ -29,14 +32,16 @@
 #include <QFileDialog>
 #include <QXmlStreamWriter>
 #include <QDomDocument>
+#include <QTableWidgetItem>
 
 #include "appointment.h"
 #include "contact.h"
 #include "holiday.h"
 
 #include "dbmanager.h"
-#include "dialogshowdaydetails.h"
+
 #include "dialogappointment.h"
+#include "dialogappointmentupdate.h"
 #include "dialogcontact.h"
 #include "contactmodel.h"
 #include "proxymodelcontacts.h"
@@ -44,6 +49,7 @@
 #include "dialogupcomingschedule.h"
 #include "dialogupcomingbirthdays.h"
 #include "dialogrepeatappointment.h"
+#include "daylistmodel.h"
 
 
 namespace Ui {
@@ -58,14 +64,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    //Database
     DbManager dbm;
-
-
-    int appointmentId =0;
-    int contactId=0;
-    int parentId=1;
-    Appointment parentAppointment;
-
 
     //Appointments
     QString title="";
@@ -74,21 +74,76 @@ public:
     QDate appointmentDate;
     QTime appointmentStartTime;
     QTime appointmentEndTime;
-    QString category="";    
+    QString category="";
     int isAllDay=0;
+    int appointmentId =0;
 
     int isRepeating=0;
     int repeatDayInterval=0;
     int repeatNumber=0;
 
-    int selectedAppointmentdDbId =0;
+    QList<Appointment> appointmentList;
 
-    //Appointments
     void NewAppointment();
+    void UpdateAppointment(int dbID, int selectedRowindex);
     void GenerateRepeatAppointments();
-    static bool compare(const Appointment& first, const Appointment& second);
-    //AppointmentList methods
     void LoadDatabaseAppointmentsToAppointmentList();
+    void UpdateAppointmentInAppointmentList(Appointment app, int appointmentId);
+    void RemoveAppointmentFromAppointmentList(int appointmentId);
+
+    void ShowAppointmentsOnListView(QDate theSelectedDate);
+
+    //Sorting
+    static bool compare(const Appointment& first, const Appointment& second);
+    QList<Appointment> getSortedDayList(QDate theDate);
+
+    //Models
+    DayListModel *dayListModel;
+
+    //Selected date
+     QDate selectedDate;
+     int selectedYear=2000;
+     int selectedMonth=1;
+     int selectedDay=1;
+     int firstDay=1;
+     QLabel *selectedDateLabel;
+     QLabel *dateInfoLabel;
+
+
+    //Widget Calendar
+    int columnCount=7;
+    int rowCount=6;
+    //int dayArray[6][7];
+    int dayArray[6*7];
+    int fontSize=12;
+    void UpdateCalendar();
+
+    QTableWidgetItem* dayItem;
+    QTableWidgetItem* calendarItem;
+    QTableWidgetItem* holidayItem;
+    QTableWidgetItem* birthdayItem;
+
+
+    //Helper methods
+    QDate CalculateEaster(int year);
+    void checkForBirthdaysNextSevenDays();
+    void checkAppointmentsNextSevenDays();
+
+
+    //Navigation   
+    void gotoNextMonth();
+    void gotoPreviousMonth();
+    void gotoToday();
+    //void showDayEvents();
+
+    //Keyboard navigation actions
+    QAction *gotoNextMonthAction;
+    QAction *gotoPreviousMonthAction;
+    QAction *gotoTodayAction;
+
+
+    QList<Holiday> holidayList;
+    void AddHolidaysToHolidayList(int year);
 
     //Contacts
     QString contactFirstName ="";
@@ -106,10 +161,12 @@ public:
     int addBirthdayToCalendar =0;
     int selectedContactDbId=0;
     Contact selectedContact;
+     int contactId=0;
 
     ContactModel *contactModel;
     ProxyModelContacts *proxyModelContacts;
 
+    QAction *newContactAction;
 
     void LoadDatebaseContactsToContactList();
     void NewContact();
@@ -119,9 +176,8 @@ public:
     //ContactList methods
     void RemoveContactFromContactList(int contactId);
 
+    QList <Contact> contactList;
 
-    QAction *newAppointmentAction;
-    QAction *newContactAction;
 
     //Flags
     bool flagShowBirthdays=true;
@@ -135,44 +191,8 @@ public:
     bool flagShowMedical=true;
     bool flagColourCoding=true;
     bool flagShowFitness=true;
-
-
-
     bool flagQuickView=false;
 
-
-    //Helper methods
-     QDate CalculateEaster(int year);
-     void checkForBirthdaysNextSevenDays();
-     void checkAppointmentsNextSevenDays();
-
-     //Font
-     void increaseFont();
-     void decreaseFont();
-     void resetFont();
-
-     QAction *increaseFontAction;
-     QAction *decreaseFontAction;
-     QAction *resetFontAction;
-
-
-     //Navigation
-     void gotoNextDay();
-     void gotoPreviousDay();
-     void gotoNextMonth();
-     void gotoPreviousMonth();
-     void gotoToday();
-     void showDayEvents();
-
-     QAction *gotoNextDayAction;
-     QAction *gotoPreviousDayAction;
-     QAction *gotoNextMonthAction;
-     QAction *gotoPreviousMonthAction;
-     QAction *gotoTodayAction;
-     QAction *showAppointmentDetailsAction;
-
-     QLabel *selectedDateLabel;
-     QLabel *dateInfoLabel;
 
     //Export Import
     void ExportContactsXML();
@@ -181,53 +201,30 @@ public:
     void ImportAppointmentsXML();
 
 
+
 private slots:
 
-    void gotoNextDaySlot();
-    void gotoPreviousDaySlot();
     void gotoNextMonthSlot();
     void gotoPreviousMonthSlot();
     void gotoTodaySlot();
-    void showAppointmentDetailsSlot();
-
-    void increaseFontSlot();
-    void decreaseFontSlot();
-    void resetFontSlot();
-
-    void newAppointmentSlot();
+    //void newAppointmentSlot();
     void newContactSlot();
 
     void on_actionExit_triggered();
 
-    void on_actionNext_Day_triggered();
-
-    void on_actionPrevious_Day_triggered();
-
-    void on_actionNext_Month_triggered();
-
-    void on_actionPrevious_Month_triggered();
+    void on_tableWidgetCalendar_cellClicked(int row, int column);
 
     void on_actionNew_Appointment_triggered();
 
+    void on_listViewDay_doubleClicked(const QModelIndex &index);
+
+    void on_tableWidgetCalendar_cellDoubleClicked(int row, int column);
+
+    void on_actionGeneerate_Repeat_Appointments_triggered();
+
+    void on_actionUpcoming_Schedule_triggered();
+
     void on_actionNew_Contact_triggered();
-
-    void on_tableViewContacts_doubleClicked(const QModelIndex &index);
-
-    void on_actionCheck_For_Birthdays_triggered();
-
-    void on_pushButtonShowQuickFullView_clicked();
-
-    void on_pushButtonMailTo_clicked();
-
-    void on_tableViewContacts_clicked(const QModelIndex &index);
-
-    void on_actionShow_Birthdays_on_Calendar_triggered();
-
-    void on_actionShow_Holidays_on_Calendar_triggered();
-
-    void on_actionExport_Contacts_XML_triggered();
-
-    void on_actionImport_Contacts_XML_triggered();
 
     void on_actionDelete_All_Appointments_triggered();
 
@@ -235,62 +232,60 @@ private slots:
 
     void on_actionAbout_triggered();
 
-    void on_actionShow_Day_Events_triggered();
+    void on_tableViewContacts_clicked(const QModelIndex &index);
 
-    void on_action_Increase_Font_triggered();
+    void on_pushButtonMailTo_clicked();
 
-    void on_actionDecrease_Font_triggered();
+    void on_pushButtonShowQuickFullView_clicked();
 
-    void on_actionReset_Calendar_Font_Size_triggered();
+    void on_tableViewContacts_doubleClicked(const QModelIndex &index);
 
-    void on_actionUpcoming_Schedule_triggered();
+    void on_actionNext_Month_triggered();
+
+    void on_actionPrevious_Month_triggered();
 
     void on_actionToday_triggered();
 
-    void on_actionGenerate_Repeat_Appointments_triggered();
+    void on_actionCheck_For_Birthdays_triggered();
 
-    void on_actionShow_General_Events_triggered();
+    void on_actionShow_Birthdays_triggered();
 
-    void on_actionShow_Family_Events_triggered();
+    void on_actionShow_Holidays_triggered();
 
-    void on_actionShow_Leisure_Events_triggered();
+    void on_actionShow_General_triggered();
 
     void on_actionShow_Meetings_triggered();
 
     void on_actionShow_Work_triggered();
 
+    void on_actionShow_Leisure_triggered();
+
+    void on_actionShow_Fitness_triggered();
+
     void on_actionShow_Vacations_triggered();
 
     void on_actionShow_Medical_triggered();
 
-    void on_actionColour_Code_Appointments_triggered();
+    void on_actionShow_Family_triggered();
 
-    void on_actionShow_Fitness_triggered();
+    void on_actionStandard_Theme_triggered();
 
-    void on_actionExport_Appointments_XML_triggered();
+    void on_actionStandard_Theme_LargeText_triggered();
 
-    void on_actionImport_Appointments_XML_triggered();
+    void on_actionGarish_Theme_triggered();
+
+    void on_actionGarish_Blue_triggered();
+
+    void on_actionExport_Appointments_triggered();
+
+    void on_actionImport_Appointments_triggered();
+
+    void on_actionExport_Contacts_triggered();
+
+    void on_actionImport_Contacts_triggered();
 
 private:
     Ui::MainWindow *ui;
-
-    int fontSize;
-    QDate selectedDate;
-    void UpdateCalendar();
-
-    const char *monthNames[12]= {"January", "February", "March", "April",
-                                 "May", "June", "July", "August", "September",
-                                 "October", "November", "December"};
-    int selectedYear=0;
-    int selectedMonth=0;
-    int selectedDay=0;
-
-    QList<Appointment> appointmentList;    
-    QList<Holiday> holidayList;
-    QList <Contact> contactList;
-
-    void AddHolidaysToHolidayList(int year);
-
 };
 
 #endif // MAINWINDOW_H

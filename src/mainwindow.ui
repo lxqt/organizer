@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1046</width>
-    <height>671</height>
+    <width>1145</width>
+    <height>773</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout">
+   <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
@@ -24,9 +24,9 @@
        <attribute name="title">
         <string>Calendar</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
+       <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout">
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,70,30">
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
@@ -44,17 +44,8 @@
             </item>
             <item>
              <widget class="QLabel" name="labelMonthYear">
-              <property name="font">
-               <font>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
               <property name="text">
                <string>Month Year</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
               </property>
              </widget>
             </item>
@@ -74,7 +65,38 @@
            </layout>
           </item>
           <item>
-           <widget class="QTextBrowser" name="textBrowserCalendar"/>
+           <widget class="QTableWidget" name="tableWidgetCalendar">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <property name="lineWidth">
+             <number>4</number>
+            </property>
+            <property name="midLineWidth">
+             <number>1</number>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="textElideMode">
+             <enum>Qt::ElideRight</enum>
+            </property>
+            <property name="horizontalScrollMode">
+             <enum>QAbstractItemView::ScrollPerItem</enum>
+            </property>
+            <property name="gridStyle">
+             <enum>Qt::SolidLine</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListView" name="listViewDay"/>
           </item>
          </layout>
         </item>
@@ -95,7 +117,7 @@
             <item>
              <widget class="QPushButton" name="pushButtonShowQuickFullView">
               <property name="text">
-               <string>Quick/Full View</string>
+               <string>Show Quick/Full View</string>
               </property>
              </widget>
             </item>
@@ -121,7 +143,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1046</width>
+     <width>1145</width>
      <height>29</height>
     </rect>
    </property>
@@ -129,11 +151,11 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionExport_Appointments_XML"/>
-    <addaction name="actionImport_Appointments_XML"/>
+    <addaction name="actionExport_Appointments"/>
+    <addaction name="actionImport_Appointments"/>
     <addaction name="separator"/>
-    <addaction name="actionExport_Contacts_XML"/>
-    <addaction name="actionImport_Contacts_XML"/>
+    <addaction name="actionExport_Contacts"/>
+    <addaction name="actionImport_Contacts"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -142,39 +164,32 @@
      <string>Edit</string>
     </property>
     <addaction name="actionDelete_All_Appointments"/>
-    <addaction name="separator"/>
     <addaction name="actionDelete_All_Contacts"/>
    </widget>
-   <widget class="QMenu" name="menuAction">
+   <widget class="QMenu" name="menuAppointments">
     <property name="title">
-     <string>Action</string>
+     <string>Appointments</string>
     </property>
     <addaction name="actionNew_Appointment"/>
-    <addaction name="actionGenerate_Repeat_Appointments"/>
-    <addaction name="separator"/>
-    <addaction name="actionNew_Contact"/>
+    <addaction name="actionGeneerate_Repeat_Appointments"/>
     <addaction name="separator"/>
     <addaction name="actionUpcoming_Schedule"/>
+   </widget>
+   <widget class="QMenu" name="menuContacts">
+    <property name="title">
+     <string>Contacts</string>
+    </property>
+    <addaction name="actionNew_Contact"/>
+    <addaction name="separator"/>
     <addaction name="actionCheck_For_Birthdays"/>
    </widget>
-   <widget class="QMenu" name="menuOptions">
+   <widget class="QMenu" name="menuNavigation">
     <property name="title">
-     <string>Options</string>
+     <string>Navigation</string>
     </property>
-    <addaction name="actionShow_Birthdays_on_Calendar"/>
-    <addaction name="separator"/>
-    <addaction name="actionShow_Holidays_on_Calendar"/>
-    <addaction name="separator"/>
-    <addaction name="actionColour_Code_Appointments"/>
-    <addaction name="separator"/>
-    <addaction name="actionShow_General_Events"/>
-    <addaction name="actionShow_Meetings"/>
-    <addaction name="actionShow_Work"/>
-    <addaction name="actionShow_Family_Events"/>
-    <addaction name="actionShow_Leisure_Events"/>
-    <addaction name="actionShow_Fitness"/>
-    <addaction name="actionShow_Vacations"/>
-    <addaction name="actionShow_Medical"/>
+    <addaction name="actionNext_Month"/>
+    <addaction name="actionPrevious_Month"/>
+    <addaction name="actionToday"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -182,25 +197,41 @@
     </property>
     <addaction name="actionAbout"/>
    </widget>
-   <widget class="QMenu" name="menuNaviagation">
+   <widget class="QMenu" name="menuOptions">
     <property name="title">
-     <string>Navigation</string>
+     <string>Options</string>
     </property>
-    <addaction name="actionNext_Day"/>
-    <addaction name="actionPrevious_Day"/>
-    <addaction name="actionNext_Month"/>
-    <addaction name="actionPrevious_Month"/>
-    <addaction name="actionShow_Day_Events"/>
-    <addaction name="actionToday"/>
-    <addaction name="action_Increase_Font"/>
-    <addaction name="actionDecrease_Font"/>
-    <addaction name="actionReset_Calendar_Font_Size"/>
+    <addaction name="actionShow_Birthdays"/>
+    <addaction name="separator"/>
+    <addaction name="actionShow_Holidays"/>
+    <addaction name="separator"/>
+    <addaction name="actionShow_General"/>
+    <addaction name="actionShow_Meetings"/>
+    <addaction name="actionShow_Work"/>
+    <addaction name="actionShow_Family"/>
+    <addaction name="actionShow_Leisure"/>
+    <addaction name="actionShow_Fitness"/>
+    <addaction name="actionShow_Vacations"/>
+    <addaction name="actionShow_Medical"/>
+   </widget>
+   <widget class="QMenu" name="menuThemes">
+    <property name="title">
+     <string>Themes</string>
+    </property>
+    <addaction name="actionStandard_Theme"/>
+    <addaction name="actionStandard_Theme_LargeText"/>
+    <addaction name="separator"/>
+    <addaction name="actionGarish_Theme"/>
+    <addaction name="separator"/>
+    <addaction name="actionGarish_Blue"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
-   <addaction name="menuAction"/>
-   <addaction name="menuNaviagation"/>
+   <addaction name="menuAppointments"/>
+   <addaction name="menuContacts"/>
+   <addaction name="menuNavigation"/>
    <addaction name="menuOptions"/>
+   <addaction name="menuThemes"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -210,19 +241,6 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionNew_Appointment"/>
-   <addaction name="separator"/>
-   <addaction name="actionNew_Contact"/>
-   <addaction name="separator"/>
-   <addaction name="separator"/>
-   <addaction name="actionPrevious_Month"/>
-   <addaction name="actionPrevious_Day"/>
-   <addaction name="actionNext_Day"/>
-   <addaction name="actionNext_Month"/>
-   <addaction name="actionShow_Day_Events"/>
-   <addaction name="actionToday"/>
-   <addaction name="separator"/>
-   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionExit">
@@ -230,49 +248,65 @@
     <string>Exit</string>
    </property>
   </action>
+  <action name="actionDelete_All_Appointments">
+   <property name="text">
+    <string>Delete All Appointments</string>
+   </property>
+  </action>
+  <action name="actionDelete_All_Contacts">
+   <property name="text">
+    <string>Delete All Contacts</string>
+   </property>
+  </action>
   <action name="actionNew_Appointment">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/appointment.svg</normaloff>:/new/toolbar/icons/appointment.svg</iconset>
+     <normaloff>:/new/icons/icons/appointment.svg</normaloff>:/new/icons/icons/appointment.svg</iconset>
    </property>
    <property name="text">
-    <string>New Appointment</string>
+    <string>New Appointment (Double Click On Calendar)</string>
    </property>
-   <property name="toolTip">
-    <string>New Appointment</string>
+  </action>
+  <action name="actionGeneerate_Repeat_Appointments">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/icons/icons/repeats.svg</normaloff>:/new/icons/icons/repeats.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Generate Repeat Appointments</string>
+   </property>
+  </action>
+  <action name="actionUpcoming_Schedule">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/icons/icons/schedule.svg</normaloff>:/new/icons/icons/schedule.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Upcoming Schedule</string>
    </property>
   </action>
   <action name="actionNew_Contact">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/contact.svg</normaloff>:/new/toolbar/icons/contact.svg</iconset>
+     <normaloff>:/new/icons/icons/contact.svg</normaloff>:/new/icons/icons/contact.svg</iconset>
    </property>
    <property name="text">
     <string>New Contact</string>
    </property>
   </action>
-  <action name="actionNext_Day">
+  <action name="actionCheck_For_Birthdays">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/icon-rightarrow.svg</normaloff>:/new/toolbar/icons/icon-rightarrow.svg</iconset>
+     <normaloff>:/new/icons/icons/birthdaycheck.svg</normaloff>:/new/icons/icons/birthdaycheck.svg</iconset>
    </property>
    <property name="text">
-    <string>Next Day</string>
-   </property>
-  </action>
-  <action name="actionPrevious_Day">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/icon-leftarrow.svg</normaloff>:/new/toolbar/icons/icon-leftarrow.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Previous Day</string>
+    <string>Check For Birthdays</string>
    </property>
   </action>
   <action name="actionNext_Month">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/icon-uparrow.svg</normaloff>:/new/toolbar/icons/icon-uparrow.svg</iconset>
+     <normaloff>:/new/icons/icons/icon-uparrow.svg</normaloff>:/new/icons/icons/icon-uparrow.svg</iconset>
    </property>
    <property name="text">
     <string>Next Month</string>
@@ -281,64 +315,19 @@
   <action name="actionPrevious_Month">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/icon-downarrow.svg</normaloff>:/new/toolbar/icons/icon-downarrow.svg</iconset>
+     <normaloff>:/new/icons/icons/icon-downarrow.svg</normaloff>:/new/icons/icons/icon-downarrow.svg</iconset>
    </property>
    <property name="text">
-    <string>Previous Month </string>
+    <string>Previous Month</string>
    </property>
   </action>
-  <action name="actionUpcoming_Schedule">
+  <action name="actionToday">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/schedule.svg</normaloff>:/new/toolbar/icons/schedule.svg</iconset>
+     <normaloff>:/new/icons/icons/icon-spacebar.svg</normaloff>:/new/icons/icons/icon-spacebar.svg</iconset>
    </property>
    <property name="text">
-    <string>Upcoming Schedule</string>
-   </property>
-  </action>
-  <action name="actionCheck_For_Birthdays">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/birthdaycheck.svg</normaloff>:/new/toolbar/icons/birthdaycheck.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Check For Birthdays</string>
-   </property>
-  </action>
-  <action name="actionShow_Birthdays_on_Calendar">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show Birthdays On Calendar</string>
-   </property>
-  </action>
-  <action name="actionShow_Holidays_on_Calendar">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show Holidays On Calendar</string>
-   </property>
-  </action>
-  <action name="actionExport_Contacts_XML">
-   <property name="text">
-    <string>Export Contacts (XML)</string>
-   </property>
-  </action>
-  <action name="actionImport_Contacts_XML">
-   <property name="text">
-    <string>Import Contacts (XML)</string>
-   </property>
-  </action>
-  <action name="actionDelete_All_Contacts">
-   <property name="text">
-    <string>Delete All Contacts</string>
-   </property>
-  </action>
-  <action name="actionDelete_All_Appointments">
-   <property name="text">
-    <string>Delete All Appointments</string>
+    <string>Today</string>
    </property>
   </action>
   <action name="actionAbout">
@@ -346,82 +335,28 @@
     <string>About</string>
    </property>
   </action>
-  <action name="actionShow_Day_Events">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/icon-enter.svg</normaloff>:/new/toolbar/icons/icon-enter.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Show Day Events</string>
-   </property>
-  </action>
-  <action name="action_Increase_Font">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/icon-f.svg</normaloff>:/new/toolbar/icons/icon-f.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Increase Calendar Font Size</string>
-   </property>
-  </action>
-  <action name="actionDecrease_Font">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/icon-d.svg</normaloff>:/new/toolbar/icons/icon-d.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Decrease Calendar Font Size</string>
-   </property>
-  </action>
-  <action name="actionReset_Calendar_Font_Size">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/icon-r.svg</normaloff>:/new/toolbar/icons/icon-r.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Reset Calendar Font Size</string>
-   </property>
-  </action>
-  <action name="actionToday">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/icon-spacebar.svg</normaloff>:/new/toolbar/icons/icon-spacebar.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Today (Spacebar)</string>
-   </property>
-  </action>
-  <action name="actionGenerate_Repeat_Appointments">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/toolbar/icons/repeats.svg</normaloff>:/new/toolbar/icons/repeats.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Generate Repeat Appointments</string>
-   </property>
-  </action>
-  <action name="actionShow_General_Events">
+  <action name="actionShow_Birthdays">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Show General </string>
+    <string>Show Birthdays</string>
    </property>
   </action>
-  <action name="actionShow_Family_Events">
+  <action name="actionShow_Holidays">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Show Family</string>
+    <string>Show Holidays</string>
    </property>
   </action>
-  <action name="actionShow_Leisure_Events">
+  <action name="actionShow_General">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Show Leisure</string>
+    <string>Show General</string>
    </property>
   </action>
   <action name="actionShow_Meetings">
@@ -440,6 +375,22 @@
     <string>Show Work</string>
    </property>
   </action>
+  <action name="actionShow_Leisure">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Leisure</string>
+   </property>
+  </action>
+  <action name="actionShow_Fitness">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Fitness</string>
+   </property>
+  </action>
   <action name="actionShow_Vacations">
    <property name="checkable">
     <bool>true</bool>
@@ -456,30 +407,52 @@
     <string>Show Medical</string>
    </property>
   </action>
-  <action name="actionColour_Code_Appointments">
+  <action name="actionShow_Family">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Colour Code Calendar</string>
+    <string>Show Family</string>
    </property>
   </action>
-  <action name="actionShow_Fitness">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
+  <action name="actionStandard_Theme">
    <property name="text">
-    <string>Show Fitness</string>
+    <string>Standard Theme </string>
    </property>
   </action>
-  <action name="actionExport_Appointments_XML">
+  <action name="actionStandard_Theme_LargeText">
    <property name="text">
-    <string>Export Appointments (XML)</string>
+    <string>Standard Theme (LargeText)</string>
    </property>
   </action>
-  <action name="actionImport_Appointments_XML">
+  <action name="actionGarish_Theme">
    <property name="text">
-    <string>Import Appointments (XML)</string>
+    <string>Garish Green</string>
+   </property>
+  </action>
+  <action name="actionGarish_Blue">
+   <property name="text">
+    <string>Garish Blue</string>
+   </property>
+  </action>
+  <action name="actionExport_Appointments">
+   <property name="text">
+    <string>Export Appointments</string>
+   </property>
+  </action>
+  <action name="actionImport_Appointments">
+   <property name="text">
+    <string>Import Appointments</string>
+   </property>
+  </action>
+  <action name="actionExport_Contacts">
+   <property name="text">
+    <string>Export Contacts</string>
+   </property>
+  </action>
+  <action name="actionImport_Contacts">
+   <property name="text">
+    <string>Import Contacts</string>
    </property>
   </action>
  </widget>

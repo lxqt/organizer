@@ -121,10 +121,11 @@ void DialogRepeatAppointment::setupComboBoxes()
     //Set up Category Combobox
 
     ui->comboBoxCategory->addItem(tr("General"));
-    ui->comboBoxCategory->addItem(tr("Family"));
-    ui->comboBoxCategory->addItem(tr("Leisure"));
     ui->comboBoxCategory->addItem(tr("Meeting"));
     ui->comboBoxCategory->addItem(tr("Work"));
+    ui->comboBoxCategory->addItem(tr("Family"));
+    ui->comboBoxCategory->addItem(tr("Leisure"));
+    ui->comboBoxCategory->addItem(tr("Fitness"));
     ui->comboBoxCategory->addItem(tr("Vacation"));
     ui->comboBoxCategory->addItem(tr("Medical"));
 }

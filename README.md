@@ -5,6 +5,18 @@ Organizer is a lightweight personal information manager consisting of a calendar
 
 ## Overview
 
+v005 alpha1
+
+* Calendar enhancements
+
+```
+Single click date to show appointments
+Double click date to add new appointment
+```
+
+* Calendar themes
+
+
 v004 
 
 * custom calendar
@@ -12,27 +24,13 @@ v004
 * calendar keyboard navigation
 
 ```
-right arrow = next day
-left arrow = previous day
 up arrow = next month
 down arrow = previous month
-return (enter) = show day events
-spacebar = back to today
+spacebar = back to today`
 ```
 
-* event category colours
-
-* calendar font resizing
-
+* key actions for  new contact
 ```
-key_f = increase font size
-key_d = decrease font size
-key_r = reset font size
-```
-* key actions for new appointment and new contact
-
-```
-key_a = new appointment
 key_c = new contact
 ```
 
