@@ -391,7 +391,8 @@ void MainWindow::UpdateAppointment(int dbID, int selectedRowindex)
 
             if (dbm.isOpen())
             {
-                bool success =dbm.updateAppointment(a,dbID);
+                dbm.updateAppointment(a,dbID);
+                //bool success =dbm.updateAppointment(a,dbID);
                 //qDebug()<<"Apointment update: success ="<<success;
 
                 LoadDatabaseAppointmentsToAppointmentList(); //sync with db

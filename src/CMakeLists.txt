@@ -1,4 +1,4 @@
-project( Organizer )
+project( organizer )
 cmake_minimum_required( VERSION 3.1 )
 set( CMAKE_CXX_STANDARD 14 )
 set( CMAKE_INCLUDE_CURRENT_DIR ON )
@@ -11,74 +11,76 @@ find_package ( Qt5Gui REQUIRED )
 find_package ( Qt5Sql REQUIRED )
 find_package(Qt5Svg REQUIRED)
 find_package(Qt5Xml REQUIRED)
-set ( Organizer_HDRS
+set (organizer_HDRS
 	appointment.h
+	holiday.h
 	daylistmodel.h
 	dbmanager.h
 	contact.h
-	holiday.h
-	birthdaylistmodel.h
 	contactmodel.h
 	schedulelistmodel.h
+	birthdaylistmodel.h	
 	)
 
-set ( Organizer_SRCS
+set ( organizer_SRCS
+	
 	main.cpp
 	mainwindow.cpp
+	
 	daylistmodel.cpp
-	dialogappointment.cpp
 	dbmanager.cpp
-	birthdaylistmodel.cpp
-	dialogabout.cpp
-	dialogcontact.cpp
-	dialogrepeatappointment.cpp
-	dialogupcomingbirthdays.cpp
-	dialogupcomingschedule.cpp
+	dialogappointment.cpp
 	contactmodel.cpp
 	proxymodelcontacts.cpp
+	dialogcontact.cpp
+	dialogabout.cpp
+	dialogupcomingschedule.cpp
+	dialogupcomingbirthdays.cpp
 	schedulelistmodel.cpp
-	dialogappointmentupdate.cpp
+	birthdaylistmodel.cpp
+	dialogrepeatappointment.cpp
+	dialogappointmentupdate.cpp	
 	)
 
-set ( Organizer_UIS
-	mainwindow.ui
-	dialogappointment.ui
-	dialogabout.ui
+set (organizer_UIS
+
+mainwindow.ui
+	dialogappointment.ui	
 	dialogcontact.ui
-	dialogrepeatappointment.ui
-	dialogupcomingbirthdays.ui
+	dialogabout.ui
 	dialogupcomingschedule.ui
+	dialogupcomingbirthdays.ui
+	dialogrepeatappointment.ui
 	dialogappointmentupdate.ui
 	)
-QT5_WRAP_UI(UIS ${Organizer_UIS})
+QT5_WRAP_UI(UIS ${organizer_UIS})
 
-set ( Organizer_RSCS
+set ( organizer_RSCS
 	icons.qrc
 	)
-QT5_ADD_RESOURCES(RSCS ${Organizer_RSCS})
+QT5_ADD_RESOURCES(RSCS ${organizer_RSCS})
 
-set ( Organizer_MOCS
+set ( organizer_MOCS
+	
 	mainwindow.h
 	dialogappointment.h
-	dialogabout.h
+	proxymodelcontacts.h	
 	dialogcontact.h
-	dialogrepeatappointment.h
+	dialogabout.h
+	dialogupcomingschedule.h	
 	dialogupcomingbirthdays.h
-	dialogupcomingschedule.h
-	proxymodelcontacts.h
-	dialogappointmentupdate.h
+	dialogrepeatappointment.h	
+	dialogappointmentupdate.h	
 	)
-QT5_WRAP_CPP(MOCS ${Organizer_MOCS})
+QT5_WRAP_CPP(MOCS ${organizer_MOCS})
 
 add_executable ( organizer ${organizer_SRCS} ${UIS} ${RSCS} ${TRS} ${MOCS} )
 target_link_libraries ( organizer  Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Svg Qt5::Xml )
 
-#Testing purposes..
-#install(TARGETS organizer DESTINATION ${CMAKE_INSTALL_PREFIX})
 
-#INSTALL(TARGETS
-    #organizer
-   #RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-   #COMPONENT Runtime
-#)
+INSTALL(TARGETS
+    organizer
+    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+    COMPONENT Runtime
+)
 
