@@ -123,6 +123,19 @@ public:
     QTableWidgetItem* holidayItem;
     QTableWidgetItem* birthdayItem;
 
+    //Themes
+    void SetTheme(int type, int fontsize);
+    int themeType=1;
+
+    //Font
+    void increaseFont();
+    void decreaseFont();
+    void resetFont();
+
+    QAction *increaseFontAction;
+    QAction *decreaseFontAction;
+    QAction *resetFontAction;
+
 
     //Helper methods
     QDate CalculateEaster(int year);
@@ -210,6 +223,11 @@ private slots:
     //void newAppointmentSlot();
     void newContactSlot();
 
+    void increaseFontSlot();
+    void decreaseFontSlot();
+    void resetFontSlot();
+
+
     void on_actionExit_triggered();
 
     void on_tableWidgetCalendar_cellClicked(int row, int column);
@@ -270,7 +288,6 @@ private slots:
 
     void on_actionStandard_Theme_triggered();
 
-    void on_actionStandard_Theme_LargeText_triggered();
 
     void on_actionGarish_Theme_triggered();
 
@@ -283,6 +300,14 @@ private slots:
     void on_actionExport_Contacts_triggered();
 
     void on_actionImport_Contacts_triggered();
+
+    void on_actionIncrease_Font_triggered();
+
+    void on_actionDecrease_Font_triggered();
+
+    void on_actionReset_Font_triggered();
+
+    void on_actionDark_Theme_triggered();
 
 private:
     Ui::MainWindow *ui;

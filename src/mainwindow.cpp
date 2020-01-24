@@ -83,29 +83,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->tableWidgetCalendar->verticalHeader()->setMinimumSectionSize(60);
 
-    QString style12(
-                "QTableWidget {"
-                "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4f4f6, stop:1 #ceced6);"
-                "border-width: 2px;"
-                "border-style: solid;"
-                "border-color: black;"
-                " gridline-color: black;"
-                "font-size: 12pt;"
-                "selection-color: darkblue"
-                "}"
-                "QTableWidget::item {"
-                "background: none;"
-                "}"
-                );
 
-    ui->tableWidgetCalendar->setStyleSheet(style12);
-    QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
-    font.setPointSize(fontSize+1);
-    ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
-    QFont font3 = ui->listViewDay->font();
-    font3.setPointSize(fontSize);
-    ui->listViewDay->setFont(font3);
-
+    themeType=1;
+    fontSize=12;
+    SetTheme(themeType,fontSize);
 
 
     for (int row=0; row<ui->tableWidgetCalendar->rowCount(); ++row)
@@ -156,6 +137,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     //Keyboard QActions (shortcuts)
+    //----------------------------
     gotoNextMonthAction= new QAction(this);
     gotoNextMonthAction->setShortcut(Qt::Key_Up);
     connect(gotoNextMonthAction, SIGNAL(triggered()), this, SLOT(gotoNextMonthSlot()));
@@ -177,6 +159,24 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(newContactSlot()));
     this->addAction(newContactAction);
 
+    increaseFontAction=new QAction(this);
+    increaseFontAction->setShortcut(Qt::Key_F);
+    connect(increaseFontAction, SIGNAL(triggered()),
+            this, SLOT(increaseFontSlot()));
+    this->addAction(increaseFontAction);
+
+    resetFontAction=new QAction(this);
+    resetFontAction->setShortcut(Qt::Key_R);
+    connect(resetFontAction, SIGNAL(triggered()),
+            this, SLOT(resetFontSlot()));
+    this->addAction(resetFontAction);
+
+    decreaseFontAction=new QAction(this);
+    decreaseFontAction->setShortcut(Qt::Key_D);
+    connect(decreaseFontAction, SIGNAL(triggered()),
+            this, SLOT(decreaseFontSlot()));
+    this->addAction(decreaseFontAction);
+    //------------------------------------------
 
     //Setup empty lists
     appointmentList= QList<Appointment>();
@@ -551,8 +551,9 @@ void MainWindow::ShowAppointmentsOnListView(QDate theSelectedDate)
     }
 
 
-        dayListModel = new DayListModel(sortedDayList2);
-        ui->listViewDay->setModel(dayListModel);
+    dayListModel = new DayListModel(sortedDayList2);
+    dayListModel->setThemeType(themeType);
+    ui->listViewDay->setModel(dayListModel);
 }
 
 bool MainWindow::compare(const Appointment &first, const Appointment &second)
@@ -631,10 +632,13 @@ void MainWindow::UpdateCalendar()
 
         ui->tableWidgetCalendar->setItem(row, weekDay-1,dayItem);
 
-        if (date==QDate::currentDate())        {
+//        if (date==QDate::currentDate())        {
 
-            dayItem->setBackgroundColor(Qt::yellow);
-        }
+//
+//                dayItem->setBackgroundColor(Qt::yellow);
+//
+
+//        }
 
         QString str="";
         //-----------------------------------------------------
@@ -722,20 +726,21 @@ void MainWindow::UpdateCalendar()
                                                   +str);
 
            calendarItem->setTextColor(Qt::black);
-            ui->tableWidgetCalendar->setItem(row,weekDay-1, calendarItem);
+           ui->tableWidgetCalendar->setItem(row,weekDay-1, calendarItem);
 
-            if (date==QDate::currentDate())
-            {
-                ui->tableWidgetCalendar->item(row, weekDay-1)->setData(
-                        Qt::BackgroundRole,
-                        QBrush(Qt::yellow)
-                    );
+           if (date==QDate::currentDate())
+           {
 
-            }
+               ui->tableWidgetCalendar->item(row, weekDay-1)->setData(
+                           Qt::BackgroundRole,
+                           QBrush(Qt::lightGray)
+                           );
+
+           }
 
 
-        //Move on ...
-        date = date.addDays(1); //move to next day
+            //Move on ...
+            date = date.addDays(1); //move to next day
         if (weekDay == 7 && date.month() == selectedDate.month())
         {
             row=row+1;
@@ -749,6 +754,8 @@ void MainWindow::UpdateCalendar()
                   ).arg(QLocale::system().monthName(selectedDate.month())
                         ).arg(selectedDate.year()));
 }
+
+
 
 QDate MainWindow::CalculateEaster(int year)
 {
@@ -1358,6 +1365,21 @@ void MainWindow::newContactSlot()
     NewContact();
 }
 
+void MainWindow::increaseFontSlot()
+{
+    increaseFont();
+}
+
+void MainWindow::decreaseFontSlot()
+{
+    decreaseFont();
+}
+
+void MainWindow::resetFontSlot()
+{
+    resetFont();
+}
+
 
 
 void MainWindow::on_actionExit_triggered()
@@ -1682,114 +1704,175 @@ void MainWindow::on_actionShow_Family_triggered()
 
 }
 
-void MainWindow::on_actionStandard_Theme_triggered()
+void MainWindow::SetTheme(int type, int fontsize)
 {
-    fontSize=12;
-    QString style12(
-                "QTableWidget {"
-                "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4f4f6, stop:1 #ceced6);"
-                "border-width: 2px;"
-                "border-style: solid;"
-                "border-color: black;"
-                " gridline-color: black;"
-                "font-size: 12pt;"
-                "selection-color: darkblue"
-                "}"
-                "QTableWidget::item {"
-                "background: none;"
-                "}"
-                );
+    if (type==1)
+    {
 
-     ui->tableWidgetCalendar->setStyleSheet(style12);
-     QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
-     font.setPointSize(fontSize+1);
-     ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
-     QFont font3 = ui->listViewDay->font();
-     font3.setPointSize(fontSize);
-     ui->listViewDay->setFont(font3);
+        QString strfont ="font-size: "+ QString::number(fontsize)+"pt;";
+        //Light theme
+        QString style(
+                    "QTableWidget {"
+                    "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4f4f6, stop:1 #ceced6);"
+                    "border-width: 2px;"
+                    "border-style: solid;"
+                    "border-color: black;"
+                    " gridline-color: black;"
+                    "color: black;"
+                    +strfont+
+                    "selection-color: darkblue"
+                    "}"
+                    "QTableWidget::item {"
+                    "background: none;"
+                    "}"
+                    );
+
+        ui->tableWidgetCalendar->setStyleSheet(style);
+        QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
+        font.setPointSize(fontsize+1);
+        ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
+        QFont font3 = ui->listViewDay->font();
+        font3.setPointSize(fontsize);
+        ui->listViewDay->setFont(font3);
+        //ui->listViewDay->setBackgroundRole(QPalette::NoRole);
+        ui->listViewDay->setBackgroundRole(QPalette::Window);
+        //(QBrush(Qt::lightGray));
 
 
+    }
+    else if (type==2)
+    {
+        //Dark theme
+        QString strfont ="font-size: "+ QString::number(fontsize)+"pt;";
+        QString style1(
+                    "QTableWidget {"
+                    "background-color:#232326;"
+                    "border-width: 2px;"
+                    "border-style: solid;"
+                    "border-color: white;"
+                    "gridline-color: white;"
+                    "color: white;"
+                    +strfont+
+                    "}"
+                    "QTableWidget::item {"
+                    "color:white;"
+                    "selection-color: #000000;"
+                    "background: none;"
+                    "}"
+                    "QTableWidget::item:selected {"
+                    "color:white;"
+                    "background:#000000; "
+                    "font-weight:900;"
+                    "}"
+                    );
+
+
+        ui->tableWidgetCalendar->setStyleSheet(style1);
+        QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
+        font.setPointSize(fontsize+2);
+        ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
+        QFont font3 = ui->listViewDay->font();
+        font3.setPointSize(fontsize+1);
+        ui->listViewDay->setFont(font3);
+        ui->listViewDay->setBackgroundRole(QPalette::Window);
+    }
+
+    else if (type ==3)
+    {
+        //Garish green
+        QString strfont ="font-size: "+ QString::number(fontsize)+"pt;";
+        QString styleGarish(
+                    "QTableWidget {"
+                    "background-color: qradialgradient(cx:0, cy:0, radius: 1, fx:0.5, fy:0.5, stop:0 white, stop:1 green);"
+                    "border-width: 2px;"
+                    "border-style: solid;"
+                    "border-color: red;"
+                    " gridline-color: red;"
+                    +strfont+
+                    "selection-color: darkblue"
+                    "}"
+                    "QTableWidget::item {"
+                    "background: none;"
+                    "}"
+                    );
+
+        ui->tableWidgetCalendar->setStyleSheet(styleGarish);
+        QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
+        font.setPointSize(fontsize+1);
+        ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
+        QFont font3 = ui->listViewDay->font();
+        font3.setPointSize(fontsize);
+        ui->listViewDay->setFont(font3);
+        ui->listViewDay->setBackgroundRole(QPalette::Window);
+    }
+    else if (type ==4)
+    {
+        //Garish blue
+        QString strfont ="font-size: "+ QString::number(fontsize)+"pt;";
+        QString styleGarishBlue(
+                    "QTableWidget {"
+                    "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 white, stop:1 blue);"
+                    "border-width: 2px;"
+                    "border-style: solid;"
+                    "border-color: red;"
+                    " gridline-color: red;"
+                    +strfont+
+                    "selection-color: darkblue"
+                    "}"
+                    "QTableWidget::item {"
+                    "background: none;"
+                    "}"
+                    );
+
+        ui->tableWidgetCalendar->setStyleSheet(styleGarishBlue);
+        QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
+        font.setPointSize(fontsize+1);
+        ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
+        QFont font3 = ui->listViewDay->font();
+        font3.setPointSize(fontSize);
+        ui->listViewDay->setFont(font3);
+        ui->listViewDay->setBackgroundRole(QPalette::Window);
+    }
 }
 
-void MainWindow::on_actionStandard_Theme_LargeText_triggered()
+void MainWindow::increaseFont()
 {
-    //larger font
-    QString style14(
-                "QTableWidget {"
-                "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4f4f6, stop:1 #ceced6);"
-                "border-width: 2px;"
-                "border-style: solid;"
-                "border-color: black;"
-                " gridline-color: black;"
-                "font-size: 14pt;"
-                "selection-color: darkblue"
-                "}"
-                "QTableWidget::item {"
-                "background: none;"
-                "}"
-                );
-     fontSize=14;
-     ui->tableWidgetCalendar->setStyleSheet(style14);
-     QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
-     font.setPointSize(fontSize+2);
-     ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
-     QFont font3 = ui->listViewDay->font();
-     font3.setPointSize(fontSize+1);
-     ui->listViewDay->setFont(font3);
+    fontSize=fontSize+1;
+    if (fontSize>=36) fontSize=36;
+    SetTheme(themeType,fontSize);
+}
+
+void MainWindow::decreaseFont()
+{
+    fontSize=fontSize-1;
+    if (fontSize<=8) fontSize=8;
+    SetTheme(themeType,fontSize);
+}
+
+void MainWindow::resetFont()
+{
+    fontSize=12;
+    SetTheme(themeType,fontSize);
+}
+
+void MainWindow::on_actionStandard_Theme_triggered()
+{
+    themeType=1;
+    SetTheme(1,fontSize);
+
 }
 
 void MainWindow::on_actionGarish_Theme_triggered()
 {
-    QString styleGarish(
-                "QTableWidget {"
-                "background-color: qradialgradient(cx:0, cy:0, radius: 1, fx:0.5, fy:0.5, stop:0 white, stop:1 green);"
-                "border-width: 2px;"
-                "border-style: solid;"
-                "border-color: red;"
-                " gridline-color: red;"
-                "font-size: 12pt;"
-                "selection-color: darkblue"
-                "}"
-                "QTableWidget::item {"
-                "background: none;"
-                "}"
-                );
-    fontSize=12;
-    ui->tableWidgetCalendar->setStyleSheet(styleGarish);
-    QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
-    font.setPointSize(fontSize+2);
-    ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
-    QFont font3 = ui->listViewDay->font();
-    font3.setPointSize(fontSize+1);
-    ui->listViewDay->setFont(font3);
+    themeType=3;
+    SetTheme(themeType,13);
 }
 
 void MainWindow::on_actionGarish_Blue_triggered()
 {
 
-    QString styleGarishBlue(
-                "QTableWidget {"
-                "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 white, stop:1 blue);"
-                "border-width: 2px;"
-                "border-style: solid;"
-                "border-color: red;"
-                " gridline-color: red;"
-                "font-size: 12pt;"
-                "selection-color: darkblue"
-                "}"
-                "QTableWidget::item {"
-                "background: none;"
-                "}"
-                );
-    fontSize=12;
-    ui->tableWidgetCalendar->setStyleSheet(styleGarishBlue);
-    QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
-    font.setPointSize(fontSize+2);
-    ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
-    QFont font3 = ui->listViewDay->font();
-    font3.setPointSize(fontSize+1);
-    ui->listViewDay->setFont(font3);
-
+    themeType=4;
+    SetTheme(themeType,13);
 }
 
 void MainWindow::on_actionExport_Appointments_triggered()
@@ -1810,4 +1893,25 @@ void MainWindow::on_actionExport_Contacts_triggered()
 void MainWindow::on_actionImport_Contacts_triggered()
 {
     ImportContactsXML();
+}
+
+void MainWindow::on_actionIncrease_Font_triggered()
+{
+    increaseFont();
+}
+
+void MainWindow::on_actionDecrease_Font_triggered()
+{
+    decreaseFont();
+}
+
+void MainWindow::on_actionReset_Font_triggered()
+{
+    resetFont();
+}
+
+void MainWindow::on_actionDark_Theme_triggered()
+{
+    themeType=2;
+    SetTheme(themeType, fontSize);
 }

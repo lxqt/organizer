@@ -10,5 +10,8 @@
         <file>icons/appointment.svg</file>
         <file>icons/birthdaycheck.svg</file>
         <file>icons/contact.svg</file>
+        <file>icons/icon-d.svg</file>
+        <file>icons/icon-f.svg</file>
+        <file>icons/icon-r.svg</file>
     </qresource>
 </RCC>

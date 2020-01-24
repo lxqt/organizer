@@ -29,6 +29,7 @@ DayListModel::DayListModel(const QList<Appointment> &appointmentList, QObject *p
 {
     Q_UNUSED(parent)
     this->modelAppointmentList=appointmentList;
+
 }
 
 void DayListModel::addAppointment(Appointment &appointment)
@@ -72,6 +73,11 @@ void DayListModel::removeAppointment(int idx)
     beginRemoveRows(QModelIndex(), 0, rowCount());
     modelAppointmentList.removeAt(idx);
     endRemoveRows();
+}
+
+void DayListModel::setThemeType(int type)
+{
+    themeType=type;
 }
 
 
@@ -121,6 +127,29 @@ QVariant DayListModel::data(const QModelIndex &index, int role) const
     if (role == Qt::ForegroundRole)
     {
         QColor col= Qt::black;
+        if (themeType==1)
+        {
+           col= Qt::black;
+        }
+        else if(themeType==2)
+        {
+             col=Qt::white;
+        }
+
+        return col;
+    }
+    if (role == Qt::BackgroundRole)
+    {
+        QColor col= Qt::white;
+        if (themeType==1)
+        {
+           col= Qt::white;
+        }
+        else if(themeType==2)
+        {
+             col=Qt::darkGray;
+        }
+
 
         return col;
     }

@@ -40,8 +40,8 @@ void DialogAbout::SetAboutMessage()
     descMsg.append(tr(" Data is stored locally in the user account and not online."));
     descMsg.append(tr(" Appointments are added and displayed in the calendar using an entry form allowing the date, "
                       "start and end times, description and category to be set. "
-                      "Repeating appointments can be generated. Organizer is a Qt based project."));
-    QString headerMsg = tr("Organizer (v005 alpha1)");
+                      "Repeating appointments can be generated. Organizer is a Qt application for the LXQt desktop project"));
+    QString headerMsg = tr("Organizer (v005 alpha1a)");
     QString authorMsg =tr("Author (Lead Developer): Alan Crispin  (aka. crispina)");
     QString lxqtMsg1 = tr("Desktop project.");
     QString lxqtLinkMsg ="<a href='https://github.com/lxqt'>LXQt</a>";

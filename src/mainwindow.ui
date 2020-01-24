@@ -219,11 +219,16 @@
      <string>Themes</string>
     </property>
     <addaction name="actionStandard_Theme"/>
-    <addaction name="actionStandard_Theme_LargeText"/>
+    <addaction name="separator"/>
+    <addaction name="actionDark_Theme"/>
     <addaction name="separator"/>
     <addaction name="actionGarish_Theme"/>
     <addaction name="separator"/>
     <addaction name="actionGarish_Blue"/>
+    <addaction name="separator"/>
+    <addaction name="actionIncrease_Font"/>
+    <addaction name="actionDecrease_Font"/>
+    <addaction name="actionReset_Font"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -453,6 +458,38 @@
   <action name="actionImport_Contacts">
    <property name="text">
     <string>Import Contacts</string>
+   </property>
+  </action>
+  <action name="actionIncrease_Font">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/icons/icons/icon-f.svg</normaloff>:/new/icons/icons/icon-f.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Increase Font</string>
+   </property>
+  </action>
+  <action name="actionDecrease_Font">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/icons/icons/icon-d.svg</normaloff>:/new/icons/icons/icon-d.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Decrease Font</string>
+   </property>
+  </action>
+  <action name="actionReset_Font">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/icons/icons/icon-r.svg</normaloff>:/new/icons/icons/icon-r.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Reset Font</string>
+   </property>
+  </action>
+  <action name="actionDark_Theme">
+   <property name="text">
+    <string>Dark Theme</string>
    </property>
   </action>
  </widget>
