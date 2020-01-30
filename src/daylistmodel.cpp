@@ -75,10 +75,12 @@ void DayListModel::removeAppointment(int idx)
     endRemoveRows();
 }
 
-void DayListModel::setThemeType(int type)
+void DayListModel::setNewLineSpacing(int spacing)
 {
-    themeType=type;
+    flagSpacing=spacing;
 }
+
+
 
 
 
@@ -107,52 +109,53 @@ QVariant DayListModel::data(const QModelIndex &index, int role) const
         if (appointment.m_isFullDay==1)
         {
 
-            details="All Day Event: "+appointment.m_title
-                    + " ("+appointment.m_location+") "
-                    +appointment.m_description+"\n";
+
+            if(flagSpacing==0)
+            {
+                details="All Day Event: "+appointment.m_title
+                        + " ("+appointment.m_location+") "
+                        +appointment.m_description;
+
+            }
+            else if(flagSpacing==1)
+            {
+                details="All Day Event: "+appointment.m_title
+                        + " ("+appointment.m_location+") "
+                        +appointment.m_description+"\n";
+            }
+            else {
+                details="All Day Event: "+appointment.m_title
+                        + " ("+appointment.m_location+") "
+                        +appointment.m_description;
+            }
+
         }
         else {
 
+            if(flagSpacing==0)
+            {
+                details =starts.toString("hh:mm")+" to "+ends.toString("hh:mm")
+                        + " "+appointment.m_title+" ("+appointment.m_location+ ") "
+                        + appointment.m_description;
 
-            details =starts.toString("hh:mm")+" to "+ends.toString("hh:mm")
-                    + " "+appointment.m_title+" ("+appointment.m_location+ ") "
-                    + appointment.m_description+"\n";
-
-
+            }
+            else if(flagSpacing==1)
+            {
+                details =starts.toString("hh:mm")+" to "+ends.toString("hh:mm")
+                        + " "+appointment.m_title+" ("+appointment.m_location+ ") "
+                        + appointment.m_description+"\n";
+            }
+            else {
+                details =starts.toString("hh:mm")+" to "+ends.toString("hh:mm")
+                        + " "+appointment.m_title+" ("+appointment.m_location+ ") "
+                        + appointment.m_description;
+            }
         }
 
         return details;
     }
 
-    if (role == Qt::ForegroundRole)
-    {
-        QColor col= Qt::black;
-        if (themeType==1)
-        {
-           col= Qt::black;
-        }
-        else if(themeType==2)
-        {
-             col=Qt::white;
-        }
 
-        return col;
-    }
-    if (role == Qt::BackgroundRole)
-    {
-        QColor col= Qt::white;
-        if (themeType==1)
-        {
-           col= Qt::white;
-        }
-        else if(themeType==2)
-        {
-             col=Qt::darkGray;
-        }
-
-
-        return col;
-    }
 
     return QVariant();
 }

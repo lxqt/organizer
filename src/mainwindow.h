@@ -124,8 +124,8 @@ public:
     QTableWidgetItem* birthdayItem;
 
     //Themes
-    void SetTheme(int type, int fontsize);
-    int themeType=1;
+    void SetTheme(int fontsize);
+
 
     //Font
     void increaseFont();
@@ -135,6 +135,8 @@ public:
     QAction *increaseFontAction;
     QAction *decreaseFontAction;
     QAction *resetFontAction;
+
+    int newLineSpacing=0;
 
 
     //Helper methods
@@ -286,12 +288,6 @@ private slots:
 
     void on_actionShow_Family_triggered();
 
-    void on_actionStandard_Theme_triggered();
-
-
-    void on_actionGarish_Theme_triggered();
-
-    void on_actionGarish_Blue_triggered();
 
     void on_actionExport_Appointments_triggered();
 
@@ -307,7 +303,9 @@ private slots:
 
     void on_actionReset_Font_triggered();
 
-    void on_actionDark_Theme_triggered();
+
+
+    void on_actionNewLine_Spacing_triggered();
 
 private:
     Ui::MainWindow *ui;

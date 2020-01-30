@@ -183,27 +183,28 @@
     <addaction name="separator"/>
     <addaction name="actionCheck_For_Birthdays"/>
    </widget>
-   <widget class="QMenu" name="menuNavigation">
-    <property name="title">
-     <string>Navigation</string>
-    </property>
-    <addaction name="actionNext_Month"/>
-    <addaction name="actionPrevious_Month"/>
-    <addaction name="actionToday"/>
-   </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
     <addaction name="actionAbout"/>
    </widget>
-   <widget class="QMenu" name="menuOptions">
+   <widget class="QMenu" name="menuCalendar">
     <property name="title">
-     <string>Options</string>
+     <string>Calendar</string>
     </property>
-    <addaction name="actionShow_Birthdays"/>
+    <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="actionShow_Holidays"/>
+    <addaction name="actionShow_Birthdays"/>
+    <addaction name="separator"/>
+    <addaction name="actionNext_Month"/>
+    <addaction name="actionPrevious_Month"/>
+    <addaction name="actionToday"/>
+    <addaction name="separator"/>
+    <addaction name="actionIncrease_Font"/>
+    <addaction name="actionDecrease_Font"/>
+    <addaction name="actionReset_Font"/>
     <addaction name="separator"/>
     <addaction name="actionShow_General"/>
     <addaction name="actionShow_Meetings"/>
@@ -213,30 +214,14 @@
     <addaction name="actionShow_Fitness"/>
     <addaction name="actionShow_Vacations"/>
     <addaction name="actionShow_Medical"/>
-   </widget>
-   <widget class="QMenu" name="menuThemes">
-    <property name="title">
-     <string>Themes</string>
-    </property>
-    <addaction name="actionStandard_Theme"/>
     <addaction name="separator"/>
-    <addaction name="actionDark_Theme"/>
-    <addaction name="separator"/>
-    <addaction name="actionGarish_Theme"/>
-    <addaction name="separator"/>
-    <addaction name="actionGarish_Blue"/>
-    <addaction name="separator"/>
-    <addaction name="actionIncrease_Font"/>
-    <addaction name="actionDecrease_Font"/>
-    <addaction name="actionReset_Font"/>
+    <addaction name="actionNewLine_Spacing"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuAppointments"/>
+   <addaction name="menuCalendar"/>
    <addaction name="menuContacts"/>
-   <addaction name="menuNavigation"/>
-   <addaction name="menuOptions"/>
-   <addaction name="menuThemes"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -490,6 +475,14 @@
   <action name="actionDark_Theme">
    <property name="text">
     <string>Dark Theme</string>
+   </property>
+  </action>
+  <action name="actionNewLine_Spacing">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>NewLine Spacing</string>
    </property>
   </action>
  </widget>

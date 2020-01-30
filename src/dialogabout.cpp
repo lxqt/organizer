@@ -36,14 +36,28 @@ DialogAbout::~DialogAbout()
 
 void DialogAbout::SetAboutMessage()
 {
-    QString descMsg = tr("Organizer is a lightweight personal information manager consisting of a calendar and contacts list.");
-    descMsg.append(tr(" Data is stored locally in the user account and not online."));
-    descMsg.append(tr(" Appointments are added and displayed in the calendar using an entry form allowing the date, "
-                      "start and end times, description and category to be set. "
-                      "Repeating appointments can be generated. Organizer is a Qt application for the LXQt desktop project"));
-    QString headerMsg = tr("Organizer (v005 alpha1a)");
+
+    QString strap=tr("Organizer is a Qt lightweight personal information manager.");
+
+    QString keyMsg="";
+    keyMsg.append(tr(" Calendar Keyboard shortcuts\n"));
+    keyMsg.append(" ---------------------------------------\n");
+    keyMsg.append(tr(" Up arrow = next month\n"));
+    keyMsg.append(tr(" Down arrow = previous month\n"));
+    keyMsg.append(tr(" Space bar = (back to) today\n"));
+    keyMsg.append(tr(" key_f = increase font size\n"));
+    keyMsg.append(tr(" key_d = decrease font size\n"));
+    keyMsg.append(tr(" key_r = reset font size\n\n"));
+    keyMsg.append(tr(" Single click calendar date = show appointments\n"));
+    keyMsg.append(tr(" Double click calendar date = new appointment\n\n"));
+
+    keyMsg.append(tr(" key_c = new contact\n"));
+
+    QString headerMsg = tr("Organizer (v005)");
     QString authorMsg =tr("Author (Lead Developer): Alan Crispin  (aka. crispina)");
-    QString lxqtMsg1 = tr("Desktop project.");
+    QString lxqtMsg1 = tr("Organizer is maintained by the LXQt project but can be "
+                          "used independently from this desktop environment."
+                          );
     QString lxqtLinkMsg ="<a href='https://github.com/lxqt'>LXQt</a>";
     QString license1 ="Organizer is free software: you can redistribute it and/or modify it under the terms "
                       "of the GNU General Public License as published by the Free Software Foundation.";
@@ -53,11 +67,13 @@ void DialogAbout::SetAboutMessage()
                      " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. "
                      "See the GNU General Public License for more details.";
 
-    QString msg =descMsg;
+    QString msg =strap;
         msg.append("\n"); //new line
         msg.append("\n"); //new line
         msg.append(authorMsg);
         msg.append("\n"); //new line
+        msg.append("\n"); //new line
+        msg.append(keyMsg);
         msg.append("\n"); //new line
         msg.append(lxqtMsg1);
         msg.append("\n"); //new line

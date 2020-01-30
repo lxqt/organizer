@@ -41,9 +41,8 @@ public:
     void clearAllAppointment();
     void removeAppointment(int idx);
 
-    void setThemeType(int type);
-    int themeType =1;
-
+    void setNewLineSpacing(int spacing);
+    int flagSpacing=0;
 
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
