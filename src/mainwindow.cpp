@@ -32,6 +32,18 @@ MainWindow::MainWindow(QWidget *parent) :
     dbm.openDatabase();
     dbm.createDatebaseTables();
 
+    applicationFontSize=20;
+    QFont appfont = QApplication::font();
+    appfont.setPixelSize(applicationFontSize); //DPI
+    QApplication::setFont(appfont);
+
+    calendarFontSize=12; //calendar font
+    newLineSpacing=0;
+    SetTheme();
+
+    currentPreferences.m_id=1;
+    currentPreferences.m_applicationFontSize=applicationFontSize;
+    currentPreferences.m_calendarFontSize=calendarFontSize;
 
     selectedDate = QDate::currentDate();
 
@@ -82,12 +94,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableWidgetCalendar->verticalHeader()->setMinimumSectionSize(60);
 
 
-
-    fontSize=12;
-    newLineSpacing=0;
-    SetTheme(fontSize);
-
-
     for (int row=0; row<ui->tableWidgetCalendar->rowCount(); ++row)
     {
         //ui->tableWidgetCalendar->verticalHeader()->setSectionResizeMode(row, QHeaderView::Stretch);
@@ -114,7 +120,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     QFont font2 = ui->labelMonthYear->font();
-    font2.setPointSize(fontSize+2);
+    font2.setPointSize(calendarFontSize+2);
     font2.setBold(true);
     ui->labelMonthYear->setFont(font2);
 
@@ -158,23 +164,7 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(newContactSlot()));
     this->addAction(newContactAction);
 
-    increaseFontAction=new QAction(this);
-    increaseFontAction->setShortcut(Qt::Key_F);
-    connect(increaseFontAction, SIGNAL(triggered()),
-            this, SLOT(increaseFontSlot()));
-    this->addAction(increaseFontAction);
 
-    resetFontAction=new QAction(this);
-    resetFontAction->setShortcut(Qt::Key_R);
-    connect(resetFontAction, SIGNAL(triggered()),
-            this, SLOT(resetFontSlot()));
-    this->addAction(resetFontAction);
-
-    decreaseFontAction=new QAction(this);
-    decreaseFontAction->setShortcut(Qt::Key_D);
-    connect(decreaseFontAction, SIGNAL(triggered()),
-            this, SLOT(decreaseFontSlot()));
-    this->addAction(decreaseFontAction);
     //------------------------------------------
 
     //Setup empty lists
@@ -276,16 +266,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionToday->setText(tr("Today (Spacebar)"));
     ui->actionToday->setToolTip(tr("Today"));
 
-    ui->actionIncrease_Font->setText(tr("Increase Calendar Font Size"));
-    ui->actionIncrease_Font->setToolTip(tr("Increase Calendar Font Size"));
-
-    ui->actionDecrease_Font->setText(tr("Decrease Calendar Font Size"));
-     ui->actionDecrease_Font->setToolTip(tr("Decrease Calendar Font Size"));
-
-     ui->actionReset_Font->setText(tr("Reset Calendar Font Size"));
-     ui->actionReset_Font->setToolTip(tr("Reset Calendar Font Size"));
-
-
+    ui->actionNewLine_Spacing->setText(tr("Line Spacing"));
+    ui->actionNewLine_Spacing->setToolTip("Line Spacing");
 
     //Contacts
     ui->menuContacts->setTitle(tr("&Contacts"));
@@ -769,6 +751,24 @@ void MainWindow::UpdateCalendar()
               (tr("%1 %2"
                   ).arg(QLocale::system().monthName(selectedDate.month())
                         ).arg(selectedDate.year()));
+}
+
+void MainWindow::SetPreferences()
+{
+    DialogPreferences *preferencesDialog = new  DialogPreferences(this,&currentPreferences);
+    preferencesDialog->setModal(true);
+
+    if (preferencesDialog->exec() == QDialog::Accepted ) {
+        //get new default font sizes
+        applicationFontSize=preferencesDialog->getApplicationFont();
+        calendarFontSize=preferencesDialog->getCalendarFont();
+        //reset preferences
+        currentPreferences.m_calendarFontSize=calendarFontSize;
+        currentPreferences.m_applicationFontSize=applicationFontSize;
+    }
+
+    SetTheme();
+
 }
 
 
@@ -1381,22 +1381,6 @@ void MainWindow::newContactSlot()
     NewContact();
 }
 
-void MainWindow::increaseFontSlot()
-{
-    increaseFont();
-}
-
-void MainWindow::decreaseFontSlot()
-{
-    decreaseFont();
-}
-
-void MainWindow::resetFontSlot()
-{
-    resetFont();
-}
-
-
 
 void MainWindow::on_actionExit_triggered()
 {
@@ -1720,9 +1704,9 @@ void MainWindow::on_actionShow_Family_triggered()
 
 }
 
-void MainWindow::SetTheme(int fontsize)
+void MainWindow::SetTheme()
 {
-        QString strfont ="font-size: "+ QString::number(fontsize)+"pt;";
+        QString strfont ="font-size: "+ QString::number(calendarFontSize)+"pt;";
 
         QString style(
                     "QTableWidget {"
@@ -1742,48 +1726,21 @@ void MainWindow::SetTheme(int fontsize)
 
         ui->tableWidgetCalendar->setStyleSheet(style);
         QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
-        font.setPointSize(fontsize+1);
+        font.setPointSize(calendarFontSize+1);
         ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
 
-//        QFont font1 =ui->tableWidgetCalendar->font();
-//        font1.setPointSize(fontsize);
-//        ui->tableWidgetCalendar->setFont(font1);
-
-        //ui->tableWidgetCalendar->setBackgroundRole(QPalette::Window);
-        //ui->tableWidgetCalendar->setForegroundRole(QPalette::Window);
-
-        QFont font3 = ui->listViewDay->font();
-        font3.setPointSize(fontsize);
-        ui->listViewDay->setFont(font3);
-        //ui->listViewDay->setBackgroundRole(QPalette::NoRole);
         ui->listViewDay->setBackgroundRole(QPalette::Window);
-        //(QBrush(Qt::lightGray));
 
         QFont fontMonthYear = ui->labelMonthYear->font();
-        fontMonthYear.setPointSize(fontSize+2);
+        fontMonthYear.setPointSize(calendarFontSize+2);
         fontMonthYear.setBold(true);
         ui->labelMonthYear->setFont(fontMonthYear);
+
+        QString styleSheet = QString("font-size:%1px;").arg(applicationFontSize);
+        this->setStyleSheet(styleSheet);
+
 }
 
-void MainWindow::increaseFont()
-{
-    fontSize=fontSize+1;
-    if (fontSize>=36) fontSize=36;
-    SetTheme(fontSize);
-}
-
-void MainWindow::decreaseFont()
-{
-    fontSize=fontSize-1;
-    if (fontSize<=8) fontSize=8;
-    SetTheme(fontSize);
-}
-
-void MainWindow::resetFont()
-{
-    fontSize=12;
-    SetTheme(fontSize);
-}
 
 
 void MainWindow::on_actionExport_Appointments_triggered()
@@ -1806,22 +1763,6 @@ void MainWindow::on_actionImport_Contacts_triggered()
     ImportContactsXML();
 }
 
-void MainWindow::on_actionIncrease_Font_triggered()
-{
-    increaseFont();
-}
-
-void MainWindow::on_actionDecrease_Font_triggered()
-{
-    decreaseFont();
-}
-
-void MainWindow::on_actionReset_Font_triggered()
-{
-    resetFont();
-}
-
-
 
 void MainWindow::on_actionNewLine_Spacing_triggered()
 {
@@ -1841,4 +1782,10 @@ void MainWindow::on_actionNewLine_Spacing_triggered()
     ShowAppointmentsOnListView(selectedDate);
 
 
+}
+
+
+void MainWindow::on_actionPreferences_triggered()
+{
+    SetPreferences();
 }

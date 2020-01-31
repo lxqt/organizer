@@ -19,7 +19,8 @@ set (organizer_HDRS
 	contact.h
 	contactmodel.h
 	schedulelistmodel.h
-	birthdaylistmodel.h	
+	birthdaylistmodel.h
+	preferences.h	
 	)
 
 set ( organizer_SRCS
@@ -39,7 +40,8 @@ set ( organizer_SRCS
 	schedulelistmodel.cpp
 	birthdaylistmodel.cpp
 	dialogrepeatappointment.cpp
-	dialogappointmentupdate.cpp	
+	dialogappointmentupdate.cpp
+	dialogpreferences.cpp	
 	)
 
 set (organizer_UIS
@@ -52,6 +54,7 @@ mainwindow.ui
 	dialogupcomingbirthdays.ui
 	dialogrepeatappointment.ui
 	dialogappointmentupdate.ui
+	dialogpreferences.ui
 	)
 QT5_WRAP_UI(UIS ${organizer_UIS})
 
@@ -70,7 +73,8 @@ set ( organizer_MOCS
 	dialogupcomingschedule.h	
 	dialogupcomingbirthdays.h
 	dialogrepeatappointment.h	
-	dialogappointmentupdate.h	
+	dialogappointmentupdate.h
+	dialogpreferences.h	
 	)
 QT5_WRAP_CPP(MOCS ${organizer_MOCS})
 

@@ -1,4 +1,4 @@
-﻿/***************************************************************************
+/***************************************************************************
  *   Author Alan Crispin aka. crispina                 *
  *   crispinalan@gmail.com                                                    *
  *                                                                         *
@@ -44,16 +44,14 @@ void DialogAbout::SetAboutMessage()
     keyMsg.append(" ---------------------------------------\n");
     keyMsg.append(tr(" Up arrow = next month\n"));
     keyMsg.append(tr(" Down arrow = previous month\n"));
-    keyMsg.append(tr(" Space bar = (back to) today\n"));
-    keyMsg.append(tr(" key_f = increase font size\n"));
-    keyMsg.append(tr(" key_d = decrease font size\n"));
-    keyMsg.append(tr(" key_r = reset font size\n\n"));
+    keyMsg.append(tr(" Space bar = (back to) today\n\n"));
+
     keyMsg.append(tr(" Single click calendar date = show appointments\n"));
     keyMsg.append(tr(" Double click calendar date = new appointment\n\n"));
 
     keyMsg.append(tr(" key_c = new contact\n"));
 
-    QString headerMsg = tr("Organizer (v005)");
+    QString headerMsg = tr("Organizer (v0.005)");
     QString authorMsg =tr("Author (Lead Developer): Alan Crispin  (aka. crispina)");
     QString lxqtMsg1 = tr("Organizer is maintained by the LXQt project but can be "
                           "used independently from this desktop environment."

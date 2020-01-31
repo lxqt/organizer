@@ -165,6 +165,9 @@
     </property>
     <addaction name="actionDelete_All_Appointments"/>
     <addaction name="actionDelete_All_Contacts"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menuAppointments">
     <property name="title">
@@ -193,29 +196,34 @@
     <property name="title">
      <string>Calendar</string>
     </property>
+    <widget class="QMenu" name="menuCategories">
+     <property name="title">
+      <string>Categories</string>
+     </property>
+     <addaction name="actionShow_General"/>
+     <addaction name="actionShow_Meetings"/>
+     <addaction name="actionShow_Work"/>
+     <addaction name="actionShow_Family"/>
+     <addaction name="actionShow_Leisure"/>
+     <addaction name="actionShow_Fitness"/>
+     <addaction name="actionShow_Vacations"/>
+     <addaction name="actionShow_Medical"/>
+    </widget>
     <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="actionShow_Holidays"/>
     <addaction name="actionShow_Birthdays"/>
     <addaction name="separator"/>
+    <addaction name="menuCategories"/>
+    <addaction name="separator"/>
     <addaction name="actionNext_Month"/>
     <addaction name="actionPrevious_Month"/>
     <addaction name="actionToday"/>
     <addaction name="separator"/>
-    <addaction name="actionIncrease_Font"/>
-    <addaction name="actionDecrease_Font"/>
-    <addaction name="actionReset_Font"/>
     <addaction name="separator"/>
-    <addaction name="actionShow_General"/>
-    <addaction name="actionShow_Meetings"/>
-    <addaction name="actionShow_Work"/>
-    <addaction name="actionShow_Family"/>
-    <addaction name="actionShow_Leisure"/>
-    <addaction name="actionShow_Fitness"/>
-    <addaction name="actionShow_Vacations"/>
-    <addaction name="actionShow_Medical"/>
     <addaction name="separator"/>
     <addaction name="actionNewLine_Spacing"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -405,26 +413,6 @@
     <string>Show Family</string>
    </property>
   </action>
-  <action name="actionStandard_Theme">
-   <property name="text">
-    <string>Standard Theme </string>
-   </property>
-  </action>
-  <action name="actionStandard_Theme_LargeText">
-   <property name="text">
-    <string>Standard Theme (LargeText)</string>
-   </property>
-  </action>
-  <action name="actionGarish_Theme">
-   <property name="text">
-    <string>Garish Green</string>
-   </property>
-  </action>
-  <action name="actionGarish_Blue">
-   <property name="text">
-    <string>Garish Blue</string>
-   </property>
-  </action>
   <action name="actionExport_Appointments">
    <property name="text">
     <string>Export Appointments</string>
@@ -445,44 +433,17 @@
     <string>Import Contacts</string>
    </property>
   </action>
-  <action name="actionIncrease_Font">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/icon-f.svg</normaloff>:/new/icons/icons/icon-f.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Increase Font</string>
-   </property>
-  </action>
-  <action name="actionDecrease_Font">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/icon-d.svg</normaloff>:/new/icons/icons/icon-d.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Decrease Font</string>
-   </property>
-  </action>
-  <action name="actionReset_Font">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/icon-r.svg</normaloff>:/new/icons/icons/icon-r.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Reset Font</string>
-   </property>
-  </action>
-  <action name="actionDark_Theme">
-   <property name="text">
-    <string>Dark Theme</string>
-   </property>
-  </action>
   <action name="actionNewLine_Spacing">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>NewLine Spacing</string>
+    <string>Line Spacing</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences (Font Sizes)</string>
    </property>
   </action>
  </widget>

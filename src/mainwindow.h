@@ -50,6 +50,8 @@
 #include "dialogupcomingbirthdays.h"
 #include "dialogrepeatappointment.h"
 #include "daylistmodel.h"
+#include "dialogpreferences.h"
+#include "preferences.h"
 
 
 namespace Ui {
@@ -115,8 +117,13 @@ public:
     int rowCount=6;
     //int dayArray[6][7];
     int dayArray[6*7];
-    int fontSize=12;
     void UpdateCalendar();
+
+
+    int applicationFontSize=20;
+    int calendarFontSize=12;
+    Preferences currentPreferences;
+    void SetPreferences();
 
     QTableWidgetItem* dayItem;
     QTableWidgetItem* calendarItem;
@@ -124,18 +131,7 @@ public:
     QTableWidgetItem* birthdayItem;
 
     //Themes
-    void SetTheme(int fontsize);
-
-
-    //Font
-    void increaseFont();
-    void decreaseFont();
-    void resetFont();
-
-    QAction *increaseFontAction;
-    QAction *decreaseFontAction;
-    QAction *resetFontAction;
-
+    void SetTheme();
     int newLineSpacing=0;
 
 
@@ -225,10 +221,6 @@ private slots:
     //void newAppointmentSlot();
     void newContactSlot();
 
-    void increaseFontSlot();
-    void decreaseFontSlot();
-    void resetFontSlot();
-
 
     void on_actionExit_triggered();
 
@@ -297,15 +289,9 @@ private slots:
 
     void on_actionImport_Contacts_triggered();
 
-    void on_actionIncrease_Font_triggered();
-
-    void on_actionDecrease_Font_triggered();
-
-    void on_actionReset_Font_triggered();
-
-
-
     void on_actionNewLine_Spacing_triggered();
+
+    void on_actionPreferences_triggered();
 
 private:
     Ui::MainWindow *ui;
