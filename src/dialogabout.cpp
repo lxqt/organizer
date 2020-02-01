@@ -51,7 +51,7 @@ void DialogAbout::SetAboutMessage()
 
     keyMsg.append(tr(" key_c = new contact\n"));
 
-    QString headerMsg = tr("Organizer (v0.005)");
+    QString headerMsg = tr("Organizer (v0.5)");
     QString authorMsg =tr("Author (Lead Developer): Alan Crispin  (aka. crispina)");
     QString lxqtMsg1 = tr("Organizer is maintained by the LXQt project but can be "
                           "used independently from this desktop environment."
