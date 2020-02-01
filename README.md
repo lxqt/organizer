@@ -33,7 +33,7 @@ and rename (or remove) the 'organizerdb.sqlite' database in your home directory.
 
 Binary packages are available as snap packages and in the Arch User Repository (AUR) 
 
-* [Snap](https://build.snapcraft.io/user/ito32bit/lxqt-organizer-snap-packaging) 
+* [Snap](https://snapcraft.io/lxqt-organizer-snap) 
 
 * [Arch (AUR)](https://aur.archlinux.org/packages/lxqt-organizer-git/) 
 
