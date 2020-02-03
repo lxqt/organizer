@@ -10,7 +10,7 @@ desktop environment.
 
 ### Compiling source code
 
-Please don't do this on production systems
+Please do not do this on production systems
 
 ```
 mkdir build  
@@ -35,8 +35,21 @@ Binary packages are available as snap packages and in the Arch User Repository (
 
 * [Snap](https://build.snapcraft.io/user/ito32bit/lxqt-organizer-snap-packaging) 
 
+To test the latest successful build use:
+```
+sudo snap install --edge lxqt-organizer-snap
+```
+To remove use:
+```
+sudo snap remove lxqt-organizer-snap
+```
 * [Arch (AUR)](https://aur.archlinux.org/packages/lxqt-organizer-git/) 
 
+It can be installed using yay as shown below.
+
+```
+yay -S lxqt-organizer
+```
 
 #### Runtime Dependencies
 * ${misc:Depends},
