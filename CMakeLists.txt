@@ -36,10 +36,18 @@ set(ORGANIZER_PATCH_VERSION 1)
 set(ORGANIZER_VERSION ${ORGANIZER_MAJOR_VERSION}.${ORGANIZER_MINOR_VERSION}.${ORGANIZER_PATCH_VERSION})
 add_definitions("-DORGANIZER_VERSION=\"${ORGANIZER_VERSION}\"")
 
-# include(LXQtPreventInSourceBuilds)
+#include(LXQtPreventInSourceBuilds)
+include(LXQtCompilerSettings NO_POLICY_SCOPE)
 
-# leave our compiler settings out for now, some fixes needed
-# include(LXQtCompilerSettings NO_POLICY_SCOPE)
+# Added by LXQtCompilerSettings. Code refactoring need before using them
+remove_definitions(
+    -DQT_USE_QSTRINGBUILDER
+    -DQT_NO_CAST_FROM_ASCII
+    -DQT_NO_CAST_TO_ASCII
+    -DQT_NO_URL_CAST_FROM_STRING
+    -DQT_NO_CAST_FROM_BYTEARRAY
+    -DQT_NO_FOREACH
+)
 
 # Translations **********************************
 # include(LXQtTranslate)

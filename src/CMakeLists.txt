@@ -1,16 +1,3 @@
-project( organizer )
-cmake_minimum_required( VERSION 3.1 )
-set( CMAKE_CXX_STANDARD 14 )
-set( CMAKE_INCLUDE_CURRENT_DIR ON )
-set( CMAKE_AUTOMOC ON )
-set( CMAKE_BUILD_TYPE Release )
-add_definitions ( -Wall )
-find_package ( Qt5Widgets REQUIRED )
-find_package ( Qt5Core REQUIRED )
-find_package ( Qt5Gui REQUIRED )
-find_package ( Qt5Sql REQUIRED )
-find_package(Qt5Svg REQUIRED)
-find_package(Qt5Xml REQUIRED)
 set (organizer_HDRS
 	appointment.h
 	holiday.h
