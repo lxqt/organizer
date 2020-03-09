@@ -267,7 +267,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionToday->setToolTip(tr("Today"));
 
     ui->actionNewLine_Spacing->setText(tr("Line Spacing"));
-    ui->actionNewLine_Spacing->setToolTip("Line Spacing");
+    ui->actionNewLine_Spacing->setToolTip(QStringLiteral("Line Spacing"));
 
     //Contacts
     ui->menuContacts->setTitle(tr("&Contacts"));
@@ -521,34 +521,34 @@ void MainWindow::ShowAppointmentsOnListView(QDate theSelectedDate)
     {
         foreach(Appointment a, sortedDayList)
         {
-            if(a.m_category=="General" && flagShowGeneralEvents)
+            if(a.m_category==QLatin1String("General") && flagShowGeneralEvents)
             {
                 sortedDayList2.append(a);
             }
-            else if(a.m_category=="Meeting" && flagShowMeetings){
+            else if(a.m_category==QLatin1String("Meeting") && flagShowMeetings){
                 sortedDayList2.append(a);
             }
-            else if(a.m_category=="Work" && flagShowWorkEvents){
+            else if(a.m_category==QLatin1String("Work") && flagShowWorkEvents){
                 sortedDayList2.append(a);
             }
-            else if(a.m_category=="Family" && flagShowFamilyEvents){
+            else if(a.m_category==QLatin1String("Family") && flagShowFamilyEvents){
 
                 sortedDayList2.append(a);
             }
-            else if(a.m_category=="Leisure" && flagShowLeisureEvents){
+            else if(a.m_category==QLatin1String("Leisure") && flagShowLeisureEvents){
                 sortedDayList2.append(a);
 
             }
-            else if(a.m_category=="Fitness" && flagShowFitness){
+            else if(a.m_category==QLatin1String("Fitness") && flagShowFitness){
                 sortedDayList2.append(a);
             }
 
 
-            else if(a.m_category=="Vacation" && flagShowVacations){
+            else if(a.m_category==QLatin1String("Vacation") && flagShowVacations){
                 sortedDayList2.append(a);
             }
 
-            else if(a.m_category=="Medical" && flagShowMedical){
+            else if(a.m_category==QLatin1String("Medical") && flagShowMedical){
                 sortedDayList2.append(a);
             }
         }
@@ -609,7 +609,7 @@ void MainWindow::UpdateCalendar()
         for(int col=0; col<ui->tableWidgetCalendar->columnCount(); ++col)
         {
             ui->tableWidgetCalendar->setItem(row, col,
-                                     new QTableWidgetItem(""));
+                                     new QTableWidgetItem(QLatin1String("")));
             cellIndex = (7 * row) + col;
             dayArray[cellIndex]=0;
         }
@@ -637,7 +637,7 @@ void MainWindow::UpdateCalendar()
 
         ui->tableWidgetCalendar->setItem(row, weekDay-1,dayItem);
 
-        QString str="";
+        QString str=QLatin1String("");
         //-----------------------------------------------------
         // Add holidays to calendar
         //-----------------------------------------------------
@@ -650,7 +650,7 @@ void MainWindow::UpdateCalendar()
                 if(date ==d)
                 {
                     //add holiday to calendar
-                    str.append("\n"+h.m_name);
+                    str.append(QLatin1Char('\n')+h.m_name);
 
                 }
             }
@@ -665,11 +665,11 @@ void MainWindow::UpdateCalendar()
             {
                 QDate birth =QDate::fromString(c.m_birthdate);
                 QDate birthday =QDate(selectedYear,birth.month(),birth.day());
-                QString name =c.m_firstname+" "+c.m_lastname;
+                QString name =c.m_firstname+ QLatin1Char(' ')+c.m_lastname;
 
                 if((date ==birthday) && (c.m_addToCalendar ==1))
                 {
-                    str.append("\nBirthday: "+name);
+                    str.append(QLatin1String("\nBirthday: ")+name);
                 }
             }
         }
@@ -684,35 +684,35 @@ void MainWindow::UpdateCalendar()
         {
             foreach(Appointment a, sortedDayList)
             {
-                if(a.m_category=="General" && flagShowGeneralEvents)
-                {
-                    str.append("\n"+a.m_title);
+                if(a.m_category==QLatin1String("General") && flagShowGeneralEvents)
+                { 
+                    str.append(QLatin1Char('\n')+a.m_title);
                 }
-                else if(a.m_category=="Meeting" && flagShowMeetings){
-                    str.append("\n"+a.m_title);
+                else if(a.m_category==QLatin1String("Meeting") && flagShowMeetings){
+                    str.append(QLatin1Char('\n')+a.m_title);
                 }
-                else if(a.m_category=="Work" && flagShowWorkEvents){
-                    str.append("\n"+a.m_title);
+                else if(a.m_category==QLatin1String("Work") && flagShowWorkEvents){
+                    str.append(QLatin1Char('\n')+a.m_title);
                 }
-                else if(a.m_category=="Family" && flagShowFamilyEvents){
+                else if(a.m_category==QLatin1String("Family") && flagShowFamilyEvents){
 
-                    str.append("\n"+a.m_title);
+                    str.append(QLatin1Char('\n')+a.m_title);
                 }
-                else if(a.m_category=="Leisure" && flagShowLeisureEvents){
-                    str.append("\n"+a.m_title);
+                else if(a.m_category==QLatin1String("Leisure") && flagShowLeisureEvents){
+                    str.append(QLatin1Char('\n')+a.m_title);
 
                 }
-                else if(a.m_category=="Fitness" && flagShowFitness){
-                    str.append("\n"+a.m_title);
-                }
-
-
-                else if(a.m_category=="Vacation" && flagShowVacations){
-                    str.append("\n"+a.m_title);
+                else if(a.m_category==QLatin1String("Fitness") && flagShowFitness){
+                    str.append(QLatin1Char('\n')+a.m_title);
                 }
 
-                else if(a.m_category=="Medical" && flagShowMedical){
-                    str.append("\n"+a.m_title);
+
+                else if(a.m_category==QLatin1String("Vacation") && flagShowVacations){
+                    str.append(QLatin1Char('\n')+a.m_title);
+                }
+
+                else if(a.m_category==QLatin1String("Medical") && flagShowMedical){
+                    str.append(QLatin1Char('\n')+a.m_title);
                 }                
 
             }
@@ -1150,7 +1150,7 @@ void MainWindow::RemoveContactFromContactList(int contactId)
 void MainWindow::ExportContactsXML()
 {
     QDomDocument document;
-    QDomElement root = document.createElement("Contacts");
+    QDomElement root = document.createElement(QStringLiteral("Contacts"));
     document.appendChild(root);
 
     QList<Contact> dbContactList =dbm.getAllContacts();
@@ -1169,24 +1169,24 @@ void MainWindow::ExportContactsXML()
         QString birthdate =c.m_birthdate;
         QString addToCal =QString::number(c.m_addToCalendar);
 
-        QDomElement contact = document.createElement("Contact");
-        contact.setAttribute("FirstName",firstName );
-        contact.setAttribute("MidName",midName);
-        contact.setAttribute("LastName", lastName);
-        contact.setAttribute("Email",email);
-        contact.setAttribute("Street",street);
-        contact.setAttribute("District",district);
-        contact.setAttribute("City",city);
-        contact.setAttribute("County",county);
-        contact.setAttribute("Postcode",postcode);
-        contact.setAttribute("Country",country);
-        contact.setAttribute("Telephone",telephone);
-        contact.setAttribute("BirthDate",birthdate);
-        contact.setAttribute("AddToCal",addToCal);
+        QDomElement contact = document.createElement(QStringLiteral("Contact"));
+        contact.setAttribute(QStringLiteral("FirstName"),firstName );
+        contact.setAttribute(QStringLiteral("MidName"),midName);
+        contact.setAttribute(QStringLiteral("LastName"), lastName);
+        contact.setAttribute(QStringLiteral("Email"),email);
+        contact.setAttribute(QStringLiteral("Street"),street);
+        contact.setAttribute(QStringLiteral("District"),district);
+        contact.setAttribute(QStringLiteral("City"),city);
+        contact.setAttribute(QStringLiteral("County"),county);
+        contact.setAttribute(QStringLiteral("Postcode"),postcode);
+        contact.setAttribute(QStringLiteral("Country"),country);
+        contact.setAttribute(QStringLiteral("Telephone"),telephone);
+        contact.setAttribute(QStringLiteral("BirthDate"),birthdate);
+        contact.setAttribute(QStringLiteral("AddToCal"),addToCal);
         root.appendChild(contact);
     }
 
-    QString filename = QFileDialog::getSaveFileName(this, "Save Contacts Xml", ".", "Xml files (*.xml)");
+    QString filename = QFileDialog::getSaveFileName(this, QStringLiteral("Save Contacts Xml"), QStringLiteral("."), QStringLiteral("Xml files (*.xml)"));
     QFile file(filename);
     if (!file.open(QFile::WriteOnly | QFile::Text)){
         //qDebug() << "Error saving XML file.";
@@ -1204,7 +1204,7 @@ void MainWindow::ExportContactsXML()
 void MainWindow::ImportContactsXML()
 {
     QDomDocument document;
-    QString filename = QFileDialog::getOpenFileName(this, "Open Contacts Xml", ".", "Xml files (*.xml)");
+    QString filename = QFileDialog::getOpenFileName(this, QStringLiteral("Open Contacts Xml"), QStringLiteral("."), QStringLiteral("Xml files (*.xml)"));
     QFile file(filename);
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
@@ -1222,7 +1222,7 @@ void MainWindow::ImportContactsXML()
     }
 
     QDomElement root = document.firstChildElement();
-    QDomNodeList contact = root.elementsByTagName("Contact");
+    QDomNodeList contact = root.elementsByTagName(QStringLiteral("Contact"));
     for(int i = 0; i < contact.count(); i++)
     {
         QDomNode contactnode = contact.at(i);
@@ -1231,19 +1231,19 @@ void MainWindow::ImportContactsXML()
             QDomElement contact = contactnode.toElement();
 
             Contact c;
-            c.m_firstname=contact.attribute("FirstName");
-            c.m_midnames=contact.attribute("MidName");
-            c.m_lastname=contact.attribute("LastName");
-            c.m_email=contact.attribute("Email");
-            c.m_street=contact.attribute("Street");
-            c.m_district=contact.attribute("District");
-            c.m_city=contact.attribute("City");
-            c.m_county=contact.attribute("County");
-            c.m_postcode=contact.attribute("Postcode");
-            c.m_country=contact.attribute("Country");
-            c.m_telephone=contact.attribute("Telephone");
-            c.m_birthdate=contact.attribute("BirthDate");
-            c.m_addToCalendar=contact.attribute("AddToCal").toInt();
+            c.m_firstname=contact.attribute(QStringLiteral("FirstName"));
+            c.m_midnames=contact.attribute(QStringLiteral("MidName"));
+            c.m_lastname=contact.attribute(QStringLiteral("LastName"));
+            c.m_email=contact.attribute(QStringLiteral("Email"));
+            c.m_street=contact.attribute(QStringLiteral("Street"));
+            c.m_district=contact.attribute(QStringLiteral("District"));
+            c.m_city=contact.attribute(QStringLiteral("City"));
+            c.m_county=contact.attribute(QStringLiteral("County"));
+            c.m_postcode=contact.attribute(QStringLiteral("Postcode"));
+            c.m_country=contact.attribute(QStringLiteral("Country"));
+            c.m_telephone=contact.attribute(QStringLiteral("Telephone"));
+            c.m_birthdate=contact.attribute(QStringLiteral("BirthDate"));
+            c.m_addToCalendar=contact.attribute(QStringLiteral("AddToCal")).toInt();
 
             if (dbm.isOpen())
             {
@@ -1262,7 +1262,7 @@ void MainWindow::ImportContactsXML()
 void MainWindow::ExportAppointmentsXML()
 {
     QDomDocument document;
-    QDomElement root = document.createElement("Appointments");
+    QDomElement root = document.createElement(QStringLiteral("Appointments"));
     document.appendChild(root);
 
     QList<Appointment> dbAppointmentList =dbm.getAllAppointments();
@@ -1277,20 +1277,20 @@ void MainWindow::ExportAppointmentsXML()
         QString category=a.m_category;
         QString allDay =QString::number(a.m_isFullDay);
 
-        QDomElement appointment = document.createElement("Appointment");
-        appointment.setAttribute("Title",title);
-        appointment.setAttribute("Location", location);
-        appointment.setAttribute("Description",description);
-        appointment.setAttribute("Date",date);
-        appointment.setAttribute("StartTime",startTime);
-        appointment.setAttribute("EndTime",endTime);
-        appointment.setAttribute("Category",category);
-        appointment.setAttribute("IsAllDay",allDay);
+        QDomElement appointment = document.createElement(QStringLiteral("Appointment"));
+        appointment.setAttribute(QStringLiteral("Title"),title);
+        appointment.setAttribute(QStringLiteral("Location"), location);
+        appointment.setAttribute(QStringLiteral("Description"),description);
+        appointment.setAttribute(QStringLiteral("Date"),date);
+        appointment.setAttribute(QStringLiteral("StartTime"),startTime);
+        appointment.setAttribute(QStringLiteral("EndTime"),endTime);
+        appointment.setAttribute(QStringLiteral("Category"),category);
+        appointment.setAttribute(QStringLiteral("IsAllDay"),allDay);
         root.appendChild(appointment);
 
     }
 
-    QString filename = QFileDialog::getSaveFileName(this, "Save Appointments Xml", ".", "Xml files (*.xml)");
+    QString filename = QFileDialog::getSaveFileName(this, QStringLiteral("Save Appointments Xml"), QStringLiteral("."), QStringLiteral("Xml files (*.xml)"));
     QFile file(filename);
     if (!file.open(QFile::WriteOnly | QFile::Text)){
 
@@ -1309,7 +1309,7 @@ void MainWindow::ExportAppointmentsXML()
 void MainWindow::ImportAppointmentsXML()
 {
     QDomDocument document;
-    QString filename = QFileDialog::getOpenFileName(this, "Open Appointments Xml", ".", "Xml files (*.xml)");
+    QString filename = QFileDialog::getOpenFileName(this, QStringLiteral("Open Appointments Xml"), QStringLiteral("."), QStringLiteral("Xml files (*.xml)"));
     QFile file(filename);
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
@@ -1327,7 +1327,7 @@ void MainWindow::ImportAppointmentsXML()
     }
 
     QDomElement root = document.firstChildElement();
-    QDomNodeList appointment = root.elementsByTagName("Appointment");
+    QDomNodeList appointment = root.elementsByTagName(QStringLiteral("Appointment"));
 
     for(int i = 0; i < appointment.count(); i++)
     {
@@ -1337,14 +1337,14 @@ void MainWindow::ImportAppointmentsXML()
             QDomElement appointment = appointmentnode.toElement();
 
             Appointment a;
-            a.m_title=appointment.attribute("Title");
-            a.m_location=appointment.attribute("Location");
-            a.m_description=appointment.attribute("Description");
-            a.m_date=appointment.attribute("Date");
-            a.m_startTime=appointment.attribute("StartTime");
-            a.m_endTime=appointment.attribute("EndTime");
-            a.m_category=appointment.attribute("Category");
-            a.m_isFullDay=appointment.attribute("IsAllDay").toInt();
+            a.m_title=appointment.attribute(QStringLiteral("Title"));
+            a.m_location=appointment.attribute(QStringLiteral("Location"));
+            a.m_description=appointment.attribute(QStringLiteral("Description"));
+            a.m_date=appointment.attribute(QStringLiteral("Date"));
+            a.m_startTime=appointment.attribute(QStringLiteral("StartTime"));
+            a.m_endTime=appointment.attribute(QStringLiteral("EndTime"));
+            a.m_category=appointment.attribute(QStringLiteral("Category"));
+            a.m_isFullDay=appointment.attribute(QStringLiteral("IsAllDay")).toInt();
 
             if (dbm.isOpen())
             {
@@ -1480,7 +1480,7 @@ void MainWindow::on_tableViewContacts_clicked(const QModelIndex &index)
 
 void MainWindow::on_pushButtonMailTo_clicked()
 {
-    QString url="mailto:?to="+selectedContact.m_email+"&subject=Enter the subject&body=Enter message";
+    QString url=QLatin1String("mailto:?to=")+selectedContact.m_email+QLatin1String("&subject=Enter the subject&body=Enter message");
     QDesktopServices::openUrl(QUrl(url, QUrl::TolerantMode));
 }
 
@@ -1706,22 +1706,22 @@ void MainWindow::on_actionShow_Family_triggered()
 
 void MainWindow::SetTheme()
 {
-        QString strfont ="font-size: "+ QString::number(calendarFontSize)+"pt;";
+        QString strfont = QLatin1String("font-size: ")+ QString::number(calendarFontSize)+QLatin1String("pt;");
 
         QString style(
-                    "QTableWidget {"
+                    QLatin1String("QTableWidget {"
                     "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4f4f6, stop:1 #ceced6);"
                     "border-width: 2px;"
                     "border-style: solid;"
                     "border-color: black;"
                     " gridline-color: black;"
-                    "color: black;"
+                    "color: black;")
                     +strfont+
-                    "selection-color: darkblue"
+                    QLatin1String("selection-color: darkblue"
                     "}"
                     "QTableWidget::item {"
                     "background: none;"
-                    "}"
+                    "}")
                     );
 
         ui->tableWidgetCalendar->setStyleSheet(style);
@@ -1736,7 +1736,7 @@ void MainWindow::SetTheme()
         fontMonthYear.setBold(true);
         ui->labelMonthYear->setFont(fontMonthYear);
 
-        QString styleSheet = QString("font-size:%1px;").arg(applicationFontSize);
+        QString styleSheet = QStringLiteral("font-size:%1px;").arg(applicationFontSize);
         this->setStyleSheet(styleSheet);
 
 }

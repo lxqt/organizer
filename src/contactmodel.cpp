@@ -139,7 +139,7 @@ QVariant ContactModel::headerData(int section, Qt::Orientation orientation, int 
     if (orientation == Qt::Horizontal) {
         switch (section) {
         case 0:
-            return "ContactId";
+            return QVariant(QLatin1String("ContactId"));
         case 1:
             return tr("First Name");
         case 2:

@@ -93,28 +93,28 @@ QVariant ScheduleListModel::data(const QModelIndex &index, int role) const
     if (role == Qt::DisplayRole) {
 
         const Appointment& appointment = modelAppointmentList.at(index.row());
-        QString details="default";
+        QString details=QStringLiteral("default");
         //More to do..
         QTime starts =QTime::fromString(appointment.m_startTime);
         QTime ends =QTime::fromString(appointment.m_endTime);
 
         if (appointment.m_isFullDay==1)
         {
-            details ="Title: "+appointment.m_title
-                    +"\nDate: "+appointment.m_date
-                    +"\nLocation: "+appointment.m_location
-                    +"\nAll Day Event" +"\nNotes: "+appointment.m_description
-                    +"\n----------------------";
+            details =QLatin1String("Title: ")+appointment.m_title
+                    +QLatin1String("\nDate: ")+appointment.m_date
+                    +QLatin1String("\nLocation: ")+appointment.m_location
+                    +QStringLiteral("\nAll Day Event") +QLatin1String("\nNotes: ")+appointment.m_description
+                    +QLatin1String("\n----------------------");
 
         }
         else {
-            details ="Title: "+appointment.m_title
-                    +"\nDate: "+appointment.m_date
-                    +"\nLocation: "+appointment.m_location
-                    + "\nStart Time: "
-                    +starts.toString("hh:mm")+" End Time: "+ends.toString("hh:mm")
-                    +"\nNotes: "+appointment.m_description
-                    +"\n----------------------";
+            details =QLatin1String("Title: ")+appointment.m_title
+                    +QLatin1String("\nDate: ")+appointment.m_date
+                    +QLatin1String("\nLocation: ")+appointment.m_location
+                    + QStringLiteral("\nStart Time: ")
+                    +starts.toString(QStringLiteral("hh:mm"))+QStringLiteral(" End Time: ")+ends.toString(QStringLiteral("hh:mm"))
+                    +QLatin1String("\nNotes: ")+appointment.m_description
+                    +QLatin1String("\n----------------------");
         }
 
         return details;

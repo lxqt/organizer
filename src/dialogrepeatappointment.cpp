@@ -50,7 +50,7 @@ DialogRepeatAppointment::DialogRepeatAppointment(QWidget *parent, QDate *theAppo
     ui->timeEditStarts->setTime(timeNow);
     ui->timeEditEnds->setTime(timeNow);
 
-    category="General";
+    category=QStringLiteral("General");
     setupComboBoxes();
 
     ui->spinBoxDays->setRange(1,28); //upto 4 weeks apart

@@ -59,8 +59,8 @@ DialogUpcomingBirthdays::DialogUpcomingBirthdays(QWidget *parent,
                ||(d7<=currentDate.addDays(7))
                )
        {
-           QString str=c.m_firstname+" "+c.m_lastname;
-           str.append(" ("+bdayDate.toString()+")");           
+           QString str=c.m_firstname+QLatin1Char(' ')+c.m_lastname;
+           str.append(QStringLiteral(" (")+bdayDate.toString()+QStringLiteral(")"));
            birthdayList.append(str);
        }
       }
