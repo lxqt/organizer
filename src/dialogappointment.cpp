@@ -48,7 +48,7 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
     ui->labelStarts->setText(tr("Start Time: "));
     ui->labelEndTime->setText(tr("End Time: "));
     ui->labelCategory->setText(tr("Category "));
-    category="General";
+    category=QStringLiteral("General");
     setupComboBoxes();
 }
 
