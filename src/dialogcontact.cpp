@@ -25,26 +25,26 @@ DialogContact::DialogContact(QWidget *parent) :
 {
     ui->setupUi(this);
     //New Contact
-    setWindowTitle(tr("New Contact"));
+    setWindowTitle(QStringLiteral("New Contact"));
     ui->checkBoxDelete->hide();
     this->birthDate=QDate(); //null
 
-    ui->labelFirstName->setText(tr("First Name: "));
-    ui->labelMidNames->setText(tr("Middle Names: "));
-    ui->labelLastName->setText(tr("Last Name: "));
-    ui->labelEmail->setText(tr("Email:"));
-    ui->labelBornOn->setText(tr("Born On: "));
-    ui->labelStreet->setText(tr("Street: "));
-    ui->labelDistrict->setText(tr("District: "));
-    ui->labelCity->setText(tr("City: "));
-    ui->labelCounty->setText(tr("County: "));
-    ui->labelPostcode->setText(tr("Postcode: "));
-    ui->labelCountry->setText(tr("Country: "));
-    ui->labelPhone->setText(tr("Phone: "));
-    ui->checkBoxDelete->setText(tr("Delete Contact"));
+    ui->labelFirstName->setText(QStringLiteral("First Name: "));
+    ui->labelMidNames->setText(QStringLiteral("Middle Names: "));
+    ui->labelLastName->setText(QStringLiteral("Last Name: "));
+    ui->labelEmail->setText(QStringLiteral("Email:"));
+    ui->labelBornOn->setText(QStringLiteral("Born On: "));
+    ui->labelStreet->setText(QStringLiteral("Street: "));
+    ui->labelDistrict->setText(QStringLiteral("District: "));
+    ui->labelCity->setText(QStringLiteral("City: "));
+    ui->labelCounty->setText(QStringLiteral("County: "));
+    ui->labelPostcode->setText(QStringLiteral("Postcode: "));
+    ui->labelCountry->setText(QStringLiteral("Country: "));
+    ui->labelPhone->setText(QStringLiteral("Phone: "));
+    ui->checkBoxDelete->setText(QStringLiteral("Delete Contact"));
 
-    ui->checkBoxBirthdayUnknown->setText(tr("Birthday Unknown"));
-    ui->checkBoxAddBirthdayToCal->setText(tr("Add To Calendar"));
+    ui->checkBoxBirthdayUnknown->setText(QStringLiteral("Birthday Unknown"));
+    ui->checkBoxAddBirthdayToCal->setText(QStringLiteral("Add To Calendar"));
     ui->checkBoxBirthdayUnknown->setCheckState(Qt::Unchecked);
     ui->dateEditBirthDate->setDate(QDate::currentDate());
 
@@ -56,7 +56,7 @@ DialogContact::DialogContact(Contact *theContact, QWidget *parent):
 {
     ui->setupUi(this);
     //Update Contact
-    setWindowTitle(tr("Update Contact"));
+    setWindowTitle(QStringLiteral("Update Contact"));
     ui->checkBoxDelete->show();
 
     ui->lineEditFirstName->setText(theContact->m_firstname);
@@ -97,21 +97,21 @@ DialogContact::DialogContact(Contact *theContact, QWidget *parent):
     }
 
 
-    ui->labelFirstName->setText(tr("First Name: "));
-    ui->labelMidNames->setText(tr("Middle Names: "));
-    ui->labelLastName->setText(tr("Last Name: "));
-    ui->labelEmail->setText(tr("Email:"));
-    ui->labelBornOn->setText(tr("Born On: "));
-    ui->labelStreet->setText(tr("Street: "));
-    ui->labelDistrict->setText(tr("District: "));
-    ui->labelCity->setText(tr("City: "));
-    ui->labelCounty->setText(tr("County: "));
-    ui->labelPostcode->setText(tr("Postcode: "));
-    ui->labelCountry->setText(tr("Country: "));
-    ui->labelPhone->setText(tr("Phone: "));
-    ui->checkBoxDelete->setText(tr("Delete Contact"));
-    ui->checkBoxAddBirthdayToCal->setText(tr("Add Birthday To Calendar"));
-    ui->checkBoxBirthdayUnknown->setText(tr("Birthday Unknown"));
+    ui->labelFirstName->setText(QStringLiteral("First Name: "));
+    ui->labelMidNames->setText(QStringLiteral("Middle Names: "));
+    ui->labelLastName->setText(QStringLiteral("Last Name: "));
+    ui->labelEmail->setText(QStringLiteral("Email:"));
+    ui->labelBornOn->setText(QStringLiteral("Born On: "));
+    ui->labelStreet->setText(QStringLiteral("Street: "));
+    ui->labelDistrict->setText(QStringLiteral("District: "));
+    ui->labelCity->setText(QStringLiteral("City: "));
+    ui->labelCounty->setText(QStringLiteral("County: "));
+    ui->labelPostcode->setText(QStringLiteral("Postcode: "));
+    ui->labelCountry->setText(QStringLiteral("Country: "));
+    ui->labelPhone->setText(QStringLiteral("Phone: "));
+    ui->checkBoxDelete->setText(QStringLiteral("Delete Contact"));
+    ui->checkBoxAddBirthdayToCal->setText(QStringLiteral("Add Birthday To Calendar"));
+    ui->checkBoxBirthdayUnknown->setText(QStringLiteral("Birthday Unknown"));
 
 }
 
@@ -207,8 +207,8 @@ void DialogContact::accept()
 {
     if (this->getFirstName().isEmpty() || this->getLastName().isEmpty())
     {
-        QMessageBox::information(this, tr("Empty Details"),
-                                 tr("Must enter first and last name"));
+        QMessageBox::information(this, QStringLiteral("Empty Details"),
+                                 QStringLiteral("Must enter first and last name"));
         return;
     }
     else {

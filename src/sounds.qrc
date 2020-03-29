@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sounds/window-attention.oga</file>
+    </qresource>
+</RCC>

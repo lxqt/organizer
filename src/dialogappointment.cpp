@@ -26,7 +26,7 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
 {
     ui->setupUi(this);
     //New appointment
-    setWindowTitle(tr("New Appointment"));
+    setWindowTitle(QStringLiteral("New Appointment"));
 
     ui->dateEditAppointmentDate->setDate(*theAppointmentDate);
 
@@ -40,16 +40,23 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
     ui->timeEditEndTime->setTime(timeNow);
 
     //Translation refactoring
-    ui->labelDate->setText((tr("AppointmentDate: ")));
-    ui->labelTitle->setText(tr("Title: "));
-    ui->labelLocation->setText(tr("Location: "));
-    ui->labelDescription->setText(tr("Notes: "));
-    ui->checkBoxAllDay->setText(tr("All Day"));
-    ui->labelStarts->setText(tr("Start Time: "));
-    ui->labelEndTime->setText(tr("End Time: "));
-    ui->labelCategory->setText(tr("Category "));
+    ui->labelDate->setText(QStringLiteral("AppointmentDate: "));
+    ui->labelTitle->setText(QStringLiteral("Title: "));
+    ui->labelLocation->setText(QStringLiteral("Location: "));
+    ui->labelDescription->setText(QStringLiteral("Notes: "));
+    ui->checkBoxAllDay->setText(QStringLiteral("All Day"));
+    ui->labelStarts->setText(QStringLiteral("Start Time: "));
+    ui->labelEndTime->setText(QStringLiteral("End Time: "));
+    ui->labelCategory->setText(QStringLiteral("Category "));
+
+    ui->checkBoxReminder->setText(QStringLiteral("Reminder"));
+
+
     category=QStringLiteral("General");
     setupComboBoxes();
+
+    ui->checkBoxReminder->setCheckState(Qt::Unchecked);
+    ui->comboBoxReminder->setEnabled(false);
 }
 
 
@@ -110,14 +117,32 @@ void DialogAppointment::setupComboBoxes()
 {
     //Set up Category Combobox
 
-    ui->comboBoxCategory->addItem(tr("General"));    
-    ui->comboBoxCategory->addItem(tr("Meeting"));
-    ui->comboBoxCategory->addItem(tr("Work"));    
-    ui->comboBoxCategory->addItem(tr("Family"));
-    ui->comboBoxCategory->addItem(tr("Leisure"));
-    ui->comboBoxCategory->addItem(tr("Fitness"));
-    ui->comboBoxCategory->addItem(tr("Vacation"));
-    ui->comboBoxCategory->addItem(tr("Medical"));
+    ui->comboBoxCategory->addItem(QStringLiteral("General"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Meeting"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Work"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Family"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Leisure"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Fitness"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Vacation"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Medical"));
+
+    //Set up Reminder ComboBox
+    ui->comboBoxReminder->addItem(QStringLiteral("5 minutes before start"));
+    ui->comboBoxReminder->addItem(QStringLiteral("10 minutes before start"));
+    ui->comboBoxReminder->addItem(QStringLiteral("30 minutes before start"));
+    ui->comboBoxReminder->addItem(QStringLiteral("1 hour before start"));
+    ui->comboBoxReminder->addItem(QStringLiteral("1 day before start"));
+
+}
+
+int DialogAppointment::getReminderMins()
+{
+    return this->reminderMins;
+}
+
+int DialogAppointment::getHasReminder()
+{
+    return this->hasReminder;
 }
 
 void DialogAppointment::accept()
@@ -128,8 +153,8 @@ void DialogAppointment::accept()
 
     if (this->getTitle().isEmpty() || this->getLocation().isEmpty())
     {
-        QMessageBox::information(this, tr("Empty Details"),
-                                 tr("Must enter a title and location"));
+        QMessageBox::information(this, QStringLiteral("Empty Details"),
+                                 QStringLiteral("Must enter a title and location"));
         return;
     }
     else {
@@ -164,8 +189,6 @@ void DialogAppointment::on_timeEditEndTime_userTimeChanged(const QTime &time)
     this->endTime=time;
 }
 
-
-
 void DialogAppointment::on_comboBoxCategory_activated(const QString &arg1)
 {
      category=arg1;
@@ -193,3 +216,47 @@ void DialogAppointment::on_checkBoxAllDay_stateChanged(int arg1)
     }
 }
 
+
+void DialogAppointment::on_comboBoxReminder_currentIndexChanged(int index)
+{
+    if(index==0){
+       reminderMins=5;
+       //qDebug()<<"Reminder minutes = "<<reminderMins;
+    }
+    else if(index==1){
+       reminderMins=10;
+       //qDebug()<<"Reminder minutes = "<<reminderMins;
+    }
+    else if(index==2){
+        reminderMins=30;
+        qDebug()<<"Reminder minutes = "<<reminderMins;
+    }
+    else if(index==3){
+        reminderMins=60;
+        //qDebug()<<"Reminder minutes = "<<reminderMins;
+    }
+    else if(index==4){
+        reminderMins=1440; //minutes in a day i.e. 1 day = (24 hours/day) × (60 minutes/hour) = 1440
+        //qDebug()<<"Reminder minutes = "<<reminderMins;
+    }
+}
+
+void DialogAppointment::on_checkBoxReminder_stateChanged(int arg1)
+{
+    if (arg1==Qt::Unchecked)
+    {
+        hasReminder=0;
+        reminderMins=0;
+       // qDebug()<<"Reminder miniutes = "<<reminderMins;
+        ui->comboBoxReminder->setEnabled(false);
+
+
+    }
+    else if (arg1==Qt::Checked) {
+        hasReminder=1;
+        reminderMins=5;
+        //qDebug()<<"Reminder minutes = "<<reminderMins;
+        ui->comboBoxReminder->setEnabled(true);
+
+    }
+}

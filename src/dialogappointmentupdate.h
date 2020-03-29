@@ -41,13 +41,13 @@ public:
 
 
     //Appointments
-    QString title=QLatin1String("");
-    QString location=QLatin1String("");
-    QString description=QLatin1String("");
+    QString title="";
+    QString location="";
+    QString description="";
     QDate appointmentDate;
     QTime appointmentStartTime;
     QTime appointmentEndTime;
-    QString category=QLatin1String("");
+    QString category="";
     int categoryIndex=0;
     int isAllDay=0;
 
@@ -57,7 +57,7 @@ public:
     bool deleteRequested=false;
     bool valid =false;
 
-    QString currentTitle=QLatin1String("");
+    QString currentTitle="";
     QString getTitle();
     QString getLocation();
     QString getDescription();
@@ -69,6 +69,12 @@ public:
 
     bool getDeleteRequested();
     void setupComboBoxes();
+
+    //reminders
+    int reminderMins=0;
+    int getReminderMins();
+    int hasReminder=0;
+    int getHasReminder();
 
 private slots:
 
@@ -94,6 +100,10 @@ private slots:
     void on_checkBoxDelete_stateChanged(int arg1);
 
     void on_comboBoxCategory_currentIndexChanged(const QString &arg1);
+
+    void on_comboBoxReminder_currentIndexChanged(int index);
+
+    void on_checkBoxReminder_stateChanged(int arg1);
 
 private:
     Ui::DialogAppointmentUpdate *ui;

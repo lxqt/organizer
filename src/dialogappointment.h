@@ -47,7 +47,7 @@ public:
     int isAllDay=0; //no
     bool deleteRequested=false;
 
-    QString currentTitle=QLatin1String("");
+    QString currentTitle="";
     QString getTitle();
     QString getLocation();
     QString getDescription();
@@ -59,6 +59,16 @@ public:
 
     bool getDeleteRequested();
     void setupComboBoxes();
+
+    //Reminders
+    int hasReminder=0; //no
+    int getHasReminder();
+    int reminderMins=0; //none
+    int getReminderMins();
+
+
+
+
 
 private slots:
 
@@ -75,6 +85,10 @@ private slots:
 
     void on_checkBoxAllDay_stateChanged(int arg1);
 
+
+    void on_comboBoxReminder_currentIndexChanged(int index);
+
+    void on_checkBoxReminder_stateChanged(int arg1);
 
 private:
     Ui::DialogAppointment *ui;

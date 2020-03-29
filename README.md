@@ -29,11 +29,30 @@ Note: If upgrading from a previous version you need to remove the previous versi
 
 and rename (or remove) the 'organizerdb.sqlite' database in your home directory. Make sure to export contacts and then import them into the new version.
 
+### Prerequisites
+
+You need the following dependencies to build and run Organizer on Debian, Ubuntu and its derivatives.
+
+```
+build-essential
+qt5-default 
+qtcreator
+automake
+checkinstall
+cmake
+libqt5svg5-dev
+libqt5*-dev
+qttools5-dev
+libkf5plasma-dev
+liblxqt0-dev
+qtmultimedia5-dev
+```
+
 ### Binary packages
 
 Binary packages are available as snap packages and in the Arch User Repository (AUR) 
 
-* [Snap](https://build.snapcraft.io/user/ito32bit/lxqt-organizer-snap-packaging) 
+* [Snap by ito32bit](https://build.snapcraft.io/user/ito32bit/lxqt-organizer-snap-packaging) 
 
 To test the latest successful build use:
 ```
@@ -43,13 +62,25 @@ To remove use:
 ```
 sudo snap remove lxqt-organizer-snap
 ```
-* [Arch (AUR)](https://aur.archlinux.org/packages/lxqt-organizer-git/) 
+* [Arch (AUR) by Librewish](https://aur.archlinux.org/packages/lxqt-organizer-git/) 
 
 It can be installed using yay as shown below.
 
 ```
 yay -S lxqt-organizer
 ```
+## Versioning
+
+[SemVer](http://semver.org/) is used for versioning. The version number has the form 0.0.0 representing major, minor and bug fix changes. Currently at 0.6.0 and working towards 1.0.0 major release.
+ 
+
+## Roadmap
+
+```
+Calendar themes and localization
+System notifications
+Time related features
+``` 
 
 #### Runtime Dependencies
 * ${misc:Depends},

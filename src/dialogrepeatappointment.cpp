@@ -25,21 +25,21 @@ DialogRepeatAppointment::DialogRepeatAppointment(QWidget *parent, QDate *theAppo
 {
     ui->setupUi(this);
 
-    setWindowTitle(tr("Generate Repeat Appointments"));
+    setWindowTitle(QStringLiteral("Generate Repeat Appointments"));
     this->appointmentDate=*theAppointmentDate;
 
     //Translation refactoring
-    ui->labelInfo->setText((tr("Appointment Start Date: ")));
-    ui->labelTitle->setText(tr("Title: "));
-    ui->labelLocation->setText(tr("Location: "));
-    ui->labelNotes->setText(tr("Notes: "));
-    ui->checkBox->setText(tr("All Day "));
-    ui->labelStartTime->setText(tr("Start Time: "));
-    ui->labelEndTime->setText(tr("End Time: "));
-    ui->labelCategory->setText(tr("Category"));
-    ui->labelRepeatEvery->setText(tr("Repeat Every: "));
-    ui->labelDays->setText(tr("Days "));
-    ui->labelOccurrences->setText(tr("Occurrences"));
+    ui->labelInfo->setText((QStringLiteral("Appointment Start Date: ")));
+    ui->labelTitle->setText(QStringLiteral("Title: "));
+    ui->labelLocation->setText(QStringLiteral("Location: "));
+    ui->labelNotes->setText(QStringLiteral("Notes: "));
+    ui->checkBox->setText(QStringLiteral("All Day "));
+    ui->labelStartTime->setText(QStringLiteral("Start Time: "));
+    ui->labelEndTime->setText(QStringLiteral("End Time: "));
+    ui->labelCategory->setText(QStringLiteral("Category"));
+    ui->labelRepeatEvery->setText(QStringLiteral("Repeat Every: "));
+    ui->labelDays->setText(QStringLiteral("Days "));
+    ui->labelOccurrences->setText(QStringLiteral("Occurrences"));
 
     ui->labelDate->setText(appointmentDate.toString());
     ui->dateEdit->setDate(*theAppointmentDate);
@@ -120,22 +120,22 @@ void DialogRepeatAppointment::setupComboBoxes()
 {
     //Set up Category Combobox
 
-    ui->comboBoxCategory->addItem(tr("General"));
-    ui->comboBoxCategory->addItem(tr("Meeting"));
-    ui->comboBoxCategory->addItem(tr("Work"));
-    ui->comboBoxCategory->addItem(tr("Family"));
-    ui->comboBoxCategory->addItem(tr("Leisure"));
-    ui->comboBoxCategory->addItem(tr("Fitness"));
-    ui->comboBoxCategory->addItem(tr("Vacation"));
-    ui->comboBoxCategory->addItem(tr("Medical"));
+    ui->comboBoxCategory->addItem(QStringLiteral("General"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Meeting"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Work"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Family"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Leisure"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Fitness"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Vacation"));
+    ui->comboBoxCategory->addItem(QStringLiteral("Medical"));
 }
 
 void DialogRepeatAppointment::accept()
 {
     if (this->getTitle().isEmpty() || this->getLocation().isEmpty())
     {
-        QMessageBox::information(this, tr("Empty Details"),
-                                 tr("Must enter a title and location"));
+        QMessageBox::information(this, QStringLiteral("Empty Details"),
+                                 QStringLiteral("Must enter a title and location"));
         return;
     }
     else {

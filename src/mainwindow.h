@@ -23,6 +23,7 @@
 #include <QTextEdit>
 #include <QDebug>
 #include <QDate>
+#include <QTimer>
 #include <QLabel>
 #include <QtWidgets>
 #include <QKeyEvent>
@@ -33,6 +34,9 @@
 #include <QXmlStreamWriter>
 #include <QDomDocument>
 #include <QTableWidgetItem>
+#include <QtMultimedia>
+#include <QSettings>
+
 
 #include "appointment.h"
 #include "contact.h"
@@ -69,16 +73,39 @@ public:
     //Database
     DbManager dbm;
 
+    //Timers
+    QTimer *timer;
+    //QTimer *timerSingleShot;
+    //Reminders
+    void checkForReminders();
+
+    //Sounds
+    QMediaPlayer *player;
+
+    //Preferences default
+
+    int playAudio=1;
+    QString locale="English";
+    int calendarTheme=0;
+    int applicationFontSize=20;
+    int calendarFontSize=14;
+    Preferences currentPreferences;
+    void SetPreferences();
+    void SaveSettings();
+    bool LoadSettings();
+
     //Appointments
-    QString title=QLatin1String("");
-    QString location=QLatin1String("");
-    QString description=QLatin1String("");
+    QString title="";
+    QString location="";
+    QString description="";
     QDate appointmentDate;
     QTime appointmentStartTime;
     QTime appointmentEndTime;
-    QString category=QLatin1String("");
+    QString category="";
     int isAllDay=0;
     int appointmentId =0;
+    int hasReminder=0;
+    int reminderMinutes=0;
 
     int isRepeating=0;
     int repeatDayInterval=0;
@@ -119,11 +146,13 @@ public:
     int dayArray[6*7];
     void UpdateCalendar();
 
+    void increaseFont();
+    void decreaseFont();
+    void resetFont();
 
-    int applicationFontSize=20;
-    int calendarFontSize=12;
-    Preferences currentPreferences;
-    void SetPreferences();
+    QAction *increaseFontAction;
+    QAction *decreaseFontAction;
+    QAction *resetFontAction;
 
     QTableWidgetItem* dayItem;
     QTableWidgetItem* calendarItem;
@@ -157,17 +186,17 @@ public:
     void AddHolidaysToHolidayList(int year);
 
     //Contacts
-    QString contactFirstName =QLatin1String("");
-    QString contactMiddleNames=QLatin1String("");
-    QString contactLastName=QLatin1String("");
-    QString contactEmail=QLatin1String("");
-    QString street=QLatin1String("");
-    QString district=QLatin1String("");
-    QString city=QLatin1String("");
-    QString county=QLatin1String("");
-    QString postcode =QLatin1String("");
-    QString country =QLatin1String("");
-    QString phoneNumber=QLatin1String("");
+    QString contactFirstName ="";
+    QString contactMiddleNames="";
+    QString contactLastName="";
+    QString contactEmail="";
+    QString street="";
+    QString district="";
+    QString city="";
+    QString county="";
+    QString postcode ="";
+    QString country ="";
+    QString phoneNumber="";
     QDate birthDate=QDate(); //(0,0,0)
     int addBirthdayToCalendar =0;
     int selectedContactDbId=0;
@@ -215,12 +244,17 @@ public:
 
 private slots:
 
+    void timerUpdateSlot();
+
     void gotoNextMonthSlot();
     void gotoPreviousMonthSlot();
     void gotoTodaySlot();
     //void newAppointmentSlot();
     void newContactSlot();
 
+    void increaseFontSlot();
+    void decreaseFontSlot();
+    void resetFontSlot();
 
     void on_actionExit_triggered();
 
@@ -289,9 +323,9 @@ private slots:
 
     void on_actionImport_Contacts_triggered();
 
-    void on_actionNewLine_Spacing_triggered();
 
     void on_actionPreferences_triggered();
+
 
 private:
     Ui::MainWindow *ui;
