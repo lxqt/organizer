@@ -30,6 +30,7 @@
 #include <QList>
 #include "appointment.h"
 #include "contact.h"
+#include "preferences.h"
 
 
 class DbManager
@@ -57,6 +58,12 @@ public:
     Contact getContactByID(int id);
     bool removeAllContacts();
     bool removeContactById(const int id);
+
+    //Preferences (settings)
+    int addPreferences(Preferences &preferences);
+    bool updatePreferences(Preferences &preferences, int id);
+    Preferences getPreferencesByID(int id);
+
 
 
 };

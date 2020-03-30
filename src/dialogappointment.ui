@@ -216,6 +216,16 @@
          </property>
         </spacer>
        </item>
+       <item>
+        <widget class="QCheckBox" name="checkBoxReminder">
+         <property name="text">
+          <string>Reminder: </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxReminder"/>
+       </item>
       </layout>
      </item>
     </layout>

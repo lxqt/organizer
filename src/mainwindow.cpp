@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("Organizer"));    
+    setWindowTitle(QStringLiteral("Organizer"));
     //set layout first
     QMainWindow::centralWidget()->layout()->setContentsMargins(0, 0, 0, 0);
 
@@ -32,23 +32,65 @@ MainWindow::MainWindow(QWidget *parent) :
     dbm.openDatabase();
     dbm.createDatebaseTables();
 
-    applicationFontSize=20;
+    if (LoadSettings())
+    {
+       //qDebug()<<"Using loaded settings ...";
+       playAudio=currentPreferences.m_playAudio;
+       locale=currentPreferences.m_localization;
+       calendarTheme=currentPreferences.m_calendarTheme;
+       applicationFontSize=currentPreferences.m_applicationFontSize;
+       calendarFontSize=currentPreferences.m_calendarFontSize;
+       newLineSpacing=currentPreferences.m_lineSpacing;
+
+//       qDebug()<<"Loaded Settings: PlayAudio = "<<currentPreferences.m_playAudio
+//              <<" Locale = "<<currentPreferences.m_localization
+//             << " CalendarTheme = "<<currentPreferences.m_calendarTheme
+//             <<" ApplicationFontSize = "<<currentPreferences.m_applicationFontSize
+//            <<" CalendarFontSize = "<<currentPreferences.m_calendarFontSize
+//           <<"Line Spacing = "<<currentPreferences.m_lineSpacing;
+
+    }
+    else {
+        //default values
+        //qDebug()<<"Using default settings ...";
+        playAudio=1;
+        locale=QStringLiteral("English");
+        calendarTheme=0;
+        applicationFontSize=20;
+        calendarFontSize=14;
+        newLineSpacing=0;
+    }
+
+
+    //setup timer
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(timerUpdateSlot()));
+    timer->start(1000); //check for reminders every 1000ms
+
+    //setup and test audio
+    //qDebug()<<"Checking sounds ...";
+    player = new QMediaPlayer();
+
+    player->setMedia(QUrl("qrc:/sounds/window-attention.oga"));
+
+    player->setVolume(100);
+
+    if(playAudio) {
+       player->play();
+    }
+
+    //qDebug() << sound->errorString();
+
+    //Setting Application Font
     QFont appfont = QApplication::font();
     appfont.setPixelSize(applicationFontSize); //DPI
     QApplication::setFont(appfont);
-
-    calendarFontSize=12; //calendar font
-    newLineSpacing=0;
     SetTheme();
-
-    currentPreferences.m_id=1;
-    currentPreferences.m_applicationFontSize=applicationFontSize;
-    currentPreferences.m_calendarFontSize=calendarFontSize;
 
     selectedDate = QDate::currentDate();
 
     dateInfoLabel =new QLabel(this);
-    dateInfoLabel->setText(tr("Selected Date: "));
+    dateInfoLabel->setText(QStringLiteral("Selected Date: "));
     selectedDateLabel = new QLabel(this);
     QFont font1 = selectedDateLabel->font();
     font1.setWeight(QFont::Bold);
@@ -86,13 +128,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableWidgetCalendar->setWordWrap(true);
     ui->tableWidgetCalendar->setTextElideMode(Qt::ElideRight);
     ui->tableWidgetCalendar->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
     ui->tableWidgetCalendar->setSelectionMode(QAbstractItemView::NoSelection);
-
     ui->tableWidgetCalendar->horizontalHeader()->setMinimumSectionSize(120);
-
     ui->tableWidgetCalendar->verticalHeader()->setMinimumSectionSize(60);
-
 
     for (int row=0; row<ui->tableWidgetCalendar->rowCount(); ++row)
     {
@@ -114,7 +152,7 @@ MainWindow::MainWindow(QWidget *parent) :
     firstDay = Qt::Monday;
 
     ui->labelMonthYear->setText
-            (tr("%1 %2"
+            (QStringLiteral("%1 %2"
                 ).arg(QLocale::system().monthName(selectedDate.month())
                       ).arg(selectedDate.year()));
 
@@ -163,7 +201,27 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(newContactAction, SIGNAL(triggered()),
             this, SLOT(newContactSlot()));
     this->addAction(newContactAction);
+    //------------------------------------------
 
+    //Calendar font key actions
+
+    increaseFontAction=new QAction(this);
+    increaseFontAction->setShortcut(Qt::Key_F);
+    connect(increaseFontAction, SIGNAL(triggered()),
+            this, SLOT(increaseFontSlot()));
+    this->addAction(increaseFontAction);
+
+    resetFontAction=new QAction(this);
+    resetFontAction->setShortcut(Qt::Key_R);
+    connect(resetFontAction, SIGNAL(triggered()),
+            this, SLOT(resetFontSlot()));
+    this->addAction(resetFontAction);
+
+    decreaseFontAction=new QAction(this);
+    decreaseFontAction->setShortcut(Qt::Key_D);
+    connect(decreaseFontAction, SIGNAL(triggered()),
+            this, SLOT(decreaseFontSlot()));
+    this->addAction(decreaseFontAction);
 
     //------------------------------------------
 
@@ -186,113 +244,93 @@ MainWindow::MainWindow(QWidget *parent) :
     UpdateCalendar();
     ShowAppointmentsOnListView(selectedDate);
 
-    //Translations (to do..)
-    ui->menuFile->setTitle(tr("&File"));
-    //ui->menuFile->setToolTip(tr("File"));
-    ui->actionExport_Contacts->setText(tr("Export Contacts XML"));
-    ui->actionExport_Contacts->setToolTip(tr("Export Contacts XML"));
-    ui->actionImport_Contacts->setText(tr("Import Contacts XML"));
-    ui->actionImport_Contacts->setToolTip(tr("Import Contacts XML"));
-
-    ui->actionExport_Appointments->setText(tr("Export Appointments XML"));
-    ui->actionExport_Appointments->setToolTip(tr("Export Appointments XML"));
-    ui->actionImport_Appointments->setText(tr("Import Appointments XML"));
-    ui->actionImport_Appointments->setToolTip(tr("Import Appointments XML"));
-
-
-    ui->actionExit->setText(tr("Exit"));
-    ui->actionExit->setToolTip(tr("Exit"));
-
-    //Edit menu
-    ui->menuEdit->setTitle(tr("&Edit"));
-    //ui->menuEdit->setToolTip(tr("Edit"));
-    ui->actionDelete_All_Appointments->setText(tr("Delete All Appointments"));
-    ui->actionDelete_All_Appointments->setToolTip(tr("Delete All Appointments"));
-    ui->actionDelete_All_Contacts->setText(tr("Delete All Contacts"));
-    ui->actionDelete_All_Contacts->setToolTip(tr("Delete All Contacts"));
-
-    //Appointments
-    ui->menuAppointments->setTitle(tr("&Appointments"));
-    ui->menuAppointments->setToolTip(tr("Appointments"));
-
-    ui->actionNew_Appointment->setText(tr("New Appointment"));
-    ui->actionNew_Appointment->setToolTip(tr("New Appointment"));
-    ui->actionGeneerate_Repeat_Appointments->setText(tr("Generate Repeat Appointments"));
-    ui->actionGeneerate_Repeat_Appointments->setToolTip(tr("Generate Repeat Appointments"));
-    ui->actionUpcoming_Schedule->setText(tr("Upcoming Schedule"));
-    ui->actionUpcoming_Schedule->setToolTip(tr("Upcoming Schedule"));
-
-
-    //Calendar
-    ui->menuCalendar->setTitle(tr("Ca&lendar"));
-    ui->menuCalendar->setToolTip(tr("Calendar"));
-
-    ui->actionShow_Birthdays->setText(tr("Show Birthdays On Calendar"));
-    ui->actionShow_Birthdays->setToolTip(tr("Show Birthdays On Calendar"));
-
-    ui->actionShow_Holidays->setText(tr("Show Holidays On Calendar"));
-    ui->actionShow_Holidays->setToolTip(tr("Show Holidays On Calendar"));
-
-
-    ui->actionShow_General->setText(tr("Show General"));
-    ui->actionShow_General->setToolTip(tr("Show General"));
-
-    ui->actionShow_Family->setText(tr("Show Family"));
-    ui->actionShow_Family->setToolTip(tr("Show Family"));
-
-    ui->actionShow_Leisure->setText(tr("Show Leisure"));
-    ui->actionShow_Leisure->setToolTip(tr("Show Leisure"));
-
-    ui->actionShow_Meetings->setText(tr("Show Meetings"));
-    ui->actionShow_Meetings->setToolTip(tr("Show Meetings"));
-
-    ui->actionShow_Work->setText(tr("Show Work"));
-    ui->actionShow_Work->setToolTip(tr("Show Work"));
-
-    ui->actionShow_Vacations->setText(tr("Show Vacations"));
-    ui->actionShow_Vacations->setToolTip(tr("Show Vacations"));
-
-    ui->actionShow_Medical->setText(tr("Show Medical"));
-    ui->actionShow_Medical->setToolTip(tr("Show Medical"));
-
-    ui->actionShow_Fitness->setText(tr("Show Fitness"));
-    ui->actionShow_Fitness->setToolTip(tr("Show Fitness"));
-
-
-    ui->actionNext_Month->setText(tr("Next Month"));
-    ui->actionNext_Month->setToolTip(tr("Next Month"));
-    ui->actionPrevious_Month->setText(tr("Previous Month"));
-    ui->actionPrevious_Month->setToolTip(tr("Previous Month"));
-    ui->actionToday->setText(tr("Today (Spacebar)"));
-    ui->actionToday->setToolTip(tr("Today"));
-
-    ui->actionNewLine_Spacing->setText(tr("Line Spacing"));
-    ui->actionNewLine_Spacing->setToolTip("Line Spacing");
-
-    //Contacts
-    ui->menuContacts->setTitle(tr("&Contacts"));
-    ui->menuContacts->setToolTip(tr("Contacts"));
-    ui->actionNew_Contact->setText(tr("New Contact"));
-    ui->actionNew_Contact->setToolTip(tr("New Contact"));
-    ui->actionCheck_For_Birthdays->setText(tr("Check For Birthdays"));
-    ui->actionCheck_For_Birthdays->setToolTip(tr("Check For Birthdays"));
-
-    //Help
-    ui->menuHelp->setTitle(tr("&Help"));
-    ui->actionAbout->setText(tr("About"));
-    ui->actionAbout->setToolTip(tr("About"));
-
-    ui->pushButtonShowQuickFullView->setText(tr("Quick/Full View"));
-    ui->pushButtonShowQuickFullView->setToolTip(tr("Quick/Full View"));
-
-    ui->pushButtonMailTo->setText(tr("Mail To:"));
-    ui->pushButtonMailTo->setToolTip(tr("Mail To:"));
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::timerUpdateSlot()
+{
+    checkForReminders();
+}
+
+
+
+void MainWindow::checkForReminders()
+{
+
+    //qDebug()<<"Checking for reminders...";
+
+    QDate currentDate=QDate::currentDate();
+    QTime currentTime= QTime::currentTime();
+    int currentHour =currentTime.hour();
+    int currentMinute = currentTime.minute();
+    int currentSecond =currentTime.second();
+
+    foreach(Appointment a, appointmentList){
+
+        if(a.m_hasReminder==1)
+        {
+           //Appointment has reminder
+           QDate reminderDate =QDate::fromString(a.m_date);
+           QTime reminderTime = QTime::fromString(a.m_startTime);
+
+           if (a.m_reminderMinutes ==5){
+
+               reminderTime =reminderTime.addSecs(-(5*60));
+           }
+           else if(a.m_reminderMinutes==10) {
+                reminderTime =reminderTime.addSecs(-(10*60));
+           }
+           else if(a.m_reminderMinutes==30)
+           {
+               reminderTime =reminderTime.addSecs(-(30*60)); // 1hour = 3,600 seconds
+           }
+           else if(a.m_reminderMinutes==60)
+           {
+               reminderTime =reminderTime.addSecs(-(60*60)); // 1hour = 3,600 seconds
+           }
+           else if(a.m_reminderMinutes==1440)
+           {
+               reminderDate=reminderDate.addDays(-1);
+           }
+
+
+
+//           qDebug()<<"Appointment Title = "<<a.m_title
+//                  <<" \nAppointment date = "<<a.m_date
+//                 << " \nAppointment start time = "<<a.m_startTime
+//                  <<" \nReminder date = "<<reminderDate.toString()
+//                 << " \nReminder time = "<<reminderTime.toString();
+
+           int reminderHour =reminderTime.hour();
+           int reminderMinute=reminderTime.minute();
+           //int reminderSecond=reminderTime.second();
+
+           if (reminderDate==currentDate)
+           {
+               if(currentHour==reminderHour && currentMinute==reminderMinute &&currentSecond==0)
+               {
+                   QString str=a.m_title;
+                   str.append(QStringLiteral(" on "));
+                   str.append(a.m_date);
+                   str.append(QLatin1Char('\n')); //new line
+                   str.append(QStringLiteral("Starts at "));
+                   QTime startsAt =QTime::fromString(a.m_startTime);
+                   str.append(startsAt.toString("hh:mm"));
+                   if(playAudio){
+                      player->play();
+                   }
+
+                   QMessageBox::information(this,QLatin1String("Reminder"),str);
+               }
+
+           }
+        }
+    }
 }
 
 void MainWindow::NewAppointment()
@@ -310,6 +348,8 @@ void MainWindow::NewAppointment()
         appointmentEndTime=appointmentDialog->getEndTime();
         category=appointmentDialog->getCategory();
         isAllDay=appointmentDialog->getAllDay();
+        hasReminder=appointmentDialog->getHasReminder();
+        reminderMinutes=appointmentDialog->getReminderMins();
 
         Appointment a;
         a.m_title=title;
@@ -320,6 +360,12 @@ void MainWindow::NewAppointment()
         a.m_endTime=appointmentEndTime.toString();
         a.m_category=category;
         a.m_isFullDay=isAllDay;
+        a.m_hasReminder=hasReminder;
+        a.m_reminderMinutes=reminderMinutes;
+
+//        qDebug()<<"Appointment Title= "<<a.m_title
+//               <<"hasReminder= "<<a.m_hasReminder
+//              <<" reminderMinutes= "<<a.m_reminderMinutes;
 
         if (dbm.isOpen())
         {
@@ -371,6 +417,9 @@ void MainWindow::UpdateAppointment(int dbID, int selectedRowindex)
             appointmentEndTime=appointmentDialog->getEndTime();
             category=appointmentDialog->getCategory();
             isAllDay=appointmentDialog->getAllDay();
+            hasReminder=appointmentDialog->getHasReminder();
+            reminderMinutes=appointmentDialog->getReminderMins();
+
 
             Appointment a;
             a.m_title=title;
@@ -381,6 +430,8 @@ void MainWindow::UpdateAppointment(int dbID, int selectedRowindex)
             a.m_endTime=appointmentEndTime.toString();
             a.m_category=category;
             a.m_isFullDay=isAllDay;
+            a.m_hasReminder=hasReminder;
+            a.m_reminderMinutes=reminderMinutes;
 
 
             if (dbm.isOpen())
@@ -393,15 +444,13 @@ void MainWindow::UpdateAppointment(int dbID, int selectedRowindex)
                 UpdateCalendar();
                 ShowAppointmentsOnListView(selectedDate);
             }
-
-
         }
 
 }
 
 void MainWindow::GenerateRepeatAppointments()
 {
-    qDebug()<<"Generate repeat appointments";
+    //qDebug()<<"Generate repeat appointments";
 
     DialogRepeatAppointment *repeatDialog = new  DialogRepeatAppointment(this,&selectedDate);
         repeatDialog->setModal(true);
@@ -420,13 +469,11 @@ void MainWindow::GenerateRepeatAppointments()
             repeatDayInterval=repeatDialog->getRepeatDayInterval();
             repeatNumber=repeatDialog->getRepeatNumber();
 
-
-
-            qDebug()<<"Title = "<<title;
-            qDebug()<<"Location = "<<location;
-            qDebug()<<"Description = "<<description;
-            qDebug()<<"RepeatDayInterval  = "<<repeatDayInterval;
-            qDebug()<<"Repeat Number == "<<repeatNumber;
+            //qDebug()<<"Title = "<<title;
+            //qDebug()<<"Location = "<<location;
+            //qDebug()<<"Description = "<<description;
+            //qDebug()<<"RepeatDayInterval  = "<<repeatDayInterval;
+            //qDebug()<<"Repeat Number == "<<repeatNumber;
 
             Appointment a;
             a.m_title=title;
@@ -437,6 +484,8 @@ void MainWindow::GenerateRepeatAppointments()
             a.m_endTime=appointmentEndTime.toString();
             a.m_category=category;
             a.m_isFullDay=isAllDay;
+            a.m_hasReminder=0;
+            a.m_reminderMinutes=0;
 
 
             Appointment tmp;
@@ -453,6 +502,8 @@ void MainWindow::GenerateRepeatAppointments()
                 tmp.m_endTime=a.m_endTime;
                 tmp.m_category=a.m_category;
                 tmp.m_isFullDay=a.m_isFullDay;
+                tmp.m_hasReminder=0;
+                tmp.m_reminderMinutes=0;
 
 
                 if (dbm.isOpen())
@@ -521,34 +572,34 @@ void MainWindow::ShowAppointmentsOnListView(QDate theSelectedDate)
     {
         foreach(Appointment a, sortedDayList)
         {
-            if(a.m_category=="General" && flagShowGeneralEvents)
+            if(a.m_category==QLatin1String("General") && flagShowGeneralEvents)
             {
                 sortedDayList2.append(a);
             }
-            else if(a.m_category=="Meeting" && flagShowMeetings){
+            else if(a.m_category==QLatin1String("Meeting") && flagShowMeetings){
                 sortedDayList2.append(a);
             }
-            else if(a.m_category=="Work" && flagShowWorkEvents){
+            else if(a.m_category==QLatin1String("Work") && flagShowWorkEvents){
                 sortedDayList2.append(a);
             }
-            else if(a.m_category=="Family" && flagShowFamilyEvents){
+            else if(a.m_category==QLatin1String("Family") && flagShowFamilyEvents){
 
                 sortedDayList2.append(a);
             }
-            else if(a.m_category=="Leisure" && flagShowLeisureEvents){
+            else if(a.m_category==QLatin1String("Leisure") && flagShowLeisureEvents){
                 sortedDayList2.append(a);
 
             }
-            else if(a.m_category=="Fitness" && flagShowFitness){
+            else if(a.m_category==QLatin1String("Fitness") && flagShowFitness){
                 sortedDayList2.append(a);
             }
 
 
-            else if(a.m_category=="Vacation" && flagShowVacations){
+            else if(a.m_category==QLatin1String("Vacation") && flagShowVacations){
                 sortedDayList2.append(a);
             }
 
-            else if(a.m_category=="Medical" && flagShowMedical){
+            else if(a.m_category==QLatin1String("Medical") && flagShowMedical){
                 sortedDayList2.append(a);
             }
         }
@@ -600,7 +651,6 @@ QList<Appointment> MainWindow::getSortedDayList(QDate theDate)
 
 void MainWindow::UpdateCalendar()
 {
-
     int cellIndex=0;
     ui->tableWidgetCalendar->clearContents();
     //Initialise with empty cells
@@ -609,7 +659,7 @@ void MainWindow::UpdateCalendar()
         for(int col=0; col<ui->tableWidgetCalendar->columnCount(); ++col)
         {
             ui->tableWidgetCalendar->setItem(row, col,
-                                     new QTableWidgetItem(""));
+                                             new QTableWidgetItem(QLatin1String("")));
             cellIndex = (7 * row) + col;
             dayArray[cellIndex]=0;
         }
@@ -629,15 +679,15 @@ void MainWindow::UpdateCalendar()
     int row=0;
     int dayValue=0;
     while (date.month() == selectedDate.month()) {
-        int weekDay = date.dayOfWeek();       
-        dayValue= date.day();       
-        cellIndex = (7 * row) + weekDay-1;       
+        int weekDay = date.dayOfWeek();
+        dayValue= date.day();
+        cellIndex = (7 * row) + weekDay-1;
         dayArray[cellIndex]=dayValue;
         dayItem = new QTableWidgetItem(QString::number(dayValue));
 
         ui->tableWidgetCalendar->setItem(row, weekDay-1,dayItem);
 
-        QString str="";
+        QString str=QLatin1String("");
         //-----------------------------------------------------
         // Add holidays to calendar
         //-----------------------------------------------------
@@ -650,7 +700,7 @@ void MainWindow::UpdateCalendar()
                 if(date ==d)
                 {
                     //add holiday to calendar
-                    str.append("\n"+h.m_name);
+                    str.append(QLatin1Char('\n')+h.m_name);
 
                 }
             }
@@ -665,11 +715,11 @@ void MainWindow::UpdateCalendar()
             {
                 QDate birth =QDate::fromString(c.m_birthdate);
                 QDate birthday =QDate(selectedYear,birth.month(),birth.day());
-                QString name =c.m_firstname+" "+c.m_lastname;
+                QString name =c.m_firstname+ QLatin1Char(' ')+c.m_lastname;
 
                 if((date ==birthday) && (c.m_addToCalendar ==1))
                 {
-                    str.append("\nBirthday: "+name);
+                    str.append(QLatin1String("\nBirthday: ")+name);
                 }
             }
         }
@@ -684,60 +734,60 @@ void MainWindow::UpdateCalendar()
         {
             foreach(Appointment a, sortedDayList)
             {
-                if(a.m_category=="General" && flagShowGeneralEvents)
+                if(a.m_category==QLatin1String("General") && flagShowGeneralEvents)
                 {
-                    str.append("\n"+a.m_title);
+                    str.append(QLatin1Char('\n')+a.m_title);
                 }
-                else if(a.m_category=="Meeting" && flagShowMeetings){
-                    str.append("\n"+a.m_title);
+                else if(a.m_category==QLatin1String("Meeting") && flagShowMeetings){
+                    str.append(QLatin1Char('\n')+a.m_title);
                 }
-                else if(a.m_category=="Work" && flagShowWorkEvents){
-                    str.append("\n"+a.m_title);
+                else if(a.m_category==QLatin1String("Work") && flagShowWorkEvents){
+                    str.append(QLatin1Char('\n')+a.m_title);
                 }
-                else if(a.m_category=="Family" && flagShowFamilyEvents){
+                else if(a.m_category==QLatin1String("Family") && flagShowFamilyEvents){
 
-                    str.append("\n"+a.m_title);
+                    str.append(QLatin1Char('\n')+a.m_title);
                 }
-                else if(a.m_category=="Leisure" && flagShowLeisureEvents){
-                    str.append("\n"+a.m_title);
+                else if(a.m_category==QLatin1String("Leisure") && flagShowLeisureEvents){
+                    str.append(QLatin1Char('\n')+a.m_title);
 
                 }
-                else if(a.m_category=="Fitness" && flagShowFitness){
-                    str.append("\n"+a.m_title);
-                }
-
-
-                else if(a.m_category=="Vacation" && flagShowVacations){
-                    str.append("\n"+a.m_title);
+                else if(a.m_category==QLatin1String("Fitness") && flagShowFitness){
+                    str.append(QLatin1Char('\n')+a.m_title);
                 }
 
-                else if(a.m_category=="Medical" && flagShowMedical){
-                    str.append("\n"+a.m_title);
-                }                
+
+                else if(a.m_category==QLatin1String("Vacation") && flagShowVacations){
+                    str.append(QLatin1Char('\n')+a.m_title);
+                }
+
+                else if(a.m_category==QLatin1String("Medical") && flagShowMedical){
+                    str.append(QLatin1Char('\n')+a.m_title);
+                }
 
             }
             //Display on calendar
         }
 
-           calendarItem = new QTableWidgetItem(QString::number(dayValue)
-                                                  +str);
+        calendarItem = new QTableWidgetItem(QString::number(dayValue)
+                                            +str);
 
-           calendarItem->setTextColor(Qt::black);
-           ui->tableWidgetCalendar->setItem(row,weekDay-1, calendarItem);
+        calendarItem->setTextColor(Qt::black);
+        ui->tableWidgetCalendar->setItem(row,weekDay-1, calendarItem);
 
-           if (date==QDate::currentDate())
-           {
+        if (date==QDate::currentDate())
+        {
 
-               ui->tableWidgetCalendar->item(row, weekDay-1)->setData(
-                           Qt::BackgroundRole,
-                           QBrush(Qt::lightGray)
-                           );
+            ui->tableWidgetCalendar->item(row, weekDay-1)->setData(
+                        Qt::BackgroundRole,
+                        QBrush(Qt::lightGray)
+                        );
 
-           }
+        }
 
 
-            //Move on ...
-            date = date.addDays(1); //move to next day
+        //Move on ...
+        date = date.addDays(1); //move to next day
         if (weekDay == 7 && date.month() == selectedDate.month())
         {
             row=row+1;
@@ -748,9 +798,10 @@ void MainWindow::UpdateCalendar()
 
 
     ui->labelMonthYear->setText
-              (tr("%1 %2"
-                  ).arg(QLocale::system().monthName(selectedDate.month())
-                        ).arg(selectedDate.year()));
+            (tr("%1 %2"
+                ).arg(QLocale::system().monthName(selectedDate.month())
+                      ).arg(selectedDate.year()));
+
 }
 
 void MainWindow::SetPreferences()
@@ -759,16 +810,58 @@ void MainWindow::SetPreferences()
     preferencesDialog->setModal(true);
 
     if (preferencesDialog->exec() == QDialog::Accepted ) {
+
+        playAudio=preferencesDialog->getPlayAudio();
+        locale=preferencesDialog->getLocalization();
+        calendarTheme=preferencesDialog->getCalendarTheme();
         //get new default font sizes
         applicationFontSize=preferencesDialog->getApplicationFont();
         calendarFontSize=preferencesDialog->getCalendarFont();
+
+
+        newLineSpacing=preferencesDialog->getLineSpacing();
+        UpdateCalendar();
+        ShowAppointmentsOnListView(selectedDate);
+
         //reset preferences
+        currentPreferences.m_playAudio=playAudio;
+        currentPreferences.m_localization=locale;
+        currentPreferences.m_calendarTheme=calendarTheme;
         currentPreferences.m_calendarFontSize=calendarFontSize;
         currentPreferences.m_applicationFontSize=applicationFontSize;
+        currentPreferences.m_lineSpacing=newLineSpacing;
+
+        //dbm.addPreferences(currentPreferences);
+        SaveSettings();
     }
 
     SetTheme();
 
+}
+
+
+
+void MainWindow::increaseFont()
+{
+    calendarFontSize=calendarFontSize+1;
+    if (calendarFontSize>=36) calendarFontSize=36;
+    currentPreferences.m_calendarFontSize=calendarFontSize;
+    SetTheme();
+}
+
+void MainWindow::decreaseFont()
+{
+    calendarFontSize=calendarFontSize-1;
+    if (calendarFontSize<=8) calendarFontSize=8;
+    currentPreferences.m_calendarFontSize=calendarFontSize;
+    SetTheme();
+}
+
+void MainWindow::resetFont()
+{
+    calendarFontSize=14;
+    currentPreferences.m_calendarFontSize=calendarFontSize;
+    SetTheme();
 }
 
 
@@ -878,21 +971,21 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h1;
     h1.m_id=1;
-    h1.m_name=tr("Christmas");
+    h1.m_name=QLatin1String("Christmas");
     h1.m_date=QDate(year,12,25).toString();
     h1.m_addToCalendar=1;
     holidayList.append(h1);
 
     Holiday h2;
     h2.m_id=2;
-    h2.m_name=tr("Boxing Day");
+    h2.m_name=QLatin1String("Boxing Day");
     h2.m_date=QDate(year,12,26).toString();
     h2.m_addToCalendar=1;
     holidayList.append(h2);
 
     Holiday h3;
     h3.m_id=3;
-    h3.m_name=tr("New Years Day");
+    h3.m_name=QLatin1String("New Years Day");
     h3.m_date=QDate(year,1,1).toString();
     h3.m_addToCalendar=1;
     holidayList.append(h3);
@@ -901,28 +994,28 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h4;
     h4.m_id=4;
-    h4.m_name=tr("Easter");
+    h4.m_name=QLatin1String("Easter");
     h4.m_date=easterSunday.toString();
     h4.m_addToCalendar=1;
     holidayList.append(h4);
 
     Holiday h5;
     h5.m_id=5;
-    h5.m_name=tr("Good Friday");
+    h5.m_name=QLatin1String("Good Friday");
     h5.m_date=easterSunday.addDays(-2).toString();
     h5.m_addToCalendar=1;
     holidayList.append(h5);
 
     Holiday h6;
     h6.m_id=6;
-    h6.m_name=tr("Easter Monday");
+    h6.m_name=QLatin1String("Easter Monday");
     h6.m_date=easterSunday.addDays(1).toString();
     h6.m_addToCalendar=1;
     holidayList.append(h6);
 
     Holiday h7;
     h7.m_id=7;
-    h7.m_name=tr("May Bank Holiday");
+    h7.m_name=QLatin1String("May Bank Holiday");
 
     QDate firstMondayMay(year, 5, 1);
 
@@ -949,7 +1042,7 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h8;
     h8.m_id=8;
-    h8.m_name=tr("Spring Bank Holiday");
+    h8.m_name=QLatin1String("Spring Bank Holiday");
     QDate springbank =firstMondayMay.addDays(plusDays);
 
     if (springbank.isValid())
@@ -961,7 +1054,7 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h9;
     h9.m_id=9;
-    h9.m_name=tr("Summer Bank Holiday");
+    h9.m_name=QLatin1String("Summer Bank Holiday");
 
     QDate firstMondayAug(year, 8, 1);
 
@@ -1150,7 +1243,7 @@ void MainWindow::RemoveContactFromContactList(int contactId)
 void MainWindow::ExportContactsXML()
 {
     QDomDocument document;
-    QDomElement root = document.createElement("Contacts");
+    QDomElement root = document.createElement(QStringLiteral("Contacts"));
     document.appendChild(root);
 
     QList<Contact> dbContactList =dbm.getAllContacts();
@@ -1169,24 +1262,24 @@ void MainWindow::ExportContactsXML()
         QString birthdate =c.m_birthdate;
         QString addToCal =QString::number(c.m_addToCalendar);
 
-        QDomElement contact = document.createElement("Contact");
-        contact.setAttribute("FirstName",firstName );
-        contact.setAttribute("MidName",midName);
-        contact.setAttribute("LastName", lastName);
-        contact.setAttribute("Email",email);
-        contact.setAttribute("Street",street);
-        contact.setAttribute("District",district);
-        contact.setAttribute("City",city);
-        contact.setAttribute("County",county);
-        contact.setAttribute("Postcode",postcode);
-        contact.setAttribute("Country",country);
-        contact.setAttribute("Telephone",telephone);
-        contact.setAttribute("BirthDate",birthdate);
-        contact.setAttribute("AddToCal",addToCal);
+        QDomElement contact = document.createElement(QStringLiteral("Contact"));
+        contact.setAttribute(QStringLiteral("FirstName"),firstName );
+        contact.setAttribute(QStringLiteral("MidName"),midName);
+        contact.setAttribute(QStringLiteral("LastName"), lastName);
+        contact.setAttribute(QStringLiteral("Email"),email);
+        contact.setAttribute(QStringLiteral("Street"),street);
+        contact.setAttribute(QStringLiteral("District"),district);
+        contact.setAttribute(QStringLiteral("City"),city);
+        contact.setAttribute(QStringLiteral("County"),county);
+        contact.setAttribute(QStringLiteral("Postcode"),postcode);
+        contact.setAttribute(QStringLiteral("Country"),country);
+        contact.setAttribute(QStringLiteral("Telephone"),telephone);
+        contact.setAttribute(QStringLiteral("BirthDate"),birthdate);
+        contact.setAttribute(QStringLiteral("AddToCal"),addToCal);
         root.appendChild(contact);
     }
 
-    QString filename = QFileDialog::getSaveFileName(this, "Save Contacts Xml", ".", "Xml files (*.xml)");
+    QString filename = QFileDialog::getSaveFileName(this, QStringLiteral("Save Contacts Xml"), QStringLiteral("."), QStringLiteral("Xml files (*.xml)"));
     QFile file(filename);
     if (!file.open(QFile::WriteOnly | QFile::Text)){
         //qDebug() << "Error saving XML file.";
@@ -1198,14 +1291,14 @@ void MainWindow::ExportContactsXML()
         file.close();
         //qDebug() << "Finished";
     }
-
 }
 
 void MainWindow::ImportContactsXML()
 {
     QDomDocument document;
-    QString filename = QFileDialog::getOpenFileName(this, "Open Contacts Xml", ".", "Xml files (*.xml)");
+    QString filename = QFileDialog::getOpenFileName(this, QStringLiteral("Open Contacts Xml"), QStringLiteral("."), QStringLiteral("Xml files (*.xml)"));
     QFile file(filename);
+    
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
         //qDebug() << "Failed to open XML file.";
@@ -1222,7 +1315,8 @@ void MainWindow::ImportContactsXML()
     }
 
     QDomElement root = document.firstChildElement();
-    QDomNodeList contact = root.elementsByTagName("Contact");
+    QDomNodeList contact = root.elementsByTagName(QStringLiteral("Contact"));
+    
     for(int i = 0; i < contact.count(); i++)
     {
         QDomNode contactnode = contact.at(i);
@@ -1231,19 +1325,19 @@ void MainWindow::ImportContactsXML()
             QDomElement contact = contactnode.toElement();
 
             Contact c;
-            c.m_firstname=contact.attribute("FirstName");
-            c.m_midnames=contact.attribute("MidName");
-            c.m_lastname=contact.attribute("LastName");
-            c.m_email=contact.attribute("Email");
-            c.m_street=contact.attribute("Street");
-            c.m_district=contact.attribute("District");
-            c.m_city=contact.attribute("City");
-            c.m_county=contact.attribute("County");
-            c.m_postcode=contact.attribute("Postcode");
-            c.m_country=contact.attribute("Country");
-            c.m_telephone=contact.attribute("Telephone");
-            c.m_birthdate=contact.attribute("BirthDate");
-            c.m_addToCalendar=contact.attribute("AddToCal").toInt();
+            c.m_firstname=contact.attribute(QStringLiteral("FirstName"));
+            c.m_midnames=contact.attribute(QStringLiteral("MidName"));
+            c.m_lastname=contact.attribute(QStringLiteral("LastName"));
+            c.m_email=contact.attribute(QStringLiteral("Email"));
+            c.m_street=contact.attribute(QStringLiteral("Street"));
+            c.m_district=contact.attribute(QStringLiteral("District"));
+            c.m_city=contact.attribute(QStringLiteral("City"));
+            c.m_county=contact.attribute(QStringLiteral("County"));
+            c.m_postcode=contact.attribute(QStringLiteral("Postcode"));
+            c.m_country=contact.attribute(QStringLiteral("Country"));
+            c.m_telephone=contact.attribute(QStringLiteral("Telephone"));
+            c.m_birthdate=contact.attribute(QStringLiteral("BirthDate"));
+            c.m_addToCalendar=contact.attribute(QStringLiteral("AddToCal")).toInt();
 
             if (dbm.isOpen())
             {
@@ -1261,8 +1355,8 @@ void MainWindow::ImportContactsXML()
 
 void MainWindow::ExportAppointmentsXML()
 {
-    QDomDocument document;
-    QDomElement root = document.createElement("Appointments");
+     QDomDocument document;
+    QDomElement root = document.createElement(QStringLiteral("Appointments"));
     document.appendChild(root);
 
     QList<Appointment> dbAppointmentList =dbm.getAllAppointments();
@@ -1276,21 +1370,26 @@ void MainWindow::ExportAppointmentsXML()
         QString endTime=a.m_endTime;
         QString category=a.m_category;
         QString allDay =QString::number(a.m_isFullDay);
+        //Don't save reminder details so compatible with previous versions
+       // QString hasReminder=QString::number(a.m_hasReminder);
+       // QString reminderMins=QString::number(a.m_reminderMinutes);
 
-        QDomElement appointment = document.createElement("Appointment");
-        appointment.setAttribute("Title",title);
-        appointment.setAttribute("Location", location);
-        appointment.setAttribute("Description",description);
-        appointment.setAttribute("Date",date);
-        appointment.setAttribute("StartTime",startTime);
-        appointment.setAttribute("EndTime",endTime);
-        appointment.setAttribute("Category",category);
-        appointment.setAttribute("IsAllDay",allDay);
+        QDomElement appointment = document.createElement(QStringLiteral("Appointment"));
+        appointment.setAttribute(QStringLiteral("Title"),title);
+        appointment.setAttribute(QStringLiteral("Location"), location);
+        appointment.setAttribute(QStringLiteral("Description"),description);
+        appointment.setAttribute(QStringLiteral("Date"),date);
+        appointment.setAttribute(QStringLiteral("StartTime"),startTime);
+        appointment.setAttribute(QStringLiteral("EndTime"),endTime);
+        appointment.setAttribute(QStringLiteral("Category"),category);
+        appointment.setAttribute(QStringLiteral("IsAllDay"),allDay);
+        //appointment.setAttribute(QStringLiteral("HasReminder"),hasReminder);
+        //appointment.setAttribute(QStringLiteral("ReminderMinutes"),reminderMins);
         root.appendChild(appointment);
 
     }
 
-    QString filename = QFileDialog::getSaveFileName(this, "Save Appointments Xml", ".", "Xml files (*.xml)");
+    QString filename = QFileDialog::getSaveFileName(this, QStringLiteral("Save Appointments Xml"), QStringLiteral("."), QStringLiteral("Xml files (*.xml)"));
     QFile file(filename);
     if (!file.open(QFile::WriteOnly | QFile::Text)){
 
@@ -1309,7 +1408,7 @@ void MainWindow::ExportAppointmentsXML()
 void MainWindow::ImportAppointmentsXML()
 {
     QDomDocument document;
-    QString filename = QFileDialog::getOpenFileName(this, "Open Appointments Xml", ".", "Xml files (*.xml)");
+    QString filename = QFileDialog::getOpenFileName(this, QStringLiteral("Open Appointments Xml"), QStringLiteral("."), QStringLiteral("Xml files (*.xml)"));
     QFile file(filename);
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
@@ -1327,7 +1426,7 @@ void MainWindow::ImportAppointmentsXML()
     }
 
     QDomElement root = document.firstChildElement();
-    QDomNodeList appointment = root.elementsByTagName("Appointment");
+    QDomNodeList appointment = root.elementsByTagName(QStringLiteral("Appointment"));
 
     for(int i = 0; i < appointment.count(); i++)
     {
@@ -1337,14 +1436,16 @@ void MainWindow::ImportAppointmentsXML()
             QDomElement appointment = appointmentnode.toElement();
 
             Appointment a;
-            a.m_title=appointment.attribute("Title");
-            a.m_location=appointment.attribute("Location");
-            a.m_description=appointment.attribute("Description");
-            a.m_date=appointment.attribute("Date");
-            a.m_startTime=appointment.attribute("StartTime");
-            a.m_endTime=appointment.attribute("EndTime");
-            a.m_category=appointment.attribute("Category");
-            a.m_isFullDay=appointment.attribute("IsAllDay").toInt();
+            a.m_title=appointment.attribute(QStringLiteral("Title"));
+            a.m_location=appointment.attribute(QStringLiteral("Location"));
+            a.m_description=appointment.attribute(QStringLiteral("Description"));
+            a.m_date=appointment.attribute(QStringLiteral("Date"));
+            a.m_startTime=appointment.attribute(QStringLiteral("StartTime"));
+            a.m_endTime=appointment.attribute(QStringLiteral("EndTime"));
+            a.m_category=appointment.attribute(QStringLiteral("Category"));
+            a.m_isFullDay=appointment.attribute(QStringLiteral("IsAllDay")).toInt();
+            a.m_hasReminder=0;
+            a.m_reminderMinutes=0;
 
             if (dbm.isOpen())
             {
@@ -1381,6 +1482,21 @@ void MainWindow::newContactSlot()
     NewContact();
 }
 
+void MainWindow::increaseFontSlot()
+{
+    increaseFont();
+}
+
+void MainWindow::decreaseFontSlot()
+{
+    decreaseFont();
+}
+
+void MainWindow::resetFontSlot()
+{
+    resetFont();
+}
+
 
 void MainWindow::on_actionExit_triggered()
 {
@@ -1400,8 +1516,6 @@ void MainWindow::on_tableWidgetCalendar_cellClicked(int row, int column)
 
     selectedDateLabel->setText(selectedDate.toString());
     ShowAppointmentsOnListView(selectedDate);
-
-
 }
 
 void MainWindow::on_actionNew_Appointment_triggered()
@@ -1414,7 +1528,7 @@ void MainWindow::on_listViewDay_doubleClicked(const QModelIndex &index)
     int selectedRowIdx=index.row();
     Appointment tmp =dayListModel->getAppointment(selectedRowIdx);
     int dbId =tmp.m_id;
-    qDebug()<<"dbID = "<<dbId;
+    //qDebug()<<"dbID = "<<dbId;
     UpdateAppointment(dbId,selectedRowIdx);
 }
 
@@ -1480,7 +1594,7 @@ void MainWindow::on_tableViewContacts_clicked(const QModelIndex &index)
 
 void MainWindow::on_pushButtonMailTo_clicked()
 {
-    QString url="mailto:?to="+selectedContact.m_email+"&subject=Enter the subject&body=Enter message";
+    QString url=QLatin1String("mailto:?to=")+selectedContact.m_email+QLatin1String("&subject=Enter the subject&body=Enter message");
     QDesktopServices::openUrl(QUrl(url, QUrl::TolerantMode));
 }
 
@@ -1706,39 +1820,38 @@ void MainWindow::on_actionShow_Family_triggered()
 
 void MainWindow::SetTheme()
 {
-        QString strfont ="font-size: "+ QString::number(calendarFontSize)+"pt;";
+    QString strfont = QLatin1String("font-size: ")+ QString::number(calendarFontSize)+QLatin1String("pt;");
 
-        QString style(
-                    "QTableWidget {"
-                    "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4f4f6, stop:1 #ceced6);"
-                    "border-width: 2px;"
-                    "border-style: solid;"
-                    "border-color: black;"
-                    " gridline-color: black;"
-                    "color: black;"
-                    +strfont+
-                    "selection-color: darkblue"
-                    "}"
-                    "QTableWidget::item {"
-                    "background: none;"
-                    "}"
-                    );
+    QString style(
+                QLatin1String("QTableWidget {"
+                              "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4f4f6, stop:1 #ceced6);"
+                              "border-width: 2px;"
+                              "border-style: solid;"
+                              "border-color: black;"
+                              " gridline-color: black;"
+                              "color: black;")
+                +strfont+
+                QLatin1String("selection-color: darkblue"
+                              "}"
+                              "QTableWidget::item {"
+                              "background: none;"
+                              "}")
+                );
 
-        ui->tableWidgetCalendar->setStyleSheet(style);
-        QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
-        font.setPointSize(calendarFontSize+1);
-        ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
+    ui->tableWidgetCalendar->setStyleSheet(style);
+    QFont font = ui->tableWidgetCalendar->horizontalHeader()->font();
+    font.setPointSize(calendarFontSize+1);
+    ui->tableWidgetCalendar->horizontalHeader()->setFont(font);
 
-        ui->listViewDay->setBackgroundRole(QPalette::Window);
+    ui->listViewDay->setBackgroundRole(QPalette::Window);
 
-        QFont fontMonthYear = ui->labelMonthYear->font();
-        fontMonthYear.setPointSize(calendarFontSize+2);
-        fontMonthYear.setBold(true);
-        ui->labelMonthYear->setFont(fontMonthYear);
+    QFont fontMonthYear = ui->labelMonthYear->font();
+    fontMonthYear.setPointSize(calendarFontSize+2);
+    fontMonthYear.setBold(true);
+    ui->labelMonthYear->setFont(fontMonthYear);
 
-        QString styleSheet = QString("font-size:%1px;").arg(applicationFontSize);
-        this->setStyleSheet(styleSheet);
-
+    QString styleSheet = QStringLiteral("font-size:%1px;").arg(applicationFontSize);
+    this->setStyleSheet(styleSheet);
 }
 
 
@@ -1764,28 +1877,80 @@ void MainWindow::on_actionImport_Contacts_triggered()
 }
 
 
-void MainWindow::on_actionNewLine_Spacing_triggered()
-{
-    if(ui->actionNewLine_Spacing->isChecked())
-    {
-        ui->actionNewLine_Spacing->setChecked(true);
-        newLineSpacing=1;
-
-    }
-    else {
-        ui->actionNewLine_Spacing->setChecked(false);
-        newLineSpacing=0;
-
-    }
-
-    UpdateCalendar();
-    ShowAppointmentsOnListView(selectedDate);
-
-
-}
-
-
 void MainWindow::on_actionPreferences_triggered()
 {
     SetPreferences();
 }
+
+void MainWindow::SaveSettings()
+{
+    QDomDocument document;
+    QDomElement root = document.createElement(QStringLiteral("Settings"));
+    document.appendChild(root);
+
+    QDomElement setting = document.createElement(QStringLiteral("Settings"));
+    setting.setAttribute(QStringLiteral("PlayAudio"),currentPreferences.m_playAudio);
+    setting.setAttribute(QStringLiteral("Locale"),currentPreferences.m_localization);
+    setting.setAttribute(QStringLiteral("CalendarTheme"),currentPreferences.m_calendarTheme);
+    setting.setAttribute(QStringLiteral("ApplicationFontSize"),currentPreferences.m_applicationFontSize);
+    setting.setAttribute(QStringLiteral("CalendarFontSize"),currentPreferences.m_calendarFontSize);
+    setting.setAttribute(QStringLiteral("LineSpacing"),currentPreferences.m_lineSpacing);
+    root.appendChild(setting);
+
+    QFile file("conf.xml");
+    if (!file.open(QFile::WriteOnly | QFile::Text)){
+       qDebug() << "Error saving XML file.";
+        return;
+    }
+    else {
+        QTextStream stream(&file);
+        stream << document.toString();
+        file.close();
+        qDebug() << "Finished saving configuation settings";
+    }
+}
+
+bool MainWindow::LoadSettings()
+{
+    QDomDocument document;
+
+    QFile file("conf.xml");
+
+    if (!file.open(QFile::ReadOnly | QFile::Text))
+    {
+        qDebug() << "Failed to open XML file.";
+        return false;
+    }
+    else
+    {
+        if(!document.setContent(&file))
+        {
+            qDebug() << "Failed to load document";
+            return false;
+        }
+        file.close();
+    }
+
+    QDomElement root = document.firstChildElement();
+
+    QDomNodeList setting = root.elementsByTagName(QStringLiteral("Settings"));
+
+    for(int i = 0; i < setting.count(); i++)
+    {
+        QDomNode node = setting.at(i);
+        if(node.isElement())
+        {
+            QDomElement element = node.toElement();
+            currentPreferences.m_playAudio=element.attribute(QStringLiteral("PlayAudio")).toInt();
+            currentPreferences.m_localization=element.attribute(QStringLiteral("Locale"));
+            currentPreferences.m_calendarTheme=element.attribute(QStringLiteral("CalendarTheme")).toInt();
+            currentPreferences.m_applicationFontSize=element.attribute(QStringLiteral("ApplicationFontSize")).toInt();
+            currentPreferences.m_calendarFontSize=element.attribute(QStringLiteral("CalendarFontSize")).toInt();
+            currentPreferences.m_lineSpacing=element.attribute(QStringLiteral("LineSpacing")).toInt();
+        }
+
+    }
+    file.close();
+    return true;
+}
+

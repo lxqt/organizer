@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Author Alan Crispin aka. crispina                 *
- *   crispinalan@gmail.com                                                    *
+ *   Author Alan Crispin aka. crispina                                     *
+ *   crispinalan@gmail.com                                                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -31,7 +31,9 @@ struct Appointment {
                 const QString& startTime=QString(),                
                 const QString& endTime=QString(),
                 const QString& category=QString(),
-                int isFullDay =0
+                int isFullDay =0,
+                int hasReminder=0,
+                int reminderMins=0
                 ):
         m_id(id),
         m_title(title),
@@ -41,7 +43,9 @@ struct Appointment {
         m_startTime(startTime),
         m_endTime(endTime),
         m_category(category),
-        m_isFullDay(isFullDay)
+        m_isFullDay(isFullDay),
+        m_hasReminder(hasReminder),
+        m_reminderMinutes(reminderMins)
     {
     }
    int m_id;
@@ -53,6 +57,8 @@ struct Appointment {
    QString m_endTime;
    QString m_category;
    int m_isFullDay;
+   int m_hasReminder;
+   int m_reminderMinutes;
 };
 
 

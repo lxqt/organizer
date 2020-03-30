@@ -60,6 +60,16 @@ public:
     bool getDeleteRequested();
     void setupComboBoxes();
 
+    //Reminders
+    int hasReminder=0; //no
+    int getHasReminder();
+    int reminderMins=0; //none
+    int getReminderMins();
+
+
+
+
+
 private slots:
 
     void accept();
@@ -75,6 +85,10 @@ private slots:
 
     void on_checkBoxAllDay_stateChanged(int arg1);
 
+
+    void on_comboBoxReminder_currentIndexChanged(int index);
+
+    void on_checkBoxReminder_stateChanged(int arg1);
 
 private:
     Ui::DialogAppointment *ui;

@@ -101,7 +101,7 @@ QVariant DayListModel::data(const QModelIndex &index, int role) const
     if (role == Qt::DisplayRole) {
 
 
-        QString details="default";
+        QString details=QStringLiteral("default");
         //More to do..
         QTime starts =QTime::fromString(appointment.m_startTime);
         QTime ends =QTime::fromString(appointment.m_endTime);
@@ -112,20 +112,20 @@ QVariant DayListModel::data(const QModelIndex &index, int role) const
 
             if(flagSpacing==0)
             {
-                details="All Day Event: "+appointment.m_title
-                        + " ("+appointment.m_location+") "
+                details=QStringLiteral("All Day Event: ")+appointment.m_title
+                        + QStringLiteral(" (")+appointment.m_location+QStringLiteral(") ")
                         +appointment.m_description;
 
             }
             else if(flagSpacing==1)
             {
-                details="All Day Event: "+appointment.m_title
-                        + " ("+appointment.m_location+") "
-                        +appointment.m_description+"\n";
+                details=QStringLiteral("All Day Event: ")+appointment.m_title
+                        + QStringLiteral(" (")+appointment.m_location+QStringLiteral(") ")
+                        +appointment.m_description+QLatin1Char('\n');
             }
             else {
-                details="All Day Event: "+appointment.m_title
-                        + " ("+appointment.m_location+") "
+                details=QStringLiteral("All Day Event: ")+appointment.m_title
+                        + QStringLiteral(" (")+appointment.m_location+QStringLiteral(") ")
                         +appointment.m_description;
             }
 
@@ -134,20 +134,20 @@ QVariant DayListModel::data(const QModelIndex &index, int role) const
 
             if(flagSpacing==0)
             {
-                details =starts.toString("hh:mm")+" to "+ends.toString("hh:mm")
-                        + " "+appointment.m_title+" ("+appointment.m_location+ ") "
+                details =starts.toString(QStringLiteral("hh:mm"))+QStringLiteral(" to ")+ends.toString(QStringLiteral("hh:mm"))
+                        + QLatin1Char(' ')+appointment.m_title+QStringLiteral(" (")+appointment.m_location+ QStringLiteral(") ")
                         + appointment.m_description;
 
             }
             else if(flagSpacing==1)
             {
-                details =starts.toString("hh:mm")+" to "+ends.toString("hh:mm")
-                        + " "+appointment.m_title+" ("+appointment.m_location+ ") "
-                        + appointment.m_description+"\n";
+                details =starts.toString(QStringLiteral("hh:mm"))+QStringLiteral(" to ")+ends.toString(QStringLiteral("hh:mm"))
+                        + QLatin1Char(' ')+appointment.m_title+QStringLiteral(" (")+appointment.m_location+ QStringLiteral(") ")
+                        + appointment.m_description+QLatin1Char('\n');
             }
             else {
-                details =starts.toString("hh:mm")+" to "+ends.toString("hh:mm")
-                        + " "+appointment.m_title+" ("+appointment.m_location+ ") "
+                details =starts.toString(QStringLiteral("hh:mm"))+QStringLiteral(" to ")+ends.toString(QStringLiteral("hh:mm"))
+                        + QLatin1Char(' ')+appointment.m_title+QStringLiteral(" (")+appointment.m_location+ QStringLiteral(") ")
                         + appointment.m_description;
             }
         }

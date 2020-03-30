@@ -144,7 +144,7 @@
      <x>0</x>
      <y>0</y>
      <width>1145</width>
-     <height>29</height>
+     <height>39</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -222,7 +222,6 @@
     <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
-    <addaction name="actionNewLine_Spacing"/>
     <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
@@ -433,17 +432,9 @@
     <string>Import Contacts</string>
    </property>
   </action>
-  <action name="actionNewLine_Spacing">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Line Spacing</string>
-   </property>
-  </action>
   <action name="actionPreferences">
    <property name="text">
-    <string>Preferences (Font Sizes)</string>
+    <string>Preferences</string>
    </property>
   </action>
  </widget>

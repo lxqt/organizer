@@ -17,17 +17,28 @@ public:
     ~DialogPreferences();
 
     int defaultApplicationFontSize=20;
-    int defaultCalendarFontSize =12;
+    int defaultCalendarFontSize =14;
+    int playAudio=1;
+    QString locale ="English";
+    int calendarTheme =0; //default
+    int lineSpacing =0;
 
     int getCalendarFont();
     int getApplicationFont();
-
+    int getPlayAudio();
+    QString getLocalization();
+    int getCalendarTheme();
+    int getLineSpacing();
 
 
 private slots:
     void on_spinBoxApplicationFont_valueChanged(int arg1);
 
-    void on_spinBoxCalendarFont_valueChanged(int arg1);
+    void on_spinBoxCalendarFont_valueChanged(int arg1);   
+
+    void on_checkBoxPlayAudio_stateChanged(int arg1);  
+
+    void on_checkBoxLineSpacing_stateChanged(int arg1);
 
 private:
     Ui::DialogPreferences *ui;

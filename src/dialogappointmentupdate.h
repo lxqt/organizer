@@ -70,6 +70,12 @@ public:
     bool getDeleteRequested();
     void setupComboBoxes();
 
+    //reminders
+    int reminderMins=0;
+    int getReminderMins();
+    int hasReminder=0;
+    int getHasReminder();
+
 private slots:
 
     void accept();
@@ -94,6 +100,10 @@ private slots:
     void on_checkBoxDelete_stateChanged(int arg1);
 
     void on_comboBoxCategory_currentIndexChanged(const QString &arg1);
+
+    void on_comboBoxReminder_currentIndexChanged(int index);
+
+    void on_checkBoxReminder_stateChanged(int arg1);
 
 private:
     Ui::DialogAppointmentUpdate *ui;
