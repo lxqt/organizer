@@ -186,10 +186,6 @@ void DialogAppointmentUpdate::setupComboBoxes()
     ui->comboBoxReminder->addItem(QStringLiteral("30 minutes before start"));
     ui->comboBoxReminder->addItem(QStringLiteral("1 hour before start"));
     ui->comboBoxReminder->addItem(QStringLiteral("1 day before start"));
-
-    //ui->comboBoxReminder->addItem(tr("1 hour before start"));
-    //ui->comboBoxReminder->addItem(tr("1 day before start"));
-    //ui->comboBoxReminder->addItem(tr("2 days before start"));
 }
 
 int DialogAppointmentUpdate::getReminderMins()
@@ -220,17 +216,6 @@ void DialogAppointmentUpdate::accept()
      QDialog::accept();
 
     }
-
-//    this->title=ui->lineEditTitle->text();
-//    this->location=ui->lineEditLocation->text();
-//    this->description=ui->textEditDescription->toPlainText();
-//    this->isAllDay=ui->checkBoxAllDay->checkState();
-//    this->startTime=ui->timeEditStartTime->time();
-//    this->endTime=ui->timeEditEndTime->time();
-//    this->category=ui->comboBoxCategory->itemText(categoryIndex);
-//    this->deleteRequested=ui->checkBoxDelete->checkState();
-
-
 
 }
 

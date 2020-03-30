@@ -46,8 +46,8 @@ public:
 
     int isAllDay=0; //no
     bool deleteRequested=false;
+    QString currentTitle=QStringLiteral("");
 
-    QString currentTitle="";
     QString getTitle();
     QString getLocation();
     QString getDescription();

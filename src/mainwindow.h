@@ -85,7 +85,7 @@ public:
     //Preferences default
 
     int playAudio=1;
-    QString locale="English";
+    QString locale=QLatin1String("English");
     int calendarTheme=0;
     int applicationFontSize=20;
     int calendarFontSize=14;
@@ -95,13 +95,15 @@ public:
     bool LoadSettings();
 
     //Appointments
-    QString title="";
-    QString location="";
-    QString description="";
+
+    QString title=QLatin1String("");
+    QString location=QLatin1String("");
+    QString description=QLatin1String("");
+
     QDate appointmentDate;
     QTime appointmentStartTime;
     QTime appointmentEndTime;
-    QString category="";
+    QString category=QLatin1String("");
     int isAllDay=0;
     int appointmentId =0;
     int hasReminder=0;
@@ -186,17 +188,19 @@ public:
     void AddHolidaysToHolidayList(int year);
 
     //Contacts
-    QString contactFirstName ="";
-    QString contactMiddleNames="";
-    QString contactLastName="";
-    QString contactEmail="";
-    QString street="";
-    QString district="";
-    QString city="";
-    QString county="";
-    QString postcode ="";
-    QString country ="";
-    QString phoneNumber="";
+
+    QString contactFirstName =QLatin1String("");
+    QString contactMiddleNames=QLatin1String("");
+    QString contactLastName=QLatin1String("");
+    QString contactEmail=QLatin1String("");
+    QString street=QLatin1String("");
+    QString district=QLatin1String("");
+    QString city=QLatin1String("");
+    QString county=QLatin1String("");
+    QString postcode =QLatin1String("");
+    QString country =QLatin1String("");
+    QString phoneNumber=QLatin1String("");
+
     QDate birthDate=QDate(); //(0,0,0)
     int addBirthdayToCalendar =0;
     int selectedContactDbId=0;

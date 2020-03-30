@@ -19,7 +19,7 @@ public:
     int defaultApplicationFontSize=20;
     int defaultCalendarFontSize =14;
     int playAudio=1;
-    QString locale ="English";
+    QString locale =QStringLiteral("English");
     int calendarTheme =0; //default
     int lineSpacing =0;
 

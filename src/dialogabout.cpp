@@ -37,26 +37,26 @@ DialogAbout::~DialogAbout()
 void DialogAbout::SetAboutMessage()
 {
 
-    QString strap=QLatin1String("Organizer is a Qt lightweight personal information manager.");
+    QString strap=QStringLiteral("Organizer is a Qt lightweight personal information manager.");
 
-    QString keyMsg=QLatin1String("");
-    keyMsg.append(QLatin1String(" Calendar Keyboard shortcuts\n"));
+    QString keyMsg=QStringLiteral("");
+    keyMsg.append(QStringLiteral(" Calendar Keyboard shortcuts\n"));
     keyMsg.append(QStringLiteral(" ---------------------------------------\n"));
-    keyMsg.append(QLatin1String(" Up arrow = next month\n"));
-    keyMsg.append(QLatin1String(" Down arrow = previous month\n"));
-    keyMsg.append(QLatin1String(" Space bar = (back to) today\n\n"));
+    keyMsg.append(QStringLiteral(" Up arrow = next month\n"));
+    keyMsg.append(QStringLiteral(" Down arrow = previous month\n"));
+    keyMsg.append(QStringLiteral(" Space bar = (back to) today\n\n"));
 
-    keyMsg.append(QLatin1String(" Single click calendar date = show appointments\n"));
-    keyMsg.append(QLatin1String(" Double click calendar date = new appointment\n\n"));
+    keyMsg.append(QStringLiteral(" Single click calendar date = show appointments\n"));
+    keyMsg.append(QStringLiteral(" Double click calendar date = new appointment\n\n"));
 
-    keyMsg.append(QLatin1String(" key_c = new contact\n"));
-    keyMsg.append(QLatin1String(" key_f = increase calendar font size\n"));
-    keyMsg.append(QLatin1String(" key_d = decrease calendar font size\n"));
-    keyMsg.append(QLatin1String(" key_r = reset calendar font size\n"));
+    keyMsg.append(QStringLiteral(" key_c = new contact\n"));
+    keyMsg.append(QStringLiteral(" key_f = increase calendar font size\n"));
+    keyMsg.append(QStringLiteral(" key_d = decrease calendar font size\n"));
+    keyMsg.append(QStringLiteral(" key_r = reset calendar font size\n"));
 
-    QString headerMsg = QLatin1String("Organizer (v0.6.0)");
-    QString authorMsg =QLatin1String("Author (Lead Developer): Alan Crispin  (aka. crispina)");
-    QString lxqtMsg1 = QLatin1String("Organizer is maintained by the LXQt project but can be "
+    QString headerMsg =QStringLiteral("Organizer (v0.6.1)");
+    QString authorMsg =QStringLiteral("Author (Lead Developer): Alan Crispin  (aka. crispina)");
+    QString lxqtMsg1 = QStringLiteral("Organizer is maintained by the LXQt project but can be "
                                      "used independently from this desktop environment."
                                      );
     QString lxqtLinkMsg =QStringLiteral("<a href='https://github.com/lxqt'>LXQt</a>");

@@ -71,8 +71,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //qDebug()<<"Checking sounds ...";
     player = new QMediaPlayer();
 
-    player->setMedia(QUrl("qrc:/sounds/window-attention.oga"));
-
+    //player->setMedia(QUrl("qrc:/sounds/window-attention.oga"));
+    player->setMedia(QUrl::fromLocalFile("/usr/share/sounds/freedesktop/stereo/message-new-instant.oga"));
     player->setVolume(100);
 
     if(playAudio) {
@@ -469,11 +469,6 @@ void MainWindow::GenerateRepeatAppointments()
             repeatDayInterval=repeatDialog->getRepeatDayInterval();
             repeatNumber=repeatDialog->getRepeatNumber();
 
-            //qDebug()<<"Title = "<<title;
-            //qDebug()<<"Location = "<<location;
-            //qDebug()<<"Description = "<<description;
-            //qDebug()<<"RepeatDayInterval  = "<<repeatDayInterval;
-            //qDebug()<<"Repeat Number == "<<repeatNumber;
 
             Appointment a;
             a.m_title=title;
@@ -572,34 +567,34 @@ void MainWindow::ShowAppointmentsOnListView(QDate theSelectedDate)
     {
         foreach(Appointment a, sortedDayList)
         {
-            if(a.m_category==QLatin1String("General") && flagShowGeneralEvents)
+            if(a.m_category==QStringLiteral("General") && flagShowGeneralEvents)
             {
                 sortedDayList2.append(a);
             }
-            else if(a.m_category==QLatin1String("Meeting") && flagShowMeetings){
+            else if(a.m_category==QStringLiteral("Meeting") && flagShowMeetings){
                 sortedDayList2.append(a);
             }
-            else if(a.m_category==QLatin1String("Work") && flagShowWorkEvents){
+            else if(a.m_category==QStringLiteral("Work") && flagShowWorkEvents){
                 sortedDayList2.append(a);
             }
-            else if(a.m_category==QLatin1String("Family") && flagShowFamilyEvents){
+            else if(a.m_category==QStringLiteral("Family") && flagShowFamilyEvents){
 
                 sortedDayList2.append(a);
             }
-            else if(a.m_category==QLatin1String("Leisure") && flagShowLeisureEvents){
+            else if(a.m_category==QStringLiteral("Leisure") && flagShowLeisureEvents){
                 sortedDayList2.append(a);
 
             }
-            else if(a.m_category==QLatin1String("Fitness") && flagShowFitness){
+            else if(a.m_category==QStringLiteral("Fitness") && flagShowFitness){
                 sortedDayList2.append(a);
             }
 
 
-            else if(a.m_category==QLatin1String("Vacation") && flagShowVacations){
+            else if(a.m_category==QStringLiteral("Vacation") && flagShowVacations){
                 sortedDayList2.append(a);
             }
 
-            else if(a.m_category==QLatin1String("Medical") && flagShowMedical){
+            else if(a.m_category==QStringLiteral("Medical") && flagShowMedical){
                 sortedDayList2.append(a);
             }
         }
@@ -719,7 +714,7 @@ void MainWindow::UpdateCalendar()
 
                 if((date ==birthday) && (c.m_addToCalendar ==1))
                 {
-                    str.append(QLatin1String("\nBirthday: ")+name);
+                    str.append(QStringLiteral("\nBirthday: ")+name);
                 }
             }
         }
@@ -734,34 +729,34 @@ void MainWindow::UpdateCalendar()
         {
             foreach(Appointment a, sortedDayList)
             {
-                if(a.m_category==QLatin1String("General") && flagShowGeneralEvents)
+                if(a.m_category==QStringLiteral("General") && flagShowGeneralEvents)
                 {
                     str.append(QLatin1Char('\n')+a.m_title);
                 }
-                else if(a.m_category==QLatin1String("Meeting") && flagShowMeetings){
+                else if(a.m_category==QStringLiteral("Meeting") && flagShowMeetings){
                     str.append(QLatin1Char('\n')+a.m_title);
                 }
-                else if(a.m_category==QLatin1String("Work") && flagShowWorkEvents){
+                else if(a.m_category==QStringLiteral("Work") && flagShowWorkEvents){
                     str.append(QLatin1Char('\n')+a.m_title);
                 }
-                else if(a.m_category==QLatin1String("Family") && flagShowFamilyEvents){
+                else if(a.m_category==QStringLiteral("Family") && flagShowFamilyEvents){
 
                     str.append(QLatin1Char('\n')+a.m_title);
                 }
-                else if(a.m_category==QLatin1String("Leisure") && flagShowLeisureEvents){
+                else if(a.m_category==QStringLiteral("Leisure") && flagShowLeisureEvents){
                     str.append(QLatin1Char('\n')+a.m_title);
 
                 }
-                else if(a.m_category==QLatin1String("Fitness") && flagShowFitness){
+                else if(a.m_category==QStringLiteral("Fitness") && flagShowFitness){
                     str.append(QLatin1Char('\n')+a.m_title);
                 }
 
 
-                else if(a.m_category==QLatin1String("Vacation") && flagShowVacations){
+                else if(a.m_category==QStringLiteral("Vacation") && flagShowVacations){
                     str.append(QLatin1Char('\n')+a.m_title);
                 }
 
-                else if(a.m_category==QLatin1String("Medical") && flagShowMedical){
+                else if(a.m_category==QStringLiteral("Medical") && flagShowMedical){
                     str.append(QLatin1Char('\n')+a.m_title);
                 }
 
@@ -978,14 +973,14 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h2;
     h2.m_id=2;
-    h2.m_name=QLatin1String("Boxing Day");
+    h2.m_name=QStringLiteral("Boxing Day");
     h2.m_date=QDate(year,12,26).toString();
     h2.m_addToCalendar=1;
     holidayList.append(h2);
 
     Holiday h3;
     h3.m_id=3;
-    h3.m_name=QLatin1String("New Years Day");
+    h3.m_name=QStringLiteral("New Years Day");
     h3.m_date=QDate(year,1,1).toString();
     h3.m_addToCalendar=1;
     holidayList.append(h3);
@@ -994,28 +989,28 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h4;
     h4.m_id=4;
-    h4.m_name=QLatin1String("Easter");
+    h4.m_name=QStringLiteral("Easter");
     h4.m_date=easterSunday.toString();
     h4.m_addToCalendar=1;
     holidayList.append(h4);
 
     Holiday h5;
     h5.m_id=5;
-    h5.m_name=QLatin1String("Good Friday");
+    h5.m_name=QStringLiteral("Good Friday");
     h5.m_date=easterSunday.addDays(-2).toString();
     h5.m_addToCalendar=1;
     holidayList.append(h5);
 
     Holiday h6;
     h6.m_id=6;
-    h6.m_name=QLatin1String("Easter Monday");
+    h6.m_name=QStringLiteral("Easter Monday");
     h6.m_date=easterSunday.addDays(1).toString();
     h6.m_addToCalendar=1;
     holidayList.append(h6);
 
     Holiday h7;
     h7.m_id=7;
-    h7.m_name=QLatin1String("May Bank Holiday");
+    h7.m_name=QStringLiteral("May Bank Holiday");
 
     QDate firstMondayMay(year, 5, 1);
 
@@ -1042,7 +1037,7 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h8;
     h8.m_id=8;
-    h8.m_name=QLatin1String("Spring Bank Holiday");
+    h8.m_name=QStringLiteral("Spring Bank Holiday");
     QDate springbank =firstMondayMay.addDays(plusDays);
 
     if (springbank.isValid())
@@ -1054,7 +1049,7 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h9;
     h9.m_id=9;
-    h9.m_name=QLatin1String("Summer Bank Holiday");
+    h9.m_name=QStringLiteral("Summer Bank Holiday");
 
     QDate firstMondayAug(year, 8, 1);
 

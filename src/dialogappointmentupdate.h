@@ -41,13 +41,15 @@ public:
 
 
     //Appointments
-    QString title="";
-    QString location="";
-    QString description="";
+    QString title=QStringLiteral("");
+    QString location=QStringLiteral("");
+    QString description=QStringLiteral("");
+
     QDate appointmentDate;
     QTime appointmentStartTime;
     QTime appointmentEndTime;
-    QString category="";
+    QString category=QStringLiteral("");
+
     int categoryIndex=0;
     int isAllDay=0;
 
@@ -57,7 +59,8 @@ public:
     bool deleteRequested=false;
     bool valid =false;
 
-    QString currentTitle="";
+    QString currentTitle=QStringLiteral("");
+
     QString getTitle();
     QString getLocation();
     QString getDescription();

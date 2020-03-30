@@ -54,7 +54,7 @@ QVariant BirthdayListModel::data(const QModelIndex &index, int role) const
 
     if (role == Qt::DisplayRole) {
 
-        QString details=QLatin1String("");
+        QString details=QStringLiteral("");
         details = modelBirthdayList.at(index.row());
         return details;
     }
