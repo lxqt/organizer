@@ -333,7 +333,7 @@ void MainWindow::ReadXMLTranslation(QString localeStr)
     }
     else if(localeStr=="Japanese")
     {
-        translationfile="::/translations/strings_jp.xml";
+        translationfile=":/translations/strings_jp.xml";
     }
     else {
         translationfile=":/translations/strings_gb.xml";
