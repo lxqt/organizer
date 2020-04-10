@@ -36,7 +36,7 @@ DialogRepeatAppointment::DialogRepeatAppointment(QWidget *parent, QDate *theAppo
     ui->checkBox->setText(QStringLiteral("All Day "));
     ui->labelStartTime->setText(QStringLiteral("Start Time: "));
     ui->labelEndTime->setText(QStringLiteral("End Time: "));
-    ui->labelCategory->setText(QStringLiteral("Category"));
+
     ui->labelRepeatEvery->setText(QStringLiteral("Repeat Every: "));
     ui->labelDays->setText(QStringLiteral("Days "));
     ui->labelOccurrences->setText(QStringLiteral("Occurrences"));
@@ -50,8 +50,8 @@ DialogRepeatAppointment::DialogRepeatAppointment(QWidget *parent, QDate *theAppo
     ui->timeEditStarts->setTime(timeNow);
     ui->timeEditEnds->setTime(timeNow);
 
-    category=QStringLiteral("General");
-    setupComboBoxes();
+
+
 
     ui->spinBoxDays->setRange(1,28); //upto 4 weeks apart
     ui->spinBoxDays->setValue(1);
@@ -111,24 +111,7 @@ int DialogRepeatAppointment::getAllDay()
     return isAllDay;
 }
 
-QString DialogRepeatAppointment::getCategory()
-{
-    return this->category;
-}
 
-void DialogRepeatAppointment::setupComboBoxes()
-{
-    //Set up Category Combobox
-
-    ui->comboBoxCategory->addItem(QStringLiteral("General"));
-    ui->comboBoxCategory->addItem(QStringLiteral("Meeting"));
-    ui->comboBoxCategory->addItem(QStringLiteral("Work"));
-    ui->comboBoxCategory->addItem(QStringLiteral("Family"));
-    ui->comboBoxCategory->addItem(QStringLiteral("Leisure"));
-    ui->comboBoxCategory->addItem(QStringLiteral("Fitness"));
-    ui->comboBoxCategory->addItem(QStringLiteral("Vacation"));
-    ui->comboBoxCategory->addItem(QStringLiteral("Medical"));
-}
 
 void DialogRepeatAppointment::accept()
 {
@@ -144,10 +127,6 @@ void DialogRepeatAppointment::accept()
 }
 
 
-void DialogRepeatAppointment::on_comboBoxCategory_activated(const QString &arg1)
-{
-    category=arg1;
-}
 
 void DialogRepeatAppointment::on_timeEditStarts_userTimeChanged(const QTime &time)
 {

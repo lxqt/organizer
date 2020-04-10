@@ -39,6 +39,10 @@ public:
     explicit DialogAppointment(QWidget *parent = nullptr, QDate *theAppointmentDate=nullptr);
    // explicit DialogAppointment(QWidget *parent = nullptr, Appointment *theAppointment=nullptr);
     ~DialogAppointment();
+
+    //Appointment appointment;
+   // void setupDialog();
+
     QDate appointmentDate;
     QTime startTime;
     QTime endTime;
@@ -55,7 +59,7 @@ public:
     QTime getStartTime();
     QTime getEndTime(); 
     int getAllDay();
-    QString getCategory();
+
 
     bool getDeleteRequested();
     void setupComboBoxes();
@@ -66,16 +70,52 @@ public:
     int reminderMins=0; //none
     int getReminderMins();
 
+    //Translations
+    QString t_dialog_title=QStringLiteral("New Appointment");
+    QString t_date_display=QStringLiteral("Appointment Date");
+    QString t_title=QStringLiteral("Title: ");
+    QString t_location=QStringLiteral("Location: ");
+    QString t_notes=QStringLiteral("Notes: ");
+    QString t_all_day=QStringLiteral("All Day");
+    QString t_start_time=QStringLiteral("Start Time: ");
+    QString t_end_time=QStringLiteral("End Time: ");
 
+    QString t_reminder=QStringLiteral("Reminder");  
 
+    QString t_reminder_5min=QStringLiteral("5 minutes before start");
+    QString t_reminder_10min=QStringLiteral("10 minutes before start");
+    QString t_reminder_30min=QStringLiteral("30 minutes before start");
+    QString t_reminder_1hour=QStringLiteral("1 hour before start");
+    QString t_reminder_1day=QStringLiteral("1 day before start");
 
+    void setDialogTitleTranslation(QString translation);
+    void setDateDisplayTranslation(QString translation);
+    void setTitleTranslation(QString translation);
+    void setLocationTranslation(QString translation);
+    void setNotesTranslations(QString translation);
+    void setAllDaytranslation(QString translation);
+    void setStartTimeTranslation(QString translation);
+    void setEndTimeTranslation(QString translation);
+    void setCategoryTranslation(QString translation);
+    void setReminderTranslation(QString translation);
+
+    void setLabelTranslations();
+
+    void setReminder5MinTranslation(QString translation);
+    void setReminder10MinTranslation(QString translation);
+    void setReminder30MinTranslation(QString translation);
+    void setReminder1HourTranslation(QString translation);
+    void setReminder1DayTranslation(QString translation);
+
+    void setComboBoxReminderTranslations();
+
+     QLocale locale=QLocale::English;
+     void setLocaleDate(QLocale locale);
 
 private slots:
 
     void accept();
     void reject();
-
-    void on_dateEditAppointmentDate_userDateChanged(const QDate &date);
 
     void on_timeEditStartTime_userTimeChanged(const QTime &time);
 

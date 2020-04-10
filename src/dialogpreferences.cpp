@@ -6,10 +6,9 @@ DialogPreferences::DialogPreferences(QWidget *parent, Preferences *thePreference
     ui(new Ui::DialogPreferences)
 {
     ui->setupUi(this);
-    setWindowTitle(QStringLiteral("Preferences"));
+    SetLableDescriptions();
+    setupComboxBoxCalendarLocale();
 
-    ui->spinBoxCalendarFont->setRange(8,38);
-    ui->spinBoxCalendarFont->setValue(thePreferences->m_calendarFontSize);
     ui->spinBoxApplicationFont->setRange(8,38);
     ui->spinBoxApplicationFont->setValue(thePreferences->m_applicationFontSize);
 
@@ -29,6 +28,20 @@ DialogPreferences::DialogPreferences(QWidget *parent, Preferences *thePreference
         ui->checkBoxLineSpacing->setCheckState(Qt::Checked);
     }
 
+    if(thePreferences->m_darkCalendar==0)
+    {
+        ui->checkBoxDarkCalendar->setCheckState(Qt::Unchecked);
+    }
+    else {
+        ui->checkBoxDarkCalendar->setCheckState(Qt::Checked);
+    }
+
+    localeStr=thePreferences->m_localization;
+    int index = ui->comboBoxLocale->findText(localeStr);
+
+    if ( index != -1 ) { // -1 for not found must be >0
+       ui->comboBoxLocale->setCurrentIndex(index);
+    }
 
 
 }
@@ -38,30 +51,75 @@ DialogPreferences::~DialogPreferences()
     delete ui;
 }
 
-int DialogPreferences::getCalendarFont()
+void DialogPreferences::setupComboxBoxCalendarLocale()
 {
-   return  defaultCalendarFontSize;
+
+    ui->comboBoxLocale->addItem("English");
+    ui->comboBoxLocale->addItem("German");
+    ui->comboBoxLocale->addItem("French");
+    ui->comboBoxLocale->addItem("Japanese");
 
 }
+
 
 int DialogPreferences::getApplicationFont()
 {
     return this->defaultApplicationFontSize;
 }
 
-int DialogPreferences::getPlayAudio()
+int DialogPreferences::isPlayAudio()
 {
     return playAudio;
 }
 
-QString DialogPreferences::getLocalization()
+int DialogPreferences::isDarkCalendar()
 {
-    return locale;
+    return darkCalendar;
 }
 
-int DialogPreferences::getCalendarTheme()
+QString DialogPreferences::getLocalization()
 {
-    return calendarTheme;
+    return localeStr;
+}
+
+void DialogPreferences::setTitleTranslation(QString translation)
+{
+    t_title=translation;
+}
+
+void DialogPreferences::setFontSizeTranslation(QString translation)
+{
+    t_font_size=translation;
+}
+
+void DialogPreferences::setLocaleTranslation(QString translation)
+{
+    t_locale=translation;
+}
+
+void DialogPreferences::setPlayAudioTranslation(QString translation)
+{
+    t_play_audio=translation;
+}
+
+void DialogPreferences::setDarkCalendarTranslation(QString translation)
+{
+    t_dark_calendar=translation;
+}
+
+void DialogPreferences::setLineSpacingTranslation(QString translation)
+{
+    t_line_spacing=translation;
+}
+
+void DialogPreferences::SetLableDescriptions()
+{
+    setWindowTitle(t_title);
+    ui->labelFontSize->setText(t_font_size);
+    ui->labelLocal->setText(t_locale);
+    ui->checkBoxPlayAudio->setText(t_play_audio);
+    ui->checkBoxDarkCalendar->setText(t_dark_calendar);
+    ui->checkBoxLineSpacing->setText(t_line_spacing);
 }
 
 int DialogPreferences::getLineSpacing()
@@ -69,15 +127,9 @@ int DialogPreferences::getLineSpacing()
     return lineSpacing;
 }
 
-
 void DialogPreferences::on_spinBoxApplicationFont_valueChanged(int arg1)
 {
     defaultApplicationFontSize=arg1;
-}
-
-void DialogPreferences::on_spinBoxCalendarFont_valueChanged(int arg1)
-{
-    defaultCalendarFontSize=arg1;
 }
 
 
@@ -103,5 +155,21 @@ void DialogPreferences::on_checkBoxLineSpacing_stateChanged(int arg1)
     }
     else if (arg1==Qt::Checked) {
        lineSpacing=1;
+    }
+}
+
+void DialogPreferences::on_comboBoxLocale_activated(const QString &arg1)
+{
+    localeStr=arg1;
+}
+
+void DialogPreferences::on_checkBoxDarkCalendar_stateChanged(int arg1)
+{
+    if (arg1==Qt::Unchecked)
+    {
+       darkCalendar=0;
+    }
+    else if (arg1==Qt::Checked) {
+       darkCalendar=1;
     }
 }

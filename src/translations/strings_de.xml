@@ -1,0 +1,362 @@
+<!-- Translation File strings_de.xml-->
+<TRL LANG="English" DATE="20200406">
+ 
+  <TRANSLATE ID="t_title">
+      <TEXT>Organizer</TEXT>
+      <TRANSLATION>Organisator</TRANSLATION>
+   </TRANSLATE>
+
+   <TRANSLATE ID="t_holiday_christmas">      
+      <TEXT>Christmas</TEXT>
+      <TRANSLATION>Weihnachten</TRANSLATION>
+   </TRANSLATE>  
+   <TRANSLATE ID="t_holiday_boxing">      
+      <TEXT>Boxing Day</TEXT>
+      <TRANSLATION>Boxtag</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_holiday_new_year">      
+      <TEXT>New Year's Day</TEXT>
+      <TRANSLATION>Neujahr</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_holiday_easter">      
+      <TEXT>Easter</TEXT>
+      <TRANSLATION>Ostern</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_holiday_good_friday">      
+      <TEXT>Good Friday</TEXT>
+      <TRANSLATION>Guter Freitag</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_holiday_easter_monday">      
+      <TEXT>Easter Monday</TEXT>
+      <TRANSLATION>Ostermontag</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_holiday_may_bank">      
+      <TEXT>May Bank Holiday</TEXT>
+      <TRANSLATION>Mai Feiertag</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_holiday_spring_bank">      
+      <TEXT>Spring Bank Holiday</TEXT>
+      <TRANSLATION>Frühlingsfeiertag</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_holiday_summer_bank">      
+      <TEXT>Summer Bank Holiday</TEXT>
+      <TRANSLATION>Sommerfeiertag</TRANSLATION>
+   </TRANSLATE> 
+   
+  <TRANSLATE ID="t_file">
+      <TEXT>File</TEXT>
+      <TRANSLATION>Datei</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_file_export_appointments">
+      <TEXT>Export Appointments</TEXT>
+      <TRANSLATION>Termine exportieren</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_file_import_appointments">
+      <TEXT>Import Appointments</TEXT>
+      <TRANSLATION>Termine importieren</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_file_export_contacts">
+      <TEXT>Export Contacts</TEXT>
+      <TRANSLATION>Kontakte exportieren</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_file_import_contacts">
+      <TEXT>Import Contacts</TEXT>
+      <TRANSLATION>Kontakte importieren</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_file_exit">
+      <TEXT>Exit</TEXT>
+      <TRANSLATION>Ausgang</TRANSLATION>
+   </TRANSLATE> 
+   
+   <TRANSLATE ID="t_edit">
+      <TEXT>Edit</TEXT>
+      <TRANSLATION>Bearbeiten</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_edit_delete_all_appointments">
+      <TEXT>Delete All Appointments</TEXT>
+      <TRANSLATION>Alle Termine löschen</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_edit_delete_all_contacts">
+      <TEXT>Delete All Contacts</TEXT>
+      <TRANSLATION>Alle Kontakte löschen</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_edit_preferences">
+      <TEXT>Preferences</TEXT>
+      <TRANSLATION>Einstellungen</TRANSLATION>
+   </TRANSLATE> 
+   
+    <TRANSLATE ID="t_appointments">
+      <TEXT>Appointments</TEXT>
+      <TRANSLATION>Termine</TRANSLATION>
+   </TRANSLATE> 
+    <TRANSLATE ID="t_appointments_new_appointment">
+      <TEXT>New Appointment</TEXT>
+      <TRANSLATION>Neuer Termin</TRANSLATION>
+   </TRANSLATE> 
+    <TRANSLATE ID="t_appointments_generate_repeat_appointments">
+      <TEXT>Generate Repeat Appointments</TEXT>
+      <TRANSLATION>Wiederholungstermine generieren</TRANSLATION>
+   </TRANSLATE> 
+    <TRANSLATE ID="t_appointments_upcoming_schedule">
+      <TEXT>Upcoming Schedule</TEXT>
+      <TRANSLATION>Kommender Zeitplan</TRANSLATION>
+   </TRANSLATE> 
+   
+   <TRANSLATE ID="t_calendar">
+      <TEXT>Calendar</TEXT>
+      <TRANSLATION>Kalender</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_calendar_show_holidays">
+      <TEXT>Show Holidays</TEXT>
+      <TRANSLATION>Feiertage anzeigen</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_show_birthdays">
+      <TEXT>Show Birthdays</TEXT>
+      <TRANSLATION>Geburtstage anzeigen</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_next_month">
+      <TEXT>Next Month</TEXT>
+      <TRANSLATION>Nächsten Monat</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_previous_month">
+      <TEXT>Previous Month</TEXT>
+      <TRANSLATION>Vorheriger Monat</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_today">
+      <TEXT>Today</TEXT>
+      <TRANSLATION>Heute (Leertaste)</TRANSLATION>
+   </TRANSLATE> 
+    <TRANSLATE ID="t_calendar_increase_font">
+      <TEXT>Increase Font Size</TEXT>
+      <TRANSLATION>Schriftgröße vergrößern</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_decrease_font">
+      <TEXT>Decrease Font Size</TEXT>
+      <TRANSLATION>Schriftgröße verringern</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_reset_font">
+      <TEXT>Reset Font Size</TEXT>
+      <TRANSLATION>Schriftgröße zurücksetzen</TRANSLATION>
+   </TRANSLATE> 
+   
+  
+   
+   <TRANSLATE ID="t_contacts">
+      <TEXT>Contacts</TEXT>
+      <TRANSLATION>Kontakte</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_contacts_new_contact">
+      <TEXT>New Contact</TEXT>
+      <TRANSLATION>Neuer Kontakt</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_contacts_upcoming_birthdays">
+      <TEXT>Check For Birthdays</TEXT>
+      <TRANSLATION>Auf Geburtstage prüfen</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_help">
+      <TEXT>Help</TEXT>
+      <TRANSLATION>Hilfe</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_help_about">
+      <TEXT>About</TEXT>
+      <TRANSLATION>Über</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_about_text">
+      <TEXT>Organizer is a Qt lightweight personal information manager developed by Alan Crispin (aka. crispina) </TEXT>
+      <TRANSLATION>Organizer ist ein Qt Lightweight Personal Information Manager, der von Alan Crispin (aka. Crispina) entwickelt wurde. </TRANSLATION>
+   
+    </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_first_name">
+      <TEXT>First Name</TEXT>
+      <TRANSLATION>Vorname</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_mid_name">
+      <TEXT>Mid Name</TEXT>
+      <TRANSLATION>Mittlerer Name</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_last_name">
+      <TEXT>Last Name</TEXT>
+      <TRANSLATION>Nachname</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_email">
+      <TEXT>Email</TEXT>
+      <TRANSLATION>Email</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_street">
+      <TEXT>Street</TEXT>
+      <TRANSLATION>Straße</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_district">
+      <TEXT>District</TEXT>
+      <TRANSLATION>Kreis</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_city">
+      <TEXT>City</TEXT>
+      <TRANSLATION>Stadt</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_county">
+      <TEXT>County</TEXT>
+      <TRANSLATION>Bezirk</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_postcode">
+      <TEXT>Postcode</TEXT>
+      <TRANSLATION>Postleitzahl</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_country">
+      <TEXT>Country</TEXT>
+      <TRANSLATION>Land</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_telephone">
+      <TEXT>Telephone</TEXT>
+      <TRANSLATION>Telefon</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_birthday">
+      <TEXT>Birthday</TEXT>
+      <TRANSLATION>Geburtstag</TRANSLATION>
+   </TRANSLATE>
+    
+   
+   <TRANSLATE ID="t_tab_contacts_quick-full-view">
+      <TEXT>Quick Full View</TEXT>
+      <TRANSLATION>Schnell-/Vollansicht</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_mailto">
+      <TEXT>Mail To</TEXT>
+      <TRANSLATION>Mail an:</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_preferences_title">
+      <TEXT>Preferences</TEXT>
+      <TRANSLATION>Einstellungen</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_font_size">
+      <TEXT>Font Size</TEXT>
+      <TRANSLATION>Schriftgröße</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_locale">
+      <TEXT>Locale</TEXT>
+      <TRANSLATION>Gebietsschema</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_play_audio">
+      <TEXT>Play Audio</TEXT>
+      <TRANSLATION>Audio abspielen</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_dark_calendar">
+      <TEXT>Dark Calendar</TEXT>
+      <TRANSLATION>Dunkler Kalender</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_line_spacing">
+      <TEXT>Line Spacing</TEXT>
+      <TRANSLATION>Zeilenabstand</TRANSLATION>
+   </TRANSLATE>
+   
+     <TRANSLATE ID="t_upcoming_birthdays_title">
+      <TEXT>Upcoming Birthdays</TEXT>
+      <TRANSLATION>Kommende Geburtstage (nächste sieben Tage)</TRANSLATION>
+   </TRANSLATE>
+   
+   <TRANSLATE ID="t_upcoming_schedule_title">
+      <TEXT>Upcoming Schedule</TEXT>
+      <TRANSLATION>Kommender Zeitplan (nächste sieben Tage)</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_upcoming_schedule_label">
+      <TEXT>Upcoming Schedule For Date</TEXT>
+      <TRANSLATION>Kommender Zeitplan für Datum: </TRANSLATION>
+   </TRANSLATE>
+   
+   <TRANSLATE ID="t_dialog_appointment_dialog_title">
+      <TEXT>New Appointment</TEXT>
+      <TRANSLATION>Neuer Termin</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_date_display">
+      <TEXT>Appointment Date</TEXT>
+      <TRANSLATION>Termin:</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_title">
+      <TEXT>Title</TEXT>
+      <TRANSLATION>Titel</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_location">
+      <TEXT>Location</TEXT>
+      <TRANSLATION>Ort</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_notes">
+      <TEXT>Notes</TEXT>
+      <TRANSLATION>Anmerkungen</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_all_day">
+      <TEXT>All Day</TEXT>
+      <TRANSLATION>Den ganzen Tag</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_start_time">
+      <TEXT>Start Time</TEXT>
+      <TRANSLATION>Startzeit</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_end_time">
+      <TEXT>End Time</TEXT>
+      <TRANSLATION>Endzeit</TRANSLATION>
+   </TRANSLATE>
+   
+   <TRANSLATE ID="t_dialog_appointment_reminder">
+      <TEXT>Reminder</TEXT>
+      <TRANSLATION>Erinnerung</TRANSLATION>
+   </TRANSLATE>
+   
+   <TRANSLATE ID="t_dialog_appointment_update">
+      <TEXT>Update Appointment</TEXT>
+      <TRANSLATION>Termin aktualisieren</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_delete">
+      <TEXT>Delete</TEXT>
+      <TRANSLATION>Termin löschen</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_dialog_contact_born_on">
+      <TEXT>Born On</TEXT>
+      <TRANSLATION>Geb. am </TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_contact_birthday_unknown">
+      <TEXT>Birthday Unknown</TEXT>
+      <TRANSLATION>Geburtstag unbekannt</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_contact_add_to_calendar">
+      <TEXT>Add To Calendar</TEXT>
+      <TRANSLATION>Zum Kalender hinzufügen</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_contact_delete">
+      <TEXT>Delete Contact</TEXT>
+      <TRANSLATION>Kontakt löschen</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_dialog_reminder_5min">
+      <TEXT>5 Minutes Before Start</TEXT>
+      <TRANSLATION>5 Minuten vor dem Start</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_reminder_10min">
+      <TEXT>10 Minutes Before Start</TEXT>
+      <TRANSLATION>10 Minuten vor dem Start</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_reminder_30min">
+      <TEXT>30 Minutes Before Start</TEXT>
+      <TRANSLATION>30 Minuten vor dem Start</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_reminder_1hour">
+      <TEXT>1 Hour Before Start</TEXT>
+      <TRANSLATION>1 Stunde vor dem Start</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_reminder_1day">
+      <TEXT>1 Day Before Start</TEXT>
+      <TRANSLATION>1 Tag vor dem Start</TRANSLATION>
+   </TRANSLATE>  
+   
+    <TRANSLATE ID="t_message_reminder_on">
+      <TEXT>On</TEXT>
+      <TRANSLATION>Auf</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_message_reminder_starts_at">
+      <TEXT>Starts At</TEXT>
+      <TRANSLATION>Startet um</TRANSLATION>
+   </TRANSLATE>
+
+</TRL>

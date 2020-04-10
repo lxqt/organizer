@@ -53,8 +53,7 @@ void DbManager::createDatebaseTables()
     sql1.append(QStringLiteral("Description TEXT,"));
     sql1.append(QStringLiteral("Date TEXT,"));
     sql1.append(QStringLiteral("StartTime TEXT,"));
-    sql1.append(QStringLiteral("EndTime TEXT,"));
-    sql1.append(QStringLiteral("Category TEXT,"));
+    sql1.append(QStringLiteral("EndTime TEXT,"));    
     sql1.append(QStringLiteral("IsFullDay INTEGER,"));
     sql1.append(QStringLiteral("HasReminder INTEGER,"));
     sql1.append(QStringLiteral("ReminderMinutes INTEGER"));
@@ -80,18 +79,18 @@ void DbManager::createDatebaseTables()
     query.prepare(sql1);
     if(!query.exec())
     {
-       qDebug()<<"Table appointments already exists";
+       //qDebug()<<"Table appointments already exists";
     }
     else {
-        qDebug()<<"Table appointments successfully created";
+        //qDebug()<<"Table appointments successfully created";
     }
     query.prepare(sql2);
     if(!query.exec())
     {
-      qDebug()<<"Table contacts already exists";
+      //qDebug()<<"Table contacts already exists";
     }
     else {
-       qDebug()<<"Table contacts successfully created";
+       //qDebug()<<"Table contacts successfully created";
     }
 
 
@@ -108,8 +107,7 @@ int DbManager::addAppointment(Appointment &appointment)
     QString description =appointment.m_description;
     QString date = appointment.m_date;
     QString startTime=appointment.m_startTime;
-    QString endTime=appointment.m_endTime;
-    QString category=appointment.m_category;
+    QString endTime=appointment.m_endTime;    
     int isFullDay=appointment.m_isFullDay;
     int hasReminder =appointment.m_hasReminder;
     int reminderMins =appointment.m_reminderMinutes;
@@ -122,8 +120,7 @@ int DbManager::addAppointment(Appointment &appointment)
         sql.append(QStringLiteral("`Description`,"));
         sql.append(QStringLiteral("`Date`,"));
         sql.append(QStringLiteral("`StartTime`,"));
-        sql.append(QStringLiteral("`EndTime`,"));
-        sql.append(QStringLiteral("`Category`,"));
+        sql.append(QStringLiteral("`EndTime`,"));        
         sql.append(QStringLiteral("`IsFullDay`,"));
         sql.append(QStringLiteral("`HasReminder`,"));
         sql.append(QStringLiteral("`ReminderMinutes`)"));
@@ -133,8 +130,7 @@ int DbManager::addAppointment(Appointment &appointment)
         sql.append(QStringLiteral(":descriptionin,"));
         sql.append(QStringLiteral(":datein,"));
         sql.append(QStringLiteral(":starttimein,"));
-        sql.append(QStringLiteral(":endtimein,"));
-        sql.append(QStringLiteral(":catin,"));
+        sql.append(QStringLiteral(":endtimein,"));        
         sql.append(QStringLiteral(":isfulldayin,"));
         sql.append(QStringLiteral(":hasreminderin,"));
         sql.append(QStringLiteral(":reminderminsin);"));
@@ -147,8 +143,7 @@ int DbManager::addAppointment(Appointment &appointment)
         query.bindValue(QStringLiteral(":descriptionin"),description);
         query.bindValue(QStringLiteral(":datein"),date);
         query.bindValue(QStringLiteral(":starttimein"),startTime);
-        query.bindValue(QStringLiteral(":endtimein"),endTime);
-        query.bindValue(QStringLiteral(":catin"),category);
+        query.bindValue(QStringLiteral(":endtimein"),endTime);        
         query.bindValue(QStringLiteral(":isfulldayin"),isFullDay);
         query.bindValue(QStringLiteral(":hasreminderin"),hasReminder);
         query.bindValue(QStringLiteral(":reminderminsin"),reminderMins);
@@ -171,8 +166,7 @@ bool DbManager::updateAppointment(Appointment &appointment, int id)
        sql.append(QStringLiteral(", Description = :din"));
        sql.append(QStringLiteral(", Date = :datein"));
        sql.append(QStringLiteral(", StartTime = :stin"));
-       sql.append(QStringLiteral(", EndTime = :etin"));
-       sql.append(QStringLiteral(", Category = :catin"));
+       sql.append(QStringLiteral(", EndTime = :etin"));       
        sql.append(QStringLiteral(", IsFullDay = :isfdin"));
        sql.append(QStringLiteral(", HasReminder = :hasremin"));
        sql.append(QStringLiteral(", ReminderMinutes = :remminsin"));
@@ -187,8 +181,7 @@ bool DbManager::updateAppointment(Appointment &appointment, int id)
          qry.bindValue(QStringLiteral(":din"), appointment.m_description);
          qry.bindValue(QStringLiteral(":datein"), appointment.m_date);
          qry.bindValue(QStringLiteral(":stin"),appointment.m_startTime);
-         qry.bindValue(QStringLiteral(":etin"),appointment.m_endTime);
-         qry.bindValue(QStringLiteral(":catin"),appointment.m_category);
+         qry.bindValue(QStringLiteral(":etin"),appointment.m_endTime);         
          qry.bindValue(QStringLiteral(":isfdin"),appointment.m_isFullDay);
          qry.bindValue(QStringLiteral(":hasremin"),appointment.m_hasReminder);
          qry.bindValue(QStringLiteral(":remminsin"),appointment.m_reminderMinutes);
@@ -235,8 +228,7 @@ QList<Appointment> DbManager::getAllAppointments()
         QString startTime = query.value(idName).toString();
         idName = query.record().indexOf(QStringLiteral("EndTime"));
         QString endTime = query.value(idName).toString();
-        idName = query.record().indexOf(QStringLiteral("Category"));
-        QString category = query.value(idName).toString();
+
 
         idName = query.record().indexOf(QStringLiteral("IsFullDay"));
         int isFullDay = query.value(idName).toInt();
@@ -255,8 +247,7 @@ QList<Appointment> DbManager::getAllAppointments()
         appointment.m_description=description;
         appointment.m_date=date;
         appointment.m_startTime=startTime;
-        appointment.m_endTime=endTime;
-        appointment.m_category=category;
+        appointment.m_endTime=endTime;       
         appointment.m_isFullDay=isFullDay;
         appointment.m_hasReminder=hasReminder;
         appointment.m_reminderMinutes=reminderMins;
@@ -288,8 +279,7 @@ Appointment DbManager::getAppointmentByID(int id)
     QString startTime = query.value(idName).toString();
     idName = query.record().indexOf(QStringLiteral("EndTime"));
     QString endTime = query.value(idName).toString();
-    idName = query.record().indexOf(QStringLiteral("Category"));
-    QString category = query.value(idName).toString();
+
 
     idName = query.record().indexOf(QStringLiteral("IsFullDay"));
     int isFullDay = query.value(idName).toInt();
@@ -308,8 +298,7 @@ Appointment DbManager::getAppointmentByID(int id)
     appointment.m_description=description;
     appointment.m_date=date;
     appointment.m_startTime=startTime;
-    appointment.m_endTime=endTime;
-    appointment.m_category=category;
+    appointment.m_endTime=endTime;    
     appointment.m_isFullDay=isFullDay;
     appointment.m_hasReminder=hasReminder;
     appointment.m_reminderMinutes=reminderMins;
@@ -341,8 +330,7 @@ QList<Appointment> DbManager::getAppointmentsOnDate(QDate &diaryDate)
         QString startTime = query.value(idName).toString();
         idName = query.record().indexOf(QStringLiteral("EndTime"));
         QString endTime = query.value(idName).toString();
-        idName = query.record().indexOf(QStringLiteral("Category"));
-        QString category = query.value(idName).toString();
+
 
         idName = query.record().indexOf(QStringLiteral("IsFullDay"));
         int isFullDay = query.value(idName).toInt();
@@ -365,8 +353,7 @@ QList<Appointment> DbManager::getAppointmentsOnDate(QDate &diaryDate)
             tmp.m_description=description;
             tmp.m_date=date;
             tmp.m_startTime=startTime;
-            tmp.m_endTime=endTime;
-            tmp.m_category=category;
+            tmp.m_endTime=endTime;            
             tmp.m_isFullDay=isFullDay;
             tmp.m_hasReminder=hasReminder;
             tmp.m_reminderMinutes=reminderMins;

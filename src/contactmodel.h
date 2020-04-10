@@ -20,6 +20,7 @@
 #define CONTACTMODEL_H
 
 #include <QAbstractTableModel>
+
 #include "contact.h"
 #include <QColor>
 #include <QList>
@@ -47,6 +48,50 @@ public:
 
     QVariant headerData(int section, Qt::Orientation orientation,
                         int role = Qt::DisplayRole) const override;
+
+
+    QString t_first_name=QStringLiteral("First Name");
+    void setFirstNameTranslation(QString translation);
+
+    QString t_mid_name=QStringLiteral("Mid Name");
+    void setMidNameTranslation(QString translation);
+
+    QString t_last_name=QStringLiteral("Last Name");
+    void setLastNameTranslation(QString translation);
+
+    QString t_email=QStringLiteral("Email");
+    void setEmailTranslation(QString translation);
+
+    QString t_street=QStringLiteral("Street");
+    void setStreetTranslation(QString translation);
+
+    QString t_district=QStringLiteral("District");
+    void setDistrictTranslation(QString translation);
+
+    QString t_city=QStringLiteral("City");
+    void setCityTranslation(QString translation);
+
+    QString t_county=QStringLiteral("County");
+    void setCountyTransaltion(QString translation);
+
+    QString t_postcode=QStringLiteral("Postcode");
+    void setPostcodeTranslation(QString translation);
+
+    QString t_country=QStringLiteral("Country");
+    void setCountryTranslation(QString translation);
+
+    QString t_telephone=QStringLiteral("Telephone");
+    void setTelephoneTranslation(QString translation);
+
+    QString t_birthday=QStringLiteral("Birthday");
+    void setBirthdayTranslation(QString translation);
+
+
+
+
+
+
+
 private:
     QList<Contact> modelContactList;
 

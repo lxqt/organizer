@@ -28,15 +28,13 @@ set (organizer_HDRS
 set ( organizer_SRCS
 	
 	main.cpp
-	mainwindow.cpp
-	
+	mainwindow.cpp	
 	daylistmodel.cpp
 	dbmanager.cpp
 	dialogappointment.cpp
 	contactmodel.cpp
 	proxymodelcontacts.cpp
-	dialogcontact.cpp
-	dialogabout.cpp
+	dialogcontact.cpp	
 	dialogupcomingschedule.cpp
 	dialogupcomingbirthdays.cpp
 	schedulelistmodel.cpp
@@ -50,8 +48,7 @@ set (organizer_UIS
 
 mainwindow.ui
 	dialogappointment.ui	
-	dialogcontact.ui
-	dialogabout.ui
+	dialogcontact.ui	
 	dialogupcomingschedule.ui
 	dialogupcomingbirthdays.ui
 	dialogrepeatappointment.ui
@@ -62,6 +59,8 @@ QT5_WRAP_UI(UIS ${organizer_UIS})
 
 set ( organizer_RSCS
 	icons.qrc
+	translations.qrc
+	sounds.qrc
 	)
 QT5_ADD_RESOURCES(RSCS ${organizer_RSCS})
 
@@ -70,8 +69,7 @@ set ( organizer_MOCS
 	mainwindow.h
 	dialogappointment.h
 	proxymodelcontacts.h	
-	dialogcontact.h
-	dialogabout.h
+	dialogcontact.h	
 	dialogupcomingschedule.h	
 	dialogupcomingbirthdays.h
 	dialogrepeatappointment.h	

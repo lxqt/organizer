@@ -25,23 +25,12 @@ DialogContact::DialogContact(QWidget *parent) :
 {
     ui->setupUi(this);
     //New Contact
-    setWindowTitle(QStringLiteral("New Contact"));
+    //setWindowTitle(QStringLiteral("New Contact"));
     ui->checkBoxDelete->hide();
     this->birthDate=QDate(); //null
 
-    ui->labelFirstName->setText(QStringLiteral("First Name: "));
-    ui->labelMidNames->setText(QStringLiteral("Middle Names: "));
-    ui->labelLastName->setText(QStringLiteral("Last Name: "));
-    ui->labelEmail->setText(QStringLiteral("Email:"));
-    ui->labelBornOn->setText(QStringLiteral("Born On: "));
-    ui->labelStreet->setText(QStringLiteral("Street: "));
-    ui->labelDistrict->setText(QStringLiteral("District: "));
-    ui->labelCity->setText(QStringLiteral("City: "));
-    ui->labelCounty->setText(QStringLiteral("County: "));
-    ui->labelPostcode->setText(QStringLiteral("Postcode: "));
-    ui->labelCountry->setText(QStringLiteral("Country: "));
-    ui->labelPhone->setText(QStringLiteral("Phone: "));
-    ui->checkBoxDelete->setText(QStringLiteral("Delete Contact"));
+    setLabelDescriptions();
+
 
     ui->checkBoxBirthdayUnknown->setText(QStringLiteral("Birthday Unknown"));
     ui->checkBoxAddBirthdayToCal->setText(QStringLiteral("Add To Calendar"));
@@ -56,8 +45,9 @@ DialogContact::DialogContact(Contact *theContact, QWidget *parent):
 {
     ui->setupUi(this);
     //Update Contact
-    setWindowTitle(QStringLiteral("Update Contact"));
+    //setWindowTitle(QStringLiteral("Update Contact"));
     ui->checkBoxDelete->show();
+    setLabelDescriptions();
 
     ui->lineEditFirstName->setText(theContact->m_firstname);
     ui->lineEditMiddleNames->setText(theContact->m_midnames);
@@ -95,23 +85,6 @@ DialogContact::DialogContact(Contact *theContact, QWidget *parent):
     else {
         ui->checkBoxAddBirthdayToCal->setCheckState(Qt::Unchecked);
     }
-
-
-    ui->labelFirstName->setText(QStringLiteral("First Name: "));
-    ui->labelMidNames->setText(QStringLiteral("Middle Names: "));
-    ui->labelLastName->setText(QStringLiteral("Last Name: "));
-    ui->labelEmail->setText(QStringLiteral("Email:"));
-    ui->labelBornOn->setText(QStringLiteral("Born On: "));
-    ui->labelStreet->setText(QStringLiteral("Street: "));
-    ui->labelDistrict->setText(QStringLiteral("District: "));
-    ui->labelCity->setText(QStringLiteral("City: "));
-    ui->labelCounty->setText(QStringLiteral("County: "));
-    ui->labelPostcode->setText(QStringLiteral("Postcode: "));
-    ui->labelCountry->setText(QStringLiteral("Country: "));
-    ui->labelPhone->setText(QStringLiteral("Phone: "));
-    ui->checkBoxDelete->setText(QStringLiteral("Delete Contact"));
-    ui->checkBoxAddBirthdayToCal->setText(QStringLiteral("Add Birthday To Calendar"));
-    ui->checkBoxBirthdayUnknown->setText(QStringLiteral("Birthday Unknown"));
 
 }
 
@@ -201,6 +174,108 @@ QString DialogContact::getPhoneNumber()
 bool DialogContact::getDeleteRequested()
 {
     return this->deleteRequested;
+}
+
+void DialogContact::setDialogTitleTranslation(QString translation)
+{
+    t_dialog_title=translation;
+}
+
+void DialogContact::setFirstNameTranslation(QString translation)
+{
+    t_first_name=translation;
+}
+
+void DialogContact::setMidNameTranslation(QString translation)
+{
+    t_mid_name=translation;
+}
+
+void DialogContact::setLastNameTranslation(QString translation)
+{
+    t_last_name=translation;
+}
+
+void DialogContact::setEmailTranslation(QString translation)
+{
+    t_email=translation;
+}
+
+void DialogContact::setStreetTranslation(QString translation)
+{
+    t_street=translation;
+}
+
+void DialogContact::setDistrictTranslation(QString translation)
+{
+    t_district=translation;
+}
+
+void DialogContact::setCityTranslation(QString translation)
+{
+    t_city=translation;
+}
+
+void DialogContact::setCountyTranslation(QString translation)
+{
+    t_county=translation;
+}
+
+void DialogContact::setPostcodeTranslation(QString translation)
+{
+    t_postcode=translation;
+}
+
+void DialogContact::setCountryTranslation(QString translation)
+{
+    t_country=translation;
+}
+
+void DialogContact::setTelephoneTranslation(QString translation)
+{
+    t_telephone=translation;
+}
+
+void DialogContact::setBornOnTranslation(QString translation)
+{
+    t_born_on=translation;
+}
+
+void DialogContact::setBirthdayUnknownTranslation(QString translation)
+{
+    t_birthday_unknown=translation;
+}
+
+void DialogContact::setAddToCalendarTranslation(QString translation)
+{
+    t_add_to_calendar=translation;
+}
+
+void DialogContact::setDeleteTranslation(QString translation)
+{
+    t_delete=translation;
+}
+
+void DialogContact::setLabelDescriptions()
+{
+    setWindowTitle(t_dialog_title);
+    ui->labelFirstName->setText(t_first_name);
+    ui->labelMidNames->setText(t_mid_name);
+    ui->labelLastName->setText(t_last_name);
+    ui->labelEmail->setText(t_email);
+    ui->labelStreet->setText(t_street);
+    ui->labelDistrict->setText(t_district);
+    ui->labelCity->setText(t_city);
+    ui->labelCounty->setText(t_county);
+    ui->labelPostcode->setText(t_postcode);
+    ui->labelCountry->setText(t_country);
+    ui->labelPhone->setText(t_telephone);
+
+    ui->checkBoxBirthdayUnknown->setText(t_birthday_unknown);
+    ui->labelBornOn->setText(t_born_on);
+    ui->checkBoxAddBirthdayToCal->setText(t_add_to_calendar);
+    ui->checkBoxDelete->setText(t_delete);
+
 }
 
 void DialogContact::accept()

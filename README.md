@@ -7,6 +7,7 @@ Organizer is a Qt lightweight personal information manager.
 It is maintained by the LXQt project but can be used independently from this
 desktop environment.
 
+![](organizer-070.png)
 
 ### Compiling source code
 
@@ -71,15 +72,19 @@ yay -S lxqt-organizer
 ```
 ## Versioning
 
-[SemVer](http://semver.org/) is used for versioning. The version number has the form 0.0.0 representing major, minor and bug fix changes. Currently at 0.6.0 and working towards 1.0.0 major release.
+[SemVer](http://semver.org/) is used for versioning. The version number has the form 0.0.0 representing major, minor and bug fix changes. Currently at 0.7.0 and working towards 1.0.0 major release.
  
 
 ## Roadmap
 
 ```
-Calendar themes and localization
-System notifications
-Time related features
+Custom calendar (completed)
+Add, remove and update appointments (completed)
+Add, remove and update contacts (completed)
+Reminders (completed)
+Localisation using custom XML translation system (completed)
+Calendar themes (light and dark themes completed)
+Enhanced features
 ``` 
 
 #### Runtime Dependencies

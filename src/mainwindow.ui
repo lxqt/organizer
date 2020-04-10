@@ -30,37 +30,20 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+             <widget class="QLabel" name="labelCalendarHeader">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelMonthYear">
               <property name="text">
-               <string>Month Year</string>
+               <string>MonthYear</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
              </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </item>
@@ -196,32 +179,16 @@
     <property name="title">
      <string>Calendar</string>
     </property>
-    <widget class="QMenu" name="menuCategories">
-     <property name="title">
-      <string>Categories</string>
-     </property>
-     <addaction name="actionShow_General"/>
-     <addaction name="actionShow_Meetings"/>
-     <addaction name="actionShow_Work"/>
-     <addaction name="actionShow_Family"/>
-     <addaction name="actionShow_Leisure"/>
-     <addaction name="actionShow_Fitness"/>
-     <addaction name="actionShow_Vacations"/>
-     <addaction name="actionShow_Medical"/>
-    </widget>
-    <addaction name="separator"/>
-    <addaction name="separator"/>
-    <addaction name="actionShow_Holidays"/>
-    <addaction name="actionShow_Birthdays"/>
-    <addaction name="separator"/>
-    <addaction name="menuCategories"/>
-    <addaction name="separator"/>
     <addaction name="actionNext_Month"/>
     <addaction name="actionPrevious_Month"/>
     <addaction name="actionToday"/>
     <addaction name="separator"/>
+    <addaction name="actionIncrease_Font"/>
+    <addaction name="actionDecrease_Font"/>
+    <addaction name="actionReset_Font"/>
     <addaction name="separator"/>
-    <addaction name="separator"/>
+    <addaction name="actionShow_Birthdays"/>
+    <addaction name="actionShow_Holidays"/>
     <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
@@ -256,28 +223,16 @@
    </property>
   </action>
   <action name="actionNew_Appointment">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/appointment.svg</normaloff>:/new/icons/icons/appointment.svg</iconset>
-   </property>
    <property name="text">
-    <string>New Appointment (Double Click On Calendar)</string>
+    <string>New Appointment (Double Click)</string>
    </property>
   </action>
   <action name="actionGeneerate_Repeat_Appointments">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/repeats.svg</normaloff>:/new/icons/icons/repeats.svg</iconset>
-   </property>
    <property name="text">
     <string>Generate Repeat Appointments</string>
    </property>
   </action>
   <action name="actionUpcoming_Schedule">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/schedule.svg</normaloff>:/new/icons/icons/schedule.svg</iconset>
-   </property>
    <property name="text">
     <string>Upcoming Schedule</string>
    </property>
@@ -285,17 +240,13 @@
   <action name="actionNew_Contact">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/contact.svg</normaloff>:/new/icons/icons/contact.svg</iconset>
+     <normaloff>:/icons/icon-c.svg</normaloff>:/icons/icon-c.svg</iconset>
    </property>
    <property name="text">
     <string>New Contact</string>
    </property>
   </action>
   <action name="actionCheck_For_Birthdays">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/birthdaycheck.svg</normaloff>:/new/icons/icons/birthdaycheck.svg</iconset>
-   </property>
    <property name="text">
     <string>Check For Birthdays</string>
    </property>
@@ -303,7 +254,7 @@
   <action name="actionNext_Month">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/icon-uparrow.svg</normaloff>:/new/icons/icons/icon-uparrow.svg</iconset>
+     <normaloff>:/icons/icon-uparrow.svg</normaloff>:/icons/icon-uparrow.svg</iconset>
    </property>
    <property name="text">
     <string>Next Month</string>
@@ -312,7 +263,7 @@
   <action name="actionPrevious_Month">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/icon-downarrow.svg</normaloff>:/new/icons/icons/icon-downarrow.svg</iconset>
+     <normaloff>:/icons/icon-downarrow.svg</normaloff>:/icons/icon-downarrow.svg</iconset>
    </property>
    <property name="text">
     <string>Previous Month</string>
@@ -321,7 +272,7 @@
   <action name="actionToday">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/new/icons/icons/icon-spacebar.svg</normaloff>:/new/icons/icons/icon-spacebar.svg</iconset>
+     <normaloff>:/icons/icon-spacebar.svg</normaloff>:/icons/icon-spacebar.svg</iconset>
    </property>
    <property name="text">
     <string>Today</string>
@@ -330,86 +281,6 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
-   </property>
-  </action>
-  <action name="actionShow_Birthdays">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show Birthdays</string>
-   </property>
-  </action>
-  <action name="actionShow_Holidays">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show Holidays</string>
-   </property>
-  </action>
-  <action name="actionShow_General">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show General</string>
-   </property>
-  </action>
-  <action name="actionShow_Meetings">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show Meetings</string>
-   </property>
-  </action>
-  <action name="actionShow_Work">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show Work</string>
-   </property>
-  </action>
-  <action name="actionShow_Leisure">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show Leisure</string>
-   </property>
-  </action>
-  <action name="actionShow_Fitness">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show Fitness</string>
-   </property>
-  </action>
-  <action name="actionShow_Vacations">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show Vacations</string>
-   </property>
-  </action>
-  <action name="actionShow_Medical">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show Medical</string>
-   </property>
-  </action>
-  <action name="actionShow_Family">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show Family</string>
    </property>
   </action>
   <action name="actionExport_Appointments">
@@ -435,6 +306,49 @@
   <action name="actionPreferences">
    <property name="text">
     <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionIncrease_Font">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/icon-f.svg</normaloff>:/icons/icon-f.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Increase Font</string>
+   </property>
+  </action>
+  <action name="actionDecrease_Font">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/icon-d.svg</normaloff>:/icons/icon-d.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Decrease Font</string>
+   </property>
+  </action>
+  <action name="actionReset_Font">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/icon-r.svg</normaloff>:/icons/icon-r.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Reset Font</string>
+   </property>
+  </action>
+  <action name="actionShow_Birthdays">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Birthdays</string>
+   </property>
+  </action>
+  <action name="actionShow_Holidays">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Holidays</string>
    </property>
   </action>
  </widget>

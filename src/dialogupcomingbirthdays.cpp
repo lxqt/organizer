@@ -26,7 +26,7 @@ DialogUpcomingBirthdays::DialogUpcomingBirthdays(QWidget *parent,
     ui(new Ui::DialogUpcomingBirthdays)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("Upcoming Birthdays (Next Seven Days)"));
+    setWindowTitle(t_title);
     dialogContactList=*contactList;
 
    birthdayList =QList<QString>();
@@ -72,4 +72,10 @@ DialogUpcomingBirthdays::DialogUpcomingBirthdays(QWidget *parent,
 DialogUpcomingBirthdays::~DialogUpcomingBirthdays()
 {
     delete ui;
+}
+
+void DialogUpcomingBirthdays::setTitleTranslation(QString translation)
+{
+    t_title=translation;
+    setWindowTitle(t_title);
 }

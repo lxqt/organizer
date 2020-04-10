@@ -29,8 +29,7 @@ struct Appointment {
                 const QString& description= QString(),
                 const QString& date=QString(),
                 const QString& startTime=QString(),                
-                const QString& endTime=QString(),
-                const QString& category=QString(),
+                const QString& endTime=QString(),                
                 int isFullDay =0,
                 int hasReminder=0,
                 int reminderMins=0
@@ -41,8 +40,7 @@ struct Appointment {
         m_description(description),
         m_date(date),
         m_startTime(startTime),
-        m_endTime(endTime),
-        m_category(category),
+        m_endTime(endTime),        
         m_isFullDay(isFullDay),
         m_hasReminder(hasReminder),
         m_reminderMinutes(reminderMins)
@@ -54,8 +52,7 @@ struct Appointment {
    QString m_description;
    QString m_date;
    QString m_startTime;
-   QString m_endTime;
-   QString m_category;
+   QString m_endTime;   
    int m_isFullDay;
    int m_hasReminder;
    int m_reminderMinutes;

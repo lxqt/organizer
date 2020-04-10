@@ -34,8 +34,9 @@
 #include <QXmlStreamWriter>
 #include <QDomDocument>
 #include <QTableWidgetItem>
-#include <QtMultimedia>
-#include <QSettings>
+//#include <QtMultimedia>
+#include <QSound>
+#include <QLocale>
 
 
 #include "appointment.h"
@@ -49,7 +50,6 @@
 #include "dialogcontact.h"
 #include "contactmodel.h"
 #include "proxymodelcontacts.h"
-#include "dialogabout.h"
 #include "dialogupcomingschedule.h"
 #include "dialogupcomingbirthdays.h"
 #include "dialogrepeatappointment.h"
@@ -80,22 +80,155 @@ public:
     void checkForReminders();
 
     //Sounds
-    QMediaPlayer *player;
+   // QMediaPlayer *player;
 
     //Preferences default
 
-    int playAudio=1;
-    QString locale=QLatin1String("English");
-    int calendarTheme=0;
-    int applicationFontSize=20;
-    int calendarFontSize=14;
+    int playAudio=0;
+    QString localeStr;
+    int darkCalendar=0;
+
+    void setDarkCalendar(int darkCalendar);
+
+    QLocale locale=QLocale::English;
+    QLocale getLocale(QString localeStr);
+
+    //Translation strings
+    QString t_title;
+    //Holidays
+    QString t_holiday_christmas;
+    QString t_holiday_boxing;
+    QString t_holiday_new_year;
+    QString t_holiday_easter;
+    QString t_holiday_good_friday;
+    QString t_holiday_easter_monday;
+    QString t_holiday_may_bank;
+    QString t_holiday_spring_bank;
+    QString t_holiday_summer_bank;
+    //File
+    QString t_file;
+    QString t_file_export_appointments;
+    QString t_file_import_appointments;
+    QString t_file_export_contacts;
+    QString t_file_import_contacts;
+    QString t_file_exit;
+    //Edit
+    QString t_edit;
+    QString t_edit_delete_all_appointments;
+    QString t_edit_delete_all_contacts;
+    QString t_edit_preferences;
+    //Appointments
+    QString t_appointments;
+    QString t_appointments_new_appointment;
+    QString t_appointments_generate_repeat_appointments;
+    QString t_appointments_upcoming_schedule;
+    //Calendar
+    QString t_calendar;
+    QString t_calendar_show_holidays;
+    QString t_calendar_show_birthdays;
+    QString t_calendar_next_month;
+    QString t_calendar_previous_month;
+    QString t_calendar_today;
+    QString t_calendar_increase_font;
+    QString t_calendar_decrease_font;
+    QString t_calendar_reset_font;
+
+
+    //Contacts
+    QString t_contacts;
+    QString t_contacts_new_contact;
+    QString t_contacts_upcoming_birthdays;
+    //Help
+    QString t_help;
+    QString t_help_about;
+    QString t_about_text;
+    //Contact tab
+    QString t_contact_tab_first_name;
+    QString t_contact_tab_mid_name;
+    QString t_contact_tab_last_name;
+    QString t_contact_tab_email;
+    QString t_contact_tab_street;
+    QString t_contact_tab_district;
+    QString t_contact_tab_city;
+    QString t_contact_tab_county;
+    QString t_contact_tab_postcode;
+    QString t_contact_tab_country;
+    QString t_contact_tab_telephone;
+    QString t_contact_tab_birthday;
+
+    QString t_contact_tab_quick_full_view;
+    QString t_contact_tab_mailto;
+
+    //Preferences
+    QString t_preferences_title;
+    QString t_preferences_font_size;
+    QString t_preferences_locale;
+    QString t_preferences_play_audio;
+    QString t_preferences_dark_calendar;
+    QString t_preferences_line_spacing;
+
+    //Upcoming dialogs
+    QString t_upcoming_birthdays_title;
+    QString t_upcoming_schedule_title;
+    QString t_label_upcoming_schedule;
+
+    //Appointment dialogs
+    QString t_dialog_appointment_dialog_title;
+    QString t_dialog_appointment_date_display;
+    QString t_dialog_appointment_title;
+    QString t_dialog_appointment_location;
+    QString t_dialog_appointment_notes;
+    QString t_dialog_appointment_all_day;
+    QString t_dialog_appointment_start_time;
+    QString t_dialog_appointment_end_time;    
+    QString t_dialog_appointment_reminder;
+
+    //update appointment
+    QString t_dialog_appointment_update;
+    QString t_dialog_appointment_delete;
+
+
+    QString t_reminder_5min;
+    QString t_reminder_10min;
+    QString t_reminder_30min;
+    QString t_reminder_1hour;
+    QString t_reminder_1day;
+
+    QString t_reminder_message_on;
+    QString t_reminder_message_starts_at;
+
+    //Contacts dialog
+
+    QString t_dialog_contact_title;
+    QString t_dialog_contact_first_name;
+    QString t_dialog_contact_mid_name;
+    QString t_dialog_contact_last_name;
+    QString t_dialog_contact_email;
+    QString t_dialog_contact_street;
+    QString t_dialog_contact_district;
+    QString t_dialog_contact_city;
+    QString t_dialog_contact_county;
+    QString t_dialog_contact_postcode;
+    QString t_dialog_contact_country;
+    QString t_dialog_contact_telephone;
+
+    QString t_dialog_contact_born_on;
+    QString t_dialog_contact_birthday_unknown;
+    QString t_dialog_contact_add_to_calendar;
+    QString t_dialog_contact_delete;
+
+
+    void ReadXMLTranslation(QString localeStr);
+
+
+    int applicationFontSize=20;    
+    int newLineSpacing=0;
     Preferences currentPreferences;
     void SetPreferences();
     void SaveSettings();
     bool LoadSettings();
 
     //Appointments
-
     QString title=QLatin1String("");
     QString location=QLatin1String("");
     QString description=QLatin1String("");
@@ -103,7 +236,7 @@ public:
     QDate appointmentDate;
     QTime appointmentStartTime;
     QTime appointmentEndTime;
-    QString category=QLatin1String("");
+
     int isAllDay=0;
     int appointmentId =0;
     int hasReminder=0;
@@ -148,6 +281,11 @@ public:
     int dayArray[6*7];
     void UpdateCalendar();
 
+    int prevCellRow=0;
+    int prevCellCol=0;
+
+   void SetApplicationFontSize(int fontsize);
+
     void increaseFont();
     void decreaseFont();
     void resetFont();
@@ -161,28 +299,20 @@ public:
     QTableWidgetItem* holidayItem;
     QTableWidgetItem* birthdayItem;
 
-    //Themes
-    void SetTheme();
-    int newLineSpacing=0;
-
-
     //Helper methods
     QDate CalculateEaster(int year);
     void checkForBirthdaysNextSevenDays();
     void checkAppointmentsNextSevenDays();
 
-
-    //Navigation   
+    //Navigation
     void gotoNextMonth();
     void gotoPreviousMonth();
     void gotoToday();
-    //void showDayEvents();
 
     //Keyboard navigation actions
     QAction *gotoNextMonthAction;
     QAction *gotoPreviousMonthAction;
     QAction *gotoTodayAction;
-
 
     QList<Holiday> holidayList;
     void AddHolidaysToHolidayList(int year);
@@ -222,19 +352,9 @@ public:
 
     QList <Contact> contactList;
 
-
-    //Flags
+    //flags
     bool flagShowBirthdays=true;
     bool flagShowHolidays =true;
-    bool flagShowGeneralEvents=true;
-    bool flagShowFamilyEvents =true;
-    bool flagShowLeisureEvents =true;
-    bool flagShowMeetings=true;
-    bool flagShowWorkEvents =true;
-    bool flagShowVacations=true;
-    bool flagShowMedical=true;
-    bool flagColourCoding=true;
-    bool flagShowFitness=true;
     bool flagQuickView=false;
 
 
@@ -245,15 +365,13 @@ public:
     void ImportAppointmentsXML();
 
 
-
 private slots:
 
     void timerUpdateSlot();
 
     void gotoNextMonthSlot();
     void gotoPreviousMonthSlot();
-    void gotoTodaySlot();
-    //void newAppointmentSlot();
+    void gotoTodaySlot();    
     void newContactSlot();
 
     void increaseFontSlot();
@@ -302,23 +420,6 @@ private slots:
 
     void on_actionShow_Holidays_triggered();
 
-    void on_actionShow_General_triggered();
-
-    void on_actionShow_Meetings_triggered();
-
-    void on_actionShow_Work_triggered();
-
-    void on_actionShow_Leisure_triggered();
-
-    void on_actionShow_Fitness_triggered();
-
-    void on_actionShow_Vacations_triggered();
-
-    void on_actionShow_Medical_triggered();
-
-    void on_actionShow_Family_triggered();
-
-
     void on_actionExport_Appointments_triggered();
 
     void on_actionImport_Appointments_triggered();
@@ -327,12 +428,18 @@ private slots:
 
     void on_actionImport_Contacts_triggered();
 
-
     void on_actionPreferences_triggered();
+
+    void on_actionIncrease_Font_triggered();
+
+    void on_actionDecrease_Font_triggered();
+
+    void on_actionReset_Font_triggered();
+
 
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow *ui;   
 };
 
 #endif // MAINWINDOW_H

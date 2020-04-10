@@ -44,7 +44,6 @@ public:
     QDate appointmentDate;
     QTime startTime;
     QTime endTime;
-    QString category;
 
     int isAllDay=0; //no
     int repeatDayInterval=0;
@@ -60,14 +59,10 @@ public:
     QTime getStartTime();
     QTime getEndTime();
     int getAllDay();
-    QString getCategory();
-    void setupComboBoxes();
-
 
 private slots:
     void accept();
 
-    void on_comboBoxCategory_activated(const QString &arg1);
 
     void on_timeEditStarts_userTimeChanged(const QTime &time);
 

@@ -38,6 +38,8 @@ public:
     explicit DialogUpcomingBirthdays(QWidget *parent = nullptr,
                                      QList<Contact> *contactList=nullptr);
     ~DialogUpcomingBirthdays();
+    QString t_title=QStringLiteral("Upcoming Birthdays (Next Seven Days)");
+    void setTitleTranslation(QString translation);
 
 private:
     Ui::DialogUpcomingBirthdays *ui;

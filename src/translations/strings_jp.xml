@@ -1,0 +1,362 @@
+<!-- Translation File strings_jp.xml-->
+<TRL LANG="Japanese" DATE="20200408">
+ 
+  <TRANSLATE ID="t_title">
+      <TEXT>Organizer</TEXT>
+      <TRANSLATION>主催者</TRANSLATION>
+   </TRANSLATE>
+
+   <TRANSLATE ID="t_holiday_christmas">      
+      <TEXT>Christmas</TEXT>
+      <TRANSLATION>クリスマス</TRANSLATION>
+   </TRANSLATE>  
+   <TRANSLATE ID="t_holiday_boxing">      
+      <TEXT>Boxing Day</TEXT>
+      <TRANSLATION>ボクシングデー</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_holiday_new_year">      
+      <TEXT>New Year's Day</TEXT>
+      <TRANSLATION>元旦</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_holiday_easter">      
+      <TEXT>Easter</TEXT>
+      <TRANSLATION>イースター</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_holiday_good_friday">      
+      <TEXT>Good Friday</TEXT>
+      <TRANSLATION>良い金曜日</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_holiday_easter_monday">      
+      <TEXT>Easter Monday</TEXT>
+      <TRANSLATION>イースター月曜日</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_holiday_may_bank">      
+      <TEXT>May Bank Holiday</TEXT>
+      <TRANSLATION>メイバンクホリデー</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_holiday_spring_bank">      
+      <TEXT>Spring Bank Holiday</TEXT>
+      <TRANSLATION>スプリングバンクホリデー</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_holiday_summer_bank">      
+      <TEXT>Summer Bank Holiday</TEXT>
+      <TRANSLATION>サマーバンクホリデー</TRANSLATION>
+   </TRANSLATE> 
+   
+  <TRANSLATE ID="t_file">
+      <TEXT>File</TEXT>
+      <TRANSLATION>ファイル</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_file_export_appointments">
+      <TEXT>Export Appointments</TEXT>
+      <TRANSLATION>予定のエクスポート</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_file_import_appointments">
+      <TEXT>Import Appointments</TEXT>
+      <TRANSLATION>予定をインポート</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_file_export_contacts">
+      <TEXT>Export Contacts</TEXT>
+      <TRANSLATION>連絡先をエクスポート</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_file_import_contacts">
+      <TEXT>Import Contacts</TEXT>
+      <TRANSLATION>連絡先をインポート</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_file_exit">
+      <TEXT>Exit</TEXT>
+      <TRANSLATION>出口</TRANSLATION>
+   </TRANSLATE> 
+   
+   <TRANSLATE ID="t_edit">
+      <TEXT>Edit</TEXT>
+      <TRANSLATION>編集する</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_edit_delete_all_appointments">
+      <TEXT>Delete All Appointments</TEXT>
+      <TRANSLATION>すべての予定を削除</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_edit_delete_all_contacts">
+      <TEXT>Delete All Contacts</TEXT>
+      <TRANSLATION>すべての連絡先を削除</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_edit_preferences">
+      <TEXT>Preferences</TEXT>
+      <TRANSLATION>環境設定</TRANSLATION>
+   </TRANSLATE> 
+   
+    <TRANSLATE ID="t_appointments">
+      <TEXT>Appointments</TEXT>
+      <TRANSLATION>予定</TRANSLATION>
+   </TRANSLATE> 
+    <TRANSLATE ID="t_appointments_new_appointment">
+      <TEXT>New Appointment</TEXT>
+      <TRANSLATION>新しい予定</TRANSLATION>
+   </TRANSLATE> 
+    <TRANSLATE ID="t_appointments_generate_repeat_appointments">
+      <TEXT>Generate Repeat Appointments</TEXT>
+      <TRANSLATION>繰り返し予定を生成する</TRANSLATION>
+   </TRANSLATE> 
+    <TRANSLATE ID="t_appointments_upcoming_schedule">
+      <TEXT>Upcoming Schedule</TEXT>
+      <TRANSLATION>今後のスケジュール</TRANSLATION>
+   </TRANSLATE> 
+   
+   <TRANSLATE ID="t_calendar">
+      <TEXT>Calendar</TEXT>
+      <TRANSLATION>カレンダー</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_calendar_show_holidays">
+      <TEXT>Show Holidays</TEXT>
+      <TRANSLATION>祝日を表示</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_show_birthdays">
+      <TEXT>Show Birthdays</TEXT>
+      <TRANSLATION>誕生日を表示</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_next_month">
+      <TEXT>Next Month</TEXT>
+      <TRANSLATION>来月</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_previous_month">
+      <TEXT>Previous Month</TEXT>
+      <TRANSLATION>前月</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_today">
+      <TEXT>Today</TEXT>
+      <TRANSLATION>今日（スペースバー）</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_calendar_increase_font">
+      <TEXT>Increase Font Size</TEXT>
+      <TRANSLATION>フォントサイズを大きくする </TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_decrease_font">
+      <TEXT>Decrease Font</TEXT>
+      <TRANSLATION>フォントサイズを小さくする</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_reset_font">
+      <TEXT>Reset Font</TEXT>
+      <TRANSLATION>フォントサイズをリセット</TRANSLATION>
+   </TRANSLATE> 
+   
+  
+   
+   <TRANSLATE ID="t_contacts">
+      <TEXT>Contacts</TEXT>
+      <TRANSLATION>連絡先</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_contacts_new_contact">
+      <TEXT>New Contact</TEXT>
+      <TRANSLATION>新しい連絡先</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_contacts_upcoming_birthdays">
+      <TEXT>Check For Birthdays</TEXT>
+      <TRANSLATION>誕生日を確認する</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_help">
+      <TEXT>Help</TEXT>
+      <TRANSLATION>助けて</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_help_about">
+      <TEXT>About</TEXT>
+      <TRANSLATION>約</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_about_text">
+      <TEXT>Organizer is a Qt lightweight personal information manager developed by Alan Crispin (aka. crispina) </TEXT>
+      <TRANSLATION>Organizerは、Alan Crispin（別名crispina）によって開発されたQt軽量個人情報マネージャーです。 </TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_tab_contacts_first_name">
+      <TEXT>First Name</TEXT>
+      <TRANSLATION>ファーストネーム</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_mid_name">
+      <TEXT>Mid Name</TEXT>
+      <TRANSLATION>ミッドネーム</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_last_name">
+      <TEXT>Last Name</TEXT>
+      <TRANSLATION>苗字</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_email">
+      <TEXT>Email</TEXT>
+      <TRANSLATION>Eメール</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_street">
+      <TEXT>Street</TEXT>
+      <TRANSLATION>通り</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_district">
+      <TEXT>District</TEXT>
+      <TRANSLATION>地区</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_city">
+      <TEXT>City</TEXT>
+      <TRANSLATION>市</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_county">
+      <TEXT>County</TEXT>
+      <TRANSLATION>郡</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_postcode">
+      <TEXT>Postcode</TEXT>
+      <TRANSLATION>郵便番号</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_country">
+      <TEXT>Country</TEXT>
+      <TRANSLATION>国</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_telephone">
+      <TEXT>Telephone</TEXT>
+      <TRANSLATION>電話</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_birthday">
+      <TEXT>Birthday</TEXT>
+      <TRANSLATION>お誕生日</TRANSLATION>
+   </TRANSLATE>
+    
+   
+   <TRANSLATE ID="t_tab_contacts_quick-full-view">
+      <TEXT>Quick Full View</TEXT>
+      <TRANSLATION>クイック/フルビュー</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_mailto">
+      <TEXT>Mail To</TEXT>
+      <TRANSLATION>メールを送る:</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_preferences_title">
+      <TEXT>Preferences</TEXT>
+      <TRANSLATION>環境設定</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_font_size">
+      <TEXT>Font Size</TEXT>
+      <TRANSLATION>フォントサイズ</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_locale">
+      <TEXT>Locale</TEXT>
+      <TRANSLATION>ロケール</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_play_audio">
+      <TEXT>Play Audio</TEXT>
+      <TRANSLATION>オーディオを再生</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_dark_calendar">
+      <TEXT>Dark Calendar</TEXT>
+      <TRANSLATION>ダークカレンダー</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_line_spacing">
+      <TEXT>Line Spacing</TEXT>
+      <TRANSLATION>行間隔</TRANSLATION>
+   </TRANSLATE>
+    
+   
+    <TRANSLATE ID="t_upcoming_birthdays_title">
+      <TEXT>Upcoming Birthdays</TEXT>
+      <TRANSLATION>次の誕生日（次の7日間）</TRANSLATION>
+   </TRANSLATE>
+   
+   <TRANSLATE ID="t_upcoming_schedule_title">
+      <TEXT>Upcoming Schedule</TEXT>
+      <TRANSLATION>今後のスケジュール（今後7日間）</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_upcoming_schedule_label">
+      <TEXT>Upcoming Schedule For Date</TEXT>
+      <TRANSLATION>日付の今後のスケジュール: </TRANSLATION>
+   </TRANSLATE>
+   
+   <TRANSLATE ID="t_dialog_appointment_dialog_title">
+      <TEXT>New Appointment</TEXT>
+      <TRANSLATION>新しい予定</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_date_display">
+      <TEXT>Appointment Date</TEXT>
+      <TRANSLATION>予約日:</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_title">
+      <TEXT>Title</TEXT>
+      <TRANSLATION>題名</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_location">
+      <TEXT>Location</TEXT>
+      <TRANSLATION>ロケーション</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_notes">
+      <TEXT>Notes</TEXT>
+      <TRANSLATION>ノート</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_all_day">
+      <TEXT>All Day</TEXT>
+      <TRANSLATION>一日中</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_start_time">
+      <TEXT>Start Time</TEXT>
+      <TRANSLATION>始まる時間</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_end_time">
+      <TEXT>End Time</TEXT>
+      <TRANSLATION>終了時間</TRANSLATION>
+   </TRANSLATE>
+  
+   <TRANSLATE ID="t_dialog_appointment_reminder">
+      <TEXT>Reminder</TEXT>
+      <TRANSLATION>リマインダー</TRANSLATION>
+   </TRANSLATE>
+   
+   <TRANSLATE ID="t_dialog_appointment_update">
+      <TEXT>Update Appointment</TEXT>
+      <TRANSLATION>予定を更新</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_delete">
+      <TEXT>Delete Appointment</TEXT>
+      <TRANSLATION>予定を削除</TRANSLATION>
+   </TRANSLATE>
+   
+   <TRANSLATE ID="t_dialog_contact_born_on">
+      <TEXT>Born On</TEXT>
+      <TRANSLATION>に生まれました</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_dialog_contact_birthday_unknown">
+      <TEXT>Birthday Unknown</TEXT>
+      <TRANSLATION>誕生日不明</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_contact_add_to_calendar">
+      <TEXT>Add To Calendar</TEXT>
+      <TRANSLATION>カレンダーに追加</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_contact_delete">
+      <TEXT>Delete Contact</TEXT>
+      <TRANSLATION>連絡先を削除</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_dialog_reminder_5min">
+      <TEXT>5 Minutes Before Start</TEXT>
+      <TRANSLATION>開始の5分前</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_reminder_10min">
+      <TEXT>10 Minutes Before Start</TEXT>
+      <TRANSLATION>開始の10分前</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_reminder_30min">
+      <TEXT>30 Minutes Before Start</TEXT>
+      <TRANSLATION>開始の30分前</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_reminder_1hour">
+      <TEXT>1 Hour Before Start</TEXT>
+      <TRANSLATION>開始の1時間前</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_reminder_1day">
+      <TEXT>1 Day Before Start</TEXT>
+      <TRANSLATION>開始1日前</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_message_reminder_on">
+      <TEXT>On</TEXT>
+      <TRANSLATION>オン</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_message_reminder_starts_at">
+      <TEXT>Starts At</TEXT>
+      <TRANSLATION>で始まる</TRANSLATION>
+   </TRANSLATE>
+
+</TRL>

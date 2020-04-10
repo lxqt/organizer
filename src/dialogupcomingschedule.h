@@ -23,6 +23,7 @@
 #include <QDate>
 #include <QDebug>
 #include <QMessageBox>
+#include <QLocale>
 
 #include "appointment.h"
 #include "schedulelistmodel.h"
@@ -45,6 +46,15 @@ public:
      QList<Appointment> getSortedDayList(QDate theDate);
     static bool compare(const Appointment& first, const Appointment& second);
     ~DialogUpcomingSchedule();
+
+    QString t_title=QStringLiteral("Upcoming Schedule (Next Seven Days)");
+    QString t_label_upcoming_schedule=QStringLiteral("Upcoming Schedule For Date");
+
+    void setTitleTranslation(QString translation);
+    void setLabelUpcomingScheduleTranslation(QString translation);
+
+    QLocale locale=QLocale::English;
+    void setLocale(QLocale locale);
 
 private:
     Ui::DialogUpcomingSchedule *ui;

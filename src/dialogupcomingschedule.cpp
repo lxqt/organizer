@@ -27,15 +27,20 @@ DialogUpcomingSchedule::DialogUpcomingSchedule(QWidget *parent,
 {
      ui->setupUi(this);
 
-     setWindowTitle(QStringLiteral("Upcoming Schedule (Next Seven Days)"));
+     setWindowTitle(t_title);
+     ui->labelSchedule->setText(t_label_upcoming_schedule);
 
      this->appointmentList= theDbm->getAllAppointments();
      this->theDbm=*theDbm;
 
      QList<Appointment> schedule =QList<Appointment>();
      //QList<Appointment> dayList =QList<Appointment>();
-
      QDate currentDate =QDate::currentDate();
+     QString date =locale.toString(currentDate,QStringLiteral("dddd dd MMMM yyyy"));
+     ui->labelDate->setText(date);
+
+     //selectedDateLabel->setText(date);
+     //QDate currentDate =QDate::currentDate();
      ui->labelDate->setText(currentDate.toString());
 
      QDate currentDatePlusOne=currentDate.addDays(1);
@@ -106,3 +111,25 @@ DialogUpcomingSchedule::~DialogUpcomingSchedule()
 {
     delete ui;
 }
+
+void DialogUpcomingSchedule::setTitleTranslation(QString translation)
+{
+    t_title=translation;
+    setWindowTitle(t_title);
+}
+
+void DialogUpcomingSchedule::setLabelUpcomingScheduleTranslation(QString translation)
+{
+    t_label_upcoming_schedule=translation;
+    ui->labelSchedule->setText(t_label_upcoming_schedule);
+}
+
+void DialogUpcomingSchedule::setLocale(QLocale locale)
+{
+    this->locale=locale;
+    QDate currentDate =QDate::currentDate();
+    QString date =locale.toString(currentDate,QStringLiteral("dddd dd MMMM yyyy"));
+    ui->labelDate->setText(date);
+}
+
+

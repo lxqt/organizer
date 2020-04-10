@@ -49,7 +49,7 @@ void ScheduleListModel::updateAppointment(Appointment &appointment, int index)
     a.m_description=appointment.m_description;
     a.m_startTime=appointment.m_startTime;
     a.m_endTime=appointment.m_endTime;
-    a.m_category=appointment.m_category;
+
     a.m_isFullDay=appointment.m_isFullDay;
     modelAppointmentList.removeAt(index);
     modelAppointmentList.insert(index,a);

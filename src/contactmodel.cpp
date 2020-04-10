@@ -140,34 +140,94 @@ QVariant ContactModel::headerData(int section, Qt::Orientation orientation, int 
         switch (section) {
         case 0:
             return QVariant(QLatin1String("ContactId"));
-        case 1:
-            return QStringLiteral("First Name");
+        case 1:            
+            return t_first_name;
         case 2:
-            return QStringLiteral("Mid Names");
+            return t_mid_name;
         case 3:
-            return QStringLiteral("Last Name");
+            return t_last_name;
         case 4:
-            return QStringLiteral("Email");
+            return t_email;
         case 5:
-            return QStringLiteral("Street");
+            return t_street;
         case 6:
-            return QStringLiteral("District");
+            return t_district;
         case 7:
-            return QStringLiteral("City");
+            return t_city;
         case 8:
-            return QStringLiteral("County");
+            return t_county;
         case 9:
-            return QStringLiteral("Postcode");
+            return t_postcode;
         case 10:
-            return QStringLiteral("Country");
+            return t_country;
         case 11:
-            return QStringLiteral("Telephone");
+            return t_telephone;
         case 12:
-            return QStringLiteral("Birthday");
+            return t_birthday;
         default:
             return QVariant();
         }
     }
     return section + 1;
+}
+
+void ContactModel::setFirstNameTranslation(QString translation)
+{
+    t_first_name=translation;
+}
+
+void ContactModel::setMidNameTranslation(QString translation)
+{
+    t_mid_name=translation;
+}
+
+void ContactModel::setLastNameTranslation(QString translation)
+{
+    t_last_name=translation;
+}
+
+void ContactModel::setEmailTranslation(QString translation)
+{
+    t_email=translation;
+}
+
+void ContactModel::setStreetTranslation(QString translation)
+{
+    t_street=translation;
+}
+
+void ContactModel::setDistrictTranslation(QString translation)
+{
+    t_district=translation;
+}
+
+void ContactModel::setCityTranslation(QString translation)
+{
+    t_city=translation;
+}
+
+void ContactModel::setCountyTransaltion(QString translation)
+{
+    t_county=translation;
+}
+
+void ContactModel::setPostcodeTranslation(QString translation)
+{
+    t_postcode=translation;
+}
+
+void ContactModel::setCountryTranslation(QString translation)
+{
+    t_country=translation;
+}
+
+void ContactModel::setTelephoneTranslation(QString translation)
+{
+    t_telephone=translation;
+}
+
+void ContactModel::setBirthdayTranslation(QString translation)
+{
+    t_birthday=translation;
 }
 

@@ -4,19 +4,17 @@
 struct Preferences {
 
     Preferences(
-                int playAudio=1,
+                int playAudio=0,
                 const QString& locale= QString(),
-                int calendarTheme=0,
-                int applicationFontSize=20,
-                int calendarFontSize =12,
+                int darkCalendar=0,
+                int applicationFontSize=20,                
                 int lineSpacing=0
             ):
 
         m_playAudio(playAudio),
         m_localization(locale),
-        m_calendarTheme(calendarTheme),
-        m_applicationFontSize(applicationFontSize),
-        m_calendarFontSize(calendarFontSize),
+        m_darkCalendar(darkCalendar),
+        m_applicationFontSize(applicationFontSize),        
         m_lineSpacing(lineSpacing)
 
     {
@@ -24,9 +22,8 @@ struct Preferences {
 
     int m_playAudio;
     QString m_localization;
-    int m_calendarTheme;
-    int m_applicationFontSize;
-    int m_calendarFontSize;
+    int m_darkCalendar;
+    int m_applicationFontSize;    
     int m_lineSpacing;
 };
 

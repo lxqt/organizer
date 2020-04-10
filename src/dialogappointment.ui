@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>619</width>
-    <height>462</height>
+    <width>601</width>
+    <height>559</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,10 +26,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="labelDateDisplay">
+        <widget class="QLabel" name="labelDateValue">
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -40,7 +39,7 @@
         </widget>
        </item>
        <item>
-        <spacer name="horizontalSpacer_3">
+        <spacer name="horizontalSpacer_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -51,9 +50,6 @@
           </size>
          </property>
         </spacer>
-       </item>
-       <item>
-        <widget class="QDateEdit" name="dateEditAppointmentDate"/>
        </item>
       </layout>
      </item>
@@ -194,14 +190,14 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QLabel" name="labelCategory">
+        <widget class="QCheckBox" name="checkBoxReminder">
          <property name="text">
-          <string>Category:</string>
+          <string>Reminder: </string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBoxCategory"/>
+        <widget class="QComboBox" name="comboBoxReminder"/>
        </item>
        <item>
         <spacer name="horizontalSpacer_8">
@@ -215,16 +211,6 @@
           </size>
          </property>
         </spacer>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBoxReminder">
-         <property name="text">
-          <string>Reminder: </string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="comboBoxReminder"/>
        </item>
       </layout>
      </item>
