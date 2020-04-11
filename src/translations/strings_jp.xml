@@ -138,9 +138,7 @@
       <TEXT>Reset Font</TEXT>
       <TRANSLATION>フォントサイズをリセット</TRANSLATION>
    </TRANSLATE> 
-   
-  
-   
+    
    <TRANSLATE ID="t_contacts">
       <TEXT>Contacts</TEXT>
       <TRANSLATION>連絡先</TRANSLATION>
@@ -357,6 +355,27 @@
    <TRANSLATE ID="t_message_reminder_starts_at">
       <TEXT>Starts At</TEXT>
       <TRANSLATION>で始まる</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_dialog_repeat_title">
+      <TEXT>Generate Repeat Appointments</TEXT>
+      <TRANSLATION>繰り返し予定を生成する</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_repeat_appointment_start_date">
+      <TEXT>Appointment Start Date</TEXT>
+      <TRANSLATION>予約開始日</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_repeat_repeat_every">
+      <TEXT>Repeat Every</TEXT>
+      <TRANSLATION>毎回繰り返す</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_repeat_days">
+      <TEXT>Days</TEXT>
+      <TRANSLATION>日々</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_repeat_occurrences">
+      <TEXT>Occurrences</TEXT>
+      <TRANSLATION>オカレンス</TRANSLATION>
    </TRANSLATE>
 
 </TRL>

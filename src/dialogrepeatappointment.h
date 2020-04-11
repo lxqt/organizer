@@ -40,7 +40,6 @@ public:
     explicit DialogRepeatAppointment(QWidget *parent = nullptr, QDate *theAppointmentDate=nullptr);
     ~DialogRepeatAppointment();
 
-
     QDate appointmentDate;
     QTime startTime;
     QTime endTime;
@@ -59,6 +58,38 @@ public:
     QTime getStartTime();
     QTime getEndTime();
     int getAllDay();
+
+    //Translations
+    QString t_dialog_title=QStringLiteral("Generate Repeat Appointments");
+    QString t_start_date_display=QStringLiteral("Appointment Start Date");
+    QString t_title=QStringLiteral("Title: ");
+    QString t_location=QStringLiteral("Location: ");
+    QString t_notes=QStringLiteral("Notes: ");
+    QString t_all_day=QStringLiteral("All Day");
+    QString t_start_time=QStringLiteral("Start Time: ");
+    QString t_end_time=QStringLiteral("End Time: ");
+    QString t_repeat_every=QStringLiteral("Repeat Every");
+    QString t_days=QStringLiteral("Days");
+    QString t_occurrences=QStringLiteral("Occurences");
+
+
+    void setDialogTitleTranslation(QString translation);
+    void setStartDateDisplayTranslation(QString translation);
+    void setTitleTranslation(QString translation);
+    void setLocationTranslation(QString translation);
+    void setNotesTranslations(QString translation);
+    void setAllDaytranslation(QString translation);
+    void setStartTimeTranslation(QString translation);
+    void setEndTimeTranslation(QString translation);
+    void setRepeatEveryTranslation(QString translation);
+    void setDaysTranslation(QString translation);
+    void setOccurrencesTranslation(QString translation);
+
+    void setLabelTranslations();
+
+    QLocale locale=QLocale::English;
+    void setLocaleDate(QLocale locale);
+
 
 private slots:
     void accept();

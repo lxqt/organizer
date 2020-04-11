@@ -70,8 +70,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(timerUpdateSlot()));
     timer->start(1000); //check for reminders every 1000ms
 
-
+    if(playAudio){
     QSound::play(":/sounds/window-attention.wav");
+    }
 
     setWindowIcon(QIcon(":/icons/icon-calendar.png"));
     selectedDate = QDate::currentDate();
@@ -671,6 +672,23 @@ void MainWindow::ReadXMLTranslation(QString localeStr)
             else if(ID=="t_message_reminder_starts_at"){
                 t_reminder_message_starts_at=translation;
             }
+            //dialog repeat appointments
+            else if(ID=="t_dialog_repeat_title"){
+                t_dialog_repeat_title=translation;
+            }
+            else if(ID=="t_dialog_repeat_appointment_start_date"){
+                t_dialog_repeat_date_message=translation;
+            }
+            else if(ID=="t_dialog_repeat_repeat_every"){
+                t_dialog_repeat_repeat_every=translation;
+            }
+            else if(ID=="t_dialog_repeat_days"){
+                t_dialog_repeat_days=translation;
+            }
+            else if(ID=="t_dialog_repeat_occurrences"){
+                t_dialog_repeat_occurrences=translation;
+            }
+
 
 
         }
@@ -886,7 +904,24 @@ void MainWindow::GenerateRepeatAppointments()
 
 
     DialogRepeatAppointment *repeatDialog = new  DialogRepeatAppointment(this,&selectedDate);
-        repeatDialog->setModal(true);
+
+    repeatDialog->setLocaleDate(this->locale);
+    repeatDialog->setStartDateDisplayTranslation(t_dialog_repeat_date_message);
+
+    repeatDialog->setTitleTranslation(t_dialog_appointment_title);
+    repeatDialog->setLocationTranslation(t_dialog_appointment_location);
+    repeatDialog->setNotesTranslations(t_dialog_appointment_notes);
+    repeatDialog->setAllDaytranslation(t_dialog_appointment_all_day);
+    repeatDialog->setStartTimeTranslation(t_dialog_appointment_start_time);
+    repeatDialog->setEndTimeTranslation(t_dialog_appointment_end_time);
+
+    repeatDialog->setRepeatEveryTranslation(t_dialog_repeat_repeat_every);
+    repeatDialog->setDaysTranslation(t_dialog_repeat_days);
+    repeatDialog->setOccurrencesTranslation(t_dialog_repeat_occurrences);
+
+    repeatDialog->setLabelTranslations();
+
+    repeatDialog->setModal(true);
 
         if (repeatDialog->exec() == QDialog::Accepted ) {
 
@@ -940,7 +975,6 @@ void MainWindow::GenerateRepeatAppointments()
 
                     UpdateCalendar();
                     ShowAppointmentsOnListView(selectedDate);
-
                 }
             }
             UpdateCalendar();
@@ -1074,7 +1108,6 @@ void MainWindow::UpdateCalendar()
         ui->tableWidgetCalendar->setItem(row, weekDay-1,dayItem);
 
         QString str=QLatin1String("");
-
 
         //-----------------------------------------------------
         // Add holidays to calendar
@@ -1993,7 +2026,7 @@ void MainWindow::on_actionDelete_All_Contacts_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::information(this, t_title+QStringLiteral(" v0.7.0"),
+    QMessageBox::information(this, t_title+QStringLiteral(" v0.7.1"),
                              t_about_text);
 }
 

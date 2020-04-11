@@ -51,9 +51,6 @@
          </property>
         </spacer>
        </item>
-       <item>
-        <widget class="QDateEdit" name="dateEdit"/>
-       </item>
       </layout>
      </item>
      <item>

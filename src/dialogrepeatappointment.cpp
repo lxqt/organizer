@@ -25,24 +25,36 @@ DialogRepeatAppointment::DialogRepeatAppointment(QWidget *parent, QDate *theAppo
 {
     ui->setupUi(this);
 
-    setWindowTitle(QStringLiteral("Generate Repeat Appointments"));
+    //setWindowTitle(QStringLiteral("Generate Repeat Appointments"));
     this->appointmentDate=*theAppointmentDate;
 
     //Translation refactoring
-    ui->labelInfo->setText((QStringLiteral("Appointment Start Date: ")));
-    ui->labelTitle->setText(QStringLiteral("Title: "));
-    ui->labelLocation->setText(QStringLiteral("Location: "));
-    ui->labelNotes->setText(QStringLiteral("Notes: "));
-    ui->checkBox->setText(QStringLiteral("All Day "));
-    ui->labelStartTime->setText(QStringLiteral("Start Time: "));
-    ui->labelEndTime->setText(QStringLiteral("End Time: "));
+//    ui->labelInfo->setText((QStringLiteral("Appointment Start Date: ")));
+//    ui->labelTitle->setText(QStringLiteral("Title: "));
+//    ui->labelLocation->setText(QStringLiteral("Location: "));
+//    ui->labelNotes->setText(QStringLiteral("Notes: "));
+//    ui->checkBox->setText(QStringLiteral("All Day "));
+//    ui->labelStartTime->setText(QStringLiteral("Start Time: "));
+//    ui->labelEndTime->setText(QStringLiteral("End Time: "));
 
-    ui->labelRepeatEvery->setText(QStringLiteral("Repeat Every: "));
-    ui->labelDays->setText(QStringLiteral("Days "));
-    ui->labelOccurrences->setText(QStringLiteral("Occurrences"));
+//    ui->labelRepeatEvery->setText(QStringLiteral("Repeat Every: "));
+//    ui->labelDays->setText(QStringLiteral("Days "));
+//    ui->labelOccurrences->setText(QStringLiteral("Occurrences"));
 
-    ui->labelDate->setText(appointmentDate.toString());
-    ui->dateEdit->setDate(*theAppointmentDate);
+    //ui->labelDate->setText(appointmentDate.toString());
+
+    t_dialog_title=QStringLiteral("Generate Repeat Appointments");
+    t_start_date_display=QStringLiteral("Appointment Start Date");
+    t_title=QStringLiteral("Title: ");
+    t_location=QStringLiteral("Location: ");
+    t_notes=QStringLiteral("Notes: ");
+    t_all_day=QStringLiteral("All Day");
+    t_start_time=QStringLiteral("Start Time: ");
+    t_end_time=QStringLiteral("End Time: ");
+    t_repeat_every=QStringLiteral("Repeat Every");
+    t_days=QStringLiteral("Days");
+    t_occurrences=QStringLiteral("Occurences");
+
 
     QTime timeNow =QTime::currentTime();
     this->startTime=timeNow;
@@ -109,6 +121,84 @@ QTime DialogRepeatAppointment::getEndTime()
 int DialogRepeatAppointment::getAllDay()
 {
     return isAllDay;
+}
+
+void DialogRepeatAppointment::setDialogTitleTranslation(QString translation)
+{
+    t_dialog_title=translation;
+}
+
+void DialogRepeatAppointment::setStartDateDisplayTranslation(QString translation)
+{
+    t_start_date_display=translation;
+}
+
+void DialogRepeatAppointment::setTitleTranslation(QString translation)
+{
+    t_title=translation;
+}
+
+void DialogRepeatAppointment::setLocationTranslation(QString translation)
+{
+    t_location=translation;
+}
+
+void DialogRepeatAppointment::setNotesTranslations(QString translation)
+{
+    t_notes=translation;
+}
+
+void DialogRepeatAppointment::setAllDaytranslation(QString translation)
+{
+    t_all_day=translation;
+}
+
+void DialogRepeatAppointment::setStartTimeTranslation(QString translation)
+{
+    t_start_time=translation;
+}
+
+void DialogRepeatAppointment::setEndTimeTranslation(QString translation)
+{
+    t_end_time=translation;
+}
+
+void DialogRepeatAppointment::setRepeatEveryTranslation(QString translation)
+{
+    t_repeat_every=translation;
+}
+
+void DialogRepeatAppointment::setDaysTranslation(QString translation)
+{
+    t_days=translation;
+}
+
+void DialogRepeatAppointment::setOccurrencesTranslation(QString translation)
+{
+    t_occurrences=translation;
+}
+
+void DialogRepeatAppointment::setLabelTranslations()
+{
+    setWindowTitle(t_dialog_title);
+    ui->labelInfo->setText(t_start_date_display);
+    ui->labelTitle->setText(t_title);
+    ui->labelLocation->setText(t_location);
+    ui->labelNotes->setText(t_notes);
+    ui->checkBox->setText(t_all_day);
+    ui->labelStartTime->setText(t_start_time);
+    ui->labelEndTime->setText(t_end_time);
+    ui->labelRepeatEvery->setText(t_repeat_every);
+    ui->labelDays->setText(t_days);
+    ui->labelOccurrences->setText(t_occurrences);
+
+}
+
+void DialogRepeatAppointment::setLocaleDate(QLocale locale)
+{
+    this->locale=locale;
+    QString date =locale.toString(appointmentDate,QStringLiteral("dddd dd MMMM yyyy"));
+    ui->labelDate->setText(date);
 }
 
 

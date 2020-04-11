@@ -95,8 +95,7 @@ public:
     void setNotesTranslations(QString translation);
     void setAllDaytranslation(QString translation);
     void setStartTimeTranslation(QString translation);
-    void setEndTimeTranslation(QString translation);
-    void setCategoryTranslation(QString translation);
+    void setEndTimeTranslation(QString translation);   
     void setReminderTranslation(QString translation);
 
     void setLabelTranslations();

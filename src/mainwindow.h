@@ -187,7 +187,6 @@ public:
     QString t_dialog_appointment_update;
     QString t_dialog_appointment_delete;
 
-
     QString t_reminder_5min;
     QString t_reminder_10min;
     QString t_reminder_30min;
@@ -196,6 +195,13 @@ public:
 
     QString t_reminder_message_on;
     QString t_reminder_message_starts_at;
+
+    //repeat appointments
+    QString t_dialog_repeat_title;
+    QString t_dialog_repeat_date_message;
+    QString t_dialog_repeat_repeat_every;
+    QString t_dialog_repeat_days;
+    QString t_dialog_repeat_occurrences;
 
     //Contacts dialog
 

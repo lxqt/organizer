@@ -360,6 +360,25 @@
       <TRANSLATION>Starts At</TRANSLATION>
    </TRANSLATE>
    
+   <TRANSLATE ID="t_dialog_repeat_title">
+      <TEXT>Generate Repeat Appointments</TEXT>
+      <TRANSLATION>Generate Repeat Appointments</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_repeat_appointment_start_date">
+      <TEXT>Appointment Start Date</TEXT>
+      <TRANSLATION>Appointment Start Date</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_repeat_repeat_every">
+      <TEXT>Repeat Every</TEXT>
+      <TRANSLATION>Repeat Every</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_repeat_days">
+      <TEXT>Days</TEXT>
+      <TRANSLATION>Days</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_repeat_occurrences">
+      <TEXT>Occurrences</TEXT>
+      <TRANSLATION>Occurrences</TRANSLATION>
+   </TRANSLATE>
    
-
 </TRL>
