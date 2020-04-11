@@ -27,19 +27,18 @@ DialogAppointmentUpdate::DialogAppointmentUpdate(QWidget *parent, Appointment *t
     ui->setupUi(this);
     //Update an appointment
 
-    //setWindowTitle(QStringLiteral("Update Appointment"));
     ui->checkBoxDelete->show();
     setLabelTranslations(); //translations
     //setupComboBoxes();
     //setComboBoxReminderTranslations();
 
     //populate appointment details in dialog
-    this->title=theAppointment->m_title;
-    ui->lineEditTitle->setText(this->title);
-    this->location=theAppointment->m_location;
-    ui->lineEditLocation->setText(this->location);
-    this->description=theAppointment->m_description;
-    ui->textEditDescription->setText(this->description);
+    this->titleValue=theAppointment->m_title;
+    ui->lineEditTitle->setText(this->titleValue);
+    this->locationValue=theAppointment->m_location;
+    ui->lineEditLocation->setText(this->locationValue);
+    this->notesValue=theAppointment->m_description;
+    ui->textEditDescription->setText(this->notesValue);
     this->startTime=QTime::fromString(theAppointment->m_startTime);
     this->endTime =QTime::fromString(theAppointment->m_endTime);
     ui->timeEditStartTime->setTime(startTime);
@@ -102,17 +101,17 @@ DialogAppointmentUpdate::~DialogAppointmentUpdate()
 QString DialogAppointmentUpdate::getTitle()
 {
 
-    return this->title;
+    return this->titleValue;
 }
 
 QString DialogAppointmentUpdate::getLocation()
 {
-     return this->location;
+     return this->locationValue;
 }
 
 QString DialogAppointmentUpdate::getDescription()
 {
-    return this->description;
+    return this->notesValue;
 }
 
 QDate DialogAppointmentUpdate::getAppointmentDate()
@@ -142,19 +141,6 @@ bool DialogAppointmentUpdate::getDeleteRequested()
     return this->deleteRequested;
 
 }
-
-void DialogAppointmentUpdate::setupComboBoxes()
-{
-
-    //Set up Reminder ComboBox
-
-    ui->comboBoxReminder->addItem(QStringLiteral("5 minutes before start"));
-    ui->comboBoxReminder->addItem(QStringLiteral("10 minutes before start"));
-    ui->comboBoxReminder->addItem(QStringLiteral("30 minutes before start"));
-    ui->comboBoxReminder->addItem(QStringLiteral("1 hour before start"));
-    ui->comboBoxReminder->addItem(QStringLiteral("1 day before start"));
-}
-
 
 
 void DialogAppointmentUpdate::setComboBoxReminderTranslations()
@@ -317,20 +303,20 @@ void DialogAppointmentUpdate::reject()
 void DialogAppointmentUpdate::on_lineEditTitle_textChanged(const QString &arg1)
 {
 
-    this->title =arg1;
+    this->titleValue =arg1;
     valid=true;
 }
 
 void DialogAppointmentUpdate::on_lineEditLocation_textChanged(const QString &arg1)
 {
 
-    this->location=arg1;
+    this->locationValue=arg1;
     valid=true;
 }
 
 void DialogAppointmentUpdate::on_textEditDescription_textChanged()
 {
-    this->description =ui->textEditDescription->toPlainText();
+    this->notesValue =ui->textEditDescription->toPlainText();
     valid =true;
 }
 

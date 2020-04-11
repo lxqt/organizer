@@ -229,7 +229,7 @@ int DialogAppointment::getHasReminder()
 void DialogAppointment::accept()
 {
 
-    qDebug("ok button pressed");
+    //qDebug("ok button pressed");
 
 
     if (this->getTitle().isEmpty() || this->getLocation().isEmpty())
@@ -248,7 +248,7 @@ void DialogAppointment::reject()
 {
     //keep all the old vararialbes
 
-    qDebug("rejecting ... Cancel button pressed");
+    //qDebug("rejecting ... Cancel button pressed");
 
     QDialog::reject();
 }
@@ -265,12 +265,7 @@ void DialogAppointment::on_timeEditEndTime_userTimeChanged(const QTime &time)
     this->endTime=time;
 }
 
-void DialogAppointment::on_comboBoxCategory_activated(const QString &arg1)
-{
-     category=arg1;
 
-
-}
 
 void DialogAppointment::on_checkBoxAllDay_stateChanged(int arg1)
 {

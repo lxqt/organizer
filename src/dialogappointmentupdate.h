@@ -39,12 +39,10 @@ public:
     explicit DialogAppointmentUpdate(QWidget *parent = nullptr, Appointment *theAppointment=nullptr);
     ~DialogAppointmentUpdate();
 
-
-
     //Appointment values (default)
-    QString title=QStringLiteral("");
-    QString location=QStringLiteral("");
-    QString description=QStringLiteral("");
+    QString titleValue=QStringLiteral("");
+    QString locationValue=QStringLiteral("");
+    QString notesValue=QStringLiteral("");
     QDate appointmentDate;
     QTime appointmentStartTime;
     QTime appointmentEndTime;
@@ -68,7 +66,7 @@ public:
     int getAllDay();
 
     bool getDeleteRequested();
-    void setupComboBoxes();
+
 
     //reminders
     int reminderMins=0;
@@ -77,24 +75,25 @@ public:
     int getHasReminder();
 
     //Translations
-    QString t_dialog_update=QStringLiteral("New Appointment");
-    QString t_date_display=QStringLiteral("Appointment Date");
-    QString t_title=QStringLiteral("Title: ");
-    QString t_location=QStringLiteral("Location: ");
-    QString t_notes=QStringLiteral("Notes: ");
-    QString t_all_day=QStringLiteral("All Day");
-    QString t_start_time=QStringLiteral("Start Time: ");
-    QString t_end_time=QStringLiteral("End Time: ");
-    QString t_category=QStringLiteral("Category");
-    QString t_reminder=QStringLiteral("Reminder");
-    QString t_delete=QStringLiteral("Delete Appointment");
 
+    //Set externally with setLabelTranslations
+    QString t_dialog_update;
+    QString t_date_display;
+    QString t_title;
+    QString t_location;
+    QString t_notes;
+    QString t_all_day;
+    QString t_start_time;
+    QString t_end_time;
+    QString t_category;
+    QString t_reminder;
+    QString t_delete;
 
-    QString t_reminder_5min=QStringLiteral("5 minutes before start");
-    QString t_reminder_10min=QStringLiteral("10 minutes before start");
-    QString t_reminder_30min=QStringLiteral("30 minutes before start");
-    QString t_reminder_1hour=QStringLiteral("1 hour before start");
-    QString t_reminder_1day=QStringLiteral("1 day before start");
+    QString t_reminder_5min;
+    QString t_reminder_10min;
+    QString t_reminder_30min;
+    QString t_reminder_1hour;
+    QString t_reminder_1day;
 
     void setDialogUpdateTranslation(QString translation);
     void setDateDisplayTranslation(QString translation);

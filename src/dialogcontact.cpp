@@ -29,11 +29,11 @@ DialogContact::DialogContact(QWidget *parent) :
     ui->checkBoxDelete->hide();
     this->birthDate=QDate(); //null
 
-    setLabelDescriptions();
+    //setLabelTranslations();
 
 
-    ui->checkBoxBirthdayUnknown->setText(QStringLiteral("Birthday Unknown"));
-    ui->checkBoxAddBirthdayToCal->setText(QStringLiteral("Add To Calendar"));
+    //ui->checkBoxBirthdayUnknown->setText(QStringLiteral("Birthday Unknown"));
+    //ui->checkBoxAddBirthdayToCal->setText(QStringLiteral("Add To Calendar"));
     ui->checkBoxBirthdayUnknown->setCheckState(Qt::Unchecked);
     ui->dateEditBirthDate->setDate(QDate::currentDate());
 
@@ -45,9 +45,9 @@ DialogContact::DialogContact(Contact *theContact, QWidget *parent):
 {
     ui->setupUi(this);
     //Update Contact
-    //setWindowTitle(QStringLiteral("Update Contact"));
+
     ui->checkBoxDelete->show();
-    setLabelDescriptions();
+    //setLabelTranslations();
 
     ui->lineEditFirstName->setText(theContact->m_firstname);
     ui->lineEditMiddleNames->setText(theContact->m_midnames);
@@ -256,7 +256,7 @@ void DialogContact::setDeleteTranslation(QString translation)
     t_delete=translation;
 }
 
-void DialogContact::setLabelDescriptions()
+void DialogContact::setLabelTranslations()
 {
     setWindowTitle(t_dialog_title);
     ui->labelFirstName->setText(t_first_name);

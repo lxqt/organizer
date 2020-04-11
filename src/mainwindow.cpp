@@ -24,13 +24,143 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
     //set layout first
     QMainWindow::centralWidget()->layout()->setContentsMargins(0, 0, 0, 0);
-
     //Setup database
     dbm.openDatabase();
     dbm.createDatebaseTables();
+
+    //Set up default translation values
+    t_title =QStringLiteral("Organizer");;
+    //Holidays
+    t_holiday_christmas=QStringLiteral("Christmas");
+    t_holiday_boxing=QStringLiteral("Boxing Day");
+    t_holiday_new_year=QStringLiteral("New Year's Dat");
+    t_holiday_easter=QStringLiteral("Easter");
+    t_holiday_good_friday=QStringLiteral("Good Friday");
+    t_holiday_easter_monday=QStringLiteral("Easter Monday");
+    t_holiday_may_bank=QStringLiteral("May Bank Holiday");
+    t_holiday_spring_bank=QStringLiteral("Spring Bank Holiday");
+    t_holiday_summer_bank=QStringLiteral("Summer Bank Holiday");
+    //File
+    t_file=QStringLiteral("File");
+    t_file_export_appointments=QStringLiteral("Export Appointments");
+    t_file_import_appointments=QStringLiteral("Import Appointments");
+    t_file_export_contacts=QStringLiteral("Export Contacts");
+    t_file_import_contacts=QStringLiteral("Import Contacts");
+    t_file_exit=QStringLiteral("Exit");
+    //Edit
+    t_edit=QStringLiteral("Edit");
+    t_edit_delete_all_appointments=QStringLiteral("Delete All Appointments");
+    t_edit_delete_all_contacts=QStringLiteral("Delete All Contacts");
+    t_edit_preferences=QStringLiteral("Preferences");
+
+    //Appointments
+    t_appointments=QStringLiteral("Appointments");
+    t_appointments_new_appointment=QStringLiteral("New Appointment");
+    t_appointments_generate_repeat_appointments=QStringLiteral("Generate Repeat Appointments");
+    t_appointments_upcoming_schedule=QStringLiteral("Upcoming Schedule");
+    //Calendar
+    t_calendar=QStringLiteral("Calendar");
+    t_calendar_show_holidays=QStringLiteral("Show Holidays");
+    t_calendar_show_birthdays=QStringLiteral("Show Birthdays");
+    t_calendar_next_month=QStringLiteral("Next Month");
+    t_calendar_previous_month=QStringLiteral("Previous Month");
+    t_calendar_today=QStringLiteral("Today");
+    t_calendar_increase_font=QStringLiteral("Increase Font Size");
+    t_calendar_decrease_font=QStringLiteral("Decrease Font Size");
+    t_calendar_reset_font=QStringLiteral("Reset Font Size");
+
+
+    //Contacts
+    t_contacts=QStringLiteral("Contacts");
+    t_contacts_new_contact=QStringLiteral("New Contact");
+    t_contacts_upcoming_birthdays=QStringLiteral("Check For Birthdays");
+    //Help
+    t_help=QStringLiteral("Help");
+    t_help_about=QStringLiteral("About");
+    t_about_text=QStringLiteral("Organizer is a Qt lightweight personal information"
+                                " manager developed by Alan Crispin (aka. crispina)");
+    //Contact tab
+    t_contact_tab_first_name=QStringLiteral("First Name");
+    t_contact_tab_mid_name=QStringLiteral("Mid Name");
+    t_contact_tab_last_name=QStringLiteral("Last Name");
+    t_contact_tab_email=QStringLiteral("Email");
+    t_contact_tab_street=QStringLiteral("Street");
+    t_contact_tab_district=QStringLiteral("District");
+    t_contact_tab_city=QStringLiteral("City");
+    t_contact_tab_county=QStringLiteral("County");
+    t_contact_tab_postcode=QStringLiteral("Postcode");
+    t_contact_tab_country=QStringLiteral("Country");
+    t_contact_tab_telephone=QStringLiteral("Telephone");
+    t_contact_tab_birthday=QStringLiteral("Birthday");
+
+    t_contact_tab_quick_full_view=QStringLiteral("Quick/Full View");
+    t_contact_tab_mailto=QStringLiteral("Mail To:");
+
+    //Preferences
+    t_preferences_title=QStringLiteral("Preferences");
+    t_preferences_font_size=QStringLiteral("Font Size");
+    t_preferences_locale=QStringLiteral("Locale");
+    t_preferences_play_audio=QStringLiteral("Play Audio");
+    t_preferences_dark_calendar=QStringLiteral("Dark Calendar");
+    t_preferences_line_spacing=QStringLiteral("Line Spacing");
+
+    //Upcoming dialogs
+    t_upcoming_birthdays_title=QStringLiteral("Upcoming Birthdays (Next Seven Days)");
+    t_upcoming_schedule_title=QStringLiteral("Upcoming Schedule (Next Seven Days)");
+    t_label_upcoming_schedule=QStringLiteral("Upcoming Schedule For Date: ");
+
+    //Appointment dialogs
+    t_dialog_appointment_dialog_title=QStringLiteral("New Appointment");
+    t_dialog_appointment_date_display=QStringLiteral("Appointment Date: ");
+    t_dialog_appointment_title=QStringLiteral("Title");
+    t_dialog_appointment_location=QStringLiteral("Location");
+    t_dialog_appointment_notes=QStringLiteral("Notes");
+    t_dialog_appointment_all_day=QStringLiteral("All Day");
+    t_dialog_appointment_start_time=QStringLiteral("Start Time");
+    t_dialog_appointment_end_time=QStringLiteral("End Time");
+    t_dialog_appointment_reminder=QStringLiteral("Reminder");
+
+    //update appointment
+    t_dialog_appointment_update=QStringLiteral("Update Appointment");
+    t_dialog_appointment_delete=QStringLiteral("Delete Appointment");
+
+    t_reminder_5min=QStringLiteral("5 Minutes Before Start");
+    t_reminder_10min=QStringLiteral("10 Minutes Before Start");
+    t_reminder_30min=QStringLiteral("30 Minutes Before Start");
+    t_reminder_1hour=QStringLiteral("1 Hour Before Start");
+    t_reminder_1day=QStringLiteral("1 Day Before Start");
+
+    t_reminder_message_on=QStringLiteral("On");
+    t_reminder_message_starts_at=QStringLiteral("Starts At");
+
+    //repeat appointments
+    t_dialog_repeat_title=QStringLiteral("Gnerate Repeat Appointments");
+    t_dialog_repeat_date_message=QStringLiteral("Appointment Start Date: ");
+    t_dialog_repeat_repeat_every=QStringLiteral("Repeat Every");
+    t_dialog_repeat_days=QStringLiteral("Days");
+    t_dialog_repeat_occurrences=QStringLiteral("Occurrences");
+
+    //Contacts dialog
+
+    t_dialog_contact_title=QStringLiteral("default");
+    t_dialog_contact_first_name=QStringLiteral("default");
+    t_dialog_contact_mid_name=QStringLiteral("default");
+    t_dialog_contact_last_name=QStringLiteral("default");
+    t_dialog_contact_email=QStringLiteral("default");
+    t_dialog_contact_street=QStringLiteral("default");
+    t_dialog_contact_district=QStringLiteral("default");
+    t_dialog_contact_city=QStringLiteral("default");
+    t_dialog_contact_county=QStringLiteral("default");
+    t_dialog_contact_postcode=QStringLiteral("default");
+    t_dialog_contact_country=QStringLiteral("default");
+    t_dialog_contact_telephone=QStringLiteral("default");
+
+    t_dialog_contact_born_on=QStringLiteral("Born On");
+    t_dialog_contact_birthday_unknown=QStringLiteral("Birthday Unknown");
+    t_dialog_contact_add_to_calendar=QStringLiteral("Add To Calendar");
+    t_dialog_contact_delete=QStringLiteral("Delete Contact");
 
     //Setup empty lists
     appointmentList= QList<Appointment>();
@@ -1525,7 +1655,6 @@ void MainWindow::NewContact()
 {
     //Add new contact
     DialogContact *contactDialog = new DialogContact(this);
-    contactDialog->setModal(true);
 
     contactDialog->setDialogTitleTranslation(t_dialog_contact_title);
     contactDialog->setFirstNameTranslation(t_dialog_contact_first_name);
@@ -1544,11 +1673,9 @@ void MainWindow::NewContact()
     contactDialog->setBirthdayUnknownTranslation(t_dialog_contact_birthday_unknown);
     contactDialog->setAddToCalendarTranslation(t_dialog_contact_add_to_calendar);
 
-    //To do
-    //Birthday unkown, born on add to calenadr
+    contactDialog->setLabelTranslations();
 
-    contactDialog->setLabelDescriptions();
-
+    contactDialog->setModal(true);
 
     if (contactDialog->exec() == QDialog::Accepted ) {
 
@@ -1599,8 +1726,6 @@ void MainWindow::UpdateContact(int dbID)
     Contact currentContact = dbm.getContactByID(dbID);
     DialogContact *contactDialog = new  DialogContact(&currentContact,this);
 
-    contactDialog->setModal(true);
-
     contactDialog->setDialogTitleTranslation(t_dialog_contact_title);
     contactDialog->setFirstNameTranslation(t_dialog_contact_first_name);
     contactDialog->setMidNameTranslation(t_dialog_contact_mid_name);
@@ -1619,8 +1744,9 @@ void MainWindow::UpdateContact(int dbID)
     contactDialog->setAddToCalendarTranslation(t_dialog_contact_add_to_calendar);
     contactDialog->setDeleteTranslation(t_dialog_contact_delete);
 
-    contactDialog->setLabelDescriptions();
+    contactDialog->setLabelTranslations();
 
+    contactDialog->setModal(true);
 
     if (contactDialog->exec() == QDialog::Accepted ) {
 
@@ -2026,7 +2152,7 @@ void MainWindow::on_actionDelete_All_Contacts_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::information(this, t_title+QStringLiteral(" v0.7.1"),
+    QMessageBox::information(this, t_title+QStringLiteral(" v0.7.2"),
                              t_about_text);
 }
 

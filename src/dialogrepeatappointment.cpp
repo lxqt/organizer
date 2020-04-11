@@ -25,46 +25,12 @@ DialogRepeatAppointment::DialogRepeatAppointment(QWidget *parent, QDate *theAppo
 {
     ui->setupUi(this);
 
-    //setWindowTitle(QStringLiteral("Generate Repeat Appointments"));
     this->appointmentDate=*theAppointmentDate;
-
-    //Translation refactoring
-//    ui->labelInfo->setText((QStringLiteral("Appointment Start Date: ")));
-//    ui->labelTitle->setText(QStringLiteral("Title: "));
-//    ui->labelLocation->setText(QStringLiteral("Location: "));
-//    ui->labelNotes->setText(QStringLiteral("Notes: "));
-//    ui->checkBox->setText(QStringLiteral("All Day "));
-//    ui->labelStartTime->setText(QStringLiteral("Start Time: "));
-//    ui->labelEndTime->setText(QStringLiteral("End Time: "));
-
-//    ui->labelRepeatEvery->setText(QStringLiteral("Repeat Every: "));
-//    ui->labelDays->setText(QStringLiteral("Days "));
-//    ui->labelOccurrences->setText(QStringLiteral("Occurrences"));
-
-    //ui->labelDate->setText(appointmentDate.toString());
-
-    t_dialog_title=QStringLiteral("Generate Repeat Appointments");
-    t_start_date_display=QStringLiteral("Appointment Start Date");
-    t_title=QStringLiteral("Title: ");
-    t_location=QStringLiteral("Location: ");
-    t_notes=QStringLiteral("Notes: ");
-    t_all_day=QStringLiteral("All Day");
-    t_start_time=QStringLiteral("Start Time: ");
-    t_end_time=QStringLiteral("End Time: ");
-    t_repeat_every=QStringLiteral("Repeat Every");
-    t_days=QStringLiteral("Days");
-    t_occurrences=QStringLiteral("Occurences");
-
-
     QTime timeNow =QTime::currentTime();
     this->startTime=timeNow;
     this->endTime=timeNow;
     ui->timeEditStarts->setTime(timeNow);
     ui->timeEditEnds->setTime(timeNow);
-
-
-
-
     ui->spinBoxDays->setRange(1,28); //upto 4 weeks apart
     ui->spinBoxDays->setValue(1);
     ui->spinBoxRepeatNumber->setRange(0,12); //over 3 months
@@ -202,7 +168,6 @@ void DialogRepeatAppointment::setLocaleDate(QLocale locale)
 }
 
 
-
 void DialogRepeatAppointment::accept()
 {
     if (this->getTitle().isEmpty() || this->getLocation().isEmpty())
@@ -216,7 +181,10 @@ void DialogRepeatAppointment::accept()
     }
 }
 
-
+void DialogRepeatAppointment::reject()
+{
+    QDialog::reject();
+}
 
 void DialogRepeatAppointment::on_timeEditStarts_userTimeChanged(const QTime &time)
 {

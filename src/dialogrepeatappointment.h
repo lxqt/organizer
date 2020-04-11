@@ -60,18 +60,18 @@ public:
     int getAllDay();
 
     //Translations
-    QString t_dialog_title=QStringLiteral("Generate Repeat Appointments");
-    QString t_start_date_display=QStringLiteral("Appointment Start Date");
-    QString t_title=QStringLiteral("Title: ");
-    QString t_location=QStringLiteral("Location: ");
-    QString t_notes=QStringLiteral("Notes: ");
-    QString t_all_day=QStringLiteral("All Day");
-    QString t_start_time=QStringLiteral("Start Time: ");
-    QString t_end_time=QStringLiteral("End Time: ");
-    QString t_repeat_every=QStringLiteral("Repeat Every");
-    QString t_days=QStringLiteral("Days");
-    QString t_occurrences=QStringLiteral("Occurences");
-
+    //Set exernally with setLabelTranslations
+    QString t_dialog_title;
+    QString t_start_date_display;
+    QString t_title;
+    QString t_location;
+    QString t_notes;
+    QString t_all_day;
+    QString t_start_time;
+    QString t_end_time;
+    QString t_repeat_every;
+    QString t_days;
+    QString t_occurrences;
 
     void setDialogTitleTranslation(QString translation);
     void setStartDateDisplayTranslation(QString translation);
@@ -92,7 +92,8 @@ public:
 
 
 private slots:
-    void accept();
+    void accept();    
+    void reject();
 
 
     void on_timeEditStarts_userTimeChanged(const QTime &time);

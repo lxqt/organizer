@@ -73,24 +73,24 @@ public:
     QString getPhoneNumber();
     bool getDeleteRequested();
 
+    //Set externally with setLabelTranslations
+    QString t_dialog_title;
+    QString t_first_name;
+    QString t_mid_name;
+    QString t_last_name;
+    QString t_email;
+    QString t_street;
+    QString t_district;
+    QString t_city;
+    QString t_county;
+    QString t_postcode;
+    QString t_country;
+    QString t_telephone;
 
-    QString t_dialog_title=QStringLiteral("Contact");
-    QString t_first_name=QStringLiteral("First Name");
-    QString t_mid_name=QStringLiteral("Mid Name");
-    QString t_last_name=QStringLiteral("Last Name");
-    QString t_email=QStringLiteral("Email");
-    QString t_street=QStringLiteral("Street");
-    QString t_district=QStringLiteral("District");
-    QString t_city=QStringLiteral("City");
-    QString t_county=QStringLiteral("County");
-    QString t_postcode=QStringLiteral("Postcode");
-    QString t_country=QStringLiteral("Country");
-    QString t_telephone=QStringLiteral("Telephone");
-
-    QString t_born_on=QStringLiteral("Born On:");
-    QString t_birthday_unknown=QStringLiteral("Birthday Unknown");
-    QString t_add_to_calendar=QStringLiteral("Add To Calendar");
-    QString t_delete=QStringLiteral("Delete");
+    QString t_born_on;
+    QString t_birthday_unknown;
+    QString t_add_to_calendar;
+    QString t_delete;
 
     void setDialogTitleTranslation(QString translation);
     void setFirstNameTranslation(QString translation);
@@ -110,7 +110,7 @@ public:
     void setAddToCalendarTranslation(QString translation);
     void setDeleteTranslation(QString translation);
 
-    void setLabelDescriptions();
+    void setLabelTranslations();
 
 
 private slots:
