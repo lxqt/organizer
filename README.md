@@ -11,7 +11,7 @@ desktop environment.
 
 ### Compiling source code
 
-Please do not do this on production systems
+Compiling from source provides the latest version.  
 
 ```
 mkdir build  
@@ -29,6 +29,8 @@ Note: If upgrading from a previous version you need to remove the previous versi
 /usr/local/bin/organizer
 
 and rename (or remove) the 'organizerdb.sqlite' database in your home directory. Make sure to export contacts and then import them into the new version.
+
+Please do not do this on production systems.
 
 ### Prerequisites
 
@@ -72,7 +74,7 @@ yay -S lxqt-organizer
 ```
 ## Versioning
 
-[SemVer](http://semver.org/) is used for versioning. The version number has the form 0.0.0 representing major, minor and bug fix changes. Currently at 0.7.0 and working towards 1.0.0 major release.
+[SemVer](http://semver.org/) is used for versioning. The version number has the form 0.0.0 representing major, minor and bug fix changes. Currently at 0.7.3.
  
 
 ## Roadmap
@@ -105,4 +107,5 @@ Arch AUR will come soon.
 
 
 ### Translation (Weblate)
-Not available yet - will come soon, when we implemented the translation system.
+
+Customized code based translation system. Translations for English, German, French and Japanese.
