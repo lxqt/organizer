@@ -1,0 +1,381 @@
+<!-- Translation File strings_de.xml-->
+<TRL LANG="Czech" DATE="20200503">
+ 
+  <TRANSLATE ID="t_title">
+      <TEXT>Organizer</TEXT>
+      <TRANSLATION>Organizátor</TRANSLATION>
+   </TRANSLATE>
+
+   <TRANSLATE ID="t_holiday_christmas">      
+      <TEXT>Christmas</TEXT>
+      <TRANSLATION>Vánoce</TRANSLATION>
+   </TRANSLATE>  
+   <TRANSLATE ID="t_holiday_boxing">      
+      <TEXT>Boxing Day</TEXT>
+      <TRANSLATION>Štědrý den</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_holiday_new_year">      
+      <TEXT>New Year's Day</TEXT>
+      <TRANSLATION>Nový rok</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_holiday_easter">      
+      <TEXT>Easter</TEXT>
+      <TRANSLATION>Velikonoce</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_holiday_good_friday">      
+      <TEXT>Good Friday</TEXT>
+      <TRANSLATION>Velký pátek</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_holiday_easter_monday">      
+      <TEXT>Easter Monday</TEXT>
+      <TRANSLATION>Velikonoční pondělí</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_holiday_may_bank">      
+      <TEXT>May Bank Holiday</TEXT>
+      <TRANSLATION>Květnový státní svátek</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_holiday_spring_bank">      
+      <TEXT>Spring Bank Holiday</TEXT>
+      <TRANSLATION>Jarní státní svátek</TRANSLATION>
+   </TRANSLATE>   
+   <TRANSLATE ID="t_holiday_summer_bank">      
+      <TEXT>Summer Bank Holiday</TEXT>
+      <TRANSLATION>Letní státní svátek</TRANSLATION>
+   </TRANSLATE> 
+   
+  <TRANSLATE ID="t_file">
+      <TEXT>File</TEXT>
+      <TRANSLATION>Datum</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_file_export_appointments">
+      <TEXT>Export Appointments</TEXT>
+      <TRANSLATION>Exportovat události</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_file_import_appointments">
+      <TEXT>Import Appointments</TEXT>
+      <TRANSLATION>Importovat události</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_file_export_contacts">
+      <TEXT>Export Contacts</TEXT>
+      <TRANSLATION>Exportovat kontakty</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_file_import_contacts">
+      <TEXT>Import Contacts</TEXT>
+      <TRANSLATION>Importovat kontakty</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_file_exit">
+      <TEXT>Exit</TEXT>
+      <TRANSLATION>Ukončit</TRANSLATION>
+   </TRANSLATE> 
+   
+   <TRANSLATE ID="t_edit">
+      <TEXT>Edit</TEXT>
+      <TRANSLATION>Upravit</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_edit_delete_all_appointments">
+      <TEXT>Delete All Appointments</TEXT>
+      <TRANSLATION>Smazat všechny události</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_edit_delete_all_contacts">
+      <TEXT>Delete All Contacts</TEXT>
+      <TRANSLATION>Smazat všechny kontakty</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_edit_preferences">
+      <TEXT>Preferences</TEXT>
+      <TRANSLATION>Předvolby</TRANSLATION>
+   </TRANSLATE> 
+   
+    <TRANSLATE ID="t_appointments">
+      <TEXT>Appointments</TEXT>
+      <TRANSLATION>Události</TRANSLATION>
+   </TRANSLATE> 
+    <TRANSLATE ID="t_appointments_new_appointment">
+      <TEXT>New Appointment</TEXT>
+      <TRANSLATION>Nová událost</TRANSLATION>
+   </TRANSLATE> 
+    <TRANSLATE ID="t_appointments_generate_repeat_appointments">
+      <TEXT>Generate Repeat Appointments</TEXT>
+      <TRANSLATION>Vytvořit opakující se událost</TRANSLATION>
+   </TRANSLATE> 
+    <TRANSLATE ID="t_appointments_upcoming_schedule">
+      <TEXT>Upcoming Schedule</TEXT>
+      <TRANSLATION>Nadcházející události</TRANSLATION>
+   </TRANSLATE> 
+   
+   <TRANSLATE ID="t_calendar">
+      <TEXT>Calendar</TEXT>
+      <TRANSLATION>Kalendář</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_calendar_show_holidays">
+      <TEXT>Show Holidays</TEXT>
+      <TRANSLATION>Zobrazit svátky</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_show_birthdays">
+      <TEXT>Show Birthdays</TEXT>
+      <TRANSLATION>Zobrazit narozeniny</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_next_month">
+      <TEXT>Next Month</TEXT>
+      <TRANSLATION>Následující měsíc</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_previous_month">
+      <TEXT>Previous Month</TEXT>
+      <TRANSLATION>Předchozí měsíc</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_today">
+      <TEXT>Today</TEXT>
+      <TRANSLATION>Dnes</TRANSLATION>
+   </TRANSLATE> 
+    <TRANSLATE ID="t_calendar_increase_font">
+      <TEXT>Increase Font Size</TEXT>
+      <TRANSLATION>Zvětšit písmo</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_decrease_font">
+      <TEXT>Decrease Font Size</TEXT>
+      <TRANSLATION>Zmenšit písmo</TRANSLATION>
+   </TRANSLATE> 
+   <TRANSLATE ID="t_calendar_reset_font">
+      <TEXT>Reset Font Size</TEXT>
+      <TRANSLATION>Vrátit velikost písma na výchozí</TRANSLATION>
+   </TRANSLATE> 
+   
+   <TRANSLATE ID="t_contacts">
+      <TEXT>Contacts</TEXT>
+      <TRANSLATION>Kontakty</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_contacts_new_contact">
+      <TEXT>New Contact</TEXT>
+      <TRANSLATION>Nový kontakt</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_contacts_upcoming_birthdays">
+      <TEXT>Check For Birthdays</TEXT>
+      <TRANSLATION>Podívat se po narozeninách</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_help">
+      <TEXT>Help</TEXT>
+      <TRANSLATION>Nápověda</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_help_about">
+      <TEXT>About</TEXT>
+      <TRANSLATION>O aplikaci</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_about_text">
+      <TEXT>Organizer is a Qt lightweight personal information manager developed by Alan Crispin (aka. crispina) </TEXT>
+      <TRANSLATION>Organizátor je nenáročný správce osobních informací, využívající Qt, který vyvíjí Alan Crispin (alias Crispina). </TRANSLATION>
+   
+    </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_first_name">
+      <TEXT>First Name</TEXT>
+      <TRANSLATION>Jméno</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_mid_name">
+      <TEXT>Mid Name</TEXT>
+      <TRANSLATION>Prostřední jméno</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_last_name">
+      <TEXT>Last Name</TEXT>
+      <TRANSLATION>Příjmení</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_email">
+      <TEXT>Email</TEXT>
+      <TRANSLATION>E-mail</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_street">
+      <TEXT>Street</TEXT>
+      <TRANSLATION>Ulice</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_district">
+      <TEXT>District</TEXT>
+      <TRANSLATION>Okres</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_city">
+      <TEXT>City</TEXT>
+      <TRANSLATION>Město</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_county">
+      <TEXT>County</TEXT>
+      <TRANSLATION>Okres</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_postcode">
+      <TEXT>Postcode</TEXT>
+      <TRANSLATION>PSČ</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_country">
+      <TEXT>Country</TEXT>
+      <TRANSLATION>Země</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_telephone">
+      <TEXT>Telephone</TEXT>
+      <TRANSLATION>Telefon</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_birthday">
+      <TEXT>Birthday</TEXT>
+      <TRANSLATION>Narozeniny</TRANSLATION>
+   </TRANSLATE>
+    
+   
+   <TRANSLATE ID="t_tab_contacts_quick-full-view">
+      <TEXT>Quick Full View</TEXT>
+      <TRANSLATION>Rychlý úplný pohled</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_tab_contacts_mailto">
+      <TEXT>Mail To</TEXT>
+      <TRANSLATION>Adresát:</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_preferences_title">
+      <TEXT>Preferences</TEXT>
+      <TRANSLATION>Předvolby</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_font_size">
+      <TEXT>Font Size</TEXT>
+      <TRANSLATION>Velikost písma</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_locale">
+      <TEXT>Locale</TEXT>
+      <TRANSLATION>Místní a jazyková nastavení</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_play_audio">
+      <TEXT>Play Audio</TEXT>
+      <TRANSLATION>Přehrát zvuk</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_dark_calendar">
+      <TEXT>Dark Calendar</TEXT>
+      <TRANSLATION>Tmavý kalendář</TRANSLATION>
+   </TRANSLATE>
+    <TRANSLATE ID="t_preferences_line_spacing">
+      <TEXT>Line Spacing</TEXT>
+      <TRANSLATION>Rozestupy řádek</TRANSLATION>
+   </TRANSLATE>
+   
+     <TRANSLATE ID="t_upcoming_birthdays_title">
+      <TEXT>Upcoming Birthdays</TEXT>
+      <TRANSLATION>Nadcházející narozeniny</TRANSLATION>
+   </TRANSLATE>
+   
+   <TRANSLATE ID="t_upcoming_schedule_title">
+      <TEXT>Upcoming Schedule</TEXT>
+      <TRANSLATION>Nadcházející události</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_upcoming_schedule_label">
+      <TEXT>Upcoming Schedule For Date</TEXT>
+      <TRANSLATION>Nadcházející události pro datum: </TRANSLATION>
+   </TRANSLATE>
+   
+   <TRANSLATE ID="t_dialog_appointment_dialog_title">
+      <TEXT>New Appointment</TEXT>
+      <TRANSLATION>Nová událost</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_date_display">
+      <TEXT>Appointment Date</TEXT>
+      <TRANSLATION>Datum události:</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_title">
+      <TEXT>Title</TEXT>
+      <TRANSLATION>Název</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_location">
+      <TEXT>Location</TEXT>
+      <TRANSLATION>Místo</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_notes">
+      <TEXT>Notes</TEXT>
+      <TRANSLATION>Poznámky</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_all_day">
+      <TEXT>All Day</TEXT>
+      <TRANSLATION>Celodenní</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_start_time">
+      <TEXT>Start Time</TEXT>
+      <TRANSLATION>Začátek</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_end_time">
+      <TEXT>End Time</TEXT>
+      <TRANSLATION>Konec</TRANSLATION>
+   </TRANSLATE>
+   
+   <TRANSLATE ID="t_dialog_appointment_reminder">
+      <TEXT>Reminder</TEXT>
+      <TRANSLATION>Připomínka</TRANSLATION>
+   </TRANSLATE>
+   
+   <TRANSLATE ID="t_dialog_appointment_update">
+      <TEXT>Update Appointment</TEXT>
+      <TRANSLATION>Aktualizovat událost</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_appointment_delete">
+      <TEXT>Delete</TEXT>
+      <TRANSLATION>Smazat událost</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_dialog_contact_born_on">
+      <TEXT>Born On</TEXT>
+      <TRANSLATION>Narozen(a)</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_contact_birthday_unknown">
+      <TEXT>Birthday Unknown</TEXT>
+      <TRANSLATION>Narozeniny neznámé</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_contact_add_to_calendar">
+      <TEXT>Add To Calendar</TEXT>
+      <TRANSLATION>Přidat do kalendáře</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_contact_delete">
+      <TEXT>Delete Contact</TEXT>
+      <TRANSLATION>Smazat kontakt</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_dialog_reminder_5min">
+      <TEXT>5 Minutes Before Start</TEXT>
+      <TRANSLATION>5 minut před začátkem</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_reminder_10min">
+      <TEXT>10 Minutes Before Start</TEXT>
+      <TRANSLATION>10 minut před začátekem</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_reminder_30min">
+      <TEXT>30 Minutes Before Start</TEXT>
+      <TRANSLATION>30 minut před začátkem</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_reminder_1hour">
+      <TEXT>1 Hour Before Start</TEXT>
+      <TRANSLATION>1 hodinu před začátkem</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_reminder_1day">
+      <TEXT>1 Day Before Start</TEXT>
+      <TRANSLATION>1 den před začátkem</TRANSLATION>
+   </TRANSLATE>  
+   
+    <TRANSLATE ID="t_message_reminder_on">
+      <TEXT>On</TEXT>
+      <TRANSLATION>V</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_message_reminder_starts_at">
+      <TEXT>Starts At</TEXT>
+      <TRANSLATION>Začíná v</TRANSLATION>
+   </TRANSLATE>
+   
+    <TRANSLATE ID="t_dialog_repeat_title">
+      <TEXT>Generate Repeat Appointments</TEXT>
+      <TRANSLATION>Vytvořit opakující se událost</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_repeat_appointment_start_date">
+      <TEXT>Appointment Start Date</TEXT>
+      <TRANSLATION>Začátek události</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_repeat_repeat_every">
+      <TEXT>Repeat Every</TEXT>
+      <TRANSLATION>Opakovat každých</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_repeat_days">
+      <TEXT>Days</TEXT>
+      <TRANSLATION>Dnů</TRANSLATION>
+   </TRANSLATE>
+   <TRANSLATE ID="t_dialog_repeat_occurrences">
+      <TEXT>Occurrences</TEXT>
+      <TRANSLATION>Výskyty</TRANSLATION>
+   </TRANSLATE>
+
+</TRL>
