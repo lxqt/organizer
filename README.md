@@ -55,7 +55,7 @@ qtmultimedia5-dev
 
 Binary packages are available as snap packages and in the Arch User Repository (AUR) 
 
-* [Snap by ito32bit](https://build.snapcraft.io/user/ito32bit/lxqt-organizer-snap-packaging) 
+* [Snap by ito32bit](https://snapcraft.io/lxqt-organizer-snap) 
 
 To test the latest successful build use:
 ```
@@ -72,6 +72,7 @@ It can be installed using yay as shown below.
 ```
 yay -S lxqt-organizer
 ```
+
 ## Versioning
 
 [SemVer](http://semver.org/) is used for versioning. The version number has the form 0.0.0 representing major, minor and bug fix changes. Currently at 0.7.3.
