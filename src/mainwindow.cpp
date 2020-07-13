@@ -201,10 +201,10 @@ MainWindow::MainWindow(QWidget *parent) :
     timer->start(1000); //check for reminders every 1000ms
 
     if(playAudio){
-    QSound::play(":/sounds/window-attention.wav");
+    QSound::play(QStringLiteral(":/sounds/window-attention.wav"));
     }
 
-    setWindowIcon(QIcon(":/icons/icon-calendar.png"));
+    setWindowIcon(QIcon(QStringLiteral(":/icons/icon-calendar.png")));
     selectedDate = QDate::currentDate();
 
     selectedDateLabel = new QLabel(this);
@@ -265,7 +265,7 @@ MainWindow::MainWindow(QWidget *parent) :
      QString month_year =locale.toString(selectedDate,QStringLiteral("MMMM yyyy"));
      ui->labelCalendarHeader->setText(month_year);
      ui->labelCalendarHeader->setStyleSheet
-            ("QLabel { background-color : rgb(81, 186, 242); color : black; }");
+            (QStringLiteral("QLabel { background-color : rgb(81, 186, 242); color : black; }"));
     QFont fontCalHeader = ui->labelCalendarHeader->font();
     fontCalHeader.setBold(true);
     ui->labelCalendarHeader->setFont(fontCalHeader);
@@ -397,9 +397,9 @@ void MainWindow::checkForReminders()
 
                     QString str=a.m_title;
                     //str.append(QStringLiteral(" on "));
-                    str.append(" ");
+                    str.append(QStringLiteral(" "));
                     str.append(t_reminder_message_on);
-                    str.append(" ");
+                    str.append(QStringLiteral(" "));
 
                     //QDate reminderDate= QDate::fromString(a.m_date);
 
@@ -410,11 +410,11 @@ void MainWindow::checkForReminders()
                     str.append(QLatin1Char('\n')); //new line
                     //str.append(QStringLiteral("Starts at "));
                     str.append(t_reminder_message_starts_at);
-                    str.append(" ");
+                    str.append(QStringLiteral(" "));
                     QTime startsAt =QTime::fromString(a.m_startTime);
-                    str.append(startsAt.toString("hh:mm"));
+                    str.append(startsAt.toString(QStringLiteral("hh:mm")));
                     if(playAudio){
-                        QSound::play(":/sounds/window-attention.wav");
+                        QSound::play(QStringLiteral(":/sounds/window-attention.wav"));
                     }
 
                     QMessageBox::information(this,t_dialog_appointment_reminder,str);
@@ -429,16 +429,16 @@ void MainWindow::checkForReminders()
 
 QLocale MainWindow::getLocale(QString localeStr)
 {
-    if(localeStr=="English") {
+    if(localeStr==QLatin1String("English")) {
         return QLocale::English;
     }
-    else if(localeStr=="French") {
+    else if(localeStr==QLatin1String("French")) {
         return QLocale::French;
     }
-    else if(localeStr=="German"){
+    else if(localeStr==QLatin1String("German")){
         return QLocale::German;
     }
-    else if(localeStr=="Japanese"){
+    else if(localeStr==QLatin1String("Japanese")){
         return QLocale::Japanese;
     }
     else {
@@ -450,24 +450,24 @@ void MainWindow::ReadXMLTranslation(QString localeStr)
 {
     QDomDocument document;
 
-    QString translationfile ="";
+    QString translationfile = QLatin1String("");
 
-    if (localeStr=="German")
+    if (localeStr==QLatin1String("German"))
     {
-        translationfile=":/translations/strings_de.xml";
+        translationfile=QStringLiteral(":/translations/strings_de.xml");
     }
-    else if(localeStr=="French"){
-        translationfile=":/translations/strings_fr.xml";
+    else if(localeStr==QLatin1String("French")){
+        translationfile=QStringLiteral(":/translations/strings_fr.xml");
     }
-    else if(localeStr=="English"){
-        translationfile=":/translations/strings_gb.xml";
+    else if(localeStr==QLatin1String("English")){
+        translationfile=QStringLiteral(":/translations/strings_gb.xml");
     }
-    else if(localeStr=="Japanese")
+    else if(localeStr==QLatin1String("Japanese"))
     {
-        translationfile=":/translations/strings_jp.xml";
+        translationfile=QStringLiteral(":/translations/strings_jp.xml");
     }
     else {
-        translationfile=":/translations/strings_gb.xml";
+        translationfile=QStringLiteral(":/translations/strings_gb.xml");
     }
 
     QFile file(translationfile);
@@ -483,7 +483,7 @@ void MainWindow::ReadXMLTranslation(QString localeStr)
     QDomElement topElement = document.documentElement();
     // Get topElement names and attributes
     QString type=topElement.tagName();
-    QString lang=topElement.attribute("LANG","No name");
+    QString lang=topElement.attribute(QStringLiteral("LANG"),QStringLiteral("No name"));
     //int date=topElement.attribute("DATE","20200101").toInt();
 
     //Read data
@@ -494,10 +494,10 @@ void MainWindow::ReadXMLTranslation(QString localeStr)
     while(!Translate.isNull())
     {
         // Check if the child tag name is TRANSLATE
-        if (Translate.tagName()=="TRANSLATE")
+        if (Translate.tagName()==QLatin1String("TRANSLATE"))
         {
             // Read and display the translate ID
-            QString ID=Translate.attribute("ID","No ID");
+            QString ID=Translate.attribute(QStringLiteral("ID"),QStringLiteral("No ID"));
 
 
             // Get the first child of the component
@@ -510,312 +510,312 @@ void MainWindow::ReadXMLTranslation(QString localeStr)
             while (!Child.isNull())
             {
                 // Read text and translation (key-value pair)
-                if (Child.tagName()=="TEXT") text=Child.firstChild().toText().data();
-                if (Child.tagName()=="TRANSLATION") translation=Child.firstChild().toText().data();
+                if (Child.tagName()==QLatin1String("TEXT")) text=Child.firstChild().toText().data();
+                if (Child.tagName()==QLatin1String("TRANSLATION")) translation=Child.firstChild().toText().data();
 
                 // Next child
                 Child = Child.nextSibling().toElement();
             }
 
-            if(ID=="t_title"){
+            if(ID==QLatin1String("t_title")){
                 t_title=translation;
             }
             //Holidays
-            else if(ID=="t_holiday_christmas"){
+            else if(ID==QLatin1String("t_holiday_christmas")){
                 t_holiday_christmas=translation;
             }
-            else if(ID=="t_holiday_boxing"){
+            else if(ID==QLatin1String("t_holiday_boxing")){
                 t_holiday_boxing=translation;
             }
-            else if(ID=="t_holiday_new_year"){
+            else if(ID==QLatin1String("t_holiday_new_year")){
                 t_holiday_new_year=translation;
             }
-            else if(ID=="t_holiday_easter"){
+            else if(ID==QLatin1String("t_holiday_easter")){
                 t_holiday_easter=translation;
             }
-            else if(ID=="t_holiday_good_friday"){
+            else if(ID==QLatin1String("t_holiday_good_friday")){
                 t_holiday_good_friday=translation;
             }
-            else if(ID=="t_holiday_easter_monday"){
+            else if(ID==QLatin1String("t_holiday_easter_monday")){
                 t_holiday_easter_monday=translation;
             }
-            else if(ID=="t_holiday_may_bank"){
+            else if(ID==QLatin1String("t_holiday_may_bank")){
                 t_holiday_may_bank=translation;
             }
-            else if(ID=="t_holiday_spring_bank"){
+            else if(ID==QLatin1String("t_holiday_spring_bank")){
                 t_holiday_spring_bank=translation;
             }
-            else if(ID=="t_holiday_summer_bank"){
+            else if(ID==QLatin1String("t_holiday_summer_bank")){
                 t_holiday_summer_bank=translation;
             }
             //File menu
-            else if(ID=="t_file"){
+            else if(ID==QLatin1String("t_file")){
                 t_file=translation;
             }
-            else if(ID=="t_file_export_appointments"){
+            else if(ID==QLatin1String("t_file_export_appointments")){
                 t_file_export_appointments=translation;
             }
-            else if(ID=="t_file_import_appointments"){
+            else if(ID==QLatin1String("t_file_import_appointments")){
                 t_file_import_appointments=translation;
             }
-            else if(ID=="t_file_export_contacts"){
+            else if(ID==QLatin1String("t_file_export_contacts")){
                 t_file_export_contacts=translation;
             }
-            else if(ID=="t_file_import_contacts"){
+            else if(ID==QLatin1String("t_file_import_contacts")){
                 t_file_import_contacts=translation;
             }
-            else if(ID=="t_file_exit"){
+            else if(ID==QLatin1String("t_file_exit")){
                 t_file_exit=translation;
             }
             //Edit Menu
-            else if(ID=="t_edit"){
+            else if(ID==QLatin1String("t_edit")){
                 t_edit=translation;
             }
-            else if(ID=="t_edit_delete_all_appointments"){
+            else if(ID==QLatin1String("t_edit_delete_all_appointments")){
                 t_edit_delete_all_appointments=translation;
             }
-            else if(ID=="t_edit_delete_all_contacts"){
+            else if(ID==QLatin1String("t_edit_delete_all_contacts")){
                 t_edit_delete_all_contacts=translation;
             }
-            else if(ID=="t_edit_preferences"){
+            else if(ID==QLatin1String("t_edit_preferences")){
                 t_edit_preferences=translation;
             }
 
             //Appointments
-            else if(ID=="t_appointments"){
+            else if(ID==QLatin1String("t_appointments")){
                 t_appointments=translation;
             }
-            else if(ID=="t_appointments_new_appointment"){
+            else if(ID==QLatin1String("t_appointments_new_appointment")){
                 t_appointments_new_appointment=translation;
             }
-            else if(ID=="t_appointments_generate_repeat_appointments"){
+            else if(ID==QLatin1String("t_appointments_generate_repeat_appointments")){
                 t_appointments_generate_repeat_appointments=translation;
             }
-            else if(ID=="t_appointments_upcoming_schedule"){
+            else if(ID==QLatin1String("t_appointments_upcoming_schedule")){
                 t_appointments_upcoming_schedule=translation;
             }
 
             //Calendar
-            else if(ID=="t_calendar"){
+            else if(ID==QLatin1String("t_calendar")){
                 t_calendar=translation;
             }
-            else if(ID=="t_calendar_show_holidays"){
+            else if(ID==QLatin1String("t_calendar_show_holidays")){
                 t_calendar_show_holidays=translation;
             }
-            else if(ID=="t_calendar_show_birthdays"){
+            else if(ID==QLatin1String("t_calendar_show_birthdays")){
                 t_calendar_show_birthdays=translation;
             }
-            else if(ID=="t_calendar_next_month"){
+            else if(ID==QLatin1String("t_calendar_next_month")){
                 t_calendar_next_month=translation;
             }
-            else if(ID=="t_calendar_previous_month"){
+            else if(ID==QLatin1String("t_calendar_previous_month")){
                 t_calendar_previous_month=translation;
             }
-            else if(ID=="t_calendar_today"){
+            else if(ID==QLatin1String("t_calendar_today")){
                 t_calendar_today=translation;
             }
 
-            else if(ID=="t_calendar_increase_font"){
+            else if(ID==QLatin1String("t_calendar_increase_font")){
                 t_calendar_increase_font=translation;
             }
-            else if(ID=="t_calendar_decrease_font"){
+            else if(ID==QLatin1String("t_calendar_decrease_font")){
                 t_calendar_decrease_font=translation;
             }
-            else if(ID=="t_calendar_reset_font"){
+            else if(ID==QLatin1String("t_calendar_reset_font")){
                 t_calendar_reset_font=translation;
             }
 
 
             //Contacts
-            else if(ID=="t_contacts"){
+            else if(ID==QLatin1String("t_contacts")){
                 t_contacts=translation;
                 t_dialog_contact_title=translation;
             }
-            else if(ID=="t_contacts_new_contact"){
+            else if(ID==QLatin1String("t_contacts_new_contact")){
                 t_contacts_new_contact=translation;
             }
-            else if(ID=="t_contacts_upcoming_birthdays"){
+            else if(ID==QLatin1String("t_contacts_upcoming_birthdays")){
                 t_contacts_upcoming_birthdays=translation;
             }
             //help
-            else if(ID=="t_help"){
+            else if(ID==QLatin1String("t_help")){
                 t_help=translation;
             }
-            else if(ID=="t_help_about"){
+            else if(ID==QLatin1String("t_help_about")){
                 t_help_about=translation;
             }
-            else if(ID=="t_about_text"){
+            else if(ID==QLatin1String("t_about_text")){
                 t_about_text=translation;
             }
             //tab contacts
-            else if(ID=="t_tab_contacts_first_name"){
+            else if(ID==QLatin1String("t_tab_contacts_first_name")){
                 t_contact_tab_first_name=translation;
                 t_dialog_contact_first_name=translation;
             }
-            else if(ID=="t_tab_contacts_mid_name"){
+            else if(ID==QLatin1String("t_tab_contacts_mid_name")){
                 t_contact_tab_mid_name=translation;
                 t_dialog_contact_mid_name=translation;
             }
-            else if(ID=="t_tab_contacts_last_name"){
+            else if(ID==QLatin1String("t_tab_contacts_last_name")){
                 t_contact_tab_last_name=translation;
                 t_dialog_contact_last_name=translation;
             }
-            else if(ID=="t_tab_contacts_email"){
+            else if(ID==QLatin1String("t_tab_contacts_email")){
                 t_contact_tab_email=translation;
                 t_dialog_contact_email=translation;
             }
-            else if(ID=="t_tab_contacts_street"){
+            else if(ID==QLatin1String("t_tab_contacts_street")){
                 t_contact_tab_street=translation;
                 t_dialog_contact_street=translation;
             }
-            else if(ID=="t_tab_contacts_district"){
+            else if(ID==QLatin1String("t_tab_contacts_district")){
                 t_contact_tab_district=translation;
                 t_dialog_contact_district=translation;
             }
-            else if(ID=="t_tab_contacts_city"){
+            else if(ID==QLatin1String("t_tab_contacts_city")){
                 t_contact_tab_city=translation;
                 t_dialog_contact_city=translation;
             }
-            else if(ID=="t_tab_contacts_county"){
+            else if(ID==QLatin1String("t_tab_contacts_county")){
                 t_contact_tab_county=translation;
                 t_dialog_contact_county=translation;
             }
-            else if(ID=="t_tab_contacts_postcode"){
+            else if(ID==QLatin1String("t_tab_contacts_postcode")){
                 t_contact_tab_postcode=translation;
                 t_dialog_contact_postcode=translation;
             }
-            else if(ID=="t_tab_contacts_country"){
+            else if(ID==QLatin1String("t_tab_contacts_country")){
                 t_contact_tab_country=translation;
                 t_dialog_contact_country=translation;
             }
-            else if(ID=="t_tab_contacts_telephone"){
+            else if(ID==QLatin1String("t_tab_contacts_telephone")){
                 t_contact_tab_telephone=translation;
                 t_dialog_contact_telephone=translation;
             }
-            else if(ID=="t_tab_contacts_birthday"){
+            else if(ID==QLatin1String("t_tab_contacts_birthday")){
                 t_contact_tab_birthday=translation;
             }
-            else if(ID=="t_tab_contacts_quick-full-view"){
+            else if(ID==QLatin1String("t_tab_contacts_quick-full-view")){
                 t_contact_tab_quick_full_view=translation;
             }
-            else if(ID=="t_tab_contacts_mailto"){
+            else if(ID==QLatin1String("t_tab_contacts_mailto")){
                 t_contact_tab_mailto=translation;
             }
 
             //Preferences dialog
 
-            else if(ID=="t_preferences_title"){
+            else if(ID==QLatin1String("t_preferences_title")){
                 t_preferences_title=translation;
             }
-            else if(ID=="t_preferences_font_size"){
+            else if(ID==QLatin1String("t_preferences_font_size")){
                 t_preferences_font_size=translation;
             }
-            else if(ID=="t_preferences_locale"){
+            else if(ID==QLatin1String("t_preferences_locale")){
                 t_preferences_locale=translation;
             }
-            else if(ID=="t_preferences_play_audio"){
+            else if(ID==QLatin1String("t_preferences_play_audio")){
                 t_preferences_play_audio=translation;
             }
-            else if(ID=="t_preferences_dark_calendar"){
+            else if(ID==QLatin1String("t_preferences_dark_calendar")){
                 t_preferences_dark_calendar=translation;
             }
-            else if(ID=="t_preferences_line_spacing"){
+            else if(ID==QLatin1String("t_preferences_line_spacing")){
                 t_preferences_line_spacing=translation;
             }
             //upcoming
-            else if(ID=="t_upcoming_birthdays_title"){
+            else if(ID==QLatin1String("t_upcoming_birthdays_title")){
                 t_upcoming_birthdays_title=translation;
             }
-            else if(ID=="t_upcoming_schedule_title"){
+            else if(ID==QLatin1String("t_upcoming_schedule_title")){
                 t_upcoming_schedule_title=translation;
             }
-            else if(ID=="t_upcoming_schedule_label"){
+            else if(ID==QLatin1String("t_upcoming_schedule_label")){
                 t_label_upcoming_schedule=translation;
             }
             //appointment dialogs
-            else if(ID=="t_dialog_appointment_dialog_title"){
+            else if(ID==QLatin1String("t_dialog_appointment_dialog_title")){
                 t_dialog_appointment_dialog_title=translation;
             }
-            else if(ID=="t_dialog_appointment_date_display"){
+            else if(ID==QLatin1String("t_dialog_appointment_date_display")){
                 t_dialog_appointment_date_display=translation;
             }
-            else if(ID=="t_dialog_appointment_title"){
+            else if(ID==QLatin1String("t_dialog_appointment_title")){
                 t_dialog_appointment_title=translation;
             }
-            else if(ID=="t_dialog_appointment_location"){
+            else if(ID==QLatin1String("t_dialog_appointment_location")){
                 t_dialog_appointment_location=translation;
             }
-            else if(ID=="t_dialog_appointment_notes"){
+            else if(ID==QLatin1String("t_dialog_appointment_notes")){
                 t_dialog_appointment_notes=translation;
             }
-            else if(ID=="t_dialog_appointment_all_day"){
+            else if(ID==QLatin1String("t_dialog_appointment_all_day")){
                 t_dialog_appointment_all_day=translation;
             }
-            else if(ID=="t_dialog_appointment_start_time"){
+            else if(ID==QLatin1String("t_dialog_appointment_start_time")){
                 t_dialog_appointment_start_time=translation;
             }
-            else if(ID=="t_dialog_appointment_end_time"){
+            else if(ID==QLatin1String("t_dialog_appointment_end_time")){
                 t_dialog_appointment_end_time=translation;
             }
 
-            else if(ID=="t_dialog_appointment_reminder"){
+            else if(ID==QLatin1String("t_dialog_appointment_reminder")){
                 t_dialog_appointment_reminder=translation;
             }
-            else if(ID=="t_dialog_appointment_update"){
+            else if(ID==QLatin1String("t_dialog_appointment_update")){
                 t_dialog_appointment_update=translation;
             }
-            else if(ID=="t_dialog_appointment_delete"){
+            else if(ID==QLatin1String("t_dialog_appointment_delete")){
                 t_dialog_appointment_delete=translation;
             }
            //contact dialogs
-            else if(ID=="t_dialog_contact_born_on"){
+            else if(ID==QLatin1String("t_dialog_contact_born_on")){
                 t_dialog_contact_born_on=translation;
             }
-            else if(ID=="t_dialog_contact_birthday_unknown"){
+            else if(ID==QLatin1String("t_dialog_contact_birthday_unknown")){
                 t_dialog_contact_birthday_unknown=translation;
             }
-            else if(ID=="t_dialog_contact_add_to_calendar"){
+            else if(ID==QLatin1String("t_dialog_contact_add_to_calendar")){
                 t_dialog_contact_add_to_calendar=translation;
             }
-            else if(ID=="t_dialog_contact_delete"){
+            else if(ID==QLatin1String("t_dialog_contact_delete")){
                 t_dialog_contact_delete=translation;
             }
             //dialog reminders
-            else if(ID=="t_dialog_reminder_5min"){
+            else if(ID==QLatin1String("t_dialog_reminder_5min")){
                 t_reminder_5min=translation;
             }
-            else if(ID=="t_dialog_reminder_10min"){
+            else if(ID==QLatin1String("t_dialog_reminder_10min")){
                 t_reminder_10min=translation;
             }
-            else if(ID=="t_dialog_reminder_30min"){
+            else if(ID==QLatin1String("t_dialog_reminder_30min")){
                 t_reminder_30min=translation;
             }
-            else if(ID=="t_dialog_reminder_1hour"){
+            else if(ID==QLatin1String("t_dialog_reminder_1hour")){
                 t_reminder_1hour=translation;
             }
-            else if(ID=="t_dialog_reminder_1day"){
+            else if(ID==QLatin1String("t_dialog_reminder_1day")){
                 t_reminder_1day=translation;
             }
-            else if(ID=="t_message_reminder_on"){
+            else if(ID==QLatin1String("t_message_reminder_on")){
                 t_reminder_message_on=translation;
             }
-            else if(ID=="t_message_reminder_starts_at"){
+            else if(ID==QLatin1String("t_message_reminder_starts_at")){
                 t_reminder_message_starts_at=translation;
             }
             //dialog repeat appointments
-            else if(ID=="t_dialog_repeat_title"){
+            else if(ID==QLatin1String("t_dialog_repeat_title")){
                 t_dialog_repeat_title=translation;
             }
-            else if(ID=="t_dialog_repeat_appointment_start_date"){
+            else if(ID==QLatin1String("t_dialog_repeat_appointment_start_date")){
                 t_dialog_repeat_date_message=translation;
             }
-            else if(ID=="t_dialog_repeat_repeat_every"){
+            else if(ID==QLatin1String("t_dialog_repeat_repeat_every")){
                 t_dialog_repeat_repeat_every=translation;
             }
-            else if(ID=="t_dialog_repeat_days"){
+            else if(ID==QLatin1String("t_dialog_repeat_days")){
                 t_dialog_repeat_days=translation;
             }
-            else if(ID=="t_dialog_repeat_occurrences"){
+            else if(ID==QLatin1String("t_dialog_repeat_occurrences")){
                 t_dialog_repeat_occurrences=translation;
             }
 
@@ -2302,7 +2302,7 @@ void MainWindow::SaveSettings()
     setting.setAttribute(QStringLiteral("LineSpacing"),currentPreferences.m_lineSpacing);
     root.appendChild(setting);
 
-    QFile file("conf.xml");
+    QFile file(QStringLiteral("conf.xml"));
     if (!file.open(QFile::WriteOnly | QFile::Text)){
        //qDebug() << "Error saving XML file.";
         return;
@@ -2319,7 +2319,7 @@ bool MainWindow::LoadSettings()
 {
     QDomDocument document;
 
-    QFile file("conf.xml");
+    QFile file(QStringLiteral("conf.xml"));
 
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
@@ -2363,12 +2363,12 @@ void MainWindow::setDarkCalendar(int darkCalendar)
 {
     if (darkCalendar==0){
         //light background
-        ui->tableWidgetCalendar->setStyleSheet( "color: black; background-color: white");
+        ui->tableWidgetCalendar->setStyleSheet(QStringLiteral("color: black; background-color: white"));
 
     }
     else if (darkCalendar==1){
         //dim gray
-        ui->tableWidgetCalendar->setStyleSheet( "color: white; background-color: rgb(105,105,105)");
+        ui->tableWidgetCalendar->setStyleSheet(QStringLiteral("color: white; background-color: rgb(105,105,105)"));
     }
 }
 

@@ -54,10 +54,10 @@ DialogPreferences::~DialogPreferences()
 void DialogPreferences::setupComboxBoxCalendarLocale()
 {
 
-    ui->comboBoxLocale->addItem("English");
-    ui->comboBoxLocale->addItem("German");
-    ui->comboBoxLocale->addItem("French");
-    ui->comboBoxLocale->addItem("Japanese");
+    ui->comboBoxLocale->addItem(QStringLiteral("English"));
+    ui->comboBoxLocale->addItem(QStringLiteral("German"));
+    ui->comboBoxLocale->addItem(QStringLiteral("French"));
+    ui->comboBoxLocale->addItem(QStringLiteral("Japanese"));
 
 }
 
