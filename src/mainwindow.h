@@ -91,29 +91,6 @@ public:
     void setDarkCalendar(int darkCalendar);
 
     QLocale locale=QLocale::English;
-    //Translation strings
-    QString t_title;
-    //Edit
-    QString t_edit;
-    QString t_edit_delete_all_appointments;
-    QString t_edit_delete_all_contacts;
-    QString t_edit_preferences;
-    //Appointments
-    QString t_appointments;
-    QString t_appointments_new_appointment;
-    QString t_appointments_generate_repeat_appointments;
-    QString t_appointments_upcoming_schedule;
-    //Calendar
-    QString t_calendar;
-    QString t_calendar_show_holidays;
-    QString t_calendar_show_birthdays;
-    QString t_calendar_next_month;
-    QString t_calendar_previous_month;
-    QString t_calendar_today;
-    QString t_calendar_increase_font;
-    QString t_calendar_decrease_font;
-    QString t_calendar_reset_font;
-
 
     //Contacts
     QString t_contacts;

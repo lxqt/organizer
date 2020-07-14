@@ -30,32 +30,6 @@ MainWindow::MainWindow(QWidget *parent) :
     dbm.openDatabase();
     dbm.createDatebaseTables();
 
-    //Set up default translation values
-    t_title =QStringLiteral("Organizer");;
-
-    //Edit
-    t_edit=QStringLiteral("Edit");
-    t_edit_delete_all_appointments=QStringLiteral("Delete All Appointments");
-    t_edit_delete_all_contacts=QStringLiteral("Delete All Contacts");
-    t_edit_preferences=QStringLiteral("Preferences");
-
-    //Appointments
-    t_appointments=QStringLiteral("Appointments");
-    t_appointments_new_appointment=QStringLiteral("New Appointment");
-    t_appointments_generate_repeat_appointments=QStringLiteral("Generate Repeat Appointments");
-    t_appointments_upcoming_schedule=QStringLiteral("Upcoming Schedule");
-    //Calendar
-    t_calendar=QStringLiteral("Calendar");
-    t_calendar_show_holidays=QStringLiteral("Show Holidays");
-    t_calendar_show_birthdays=QStringLiteral("Show Birthdays");
-    t_calendar_next_month=QStringLiteral("Next Month");
-    t_calendar_previous_month=QStringLiteral("Previous Month");
-    t_calendar_today=QStringLiteral("Today");
-    t_calendar_increase_font=QStringLiteral("Increase Font Size");
-    t_calendar_decrease_font=QStringLiteral("Decrease Font Size");
-    t_calendar_reset_font=QStringLiteral("Reset Font Size");
-
-
     //Contacts
     t_contacts=QStringLiteral("Contacts");
     t_contacts_new_contact=QStringLiteral("New Contact");
@@ -1339,7 +1313,7 @@ void MainWindow::SetPreferences()
 
         darkCalendar=preferencesDialog->isDarkCalendar();
         setDarkCalendar(darkCalendar);
-        setWindowTitle(t_title);
+        setWindowTitle(tr("Organizer"));
         AddHolidaysToHolidayList(selectedYear);
         UpdateCalendar();
         ShowAppointmentsOnListView(selectedDate);
@@ -2114,7 +2088,7 @@ void MainWindow::on_actionDelete_All_Contacts_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::information(this, t_title+QStringLiteral(" v0.7.2"),
+    QMessageBox::information(this, tr("Organizer")+QStringLiteral(" v0.7.2"),
                              t_about_text);
 }
 
