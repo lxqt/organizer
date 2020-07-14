@@ -322,7 +322,7 @@
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="327"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Выход</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="328"/>
@@ -407,27 +407,27 @@
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="344"/>
         <source>Increase Font</source>
-        <translation type="unfinished">FUCK EYES</translation>
+        <translation type="unfinished">Увеличить шрифт</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="345"/>
         <source>Decrease Font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Уменьшить шрифт</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="346"/>
         <source>Reset Font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сбросить шрифт</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="347"/>
         <source>Show Birthdays</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Отобразить дни рождения</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="348"/>
         <source>Show Holidays</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Отобразить праздники</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="349"/>
@@ -438,7 +438,7 @@
         <location filename="../../build/src/ui_mainwindow.h" line="350"/>
         <location filename="../../build/src/ui_mainwindow.h" line="359"/>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Календарь</translation>
     </message>
     <message>
         <location filename="../../build/src/ui_mainwindow.h" line="351"/>
