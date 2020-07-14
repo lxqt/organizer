@@ -198,32 +198,27 @@
 <context>
     <name>DialogPreferences</name>
     <message>
-        <location filename="../../build/src/ui_dialogpreferences.h" line="122"/>
+        <location filename="../../build/src/ui_dialogpreferences.h" line="103"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../build/src/ui_dialogpreferences.h" line="123"/>
+        <location filename="../../build/src/ui_dialogpreferences.h" line="104"/>
         <source>Font Size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../build/src/ui_dialogpreferences.h" line="124"/>
-        <source>Locale:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../build/src/ui_dialogpreferences.h" line="125"/>
+        <location filename="../../build/src/ui_dialogpreferences.h" line="105"/>
         <source>Play Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../build/src/ui_dialogpreferences.h" line="126"/>
+        <location filename="../../build/src/ui_dialogpreferences.h" line="106"/>
         <source>Dark Calendar </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../build/src/ui_dialogpreferences.h" line="127"/>
+        <location filename="../../build/src/ui_dialogpreferences.h" line="107"/>
         <source>Line Spacing</source>
         <translation type="unfinished"></translation>
     </message>
