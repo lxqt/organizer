@@ -52,7 +52,7 @@ struct Appointment {
    QString m_description;
    QString m_date;
    QString m_startTime;
-   QString m_endTime;   
+   QString m_endTime;
    int m_isFullDay;
    int m_hasReminder;
    int m_reminderMinutes;

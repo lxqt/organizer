@@ -74,46 +74,6 @@ public:
     int hasReminder=0;
     int getHasReminder();
 
-    //Translations
-
-    //Set externally with setLabelTranslations
-    QString t_dialog_update;
-    QString t_date_display;
-    QString t_title;
-    QString t_location;
-    QString t_notes;
-    QString t_all_day;
-    QString t_start_time;
-    QString t_end_time;
-    QString t_category;
-    QString t_reminder;
-    QString t_delete;
-
-    QString t_reminder_5min;
-    QString t_reminder_10min;
-    QString t_reminder_30min;
-    QString t_reminder_1hour;
-    QString t_reminder_1day;
-
-    void setDialogUpdateTranslation(QString translation);
-    void setDateDisplayTranslation(QString translation);
-    void setTitleTranslation(QString translation);
-    void setLocationTranslation(QString translation);
-    void setNotesTranslations(QString translation);
-    void setAllDaytranslation(QString translation);
-    void setStartTimeTranslation(QString translation);
-    void setEndTimeTranslation(QString translation);
-    void setCategoryTranslation(QString translation);
-    void setReminderTranslation(QString translation);
-    void setDeleteTranslation(QString translation);
-    void setLabelTranslations();
-
-    void setReminder5MinTranslation(QString translation);
-    void setReminder10MinTranslation(QString translation);
-    void setReminder30MinTranslation(QString translation);
-    void setReminder1HourTranslation(QString translation);
-    void setReminder1DayTranslation(QString translation);
-
     void setComboBoxReminderTranslations();
 
     QLocale locale=QLocale::English;
