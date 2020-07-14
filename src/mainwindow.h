@@ -92,55 +92,6 @@ public:
 
     QLocale locale=QLocale::English;
 
-    //Contacts
-    QString t_contacts;
-    QString t_contacts_new_contact;
-    QString t_contacts_upcoming_birthdays;
-    //Help
-    QString t_help;
-    QString t_help_about;
-    QString t_about_text;
-    //Contact tab
-    QString t_contact_tab_first_name;
-    QString t_contact_tab_mid_name;
-    QString t_contact_tab_last_name;
-    QString t_contact_tab_email;
-    QString t_contact_tab_street;
-    QString t_contact_tab_district;
-    QString t_contact_tab_city;
-    QString t_contact_tab_county;
-    QString t_contact_tab_postcode;
-    QString t_contact_tab_country;
-    QString t_contact_tab_telephone;
-    QString t_contact_tab_birthday;
-
-    QString t_contact_tab_quick_full_view;
-    QString t_contact_tab_mailto;
-
-    //Preferences
-    QString t_preferences_title;
-    QString t_preferences_font_size;
-    QString t_preferences_locale;
-    QString t_preferences_play_audio;
-    QString t_preferences_dark_calendar;
-    QString t_preferences_line_spacing;
-
-    //Upcoming dialogs
-    QString t_upcoming_birthdays_title;
-    QString t_upcoming_schedule_title;
-    QString t_label_upcoming_schedule;
-
-    //Appointment dialogs
-    QString t_dialog_appointment_dialog_title;
-    QString t_dialog_appointment_date_display;
-    QString t_dialog_appointment_title;
-    QString t_dialog_appointment_location;
-    QString t_dialog_appointment_notes;
-    QString t_dialog_appointment_all_day;
-    QString t_dialog_appointment_start_time;
-    QString t_dialog_appointment_end_time;    
-    QString t_dialog_appointment_reminder;
-
     //update appointment
     QString t_dialog_appointment_update;
     QString t_dialog_appointment_delete;

@@ -30,56 +30,6 @@ MainWindow::MainWindow(QWidget *parent) :
     dbm.openDatabase();
     dbm.createDatebaseTables();
 
-    //Contacts
-    t_contacts=QStringLiteral("Contacts");
-    t_contacts_new_contact=QStringLiteral("New Contact");
-    t_contacts_upcoming_birthdays=QStringLiteral("Check For Birthdays");
-    //Help
-    t_help=QStringLiteral("Help");
-    t_help_about=QStringLiteral("About");
-    t_about_text=QStringLiteral("Organizer is a Qt lightweight personal information"
-                                " manager developed by Alan Crispin (aka. crispina)");
-    //Contact tab
-    t_contact_tab_first_name=QStringLiteral("First Name");
-    t_contact_tab_mid_name=QStringLiteral("Mid Name");
-    t_contact_tab_last_name=QStringLiteral("Last Name");
-    t_contact_tab_email=QStringLiteral("Email");
-    t_contact_tab_street=QStringLiteral("Street");
-    t_contact_tab_district=QStringLiteral("District");
-    t_contact_tab_city=QStringLiteral("City");
-    t_contact_tab_county=QStringLiteral("County");
-    t_contact_tab_postcode=QStringLiteral("Postcode");
-    t_contact_tab_country=QStringLiteral("Country");
-    t_contact_tab_telephone=QStringLiteral("Telephone");
-    t_contact_tab_birthday=QStringLiteral("Birthday");
-
-    t_contact_tab_quick_full_view=QStringLiteral("Quick/Full View");
-    t_contact_tab_mailto=QStringLiteral("Mail To:");
-
-    //Preferences
-    t_preferences_title=QStringLiteral("Preferences");
-    t_preferences_font_size=QStringLiteral("Font Size");
-    t_preferences_locale=QStringLiteral("Locale");
-    t_preferences_play_audio=QStringLiteral("Play Audio");
-    t_preferences_dark_calendar=QStringLiteral("Dark Calendar");
-    t_preferences_line_spacing=QStringLiteral("Line Spacing");
-
-    //Upcoming dialogs
-    t_upcoming_birthdays_title=QStringLiteral("Upcoming Birthdays (Next Seven Days)");
-    t_upcoming_schedule_title=QStringLiteral("Upcoming Schedule (Next Seven Days)");
-    t_label_upcoming_schedule=QStringLiteral("Upcoming Schedule For Date: ");
-
-    //Appointment dialogs
-    t_dialog_appointment_dialog_title=QStringLiteral("New Appointment");
-    t_dialog_appointment_date_display=QStringLiteral("Appointment Date: ");
-    t_dialog_appointment_title=QStringLiteral("Title");
-    t_dialog_appointment_location=QStringLiteral("Location");
-    t_dialog_appointment_notes=QStringLiteral("Notes");
-    t_dialog_appointment_all_day=QStringLiteral("All Day");
-    t_dialog_appointment_start_time=QStringLiteral("Start Time");
-    t_dialog_appointment_end_time=QStringLiteral("End Time");
-    t_dialog_appointment_reminder=QStringLiteral("Reminder");
-
     //update appointment
     t_dialog_appointment_update=QStringLiteral("Update Appointment");
     t_dialog_appointment_delete=QStringLiteral("Delete Appointment");
@@ -373,7 +323,7 @@ void MainWindow::checkForReminders()
                         QSound::play(":/sounds/window-attention.wav");
                     }
 
-                    QMessageBox::information(this,t_dialog_appointment_reminder,str);
+                    QMessageBox::information(this, tr("Reminder"), str);
                 }
 
             }
@@ -828,24 +778,6 @@ void MainWindow::NewAppointment()
 
 
     appointmentDialog->setLocaleDate(this->locale);
-    appointmentDialog->setDialogTitleTranslation(t_dialog_appointment_dialog_title);
-    appointmentDialog->setDateDisplayTranslation(t_dialog_appointment_date_display);
-    appointmentDialog->setTitleTranslation(t_dialog_appointment_title);
-    appointmentDialog->setLocationTranslation(t_dialog_appointment_location);
-    appointmentDialog->setNotesTranslations(t_dialog_appointment_notes);
-    appointmentDialog->setAllDaytranslation(t_dialog_appointment_all_day);
-    appointmentDialog->setStartTimeTranslation(t_dialog_appointment_start_time);
-    appointmentDialog->setEndTimeTranslation(t_dialog_appointment_end_time);
-    appointmentDialog->setReminderTranslation(t_dialog_appointment_reminder);
-    appointmentDialog->setLabelTranslations();
-
-    appointmentDialog->setReminder5MinTranslation(t_reminder_5min);
-    appointmentDialog->setReminder10MinTranslation(t_reminder_10min);
-    appointmentDialog->setReminder30MinTranslation(t_reminder_30min);
-    appointmentDialog->setReminder1HourTranslation(t_reminder_1hour);
-    appointmentDialog->setReminder1DayTranslation(t_reminder_1day);
-    appointmentDialog->setComboBoxReminderTranslations();
-
 
     appointmentDialog->setModal(true);
     if (appointmentDialog->exec() == QDialog::Accepted ) {
@@ -894,26 +826,7 @@ void MainWindow::UpdateAppointment(int dbID, int selectedRowindex)
     DialogAppointmentUpdate *appointmentDialog =
             new  DialogAppointmentUpdate(this,&currentAppointment);
 
-
-    appointmentDialog->setDialogUpdateTranslation(t_dialog_appointment_update);
-    appointmentDialog->setDateDisplayTranslation(t_dialog_appointment_date_display);
-    appointmentDialog->setTitleTranslation(t_dialog_appointment_title);
-    appointmentDialog->setLocationTranslation(t_dialog_appointment_location);
-    appointmentDialog->setNotesTranslations(t_dialog_appointment_notes);
-    appointmentDialog->setAllDaytranslation(t_dialog_appointment_all_day);
-    appointmentDialog->setStartTimeTranslation(t_dialog_appointment_start_time);
-    appointmentDialog->setEndTimeTranslation(t_dialog_appointment_end_time);    
-    appointmentDialog->setReminderTranslation(t_dialog_appointment_reminder);
-    appointmentDialog->setDeleteTranslation(t_dialog_appointment_delete);
-    appointmentDialog->setLabelTranslations();
     appointmentDialog->setLocaleDate(this->locale);
-
-    appointmentDialog->setReminder5MinTranslation(t_reminder_5min);
-    appointmentDialog->setReminder10MinTranslation(t_reminder_10min);
-    appointmentDialog->setReminder30MinTranslation(t_reminder_30min);
-    appointmentDialog->setReminder1HourTranslation(t_reminder_1hour);
-    appointmentDialog->setReminder1DayTranslation(t_reminder_1day);
-    appointmentDialog->setComboBoxReminderTranslations();
 
 
     appointmentDialog->setModal(true);
@@ -975,19 +888,6 @@ void MainWindow::GenerateRepeatAppointments()
 
     repeatDialog->setLocaleDate(this->locale);
     repeatDialog->setStartDateDisplayTranslation(t_dialog_repeat_date_message);
-
-    repeatDialog->setTitleTranslation(t_dialog_appointment_title);
-    repeatDialog->setLocationTranslation(t_dialog_appointment_location);
-    repeatDialog->setNotesTranslations(t_dialog_appointment_notes);
-    repeatDialog->setAllDaytranslation(t_dialog_appointment_all_day);
-    repeatDialog->setStartTimeTranslation(t_dialog_appointment_start_time);
-    repeatDialog->setEndTimeTranslation(t_dialog_appointment_end_time);
-
-    repeatDialog->setRepeatEveryTranslation(t_dialog_repeat_repeat_every);
-    repeatDialog->setDaysTranslation(t_dialog_repeat_days);
-    repeatDialog->setOccurrencesTranslation(t_dialog_repeat_occurrences);
-
-    repeatDialog->setLabelTranslations();
 
     repeatDialog->setModal(true);
 
@@ -1288,15 +1188,6 @@ void MainWindow::SetPreferences()
 {
     DialogPreferences *preferencesDialog = new  DialogPreferences(this,&currentPreferences);
     preferencesDialog->setModal(true);
-    //Set translations
-    preferencesDialog->setTitleTranslation(t_preferences_title);
-    preferencesDialog->setFontSizeTranslation(t_preferences_font_size);
-    preferencesDialog->setLocaleTranslation(t_preferences_locale);
-    preferencesDialog->setPlayAudioTranslation(t_preferences_play_audio);
-    preferencesDialog->setDarkCalendarTranslation(t_preferences_dark_calendar);
-    preferencesDialog->setLineSpacingTranslation(t_preferences_line_spacing);
-    preferencesDialog->SetLableDescriptions();
-
 
     if (preferencesDialog->exec() == QDialog::Accepted ) {
 
@@ -1380,7 +1271,6 @@ void MainWindow::checkForBirthdaysNextSevenDays()
 {
     DialogUpcomingBirthdays  *birthdayDialog =
             new  DialogUpcomingBirthdays(this,&contactList);
-    birthdayDialog->setTitleTranslation(t_upcoming_birthdays_title);
     birthdayDialog->setModal(true);
 
     if (birthdayDialog->exec() == QDialog::Accepted ) {
@@ -1392,8 +1282,6 @@ void MainWindow::checkAppointmentsNextSevenDays()
     DialogUpcomingSchedule  *scheduleDialog =
             new  DialogUpcomingSchedule(this, &dbm);
 
-    scheduleDialog->setTitleTranslation(t_upcoming_schedule_title);
-    scheduleDialog->setLabelUpcomingScheduleTranslation(t_label_upcoming_schedule);
     scheduleDialog->setLocale(this->locale);
     scheduleDialog->setModal(true);
 
@@ -2089,7 +1977,8 @@ void MainWindow::on_actionDelete_All_Contacts_triggered()
 void MainWindow::on_actionAbout_triggered()
 {
     QMessageBox::information(this, tr("Organizer")+QStringLiteral(" v0.7.2"),
-                             t_about_text);
+                             tr("Organizer is a Qt lightweight personal information \
+                             - manager developed by Alan Crispin (aka. crispina)"));
 }
 
 void MainWindow::on_tableViewContacts_clicked(const QModelIndex &index)
