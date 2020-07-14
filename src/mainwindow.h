@@ -224,9 +224,6 @@ public:
     QString t_dialog_contact_delete;
 
 
-    void ReadXMLTranslation(QString localeStr);
-
-
     int applicationFontSize=20;    
     int newLineSpacing=0;
     Preferences currentPreferences;

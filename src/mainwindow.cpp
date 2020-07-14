@@ -193,7 +193,6 @@ MainWindow::MainWindow(QWidget *parent) :
     setDarkCalendar(darkCalendar);
     SetApplicationFontSize(applicationFontSize);
     locale=getLocale(localeStr);
-    ReadXMLTranslation(localeStr);
 
     //setup timer
     timer = new QTimer(this);
@@ -445,7 +444,7 @@ QLocale MainWindow::getLocale(QString localeStr)
         return QLocale::English;
     }
 }
-
+#if 0
 void MainWindow::ReadXMLTranslation(QString localeStr)
 {
     QDomDocument document;
@@ -883,6 +882,7 @@ void MainWindow::ReadXMLTranslation(QString localeStr)
     ui->pushButtonMailTo->setText(t_contact_tab_mailto);
     file.close();
 }
+#endif
 
 void MainWindow::NewAppointment()
 {
@@ -1376,7 +1376,6 @@ void MainWindow::SetPreferences()
 
         darkCalendar=preferencesDialog->isDarkCalendar();
         setDarkCalendar(darkCalendar);
-        ReadXMLTranslation(localeStr);
         setWindowTitle(t_title);
         AddHolidaysToHolidayList(selectedYear);
         UpdateCalendar();
