@@ -93,13 +93,6 @@ public:
     QLocale locale=QLocale::English;
     //Translation strings
     QString t_title;
-    //File
-    QString t_file;
-    QString t_file_export_appointments;
-    QString t_file_import_appointments;
-    QString t_file_export_contacts;
-    QString t_file_import_contacts;
-    QString t_file_exit;
     //Edit
     QString t_edit;
     QString t_edit_delete_all_appointments;

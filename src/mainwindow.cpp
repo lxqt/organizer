@@ -32,13 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Set up default translation values
     t_title =QStringLiteral("Organizer");;
-    //File
-    t_file=QStringLiteral("File");
-    t_file_export_appointments=QStringLiteral("Export Appointments");
-    t_file_import_appointments=QStringLiteral("Import Appointments");
-    t_file_export_contacts=QStringLiteral("Export Contacts");
-    t_file_import_contacts=QStringLiteral("Import Contacts");
-    t_file_exit=QStringLiteral("Exit");
+
     //Edit
     t_edit=QStringLiteral("Edit");
     t_edit_delete_all_appointments=QStringLiteral("Delete All Appointments");
