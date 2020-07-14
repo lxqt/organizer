@@ -91,20 +91,8 @@ public:
     void setDarkCalendar(int darkCalendar);
 
     QLocale locale=QLocale::English;
-    QLocale getLocale(QString localeStr);
-
     //Translation strings
     QString t_title;
-    //Holidays
-    QString t_holiday_christmas;
-    QString t_holiday_boxing;
-    QString t_holiday_new_year;
-    QString t_holiday_easter;
-    QString t_holiday_good_friday;
-    QString t_holiday_easter_monday;
-    QString t_holiday_may_bank;
-    QString t_holiday_spring_bank;
-    QString t_holiday_summer_bank;
     //File
     QString t_file;
     QString t_file_export_appointments;

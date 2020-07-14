@@ -32,16 +32,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Set up default translation values
     t_title =QStringLiteral("Organizer");;
-    //Holidays
-    t_holiday_christmas=QStringLiteral("Christmas");
-    t_holiday_boxing=QStringLiteral("Boxing Day");
-    t_holiday_new_year=QStringLiteral("New Year's Dat");
-    t_holiday_easter=QStringLiteral("Easter");
-    t_holiday_good_friday=QStringLiteral("Good Friday");
-    t_holiday_easter_monday=QStringLiteral("Easter Monday");
-    t_holiday_may_bank=QStringLiteral("May Bank Holiday");
-    t_holiday_spring_bank=QStringLiteral("Spring Bank Holiday");
-    t_holiday_summer_bank=QStringLiteral("Summer Bank Holiday");
     //File
     t_file=QStringLiteral("File");
     t_file_export_appointments=QStringLiteral("Export Appointments");
@@ -192,7 +182,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setDarkCalendar(darkCalendar);
     SetApplicationFontSize(applicationFontSize);
-    locale=getLocale(localeStr);
 
     //setup timer
     timer = new QTimer(this);
@@ -425,25 +414,6 @@ void MainWindow::checkForReminders()
 }
 
 
-
-QLocale MainWindow::getLocale(QString localeStr)
-{
-    if(localeStr=="English") {
-        return QLocale::English;
-    }
-    else if(localeStr=="French") {
-        return QLocale::French;
-    }
-    else if(localeStr=="German"){
-        return QLocale::German;
-    }
-    else if(localeStr=="Japanese"){
-        return QLocale::Japanese;
-    }
-    else {
-        return QLocale::English;
-    }
-}
 #if 0
 void MainWindow::ReadXMLTranslation(QString localeStr)
 {
@@ -1366,7 +1336,6 @@ void MainWindow::SetPreferences()
         playAudio=preferencesDialog->isPlayAudio();
         localeStr=preferencesDialog->getLocalization();      
 
-        locale=getLocale(localeStr);
         QString date =locale.toString(selectedDate,QStringLiteral("dddd dd MMMM yyyy"));
         selectedDateLabel->setText(date);
 
@@ -1529,21 +1498,21 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h1;
     h1.m_id=1;
-    h1.m_name=t_holiday_christmas;
+    h1.m_name=tr("Christmas");
     h1.m_date=QDate(year,12,25).toString();
     h1.m_addToCalendar=1;
     holidayList.append(h1);
 
     Holiday h2;
     h2.m_id=2;
-    h2.m_name=t_holiday_boxing;
+    h2.m_name=tr("Boxing Day");
     h2.m_date=QDate(year,12,26).toString();
     h2.m_addToCalendar=1;
     holidayList.append(h2);
 
     Holiday h3;
     h3.m_id=3;
-    h3.m_name=t_holiday_new_year;
+    h3.m_name=tr("New Year");
     h3.m_date=QDate(year,1,1).toString();
     h3.m_addToCalendar=1;
     holidayList.append(h3);
@@ -1552,28 +1521,28 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h4;
     h4.m_id=4;
-    h4.m_name=t_holiday_easter;
+    h4.m_name=tr("Easter");
     h4.m_date=easterSunday.toString();
     h4.m_addToCalendar=1;
     holidayList.append(h4);
 
     Holiday h5;
     h5.m_id=5;
-    h5.m_name=t_holiday_good_friday;
+    h5.m_name=tr("Good Friday");
     h5.m_date=easterSunday.addDays(-2).toString();
     h5.m_addToCalendar=1;
     holidayList.append(h5);
 
     Holiday h6;
     h6.m_id=6;
-    h6.m_name=t_holiday_easter_monday;
+    h6.m_name=tr("Easter Monday");
     h6.m_date=easterSunday.addDays(1).toString();
     h6.m_addToCalendar=1;
     holidayList.append(h6);
 
     Holiday h7;
     h7.m_id=7;
-    h7.m_name=t_holiday_may_bank;
+    h7.m_name=tr("May Bank Holiday");
 
     QDate firstMondayMay(year, 5, 1);
 
@@ -1600,7 +1569,7 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h8;
     h8.m_id=8;
-    h8.m_name=t_holiday_spring_bank;
+    h8.m_name=tr("Spring Bank Holiday");
     QDate springbank =firstMondayMay.addDays(plusDays);
 
     if (springbank.isValid())
@@ -1612,7 +1581,7 @@ void MainWindow::AddHolidaysToHolidayList(int year)
 
     Holiday h9;
     h9.m_id=9;
-    h9.m_name=t_holiday_summer_bank;
+    h9.m_name=tr("Summer Bank Holiday");
 
     QDate firstMondayAug(year, 8, 1);
 
