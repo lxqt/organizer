@@ -92,47 +92,6 @@ public:
 
     QLocale locale=QLocale::English;
 
-    //update appointment
-    QString t_dialog_appointment_update;
-    QString t_dialog_appointment_delete;
-
-    QString t_reminder_5min;
-    QString t_reminder_10min;
-    QString t_reminder_30min;
-    QString t_reminder_1hour;
-    QString t_reminder_1day;
-
-    QString t_reminder_message_on;
-    QString t_reminder_message_starts_at;
-
-    //repeat appointments
-    QString t_dialog_repeat_title;
-    QString t_dialog_repeat_date_message;
-    QString t_dialog_repeat_repeat_every;
-    QString t_dialog_repeat_days;
-    QString t_dialog_repeat_occurrences;
-
-    //Contacts dialog
-
-    QString t_dialog_contact_title;
-    QString t_dialog_contact_first_name;
-    QString t_dialog_contact_mid_name;
-    QString t_dialog_contact_last_name;
-    QString t_dialog_contact_email;
-    QString t_dialog_contact_street;
-    QString t_dialog_contact_district;
-    QString t_dialog_contact_city;
-    QString t_dialog_contact_county;
-    QString t_dialog_contact_postcode;
-    QString t_dialog_contact_country;
-    QString t_dialog_contact_telephone;
-
-    QString t_dialog_contact_born_on;
-    QString t_dialog_contact_birthday_unknown;
-    QString t_dialog_contact_add_to_calendar;
-    QString t_dialog_contact_delete;
-
-
     int applicationFontSize=20;    
     int newLineSpacing=0;
     Preferences currentPreferences;

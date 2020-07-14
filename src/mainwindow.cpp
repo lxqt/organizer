@@ -30,46 +30,6 @@ MainWindow::MainWindow(QWidget *parent) :
     dbm.openDatabase();
     dbm.createDatebaseTables();
 
-    //update appointment
-    t_dialog_appointment_update=QStringLiteral("Update Appointment");
-    t_dialog_appointment_delete=QStringLiteral("Delete Appointment");
-
-    t_reminder_5min=QStringLiteral("5 Minutes Before Start");
-    t_reminder_10min=QStringLiteral("10 Minutes Before Start");
-    t_reminder_30min=QStringLiteral("30 Minutes Before Start");
-    t_reminder_1hour=QStringLiteral("1 Hour Before Start");
-    t_reminder_1day=QStringLiteral("1 Day Before Start");
-
-    t_reminder_message_on=QStringLiteral("On");
-    t_reminder_message_starts_at=QStringLiteral("Starts At");
-
-    //repeat appointments
-    t_dialog_repeat_title=QStringLiteral("Gnerate Repeat Appointments");
-    t_dialog_repeat_date_message=QStringLiteral("Appointment Start Date: ");
-    t_dialog_repeat_repeat_every=QStringLiteral("Repeat Every");
-    t_dialog_repeat_days=QStringLiteral("Days");
-    t_dialog_repeat_occurrences=QStringLiteral("Occurrences");
-
-    //Contacts dialog
-
-    t_dialog_contact_title=QStringLiteral("default");
-    t_dialog_contact_first_name=QStringLiteral("default");
-    t_dialog_contact_mid_name=QStringLiteral("default");
-    t_dialog_contact_last_name=QStringLiteral("default");
-    t_dialog_contact_email=QStringLiteral("default");
-    t_dialog_contact_street=QStringLiteral("default");
-    t_dialog_contact_district=QStringLiteral("default");
-    t_dialog_contact_city=QStringLiteral("default");
-    t_dialog_contact_county=QStringLiteral("default");
-    t_dialog_contact_postcode=QStringLiteral("default");
-    t_dialog_contact_country=QStringLiteral("default");
-    t_dialog_contact_telephone=QStringLiteral("default");
-
-    t_dialog_contact_born_on=QStringLiteral("Born On");
-    t_dialog_contact_birthday_unknown=QStringLiteral("Birthday Unknown");
-    t_dialog_contact_add_to_calendar=QStringLiteral("Add To Calendar");
-    t_dialog_contact_delete=QStringLiteral("Delete Contact");
-
     //Setup empty lists
     appointmentList= QList<Appointment>();
     holidayList=QList<Holiday>();
@@ -302,9 +262,8 @@ void MainWindow::checkForReminders()
                     //selectedDateLabel->setText(date);
 
                     QString str=a.m_title;
-                    //str.append(QStringLiteral(" on "));
                     str.append(" ");
-                    str.append(t_reminder_message_on);
+                    str.append(tr(" on "));
                     str.append(" ");
 
                     //QDate reminderDate= QDate::fromString(a.m_date);
@@ -314,8 +273,7 @@ void MainWindow::checkForReminders()
                     str.append(date);
                     //str.append(a.m_date);
                     str.append(QLatin1Char('\n')); //new line
-                    //str.append(QStringLiteral("Starts at "));
-                    str.append(t_reminder_message_starts_at);
+                    str.append(tr("Starts at "));
                     str.append(" ");
                     QTime startsAt =QTime::fromString(a.m_startTime);
                     str.append(startsAt.toString("hh:mm"));
@@ -887,7 +845,6 @@ void MainWindow::GenerateRepeatAppointments()
     DialogRepeatAppointment *repeatDialog = new  DialogRepeatAppointment(this,&selectedDate);
 
     repeatDialog->setLocaleDate(this->locale);
-    repeatDialog->setStartDateDisplayTranslation(t_dialog_repeat_date_message);
 
     repeatDialog->setModal(true);
 
@@ -1480,25 +1437,6 @@ void MainWindow::NewContact()
     //Add new contact
     DialogContact *contactDialog = new DialogContact(this);
 
-    contactDialog->setDialogTitleTranslation(t_dialog_contact_title);
-    contactDialog->setFirstNameTranslation(t_dialog_contact_first_name);
-    contactDialog->setMidNameTranslation(t_dialog_contact_mid_name);
-    contactDialog->setLastNameTranslation(t_dialog_contact_last_name);
-    contactDialog->setEmailTranslation(t_dialog_contact_email);
-    contactDialog->setStreetTranslation(t_dialog_contact_street);
-    contactDialog->setDistrictTranslation(t_dialog_contact_district);
-    contactDialog->setCityTranslation(t_dialog_contact_city);
-    contactDialog->setCountyTranslation(t_dialog_contact_county);
-    contactDialog->setPostcodeTranslation(t_dialog_contact_postcode);
-    contactDialog->setCountryTranslation(t_dialog_contact_country);
-    contactDialog->setTelephoneTranslation(t_dialog_contact_telephone);
-
-    contactDialog->setBornOnTranslation(t_dialog_contact_born_on);
-    contactDialog->setBirthdayUnknownTranslation(t_dialog_contact_birthday_unknown);
-    contactDialog->setAddToCalendarTranslation(t_dialog_contact_add_to_calendar);
-
-    contactDialog->setLabelTranslations();
-
     contactDialog->setModal(true);
 
     if (contactDialog->exec() == QDialog::Accepted ) {
@@ -1549,26 +1487,6 @@ void MainWindow::UpdateContact(int dbID)
 {
     Contact currentContact = dbm.getContactByID(dbID);
     DialogContact *contactDialog = new  DialogContact(&currentContact,this);
-
-    contactDialog->setDialogTitleTranslation(t_dialog_contact_title);
-    contactDialog->setFirstNameTranslation(t_dialog_contact_first_name);
-    contactDialog->setMidNameTranslation(t_dialog_contact_mid_name);
-    contactDialog->setLastNameTranslation(t_dialog_contact_last_name);
-    contactDialog->setEmailTranslation(t_dialog_contact_email);
-    contactDialog->setStreetTranslation(t_dialog_contact_street);
-    contactDialog->setDistrictTranslation(t_dialog_contact_district);
-    contactDialog->setCityTranslation(t_dialog_contact_city);
-    contactDialog->setCountyTranslation(t_dialog_contact_county);
-    contactDialog->setPostcodeTranslation(t_dialog_contact_postcode);
-    contactDialog->setCountryTranslation(t_dialog_contact_country);
-    contactDialog->setTelephoneTranslation(t_dialog_contact_telephone);
-
-    contactDialog->setBornOnTranslation(t_dialog_contact_born_on);
-    contactDialog->setBirthdayUnknownTranslation(t_dialog_contact_birthday_unknown);
-    contactDialog->setAddToCalendarTranslation(t_dialog_contact_add_to_calendar);
-    contactDialog->setDeleteTranslation(t_dialog_contact_delete);
-
-    contactDialog->setLabelTranslations();
 
     contactDialog->setModal(true);
 
