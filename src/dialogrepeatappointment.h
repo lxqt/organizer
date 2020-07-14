@@ -59,34 +59,6 @@ public:
     QTime getEndTime();
     int getAllDay();
 
-    //Translations
-    //Set exernally with setLabelTranslations
-    QString t_dialog_title;
-    QString t_start_date_display;
-    QString t_title;
-    QString t_location;
-    QString t_notes;
-    QString t_all_day;
-    QString t_start_time;
-    QString t_end_time;
-    QString t_repeat_every;
-    QString t_days;
-    QString t_occurrences;
-
-    void setDialogTitleTranslation(QString translation);
-    void setStartDateDisplayTranslation(QString translation);
-    void setTitleTranslation(QString translation);
-    void setLocationTranslation(QString translation);
-    void setNotesTranslations(QString translation);
-    void setAllDaytranslation(QString translation);
-    void setStartTimeTranslation(QString translation);
-    void setEndTimeTranslation(QString translation);
-    void setRepeatEveryTranslation(QString translation);
-    void setDaysTranslation(QString translation);
-    void setOccurrencesTranslation(QString translation);
-
-    void setLabelTranslations();
-
     QLocale locale=QLocale::English;
     void setLocaleDate(QLocale locale);
 

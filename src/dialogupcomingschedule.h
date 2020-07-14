@@ -50,9 +50,6 @@ public:
     QString t_title=QStringLiteral("Upcoming Schedule (Next Seven Days)");
     QString t_label_upcoming_schedule=QStringLiteral("Upcoming Schedule For Date");
 
-    void setTitleTranslation(QString translation);
-    void setLabelUpcomingScheduleTranslation(QString translation);
-
     QLocale locale=QLocale::English;
     void setLocale(QLocale locale);
 

@@ -112,18 +112,6 @@ DialogUpcomingSchedule::~DialogUpcomingSchedule()
     delete ui;
 }
 
-void DialogUpcomingSchedule::setTitleTranslation(QString translation)
-{
-    t_title=translation;
-    setWindowTitle(t_title);
-}
-
-void DialogUpcomingSchedule::setLabelUpcomingScheduleTranslation(QString translation)
-{
-    t_label_upcoming_schedule=translation;
-    ui->labelSchedule->setText(t_label_upcoming_schedule);
-}
-
 void DialogUpcomingSchedule::setLocale(QLocale locale)
 {
     this->locale=locale;

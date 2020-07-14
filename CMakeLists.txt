@@ -36,6 +36,7 @@ set(ORGANIZER_PATCH_VERSION 1)
 set(ORGANIZER_VERSION ${ORGANIZER_MAJOR_VERSION}.${ORGANIZER_MINOR_VERSION}.${ORGANIZER_PATCH_VERSION})
 add_definitions("-DORGANIZER_VERSION=\"${ORGANIZER_VERSION}\"")
 
+include(GNUInstallDirs)
 include(LXQtPreventInSourceBuilds)
 include(LXQtCompilerSettings NO_POLICY_SCOPE)
 
@@ -45,7 +46,16 @@ remove_definitions(
 )
 
 # Translations **********************************
-# include(LXQtTranslate)
+# Must be defined after including GNUInstallDirs. Move with care.
+set(ORG_TRANSLATIONS_DIR
+    "${CMAKE_INSTALL_FULL_DATAROOTDIR}/${PROJECT_NAME}/translations"
+)
+option(UPDATE_TRANSLATIONS "Update source translation translations/*.ts files" Yes)
+
+include(LXQtTranslate)
+include(LXQtTranslateTs)
+include(LXQtTranslateDesktop)
+include(Qt5TranslationLoader)
 
 add_subdirectory(src)
 add_subdirectory(scripts)

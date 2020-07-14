@@ -92,26 +92,6 @@ public:
     QString t_add_to_calendar;
     QString t_delete;
 
-    void setDialogTitleTranslation(QString translation);
-    void setFirstNameTranslation(QString translation);
-    void setMidNameTranslation(QString translation);
-    void setLastNameTranslation(QString translation);
-    void setEmailTranslation(QString translation);
-    void setStreetTranslation(QString translation);
-    void setDistrictTranslation(QString translation);
-    void setCityTranslation(QString translation);
-    void setCountyTranslation(QString translation);
-    void setPostcodeTranslation(QString translation);
-    void setCountryTranslation(QString translation);
-    void setTelephoneTranslation(QString translation);
-
-    void setBornOnTranslation(QString translation);
-    void setBirthdayUnknownTranslation(QString translation);
-    void setAddToCalendarTranslation(QString translation);
-    void setDeleteTranslation(QString translation);
-
-    void setLabelTranslations();
-
 
 private slots:
         void accept();
