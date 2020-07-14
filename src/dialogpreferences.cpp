@@ -6,8 +6,6 @@ DialogPreferences::DialogPreferences(QWidget *parent, Preferences *thePreference
     ui(new Ui::DialogPreferences)
 {
     ui->setupUi(this);
-    SetLableDescriptions();
-    setupComboxBoxCalendarLocale();
 
     ui->spinBoxApplicationFont->setRange(8,38);
     ui->spinBoxApplicationFont->setValue(thePreferences->m_applicationFontSize);
@@ -37,28 +35,11 @@ DialogPreferences::DialogPreferences(QWidget *parent, Preferences *thePreference
     }
 
     localeStr=thePreferences->m_localization;
-    int index = ui->comboBoxLocale->findText(localeStr);
-
-    if ( index != -1 ) { // -1 for not found must be >0
-       ui->comboBoxLocale->setCurrentIndex(index);
-    }
-
-
 }
 
 DialogPreferences::~DialogPreferences()
 {
     delete ui;
-}
-
-void DialogPreferences::setupComboxBoxCalendarLocale()
-{
-
-    ui->comboBoxLocale->addItem("English");
-    ui->comboBoxLocale->addItem("German");
-    ui->comboBoxLocale->addItem("French");
-    ui->comboBoxLocale->addItem("Japanese");
-
 }
 
 
@@ -75,51 +56,6 @@ int DialogPreferences::isPlayAudio()
 int DialogPreferences::isDarkCalendar()
 {
     return darkCalendar;
-}
-
-QString DialogPreferences::getLocalization()
-{
-    return localeStr;
-}
-
-void DialogPreferences::setTitleTranslation(QString translation)
-{
-    t_title=translation;
-}
-
-void DialogPreferences::setFontSizeTranslation(QString translation)
-{
-    t_font_size=translation;
-}
-
-void DialogPreferences::setLocaleTranslation(QString translation)
-{
-    t_locale=translation;
-}
-
-void DialogPreferences::setPlayAudioTranslation(QString translation)
-{
-    t_play_audio=translation;
-}
-
-void DialogPreferences::setDarkCalendarTranslation(QString translation)
-{
-    t_dark_calendar=translation;
-}
-
-void DialogPreferences::setLineSpacingTranslation(QString translation)
-{
-    t_line_spacing=translation;
-}
-
-void DialogPreferences::SetLableDescriptions()
-{
-    setWindowTitle(t_title);
-    ui->labelFontSize->setText(t_font_size);
-    ui->labelLocal->setText(t_locale);
-    ui->checkBoxPlayAudio->setText(t_play_audio);
-    ui->checkBoxDarkCalendar->setText(t_dark_calendar);
-    ui->checkBoxLineSpacing->setText(t_line_spacing);
 }
 
 int DialogPreferences::getLineSpacing()

@@ -710,7 +710,6 @@ void MainWindow::SetPreferences()
 
 
         playAudio=preferencesDialog->isPlayAudio();
-        localeStr=preferencesDialog->getLocalization();      
 
         QString date =locale.toString(selectedDate,QStringLiteral("dddd dd MMMM yyyy"));
         selectedDateLabel->setText(date);
