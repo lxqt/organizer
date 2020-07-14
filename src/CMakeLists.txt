@@ -78,7 +78,29 @@ set ( organizer_MOCS
 	)
 QT5_WRAP_CPP(MOCS ${organizer_MOCS})
 
-add_executable ( organizer ${organizer_SRCS} ${UIS} ${RSCS} ${TRS} ${MOCS} )
+#-----------------------------------------------------------------------------
+# Translations
+#-----------------------------------------------------------------------------
+lxqt_translate_ts(QM_FILES
+    UPDATE_TRANSLATIONS ${UPDATE_TRANSLATIONS}
+    SOURCES ${SOURCES} ${HEADERS} ${UIS}
+    INSTALL_DIR "${ORG_TRANSLATIONS_DIR}"
+)
+
+qt5_translation_loader(
+    QM_LOADER
+    "${ORG_TRANSLATIONS_DIR}"
+    ${PROJECT_NAME}
+)
+
+lxqt_translate_desktop(DESKTOP_FILES
+    SOURCES "${CMAKE_SOURCE_DIR}/qps.desktop.in"
+)
+#-----------------------------------------------------------------------------
+# End of translations
+#-----------------------------------------------------------------------------
+
+add_executable ( organizer ${organizer_SRCS} ${UIS} ${RSCS} ${TRS} ${MOCS} ${QM_FILES} ${QM_LOADER})
 target_link_libraries ( organizer  Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Svg Qt5::Xml Qt5::Multimedia Qt5::MultimediaWidgets)
 
 
