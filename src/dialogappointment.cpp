@@ -32,7 +32,6 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
 
     QString date =locale.toString(appointmentDate,QStringLiteral("dddd dd MMMM yyyy"));
     ui->labelDateValue->setText(date);
-    setLabelTranslations();
 
     QTime timeNow =QTime::currentTime();
     this->startTime=timeNow;
@@ -40,8 +39,6 @@ DialogAppointment::DialogAppointment(QWidget *parent, QDate *theAppointmentDate)
     ui->timeEditStartTime->setTime(timeNow);
     ui->timeEditEndTime->setTime(timeNow);
     ui->checkBoxReminder->setText(QStringLiteral("Reminder"));
-
-    //setupComboBoxes();
 
     ui->checkBoxReminder->setCheckState(Qt::Unchecked);
     ui->comboBoxReminder->setEnabled(false);
@@ -98,119 +95,11 @@ bool DialogAppointment::getDeleteRequested()
     return this->deleteRequested;
 }
 
-void DialogAppointment::setupComboBoxes()
-{
-
-    //Set up Reminder ComboBox
-    ui->comboBoxReminder->addItem(t_reminder_5min);
-    ui->comboBoxReminder->addItem(t_reminder_10min);
-    ui->comboBoxReminder->addItem(t_reminder_30min);
-    ui->comboBoxReminder->addItem(t_reminder_1hour);
-    ui->comboBoxReminder->addItem(t_reminder_1day);
-
-}
-
-void DialogAppointment::setComboBoxReminderTranslations()
-{    
-    //Set up Reminder ComboBox
-    ui->comboBoxReminder->addItem(t_reminder_5min);
-    ui->comboBoxReminder->addItem(t_reminder_10min);
-    ui->comboBoxReminder->addItem(t_reminder_30min);
-    ui->comboBoxReminder->addItem(t_reminder_1hour);
-    ui->comboBoxReminder->addItem(t_reminder_1day);
-}
-
 
 int DialogAppointment::getReminderMins()
 {
     return this->reminderMins;
 }
-
-void DialogAppointment::setDialogTitleTranslation(QString translation)
-{
-    t_dialog_title=translation;
-}
-
-void DialogAppointment::setDateDisplayTranslation(QString translation)
-{
-    t_date_display=translation;
-}
-
-void DialogAppointment::setTitleTranslation(QString translation)
-{
-    t_title=translation;
-}
-
-void DialogAppointment::setLocationTranslation(QString translation)
-{
-    t_location=translation;
-}
-
-void DialogAppointment::setNotesTranslations(QString translation)
-{
-    t_notes=translation;
-}
-
-void DialogAppointment::setAllDaytranslation(QString translation)
-{
-    t_all_day=translation;
-}
-
-void DialogAppointment::setStartTimeTranslation(QString translation)
-{
-    t_start_time=translation;
-}
-
-void DialogAppointment::setEndTimeTranslation(QString translation)
-{
-    t_end_time=translation;
-}
-
-
-void DialogAppointment::setReminderTranslation(QString translation)
-{
-    t_reminder=translation;
-}
-
-void DialogAppointment::setReminder5MinTranslation(QString translation)
-{
-    t_reminder_5min=translation;
-}
-
-void DialogAppointment::setReminder10MinTranslation(QString translation)
-{
-    t_reminder_10min=translation;
-}
-
-void DialogAppointment::setReminder30MinTranslation(QString translation)
-{
-    t_reminder_30min=translation;
-}
-
-void DialogAppointment::setReminder1HourTranslation(QString translation)
-{
-    t_reminder_1hour=translation;
-}
-
-void DialogAppointment::setReminder1DayTranslation(QString translation)
-{
-    t_reminder_1day=translation;
-}
-
-
-void DialogAppointment::setLabelTranslations()
-{
-    setWindowTitle(t_dialog_title);
-    ui->labelDate->setText(t_date_display);
-    ui->labelTitle->setText(t_title);
-    ui->labelLocation->setText(t_location);
-    ui->labelDescription->setText(t_notes);
-    ui->checkBoxAllDay->setText(t_all_day);
-    ui->labelStarts->setText(t_start_time);
-    ui->labelEndTime->setText(t_end_time);   
-    ui->checkBoxReminder->setText(t_reminder);
-}
-
 
 
 void DialogAppointment::setLocaleDate(QLocale locale)
