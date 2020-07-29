@@ -41,16 +41,6 @@
          </property>
         </spacer>
        </item>
-       <item>
-        <widget class="QLabel" name="labelLocal">
-         <property name="text">
-          <string>Locale:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="comboBoxLocale"/>
-       </item>
       </layout>
      </item>
      <item>

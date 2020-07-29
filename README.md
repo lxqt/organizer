@@ -55,6 +55,8 @@ qtmultimedia5-dev
 
 Binary packages are available as snap packages and in the Arch User Repository (AUR) 
 
+### Snap package
+
 * [Snap by ito32bit](https://build.snapcraft.io/user/ito32bit/lxqt-organizer-snap-packaging) 
 
 To test the latest successful build use:
@@ -65,6 +67,8 @@ To remove use:
 ```
 sudo snap remove lxqt-organizer-snap
 ```
+### Arch
+
 * [Arch (AUR) by Librewish](https://aur.archlinux.org/packages/lxqt-organizer-git/) 
 
 It can be installed using yay as shown below.
@@ -72,6 +76,12 @@ It can be installed using yay as shown below.
 ```
 yay -S lxqt-organizer
 ```
+
+### Deb package
+
+[Developer Deb package](https://github.com/crispinalan/organizer) 
+
+
 ## Versioning
 
 [SemVer](http://semver.org/) is used for versioning. The version number has the form 0.0.0 representing major, minor and bug fix changes. Currently at 0.7.3.
@@ -84,7 +94,6 @@ Custom calendar (completed)
 Add, remove and update appointments (completed)
 Add, remove and update contacts (completed)
 Reminders (completed)
-Localisation using custom XML translation system (completed)
 Calendar themes (light and dark themes completed)
 Enhanced features
 ``` 
@@ -108,4 +117,4 @@ Arch AUR will come soon.
 
 ### Translation (Weblate)
 
-Customized code based translation system. Translations for English, German, French and Japanese.
+

@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>translations/strings_de.xml</file>
-        <file>translations/strings_fr.xml</file>
-        <file>translations/strings_gb.xml</file>
-        <file>translations/strings_jp.xml</file>
-    </qresource>
-</RCC>

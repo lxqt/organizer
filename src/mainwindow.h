@@ -34,10 +34,10 @@
 #include <QXmlStreamWriter>
 #include <QDomDocument>
 #include <QTableWidgetItem>
-//#include <QtMultimedia>
+#include <QSettings>
+
 #include <QSound>
 #include <QLocale>
-
 
 #include "appointment.h"
 #include "contact.h"
@@ -75,23 +75,20 @@ public:
 
     //Timers
     QTimer *timer;
-    //QTimer *timerSingleShot;
+
     //Reminders
     void checkForReminders();
 
-    //Sounds
-   // QMediaPlayer *player;
+
 
     //Preferences default
 
-    int playAudio=0;
-    QString localeStr;
+    int playAudio=0;   
     int darkCalendar=0;
-
     void setDarkCalendar(int darkCalendar);
 
-    QLocale locale=QLocale::English;
-    QLocale getLocale(QString localeStr);
+   //QLocale locale=QLocale::English;
+   QLocale locale=QLocale::system();
 
     //Translation strings
     QString t_title;
@@ -223,16 +220,10 @@ public:
     QString t_dialog_contact_add_to_calendar;
     QString t_dialog_contact_delete;
 
-
-    void ReadXMLTranslation(QString localeStr);
-
-
-    int applicationFontSize=20;    
+    int applicationFontSize=14;
     int newLineSpacing=0;
     Preferences currentPreferences;
     void SetPreferences();
-    void SaveSettings();
-    bool LoadSettings();
 
     //Appointments
     QString title=QLatin1String("");
@@ -324,7 +315,6 @@ public:
     void AddHolidaysToHolidayList(int year);
 
     //Contacts
-
     QString contactFirstName =QLatin1String("");
     QString contactMiddleNames=QLatin1String("");
     QString contactLastName=QLatin1String("");
@@ -442,10 +432,10 @@ private slots:
 
     void on_actionReset_Font_triggered();
 
-
-
 private:
-    Ui::MainWindow *ui;   
+    Ui::MainWindow *ui;
+    void loadSettings();
+    void saveSettings();
 };
 
 #endif // MAINWINDOW_H

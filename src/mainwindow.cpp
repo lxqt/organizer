@@ -30,137 +30,138 @@ MainWindow::MainWindow(QWidget *parent) :
     dbm.openDatabase();
     dbm.createDatebaseTables();
 
-    //Set up default translation values
-    t_title =QStringLiteral("Organizer");;
+
+    t_title =tr("Organizer");
+    setWindowTitle(t_title);
     //Holidays
-    t_holiday_christmas=QStringLiteral("Christmas");
-    t_holiday_boxing=QStringLiteral("Boxing Day");
-    t_holiday_new_year=QStringLiteral("New Year's Dat");
-    t_holiday_easter=QStringLiteral("Easter");
-    t_holiday_good_friday=QStringLiteral("Good Friday");
-    t_holiday_easter_monday=QStringLiteral("Easter Monday");
-    t_holiday_may_bank=QStringLiteral("May Bank Holiday");
-    t_holiday_spring_bank=QStringLiteral("Spring Bank Holiday");
-    t_holiday_summer_bank=QStringLiteral("Summer Bank Holiday");
+    t_holiday_christmas=tr("Christmas");
+    t_holiday_boxing=tr("Boxing Day");
+    t_holiday_new_year=tr("New Year's Day");
+    t_holiday_easter=tr("Easter");
+    t_holiday_good_friday=tr("Good Friday");
+    t_holiday_easter_monday=tr("Easter Monday");
+    t_holiday_may_bank=tr("May Bank Holiday");
+    t_holiday_spring_bank=tr("Spring Bank Holiday");
+    t_holiday_summer_bank=tr("Summer Bank Holiday");
     //File
     t_file=QStringLiteral("File");
-    t_file_export_appointments=QStringLiteral("Export Appointments");
-    t_file_import_appointments=QStringLiteral("Import Appointments");
-    t_file_export_contacts=QStringLiteral("Export Contacts");
-    t_file_import_contacts=QStringLiteral("Import Contacts");
-    t_file_exit=QStringLiteral("Exit");
+    t_file_export_appointments=tr("Export Appointments");
+    t_file_import_appointments=tr("Import Appointments");
+    t_file_export_contacts=tr("Export Contacts");
+    t_file_import_contacts=tr("Import Contacts");
+    t_file_exit=tr("Exit");
     //Edit
-    t_edit=QStringLiteral("Edit");
-    t_edit_delete_all_appointments=QStringLiteral("Delete All Appointments");
-    t_edit_delete_all_contacts=QStringLiteral("Delete All Contacts");
-    t_edit_preferences=QStringLiteral("Preferences");
+    t_edit=tr("Edit");
+    t_edit_delete_all_appointments=tr("Delete All Appointments");
+    t_edit_delete_all_contacts=tr("Delete All Contacts");
+    t_edit_preferences=tr("Preferences");
 
     //Appointments
-    t_appointments=QStringLiteral("Appointments");
-    t_appointments_new_appointment=QStringLiteral("New Appointment");
-    t_appointments_generate_repeat_appointments=QStringLiteral("Generate Repeat Appointments");
-    t_appointments_upcoming_schedule=QStringLiteral("Upcoming Schedule");
+    t_appointments=tr("Appointments");
+    t_appointments_new_appointment=tr("New Appointment");
+    t_appointments_generate_repeat_appointments=tr("Generate Repeat Appointments");
+    t_appointments_upcoming_schedule=tr("Upcoming Schedule");
     //Calendar
-    t_calendar=QStringLiteral("Calendar");
-    t_calendar_show_holidays=QStringLiteral("Show Holidays");
-    t_calendar_show_birthdays=QStringLiteral("Show Birthdays");
-    t_calendar_next_month=QStringLiteral("Next Month");
-    t_calendar_previous_month=QStringLiteral("Previous Month");
-    t_calendar_today=QStringLiteral("Today");
-    t_calendar_increase_font=QStringLiteral("Increase Font Size");
-    t_calendar_decrease_font=QStringLiteral("Decrease Font Size");
-    t_calendar_reset_font=QStringLiteral("Reset Font Size");
+    t_calendar=tr("Calendar");
+    t_calendar_show_holidays=tr("Show Holidays");
+    t_calendar_show_birthdays=tr("Show Birthdays");
+    t_calendar_next_month=tr("Next Month");
+    t_calendar_previous_month=tr("Previous Month");
+    t_calendar_today=tr("Today");
+    t_calendar_increase_font=tr("Increase Font Size");
+    t_calendar_decrease_font=tr("Decrease Font Size");
+    t_calendar_reset_font=tr("Reset Font Size");
 
 
     //Contacts
-    t_contacts=QStringLiteral("Contacts");
-    t_contacts_new_contact=QStringLiteral("New Contact");
-    t_contacts_upcoming_birthdays=QStringLiteral("Check For Birthdays");
+    t_contacts=tr("Contacts");
+    t_contacts_new_contact=tr("New Contact");
+    t_contacts_upcoming_birthdays=tr("Check For Birthdays");
     //Help
-    t_help=QStringLiteral("Help");
-    t_help_about=QStringLiteral("About");
-    t_about_text=QStringLiteral("Organizer is a Qt lightweight personal information"
-                                " manager developed by Alan Crispin (aka. crispina)");
+    t_help=tr("Help");
+    t_help_about=tr("About");
+    t_about_text=tr("Organizer is a Qt lightweight personal information"
+                                " manager developed by Alan Crispin");
     //Contact tab
-    t_contact_tab_first_name=QStringLiteral("First Name");
-    t_contact_tab_mid_name=QStringLiteral("Mid Name");
-    t_contact_tab_last_name=QStringLiteral("Last Name");
-    t_contact_tab_email=QStringLiteral("Email");
-    t_contact_tab_street=QStringLiteral("Street");
-    t_contact_tab_district=QStringLiteral("District");
-    t_contact_tab_city=QStringLiteral("City");
-    t_contact_tab_county=QStringLiteral("County");
-    t_contact_tab_postcode=QStringLiteral("Postcode");
-    t_contact_tab_country=QStringLiteral("Country");
-    t_contact_tab_telephone=QStringLiteral("Telephone");
-    t_contact_tab_birthday=QStringLiteral("Birthday");
+    t_contact_tab_first_name=tr("First Name");
+    t_contact_tab_mid_name=tr("Mid Name");
+    t_contact_tab_last_name=tr("Last Name");
+    t_contact_tab_email=tr("Email");
+    t_contact_tab_street=tr("Street");
+    t_contact_tab_district=tr("District");
+    t_contact_tab_city=tr("City");
+    t_contact_tab_county=tr("County");
+    t_contact_tab_postcode=tr("Postcode");
+    t_contact_tab_country=tr("Country");
+    t_contact_tab_telephone=tr("Telephone");
+    t_contact_tab_birthday=tr("Birthday");
 
-    t_contact_tab_quick_full_view=QStringLiteral("Quick/Full View");
-    t_contact_tab_mailto=QStringLiteral("Mail To:");
+    t_contact_tab_quick_full_view=tr("Quick/Full View");
+    t_contact_tab_mailto=tr("Mail To:");
 
     //Preferences
-    t_preferences_title=QStringLiteral("Preferences");
-    t_preferences_font_size=QStringLiteral("Font Size");
-    t_preferences_locale=QStringLiteral("Locale");
-    t_preferences_play_audio=QStringLiteral("Play Audio");
-    t_preferences_dark_calendar=QStringLiteral("Dark Calendar");
-    t_preferences_line_spacing=QStringLiteral("Line Spacing");
+    t_preferences_title=tr("Preferences");
+    t_preferences_font_size=tr("Font Size");
+    t_preferences_locale=tr("Locale");
+    t_preferences_play_audio=tr("Play Audio");
+    t_preferences_dark_calendar=tr("Dark Calendar");
+    t_preferences_line_spacing=tr("Line Spacing");
 
     //Upcoming dialogs
-    t_upcoming_birthdays_title=QStringLiteral("Upcoming Birthdays (Next Seven Days)");
-    t_upcoming_schedule_title=QStringLiteral("Upcoming Schedule (Next Seven Days)");
-    t_label_upcoming_schedule=QStringLiteral("Upcoming Schedule For Date: ");
+    t_upcoming_birthdays_title=tr("Upcoming Birthdays (Next Seven Days)");
+    t_upcoming_schedule_title=tr("Upcoming Schedule (Next Seven Days)");
+    t_label_upcoming_schedule=tr("Upcoming Schedule For Date: ");
 
     //Appointment dialogs
-    t_dialog_appointment_dialog_title=QStringLiteral("New Appointment");
-    t_dialog_appointment_date_display=QStringLiteral("Appointment Date: ");
-    t_dialog_appointment_title=QStringLiteral("Title");
-    t_dialog_appointment_location=QStringLiteral("Location");
-    t_dialog_appointment_notes=QStringLiteral("Notes");
-    t_dialog_appointment_all_day=QStringLiteral("All Day");
-    t_dialog_appointment_start_time=QStringLiteral("Start Time");
-    t_dialog_appointment_end_time=QStringLiteral("End Time");
-    t_dialog_appointment_reminder=QStringLiteral("Reminder");
+    t_dialog_appointment_dialog_title=tr("New Appointment");
+    t_dialog_appointment_date_display=tr("Appointment Date: ");
+    t_dialog_appointment_title=tr("Title");
+    t_dialog_appointment_location=tr("Location");
+    t_dialog_appointment_notes=tr("Notes");
+    t_dialog_appointment_all_day=tr("All Day");
+    t_dialog_appointment_start_time=tr("Start Time");
+    t_dialog_appointment_end_time=tr("End Time");
+    t_dialog_appointment_reminder=tr("Reminder");
 
     //update appointment
-    t_dialog_appointment_update=QStringLiteral("Update Appointment");
-    t_dialog_appointment_delete=QStringLiteral("Delete Appointment");
+    t_dialog_appointment_update=tr("Update Appointment");
+    t_dialog_appointment_delete=tr("Delete Appointment");
 
-    t_reminder_5min=QStringLiteral("5 Minutes Before Start");
-    t_reminder_10min=QStringLiteral("10 Minutes Before Start");
-    t_reminder_30min=QStringLiteral("30 Minutes Before Start");
-    t_reminder_1hour=QStringLiteral("1 Hour Before Start");
-    t_reminder_1day=QStringLiteral("1 Day Before Start");
+    t_reminder_5min=tr("5 Minutes Before Start");
+    t_reminder_10min=tr("10 Minutes Before Start");
+    t_reminder_30min=tr("30 Minutes Before Start");
+    t_reminder_1hour=tr("1 Hour Before Start");
+    t_reminder_1day=tr("1 Day Before Start");
 
-    t_reminder_message_on=QStringLiteral("On");
-    t_reminder_message_starts_at=QStringLiteral("Starts At");
+    t_reminder_message_on=tr("On");
+    t_reminder_message_starts_at=tr("Starts At");
 
     //repeat appointments
-    t_dialog_repeat_title=QStringLiteral("Gnerate Repeat Appointments");
-    t_dialog_repeat_date_message=QStringLiteral("Appointment Start Date: ");
-    t_dialog_repeat_repeat_every=QStringLiteral("Repeat Every");
-    t_dialog_repeat_days=QStringLiteral("Days");
-    t_dialog_repeat_occurrences=QStringLiteral("Occurrences");
+    t_dialog_repeat_title=tr("Generate Repeat Appointments");
+    t_dialog_repeat_date_message=tr("Appointment Start Date: ");
+    t_dialog_repeat_repeat_every=tr("Repeat Every");
+    t_dialog_repeat_days=tr("Days");
+    t_dialog_repeat_occurrences=tr("Occurrences");
 
     //Contacts dialog
 
-    t_dialog_contact_title=QStringLiteral("default");
-    t_dialog_contact_first_name=QStringLiteral("default");
-    t_dialog_contact_mid_name=QStringLiteral("default");
-    t_dialog_contact_last_name=QStringLiteral("default");
-    t_dialog_contact_email=QStringLiteral("default");
-    t_dialog_contact_street=QStringLiteral("default");
-    t_dialog_contact_district=QStringLiteral("default");
-    t_dialog_contact_city=QStringLiteral("default");
-    t_dialog_contact_county=QStringLiteral("default");
-    t_dialog_contact_postcode=QStringLiteral("default");
-    t_dialog_contact_country=QStringLiteral("default");
-    t_dialog_contact_telephone=QStringLiteral("default");
+    t_dialog_contact_title=tr("default");
+    t_dialog_contact_first_name=tr("default");
+    t_dialog_contact_mid_name=tr("default");
+    t_dialog_contact_last_name=tr("default");
+    t_dialog_contact_email=tr("default");
+    t_dialog_contact_street=tr("default");
+    t_dialog_contact_district=tr("default");
+    t_dialog_contact_city=tr("default");
+    t_dialog_contact_county=tr("default");
+    t_dialog_contact_postcode=tr("default");
+    t_dialog_contact_country=tr("default");
+    t_dialog_contact_telephone=tr("default");
 
-    t_dialog_contact_born_on=QStringLiteral("Born On");
-    t_dialog_contact_birthday_unknown=QStringLiteral("Birthday Unknown");
-    t_dialog_contact_add_to_calendar=QStringLiteral("Add To Calendar");
-    t_dialog_contact_delete=QStringLiteral("Delete Contact");
+    t_dialog_contact_born_on=tr("Born On");
+    t_dialog_contact_birthday_unknown=tr("Birthday Unknown");
+    t_dialog_contact_add_to_calendar=tr("Add To Calendar");
+    t_dialog_contact_delete=tr("Delete Contact");
 
     //Setup empty lists
     appointmentList= QList<Appointment>();
@@ -171,29 +172,21 @@ MainWindow::MainWindow(QWidget *parent) :
     contactModel =new ContactModel;
     proxyModelContacts = new ProxyModelContacts;
 
-    if (LoadSettings())
-    {
+    //default setting values (first run)
+    playAudio=1;
+    darkCalendar=0;
+    applicationFontSize=18;
+    newLineSpacing=0;
 
-       playAudio=currentPreferences.m_playAudio;
-       localeStr=currentPreferences.m_localization;
-       darkCalendar=currentPreferences.m_darkCalendar;
-       applicationFontSize=currentPreferences.m_applicationFontSize;       
-       newLineSpacing=currentPreferences.m_lineSpacing;
+    loadSettings();
 
-    }
-    else {
-        //default values        
-        playAudio=0;
-        localeStr=QStringLiteral("English");
-        darkCalendar=0;
-        applicationFontSize=20;        
-        newLineSpacing=0;
-    }
+    playAudio=currentPreferences.m_playAudio;
+    darkCalendar=currentPreferences.m_darkCalendar;
+    applicationFontSize=currentPreferences.m_applicationFontSize;
+    newLineSpacing=currentPreferences.m_lineSpacing;
 
     setDarkCalendar(darkCalendar);
     SetApplicationFontSize(applicationFontSize);
-    locale=getLocale(localeStr);
-    ReadXMLTranslation(localeStr);
 
     //setup timer
     timer = new QTimer(this);
@@ -331,6 +324,7 @@ MainWindow::MainWindow(QWidget *parent) :
     UpdateCalendar();
     ShowAppointmentsOnListView(selectedDate);
 
+
 }
 
 MainWindow::~MainWindow()
@@ -427,462 +421,7 @@ void MainWindow::checkForReminders()
 
 
 
-QLocale MainWindow::getLocale(QString localeStr)
-{
-    if(localeStr=="English") {
-        return QLocale::English;
-    }
-    else if(localeStr=="French") {
-        return QLocale::French;
-    }
-    else if(localeStr=="German"){
-        return QLocale::German;
-    }
-    else if(localeStr=="Japanese"){
-        return QLocale::Japanese;
-    }
-    else {
-        return QLocale::English;
-    }
-}
 
-void MainWindow::ReadXMLTranslation(QString localeStr)
-{
-    QDomDocument document;
-
-    QString translationfile ="";
-
-    if (localeStr=="German")
-    {
-        translationfile=":/translations/strings_de.xml";
-    }
-    else if(localeStr=="French"){
-        translationfile=":/translations/strings_fr.xml";
-    }
-    else if(localeStr=="English"){
-        translationfile=":/translations/strings_gb.xml";
-    }
-    else if(localeStr=="Japanese")
-    {
-        translationfile=":/translations/strings_jp.xml";
-    }
-    else {
-        translationfile=":/translations/strings_gb.xml";
-    }
-
-    QFile file(translationfile);
-
-    if (!file.open(QFile::ReadOnly | QFile::Text))
-    {
-        qDebug() << "Failed to open XML file.";
-        return;
-    }
-
-    document.setContent(&file); //load document
-    // Extract topElement (root)
-    QDomElement topElement = document.documentElement();
-    // Get topElement names and attributes
-    QString type=topElement.tagName();
-    QString lang=topElement.attribute("LANG","No name");
-    //int date=topElement.attribute("DATE","20200101").toInt();
-
-    //Read data
-    // Get the first child of the root (TRANSLATE markup expected)
-    QDomElement Translate=topElement.firstChild().toElement();
-
-    // Loop while there is a child
-    while(!Translate.isNull())
-    {
-        // Check if the child tag name is TRANSLATE
-        if (Translate.tagName()=="TRANSLATE")
-        {
-            // Read and display the translate ID
-            QString ID=Translate.attribute("ID","No ID");
-
-
-            // Get the first child of the component
-            QDomElement Child=Translate.firstChild().toElement();
-
-            QString text;
-            QString translation;
-
-            // Read each child of the translate node
-            while (!Child.isNull())
-            {
-                // Read text and translation (key-value pair)
-                if (Child.tagName()=="TEXT") text=Child.firstChild().toText().data();
-                if (Child.tagName()=="TRANSLATION") translation=Child.firstChild().toText().data();
-
-                // Next child
-                Child = Child.nextSibling().toElement();
-            }
-
-            if(ID=="t_title"){
-                t_title=translation;
-            }
-            //Holidays
-            else if(ID=="t_holiday_christmas"){
-                t_holiday_christmas=translation;
-            }
-            else if(ID=="t_holiday_boxing"){
-                t_holiday_boxing=translation;
-            }
-            else if(ID=="t_holiday_new_year"){
-                t_holiday_new_year=translation;
-            }
-            else if(ID=="t_holiday_easter"){
-                t_holiday_easter=translation;
-            }
-            else if(ID=="t_holiday_good_friday"){
-                t_holiday_good_friday=translation;
-            }
-            else if(ID=="t_holiday_easter_monday"){
-                t_holiday_easter_monday=translation;
-            }
-            else if(ID=="t_holiday_may_bank"){
-                t_holiday_may_bank=translation;
-            }
-            else if(ID=="t_holiday_spring_bank"){
-                t_holiday_spring_bank=translation;
-            }
-            else if(ID=="t_holiday_summer_bank"){
-                t_holiday_summer_bank=translation;
-            }
-            //File menu
-            else if(ID=="t_file"){
-                t_file=translation;
-            }
-            else if(ID=="t_file_export_appointments"){
-                t_file_export_appointments=translation;
-            }
-            else if(ID=="t_file_import_appointments"){
-                t_file_import_appointments=translation;
-            }
-            else if(ID=="t_file_export_contacts"){
-                t_file_export_contacts=translation;
-            }
-            else if(ID=="t_file_import_contacts"){
-                t_file_import_contacts=translation;
-            }
-            else if(ID=="t_file_exit"){
-                t_file_exit=translation;
-            }
-            //Edit Menu
-            else if(ID=="t_edit"){
-                t_edit=translation;
-            }
-            else if(ID=="t_edit_delete_all_appointments"){
-                t_edit_delete_all_appointments=translation;
-            }
-            else if(ID=="t_edit_delete_all_contacts"){
-                t_edit_delete_all_contacts=translation;
-            }
-            else if(ID=="t_edit_preferences"){
-                t_edit_preferences=translation;
-            }
-
-            //Appointments
-            else if(ID=="t_appointments"){
-                t_appointments=translation;
-            }
-            else if(ID=="t_appointments_new_appointment"){
-                t_appointments_new_appointment=translation;
-            }
-            else if(ID=="t_appointments_generate_repeat_appointments"){
-                t_appointments_generate_repeat_appointments=translation;
-            }
-            else if(ID=="t_appointments_upcoming_schedule"){
-                t_appointments_upcoming_schedule=translation;
-            }
-
-            //Calendar
-            else if(ID=="t_calendar"){
-                t_calendar=translation;
-            }
-            else if(ID=="t_calendar_show_holidays"){
-                t_calendar_show_holidays=translation;
-            }
-            else if(ID=="t_calendar_show_birthdays"){
-                t_calendar_show_birthdays=translation;
-            }
-            else if(ID=="t_calendar_next_month"){
-                t_calendar_next_month=translation;
-            }
-            else if(ID=="t_calendar_previous_month"){
-                t_calendar_previous_month=translation;
-            }
-            else if(ID=="t_calendar_today"){
-                t_calendar_today=translation;
-            }
-
-            else if(ID=="t_calendar_increase_font"){
-                t_calendar_increase_font=translation;
-            }
-            else if(ID=="t_calendar_decrease_font"){
-                t_calendar_decrease_font=translation;
-            }
-            else if(ID=="t_calendar_reset_font"){
-                t_calendar_reset_font=translation;
-            }
-
-
-            //Contacts
-            else if(ID=="t_contacts"){
-                t_contacts=translation;
-                t_dialog_contact_title=translation;
-            }
-            else if(ID=="t_contacts_new_contact"){
-                t_contacts_new_contact=translation;
-            }
-            else if(ID=="t_contacts_upcoming_birthdays"){
-                t_contacts_upcoming_birthdays=translation;
-            }
-            //help
-            else if(ID=="t_help"){
-                t_help=translation;
-            }
-            else if(ID=="t_help_about"){
-                t_help_about=translation;
-            }
-            else if(ID=="t_about_text"){
-                t_about_text=translation;
-            }
-            //tab contacts
-            else if(ID=="t_tab_contacts_first_name"){
-                t_contact_tab_first_name=translation;
-                t_dialog_contact_first_name=translation;
-            }
-            else if(ID=="t_tab_contacts_mid_name"){
-                t_contact_tab_mid_name=translation;
-                t_dialog_contact_mid_name=translation;
-            }
-            else if(ID=="t_tab_contacts_last_name"){
-                t_contact_tab_last_name=translation;
-                t_dialog_contact_last_name=translation;
-            }
-            else if(ID=="t_tab_contacts_email"){
-                t_contact_tab_email=translation;
-                t_dialog_contact_email=translation;
-            }
-            else if(ID=="t_tab_contacts_street"){
-                t_contact_tab_street=translation;
-                t_dialog_contact_street=translation;
-            }
-            else if(ID=="t_tab_contacts_district"){
-                t_contact_tab_district=translation;
-                t_dialog_contact_district=translation;
-            }
-            else if(ID=="t_tab_contacts_city"){
-                t_contact_tab_city=translation;
-                t_dialog_contact_city=translation;
-            }
-            else if(ID=="t_tab_contacts_county"){
-                t_contact_tab_county=translation;
-                t_dialog_contact_county=translation;
-            }
-            else if(ID=="t_tab_contacts_postcode"){
-                t_contact_tab_postcode=translation;
-                t_dialog_contact_postcode=translation;
-            }
-            else if(ID=="t_tab_contacts_country"){
-                t_contact_tab_country=translation;
-                t_dialog_contact_country=translation;
-            }
-            else if(ID=="t_tab_contacts_telephone"){
-                t_contact_tab_telephone=translation;
-                t_dialog_contact_telephone=translation;
-            }
-            else if(ID=="t_tab_contacts_birthday"){
-                t_contact_tab_birthday=translation;
-            }
-            else if(ID=="t_tab_contacts_quick-full-view"){
-                t_contact_tab_quick_full_view=translation;
-            }
-            else if(ID=="t_tab_contacts_mailto"){
-                t_contact_tab_mailto=translation;
-            }
-
-            //Preferences dialog
-
-            else if(ID=="t_preferences_title"){
-                t_preferences_title=translation;
-            }
-            else if(ID=="t_preferences_font_size"){
-                t_preferences_font_size=translation;
-            }
-            else if(ID=="t_preferences_locale"){
-                t_preferences_locale=translation;
-            }
-            else if(ID=="t_preferences_play_audio"){
-                t_preferences_play_audio=translation;
-            }
-            else if(ID=="t_preferences_dark_calendar"){
-                t_preferences_dark_calendar=translation;
-            }
-            else if(ID=="t_preferences_line_spacing"){
-                t_preferences_line_spacing=translation;
-            }
-            //upcoming
-            else if(ID=="t_upcoming_birthdays_title"){
-                t_upcoming_birthdays_title=translation;
-            }
-            else if(ID=="t_upcoming_schedule_title"){
-                t_upcoming_schedule_title=translation;
-            }
-            else if(ID=="t_upcoming_schedule_label"){
-                t_label_upcoming_schedule=translation;
-            }
-            //appointment dialogs
-            else if(ID=="t_dialog_appointment_dialog_title"){
-                t_dialog_appointment_dialog_title=translation;
-            }
-            else if(ID=="t_dialog_appointment_date_display"){
-                t_dialog_appointment_date_display=translation;
-            }
-            else if(ID=="t_dialog_appointment_title"){
-                t_dialog_appointment_title=translation;
-            }
-            else if(ID=="t_dialog_appointment_location"){
-                t_dialog_appointment_location=translation;
-            }
-            else if(ID=="t_dialog_appointment_notes"){
-                t_dialog_appointment_notes=translation;
-            }
-            else if(ID=="t_dialog_appointment_all_day"){
-                t_dialog_appointment_all_day=translation;
-            }
-            else if(ID=="t_dialog_appointment_start_time"){
-                t_dialog_appointment_start_time=translation;
-            }
-            else if(ID=="t_dialog_appointment_end_time"){
-                t_dialog_appointment_end_time=translation;
-            }
-
-            else if(ID=="t_dialog_appointment_reminder"){
-                t_dialog_appointment_reminder=translation;
-            }
-            else if(ID=="t_dialog_appointment_update"){
-                t_dialog_appointment_update=translation;
-            }
-            else if(ID=="t_dialog_appointment_delete"){
-                t_dialog_appointment_delete=translation;
-            }
-           //contact dialogs
-            else if(ID=="t_dialog_contact_born_on"){
-                t_dialog_contact_born_on=translation;
-            }
-            else if(ID=="t_dialog_contact_birthday_unknown"){
-                t_dialog_contact_birthday_unknown=translation;
-            }
-            else if(ID=="t_dialog_contact_add_to_calendar"){
-                t_dialog_contact_add_to_calendar=translation;
-            }
-            else if(ID=="t_dialog_contact_delete"){
-                t_dialog_contact_delete=translation;
-            }
-            //dialog reminders
-            else if(ID=="t_dialog_reminder_5min"){
-                t_reminder_5min=translation;
-            }
-            else if(ID=="t_dialog_reminder_10min"){
-                t_reminder_10min=translation;
-            }
-            else if(ID=="t_dialog_reminder_30min"){
-                t_reminder_30min=translation;
-            }
-            else if(ID=="t_dialog_reminder_1hour"){
-                t_reminder_1hour=translation;
-            }
-            else if(ID=="t_dialog_reminder_1day"){
-                t_reminder_1day=translation;
-            }
-            else if(ID=="t_message_reminder_on"){
-                t_reminder_message_on=translation;
-            }
-            else if(ID=="t_message_reminder_starts_at"){
-                t_reminder_message_starts_at=translation;
-            }
-            //dialog repeat appointments
-            else if(ID=="t_dialog_repeat_title"){
-                t_dialog_repeat_title=translation;
-            }
-            else if(ID=="t_dialog_repeat_appointment_start_date"){
-                t_dialog_repeat_date_message=translation;
-            }
-            else if(ID=="t_dialog_repeat_repeat_every"){
-                t_dialog_repeat_repeat_every=translation;
-            }
-            else if(ID=="t_dialog_repeat_days"){
-                t_dialog_repeat_days=translation;
-            }
-            else if(ID=="t_dialog_repeat_occurrences"){
-                t_dialog_repeat_occurrences=translation;
-            }
-
-
-
-        }
-        // next element
-        Translate = Translate.nextSibling().toElement();
-    }
-
-    setWindowTitle(t_title);
-    ui->menuFile->setTitle(t_file);
-    ui->actionExport_Appointments->setText(t_file_export_appointments);
-    ui->actionImport_Appointments->setText(t_file_import_appointments);
-    ui->actionExport_Contacts->setText(t_file_export_contacts);
-    ui->actionImport_Contacts->setText(t_file_import_contacts);
-    ui->actionExit->setText(t_file_exit);
-
-    ui->menuEdit->setTitle(t_edit);
-    ui->actionDelete_All_Appointments->setText(t_edit_delete_all_appointments);
-    ui->actionDelete_All_Contacts->setText(t_edit_delete_all_contacts);
-    ui->actionPreferences->setText(t_edit_preferences);
-
-    ui->menuAppointments->setTitle(t_appointments);
-    ui->actionNew_Appointment->setText(t_appointments_new_appointment);
-    ui->actionGeneerate_Repeat_Appointments->setText(t_appointments_generate_repeat_appointments);
-    ui->actionUpcoming_Schedule->setText(t_appointments_upcoming_schedule);
-
-    ui->menuCalendar->setTitle(t_calendar);
-    ui->actionShow_Holidays->setText(t_calendar_show_holidays);
-    ui->actionShow_Birthdays->setText(t_calendar_show_birthdays);
-    ui->actionNext_Month->setText(t_calendar_next_month);
-    ui->actionPrevious_Month->setText(t_calendar_previous_month);
-    ui->actionToday->setText(t_calendar_today);
-    ui->actionIncrease_Font->setText(t_calendar_increase_font);
-    ui->actionDecrease_Font->setText(t_calendar_decrease_font);
-    ui->actionReset_Font->setText(t_calendar_reset_font);
-
-
-
-    ui->menuContacts->setTitle(t_contacts);
-    ui->actionNew_Contact->setText(t_contacts_new_contact);
-    ui->actionCheck_For_Birthdays->setText(t_contacts_upcoming_birthdays);
-
-    ui->menuHelp->setTitle(t_help);
-    ui->actionAbout->setText(t_help_about);
-
-    ui->tabWidget->setTabText(0,t_calendar);
-    ui->tabWidget->setTabText(1,t_contacts);
-
-    contactModel->setFirstNameTranslation(t_contact_tab_first_name);
-    contactModel->setMidNameTranslation(t_contact_tab_mid_name);
-    contactModel->setLastNameTranslation(t_contact_tab_last_name);
-    contactModel->setEmailTranslation(t_contact_tab_email);
-    contactModel->setStreetTranslation(t_contact_tab_street);
-    contactModel->setDistrictTranslation(t_contact_tab_district);
-    contactModel->setCityTranslation(t_contact_tab_city);
-    contactModel->setCountyTransaltion(t_contact_tab_county);
-    contactModel->setPostcodeTranslation(t_contact_tab_postcode);
-    contactModel->setCountryTranslation(t_contact_tab_country);
-    contactModel->setTelephoneTranslation(t_contact_tab_telephone);
-    contactModel->setBirthdayTranslation(t_contact_tab_birthday);
-
-    ui->pushButtonShowQuickFullView->setText(t_contact_tab_quick_full_view);
-    ui->pushButtonMailTo->setText(t_contact_tab_mailto);
-    file.close();
-}
 
 void MainWindow::NewAppointment()
 {
@@ -1326,6 +865,8 @@ void MainWindow::UpdateCalendar()
     }//selected month
 
     QString month_year =locale.toString(selectedDate,QStringLiteral("MMMM yyyy"));
+
+
     ui->labelCalendarHeader->setText(month_year);
 }
 
@@ -1344,19 +885,17 @@ void MainWindow::SetApplicationFontSize(int fontsize)
     QFont headerFontSize = ui->tableWidgetCalendar->horizontalHeader()->font();
     headerFontSize.setPixelSize(fontsize);
     ui->tableWidgetCalendar->horizontalHeader()->setFont(headerFontSize);
+
+    QFont labelCalendarFont=ui->labelCalendarHeader->font();
+    labelCalendarFont.setPixelSize(fontsize);
+    ui->labelCalendarHeader->setFont(labelCalendarFont);
+
 }
 
 void MainWindow::SetPreferences()
 {
     DialogPreferences *preferencesDialog = new  DialogPreferences(this,&currentPreferences);
     preferencesDialog->setModal(true);
-    //Set translations
-    preferencesDialog->setTitleTranslation(t_preferences_title);
-    preferencesDialog->setFontSizeTranslation(t_preferences_font_size);
-    preferencesDialog->setLocaleTranslation(t_preferences_locale);
-    preferencesDialog->setPlayAudioTranslation(t_preferences_play_audio);
-    preferencesDialog->setDarkCalendarTranslation(t_preferences_dark_calendar);
-    preferencesDialog->setLineSpacingTranslation(t_preferences_line_spacing);
     preferencesDialog->SetLableDescriptions();
 
 
@@ -1364,9 +903,8 @@ void MainWindow::SetPreferences()
 
 
         playAudio=preferencesDialog->isPlayAudio();
-        localeStr=preferencesDialog->getLocalization();      
 
-        locale=getLocale(localeStr);
+        //locale=getLocale(localeStr);
         QString date =locale.toString(selectedDate,QStringLiteral("dddd dd MMMM yyyy"));
         selectedDateLabel->setText(date);
 
@@ -1376,19 +914,18 @@ void MainWindow::SetPreferences()
 
         darkCalendar=preferencesDialog->isDarkCalendar();
         setDarkCalendar(darkCalendar);
-        ReadXMLTranslation(localeStr);
+
         setWindowTitle(t_title);
         AddHolidaysToHolidayList(selectedYear);
         UpdateCalendar();
         ShowAppointmentsOnListView(selectedDate);
 
         //reset preferences
-        currentPreferences.m_playAudio=playAudio;
-        currentPreferences.m_localization=localeStr;
+        currentPreferences.m_playAudio=playAudio;        
         currentPreferences.m_darkCalendar=darkCalendar;
         currentPreferences.m_applicationFontSize=applicationFontSize;
         currentPreferences.m_lineSpacing=newLineSpacing;
-        SaveSettings();
+        saveSettings();
     }
     SetApplicationFontSize(applicationFontSize);
 }
@@ -1411,7 +948,7 @@ void MainWindow::decreaseFont()
 
 void MainWindow::resetFont()
 {    
-    applicationFontSize=20;
+    applicationFontSize=16;
     currentPreferences.m_applicationFontSize=applicationFontSize;
     SetApplicationFontSize(applicationFontSize);
 }
@@ -2152,7 +1689,7 @@ void MainWindow::on_actionDelete_All_Contacts_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::information(this, t_title+QStringLiteral(" v0.7.2"),
+    QMessageBox::information(this, t_title+QStringLiteral(" v0.7.4"),
                              t_about_text);
 }
 
@@ -2287,77 +1824,7 @@ void MainWindow::on_actionPreferences_triggered()
     SetPreferences();
 }
 
-void MainWindow::SaveSettings()
-{
-    QDomDocument document;
-    QDomElement root = document.createElement(QStringLiteral("Settings"));
-    document.appendChild(root);
 
-    QDomElement setting = document.createElement(QStringLiteral("Settings"));
-    setting.setAttribute(QStringLiteral("PlayAudio"),currentPreferences.m_playAudio);
-    setting.setAttribute(QStringLiteral("Locale"),currentPreferences.m_localization);
-    setting.setAttribute(QStringLiteral("DarkCalendar"),currentPreferences.m_darkCalendar);
-    setting.setAttribute(QStringLiteral("ApplicationFontSize"),currentPreferences.m_applicationFontSize);
-
-    setting.setAttribute(QStringLiteral("LineSpacing"),currentPreferences.m_lineSpacing);
-    root.appendChild(setting);
-
-    QFile file("conf.xml");
-    if (!file.open(QFile::WriteOnly | QFile::Text)){
-       //qDebug() << "Error saving XML file.";
-        return;
-    }
-    else {
-        QTextStream stream(&file);
-        stream << document.toString();
-        file.close();
-        //qDebug() << "Finished saving configuation settings";
-    }
-}
-
-bool MainWindow::LoadSettings()
-{
-    QDomDocument document;
-
-    QFile file("conf.xml");
-
-    if (!file.open(QFile::ReadOnly | QFile::Text))
-    {
-        //qDebug() << "Failed to open XML file.";
-        return false;
-    }
-    else
-    {
-        if(!document.setContent(&file))
-        {
-            //qDebug() << "Failed to load document";
-            return false;
-        }
-        file.close();
-    }
-
-    QDomElement root = document.firstChildElement();
-
-    QDomNodeList setting = root.elementsByTagName(QStringLiteral("Settings"));
-
-    for(int i = 0; i < setting.count(); i++)
-    {
-        QDomNode node = setting.at(i);
-        if(node.isElement())
-        {
-            QDomElement element = node.toElement();
-            currentPreferences.m_playAudio=element.attribute(QStringLiteral("PlayAudio")).toInt();
-            currentPreferences.m_localization=element.attribute(QStringLiteral("Locale"));
-            currentPreferences.m_darkCalendar=element.attribute(QStringLiteral("DarkCalendar")).toInt();
-            currentPreferences.m_applicationFontSize=element.attribute(QStringLiteral("ApplicationFontSize")).toInt();
-
-            currentPreferences.m_lineSpacing=element.attribute(QStringLiteral("LineSpacing")).toInt();
-        }
-
-    }
-    file.close();
-    return true;
-}
 
 void MainWindow::setDarkCalendar(int darkCalendar)
 {
@@ -2440,6 +1907,30 @@ void MainWindow::on_actionDecrease_Font_triggered()
 void MainWindow::on_actionReset_Font_triggered()
 {
     resetFont();
+}
+
+void MainWindow::loadSettings()
+{
+    QSettings settings("LXQt", "Organizer");
+     settings.beginGroup("CoreSettings");
+     currentPreferences.m_playAudio=settings.value("PlayAudio").toInt();
+     currentPreferences.m_darkCalendar=settings.value("DarkCalendar").toInt();
+     currentPreferences.m_applicationFontSize=settings.value("ApplicationFontSize").toInt();
+     currentPreferences.m_lineSpacing=settings.value("LineSpacing").toInt();
+     settings.endGroup();
+     //qDebug()<<"Settings loaded";
+}
+
+void MainWindow::saveSettings()
+{
+    QSettings settings("LXQt", "Organizer");
+    settings.beginGroup("CoreSettings");
+    settings.setValue("PlayAudio",currentPreferences.m_playAudio);
+    settings.setValue("DarkCalendar",currentPreferences.m_darkCalendar);
+    settings.setValue("ApplicationFontSize",currentPreferences.m_applicationFontSize);
+    settings.setValue("LineSpacing",currentPreferences.m_lineSpacing);
+    settings.endGroup();
+    //qDebug()<<"Settings saved";
 }
 
 
