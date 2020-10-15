@@ -188,20 +188,10 @@ bool DbManager::updateAppointment(Appointment &appointment, int id)
 
          qry.bindValue(":idin", QString::number(id));
          success=qry.exec();
-         if (success)
-         {
-           //qDebug() << "Appointment updated" << " sucess ="<<success;
-           return success;  //true
-         }
-         else
-         {
-           //qDebug() << "Appointment update failed"<<" sucess ="<<success;
-           return success;
-         }
+         return success;
        }
        else
        {
-         //qDebug() << "SQL is broken"<<" sucess ="<<success;
          return success;
        }}
 
