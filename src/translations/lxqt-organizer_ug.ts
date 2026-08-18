@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1" language="ug">
 <context>
     <name>AboutDialog</name>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="20"/>
         <source>About LXQt Organizer</source>
-        <translation>Über LXQt Organizer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="42"/>
         <source>&lt;center&gt;&lt;span style=&quot;font-size:16pt; font-weight:600;&quot;&gt;LXQt Organizer %1&lt;/span&gt;&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;span style=&quot;font-size:16pt; font-weight:600;&quot;&gt;LXQt Organizer %1&lt;/span&gt;&lt;/center&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="55"/>
         <source>Lightweight personal information manager</source>
-        <translation>Leichtgewichtiger persönlicher Informationsmanager</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="68"/>
         <source>&lt;center&gt;&lt;a href=&quot;https://github.com/lxqt/organizer&quot;&gt;https://github.com/lxqt/organizer&lt;/a&gt;&lt;br/&gt;LXQt Project: &lt;a href=&quot;https://lxqt-project.org&quot;&gt;https://lxqt-project.org&lt;/a&gt;&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;a href=&quot;https://github.com/lxqt/organizer&quot;&gt;https://github.com/lxqt/organizer&lt;/a&gt;&lt;br/&gt;LXQt Projekt: &lt;a href=&quot;https://lxqt-project.org&quot;&gt;https://lxqt-project.org&lt;/a&gt;&lt;/center&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="85"/>
         <source>About</source>
-        <translation>Über</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="114"/>
         <source>Authors</source>
-        <translation>Autoren</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="143"/>
         <source>License</source>
-        <translation>Lizenz</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="54"/>
         <source>LXQt Organizer is a Qt lightweight personal information manager developed by Basil Crow</source>
-        <translation>LXQt Organizer ist ein von Basil Crow entwickelter, leichtgewichtiger persönlicher Informationsmanager auf Qt-Basis.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="56"/>
         <source>Built with Qt and LXQt libraries.</source>
-        <translation>Erstellt mit Qt- und LXQt-Bibliotheken.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="65"/>
         <source>Programming:</source>
-        <translation>Programmierung:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="65"/>
         <source>Maintained by:</source>
-        <translation>Betreut von:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="71"/>
         <source>is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License, version 2 or later.</source>
-        <translation>Es handelt sich um freie Software; Sie können sie gemäß den Bedingungen der GNU General Public License, Version 2 oder später, weitergeben und/oder verändern.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="73"/>
         <source>It is distributed in the hope that it will be useful, but without any warranty.</source>
-        <translation>Es wird in der Hoffnung verbreitet, dass es nützlich sein wird, jedoch ohne jegliche Gewährleistung.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -74,63 +74,63 @@
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="126"/>
         <source>Priority: High</source>
-        <translation>Priorität: Hoch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="128"/>
         <source>Priority: Low</source>
-        <translation>Priorität: Niedrig</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="130"/>
         <source>Priority: Medium</source>
-        <translation>Priorität: Mittel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="47"/>
         <source>Completed</source>
-        <translation>Vollendet</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="48"/>
         <source>Not Completed</source>
-        <translation>Nicht abgeschlossen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="61"/>
         <source>All day</source>
-        <translation>Den ganzen Tag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="71"/>
         <source>Time: %1</source>
-        <translation>Zeit: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="77"/>
         <source>Time: %1 - %2</source>
-        <translation>Zeit: %1 - %2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="93"/>
         <source>Due: %1</source>
-        <translation>Fällig: 1 %</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="275"/>
         <source>Calendar</source>
-        <translation>Kalender</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="325"/>
         <source>%1 event(s), %2 task(s)</source>
-        <translation>%1 Ereignis(se), %2 Aufgabe(n)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="679"/>
         <location filename="../ui/panes/calendarpane.cpp" line="696"/>
         <source>Calendar: %1</source>
-        <translation>Kalender: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -154,7 +154,7 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="675"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="681"/>
         <source>save</source>
-        <translation>speichern</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="372"/>
@@ -170,13 +170,13 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="653"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="664"/>
         <source>event</source>
-        <translation>Ereignis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="390"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="541"/>
         <source>edit</source>
-        <translation>bearbeiten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="489"/>
@@ -192,12 +192,12 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="675"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="681"/>
         <source>task</source>
-        <translation>Aufgabe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="569"/>
         <source>move</source>
-        <translation>bewegen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="590"/>
@@ -205,24 +205,24 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="622"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="642"/>
         <source>delete</source>
-        <translation>löschen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="598"/>
         <source>selected task</source>
-        <translation>ausgewählte Aufgabe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="601"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="634"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="738"/>
         <source>Organizer</source>
-        <translation>Veranstalter</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="602"/>
         <source>Delete task &quot;%1&quot;?</source>
-        <translation>Aufgabe &quot;%1&quot; löschen?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="630"/>
@@ -232,12 +232,12 @@
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="632"/>
         <source>Delete event &quot;%1&quot;?</source>
-        <translation>Ereignis &quot;%1&quot; löschen?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="738"/>
         <source>No writable calendar collection is available.</source>
-        <translation>Es ist keine beschreibbare Kalendersammlung verfügbar.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -246,7 +246,7 @@
         <location filename="../ui/panes/calendarpaneutils.cpp" line="173"/>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="223"/>
         <source>New Event</source>
-        <translation>Neues Ereignis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="177"/>
@@ -618,7 +618,6 @@
         <location filename="../ui/panes/contactspane.cpp" line="143"/>
         <source>%n contact(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -1121,14 +1120,12 @@
         <source>%n item(s) could not be loaded.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../ui/shell/mainwindow.cpp" line="437"/>
         <source>%n item(s) could not be loaded. First error: %1</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>

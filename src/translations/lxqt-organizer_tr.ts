@@ -6,67 +6,67 @@
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="20"/>
         <source>About LXQt Organizer</source>
-        <translation type="unfinished"></translation>
+        <translation>LXQt Organizer Hakkında</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="42"/>
         <source>&lt;center&gt;&lt;span style=&quot;font-size:16pt; font-weight:600;&quot;&gt;LXQt Organizer %1&lt;/span&gt;&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;span style=&quot;font-size:16pt; font-weight:600;&quot;&gt;LXQt Organizer %1&lt;/span&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="55"/>
         <source>Lightweight personal information manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Hafif kişisel bilgi yöneticisi</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="68"/>
         <source>&lt;center&gt;&lt;a href=&quot;https://github.com/lxqt/organizer&quot;&gt;https://github.com/lxqt/organizer&lt;/a&gt;&lt;br/&gt;LXQt Project: &lt;a href=&quot;https://lxqt-project.org&quot;&gt;https://lxqt-project.org&lt;/a&gt;&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;a href=&quot;https://github.com/lxqt/organizer&quot;&gt;https://github.com/lxqt/organizer&lt;/a&gt;&lt;br/&gt;LXQt Projesi: &lt;a href=&quot;https://lxqt-project.org&quot;&gt;https://lxqt-project.org&lt;/a&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="85"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Hakkında</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="114"/>
         <source>Authors</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazarlar</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="143"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisans</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="54"/>
         <source>LXQt Organizer is a Qt lightweight personal information manager developed by Basil Crow</source>
-        <translation type="unfinished"></translation>
+        <translation>LXQt Organizer, Basil Crow tarafından geliştirilen, Qt tabanlı hafif bir kişisel bilgi yönetim programıdır</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="56"/>
         <source>Built with Qt and LXQt libraries.</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt ve LXQt kütüphaneleri kullanılarak geliştirilmiştir.</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="65"/>
         <source>Programming:</source>
-        <translation type="unfinished"></translation>
+        <translation>Programlama:</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="65"/>
         <source>Maintained by:</source>
-        <translation type="unfinished"></translation>
+        <translation>Şunlar tarafından yönetilmektedir:</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="71"/>
         <source>is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License, version 2 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu, özgür bir yazılımdır; GNU Genel Kamu Lisansı, sürüm 2 veya daha sonraki sürümlerinin şartları altında yeniden dağıtabilir ve/veya değiştirebilirsiniz.</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="73"/>
         <source>It is distributed in the hope that it will be useful, but without any warranty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Faydalı olacağı umuduyla dağıtılmaktadır, ancak herhangi bir garanti verilmemektedir.</translation>
     </message>
 </context>
 <context>
@@ -74,63 +74,63 @@
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="126"/>
         <source>Priority: High</source>
-        <translation type="unfinished"></translation>
+        <translation>Öncelik: Yüksek</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="128"/>
         <source>Priority: Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Öncelik: Düşük</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="130"/>
         <source>Priority: Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Öncelik: Orta</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="47"/>
         <source>Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamamlanmış</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="48"/>
         <source>Not Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamamlanmadı</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="61"/>
         <source>All day</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm gün</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="71"/>
         <source>Time: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Süre: %1</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="77"/>
         <source>Time: %1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaman: %1 - %2</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="93"/>
         <source>Due: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vade: %1</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="275"/>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Takvim</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="325"/>
         <source>%1 event(s), %2 task(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 olay, %2 görev</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="679"/>
         <location filename="../ui/panes/calendarpane.cpp" line="696"/>
         <source>Calendar: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Takvim: %1</translation>
     </message>
 </context>
 <context>
@@ -154,7 +154,7 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="675"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="681"/>
         <source>save</source>
-        <translation type="unfinished"></translation>
+        <translation>kaydetmek</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="372"/>
@@ -170,13 +170,13 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="653"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="664"/>
         <source>event</source>
-        <translation type="unfinished"></translation>
+        <translation>etkinlik</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="390"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="541"/>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>düzenlemek</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="489"/>
@@ -192,12 +192,12 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="675"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="681"/>
         <source>task</source>
-        <translation type="unfinished"></translation>
+        <translation>görev</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="569"/>
         <source>move</source>
-        <translation type="unfinished"></translation>
+        <translation>taşınmak</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="590"/>
@@ -205,39 +205,39 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="622"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="642"/>
         <source>delete</source>
-        <translation type="unfinished"></translation>
+        <translation>silmek</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="598"/>
         <source>selected task</source>
-        <translation type="unfinished"></translation>
+        <translation>seçilen görev</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="601"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="634"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="738"/>
         <source>Organizer</source>
-        <translation type="unfinished"></translation>
+        <translation>Organizatör</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="602"/>
         <source>Delete task &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;%1&quot; görevi silinsin mi?</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="630"/>
         <source>selected event</source>
-        <translation type="unfinished"></translation>
+        <translation>seçilen etkinlik</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="632"/>
         <source>Delete event &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;%1&quot; etkinlik silinsin mi?</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="738"/>
         <source>No writable calendar collection is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazılabilir takvim koleksiyonu mevcut değil.</translation>
     </message>
 </context>
 <context>
@@ -246,93 +246,93 @@
         <location filename="../ui/panes/calendarpaneutils.cpp" line="173"/>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="223"/>
         <source>New Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni Etkinlik</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="177"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="179"/>
         <source>New Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni Görev</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="183"/>
         <source>Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Görev</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="185"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Düzenlemek</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="189"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Sil</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="194"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulmak</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="199"/>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonrakini Bul</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="204"/>
         <source>Find Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Öncekini Bul</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="226"/>
         <source>Edit Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkinliği Düzenle</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="229"/>
         <source>Mark as Not Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamamlanmadı olarak işaretle</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="230"/>
         <source>Mark as Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamamlandı olarak işaretle</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="232"/>
         <source>Open URL</source>
-        <translation type="unfinished"></translation>
+        <translation>URL&apos;yi aç</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="234"/>
         <source>Open Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekli dosyayı açın</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="237"/>
         <source>Delete Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkinliği Sil</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="264"/>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="271"/>
         <source>Organizer</source>
-        <translation type="unfinished"></translation>
+        <translation>Organizatör</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="265"/>
         <source>Could not open the event URL.</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkinlik URL&apos;si açılamadı.</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="272"/>
         <source>Could not open the event attachment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkinlik ekini açamadım.</translation>
     </message>
 </context>
 <context>
@@ -341,152 +341,152 @@
         <location filename="../ui/dialogs/contactdialog.ui" line="14"/>
         <location filename="../ui/dialogs/contactdialog.ui" line="87"/>
         <source>Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>İletişim</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="30"/>
         <source>Identity</source>
-        <translation type="unfinished"></translation>
+        <translation>Kimlik</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="36"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>İsim</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="45"/>
         <source>&amp;First name</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;İlk isim</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="58"/>
         <source>&amp;Middle names</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;İkinci isim</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="71"/>
         <source>&amp;Last name</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Soy isim</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="96"/>
         <source>&amp;Email</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;E-posta</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="109"/>
         <source>&amp;Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Telefon</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="122"/>
         <source>&amp;Collection</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Koleksiyon</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="177"/>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adres</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="183"/>
         <source>Postal Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Posta Adresi</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="192"/>
         <source>&amp;Street</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sokak</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="205"/>
         <source>&amp;District</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Semt</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="218"/>
         <source>&amp;City</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Şehir</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="231"/>
         <source>C&amp;ounty</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;İlçe</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="244"/>
         <source>Post&amp;code</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Posta Kodu</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="257"/>
         <source>Co&amp;untry</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ülke</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="40"/>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>İlk isim</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="41"/>
         <source>Middle Names</source>
-        <translation type="unfinished"></translation>
+        <translation>İkinci İsim</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="42"/>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Soy isim</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="43"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>E-posta</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="44"/>
         <source>Collection</source>
-        <translation type="unfinished"></translation>
+        <translation>Koleksiyon</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="45"/>
         <source>Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Sokak</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="46"/>
         <source>District</source>
-        <translation type="unfinished"></translation>
+        <translation>Semt</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="47"/>
         <source>City</source>
-        <translation type="unfinished"></translation>
+        <translation>Şehir</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="48"/>
         <source>County</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontluk</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="49"/>
         <source>Postcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Posta kodu</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="50"/>
         <source>Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Ülke</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="51"/>
         <source>Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Telefon</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="112"/>
         <source>Empty Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Boş Detaylar</translation>
     </message>
 </context>
 <context>
@@ -494,7 +494,7 @@
     <message>
         <location filename="../domain/contactvalidation.cpp" line="29"/>
         <source>Must enter first and last name</source>
-        <translation type="unfinished"></translation>
+        <translation>İsim ve soy isim girilmelidir</translation>
     </message>
 </context>
 <context>
@@ -502,62 +502,62 @@
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="209"/>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>İlk isim</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="211"/>
         <source>Middle Names</source>
-        <translation type="unfinished"></translation>
+        <translation>İkinci İsim</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="213"/>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Soy isim</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="215"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>E-posta</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="217"/>
         <source>Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Sokak</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="219"/>
         <source>District</source>
-        <translation type="unfinished"></translation>
+        <translation>Semt</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="221"/>
         <source>City</source>
-        <translation type="unfinished"></translation>
+        <translation>Şehir</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="223"/>
         <source>County</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontluk</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="225"/>
         <source>Postcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Posta kodu</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="227"/>
         <source>Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Ülke</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="229"/>
         <source>Telephone</source>
-        <translation type="unfinished"></translation>
+        <translation>Telefon</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="231"/>
         <source>Collection</source>
-        <translation type="unfinished"></translation>
+        <translation>Koleksiyon</translation>
     </message>
 </context>
 <context>
@@ -565,71 +565,72 @@
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="101"/>
         <source>Find Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Öncekini Bul</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="95"/>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonrakini Bul</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="65"/>
         <location filename="../ui/panes/contactspane.cpp" line="306"/>
         <source>New Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni İletişim</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="67"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="73"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Düzenlemek</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="78"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Silmek</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="84"/>
         <location filename="../ui/panes/contactspane.cpp" line="309"/>
         <source>Mail To...</source>
-        <translation type="unfinished"></translation>
+        <translation>Gönderilecek Kişi...</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="89"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulmak</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="112"/>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>İletişim</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="141"/>
         <source>Address Book: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Adres Defteri: %1</translation>
     </message>
     <message numerus="yes">
         <location filename="../ui/panes/contactspane.cpp" line="143"/>
         <source>%n contact(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n iletişim</numerusform>
+            <numerusform>%n iletişimler</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="308"/>
         <source>Edit Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>İletişim Bilgilerini Düzenle</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="311"/>
         <source>Delete Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>İletişim Bilgilerini Sil</translation>
     </message>
 </context>
 <context>
@@ -642,12 +643,12 @@
         <location filename="../ui/panes/contactspanecontroller.cpp" line="180"/>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="194"/>
         <source>Organizer</source>
-        <translation type="unfinished"></translation>
+        <translation>Organizatör</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="51"/>
         <source>No writable address book collection is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazılabilir adres defteri koleksiyonu mevcut değil.</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="64"/>
@@ -655,7 +656,7 @@
         <location filename="../ui/panes/contactspanecontroller.cpp" line="102"/>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="124"/>
         <source>save</source>
-        <translation type="unfinished"></translation>
+        <translation>kaydetmek</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="64"/>
@@ -667,38 +668,38 @@
         <location filename="../ui/panes/contactspanecontroller.cpp" line="132"/>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="159"/>
         <source>contact</source>
-        <translation type="unfinished"></translation>
+        <translation>iletişim</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="83"/>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>düzenle</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="114"/>
         <source>move</source>
-        <translation type="unfinished"></translation>
+        <translation>taşı</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="132"/>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="159"/>
         <source>delete</source>
-        <translation type="unfinished"></translation>
+        <translation>sil</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="146"/>
         <source>selected contact</source>
-        <translation type="unfinished"></translation>
+        <translation>seçilen iletişim</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="150"/>
         <source>Delete contact &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;%1&quot; iletişimi silinsin mi?</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="168"/>
         <source>Select a contact to email.</source>
-        <translation type="unfinished"></translation>
+        <translation>E-posta göndermek istediğiniz kişiyi seçin.</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="174"/>
