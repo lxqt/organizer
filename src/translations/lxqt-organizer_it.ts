@@ -6,7 +6,7 @@
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="20"/>
         <source>About LXQt Organizer</source>
-        <translation type="unfinished"></translation>
+        <translation>Informazioni su LXQt Organizer</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="42"/>
