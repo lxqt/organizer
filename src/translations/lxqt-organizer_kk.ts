@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="et">
+<TS version="2.1" language="kk">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -26,17 +26,17 @@
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="85"/>
         <source>About</source>
-        <translation>Rakenduse teave</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="114"/>
         <source>Authors</source>
-        <translation>Autorid</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="143"/>
         <source>License</source>
-        <translation>Litsents</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="54"/>
@@ -46,17 +46,17 @@
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="56"/>
         <source>Built with Qt and LXQt libraries.</source>
-        <translation>Arendusel on kasutusel Qt ja LXQt teegid.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="65"/>
         <source>Programming:</source>
-        <translation>Programmeerimine:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="65"/>
         <source>Maintained by:</source>
-        <translation>Hooldaja:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="71"/>
@@ -114,23 +114,23 @@
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="93"/>
         <source>Due: %1</source>
-        <translation>Tähtaeg: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="275"/>
         <source>Calendar</source>
-        <translation>Kalender</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="325"/>
         <source>%1 event(s), %2 task(s)</source>
-        <translation>%1 sündmus(t), %2 ülesanne(t)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="679"/>
         <location filename="../ui/panes/calendarpane.cpp" line="696"/>
         <source>Calendar: %1</source>
-        <translation>Kalender: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -154,7 +154,7 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="675"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="681"/>
         <source>save</source>
-        <translation>salvesta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="372"/>
@@ -170,13 +170,13 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="653"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="664"/>
         <source>event</source>
-        <translation>sündmus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="390"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="541"/>
         <source>edit</source>
-        <translation>muuda</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="489"/>
@@ -192,12 +192,12 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="675"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="681"/>
         <source>task</source>
-        <translation>ülesanne</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="569"/>
         <source>move</source>
-        <translation>teisalda</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="590"/>
@@ -205,12 +205,12 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="622"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="642"/>
         <source>delete</source>
-        <translation>kustuta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="598"/>
         <source>selected task</source>
-        <translation>valitud ülesanne</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="601"/>

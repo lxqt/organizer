@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="et">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>AboutDialog</name>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="20"/>
         <source>About LXQt Organizer</source>
-        <translation type="unfinished"></translation>
+        <translation>關於 LXQt Organizer 事務排程器</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="42"/>
         <source>&lt;center&gt;&lt;span style=&quot;font-size:16pt; font-weight:600;&quot;&gt;LXQt Organizer %1&lt;/span&gt;&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;span style=&quot;font-size:16pt; font-weight:600;&quot;&gt;LXQt Organizer 事務排程器 %1&lt;/span&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="55"/>
         <source>Lightweight personal information manager</source>
-        <translation type="unfinished"></translation>
+        <translation>輕量級個人事務資訊排程管理器</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="68"/>
         <source>&lt;center&gt;&lt;a href=&quot;https://github.com/lxqt/organizer&quot;&gt;https://github.com/lxqt/organizer&lt;/a&gt;&lt;br/&gt;LXQt Project: &lt;a href=&quot;https://lxqt-project.org&quot;&gt;https://lxqt-project.org&lt;/a&gt;&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;a href=&quot;https://github.com/lxqt/organizer&quot;&gt;https://github.com/lxqt/organizer&lt;/a&gt;&lt;br/&gt;LXQt 專案： &lt;a href=&quot;https://lxqt-project.org&quot;&gt;https://lxqt-project.org&lt;/a&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="85"/>
         <source>About</source>
-        <translation>Rakenduse teave</translation>
+        <translation>關於</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="114"/>
         <source>Authors</source>
-        <translation>Autorid</translation>
+        <translation>作者</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.ui" line="143"/>
         <source>License</source>
-        <translation>Litsents</translation>
+        <translation>授權</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="54"/>
         <source>LXQt Organizer is a Qt lightweight personal information manager developed by Basil Crow</source>
-        <translation type="unfinished"></translation>
+        <translation>LXQt Organizer 事務排程器 是 Qt 輕量級個人資訊事務排程管理器，由 Basil Crow 開發</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="56"/>
         <source>Built with Qt and LXQt libraries.</source>
-        <translation>Arendusel on kasutusel Qt ja LXQt teegid.</translation>
+        <translation>建構於 Qt 及 LXQt 程式庫。</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="65"/>
         <source>Programming:</source>
-        <translation>Programmeerimine:</translation>
+        <translation>程式編排：</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="65"/>
         <source>Maintained by:</source>
-        <translation>Hooldaja:</translation>
+        <translation>維護：</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="71"/>
         <source>is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License, version 2 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>是自由軟體；您可以根據 GNU 通用公共授權第 2 版或更新版本的條款，進行重新分發或修改。</translation>
     </message>
     <message>
         <location filename="../ui/shell/aboutdialog.cpp" line="73"/>
         <source>It is distributed in the hope that it will be useful, but without any warranty.</source>
-        <translation type="unfinished"></translation>
+        <translation>其發行希望使用有所助益，但無任何保證。</translation>
     </message>
 </context>
 <context>
@@ -74,63 +74,63 @@
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="126"/>
         <source>Priority: High</source>
-        <translation type="unfinished"></translation>
+        <translation>優先等級：高</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="128"/>
         <source>Priority: Low</source>
-        <translation type="unfinished"></translation>
+        <translation>優先等級：低</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="130"/>
         <source>Priority: Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>優先等級：中</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="47"/>
         <source>Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>已經完成</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="48"/>
         <source>Not Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>尚未完成</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="61"/>
         <source>All day</source>
-        <translation type="unfinished"></translation>
+        <translation>全天</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="71"/>
         <source>Time: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>時間： %1</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="77"/>
         <source>Time: %1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>時間： %1 - %2</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="93"/>
         <source>Due: %1</source>
-        <translation>Tähtaeg: %1</translation>
+        <translation>限期： %1</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="275"/>
         <source>Calendar</source>
-        <translation>Kalender</translation>
+        <translation>行事曆</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="325"/>
         <source>%1 event(s), %2 task(s)</source>
-        <translation>%1 sündmus(t), %2 ülesanne(t)</translation>
+        <translation>%1 事件、%2 任務</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpane.cpp" line="679"/>
         <location filename="../ui/panes/calendarpane.cpp" line="696"/>
         <source>Calendar: %1</source>
-        <translation>Kalender: %1</translation>
+        <translation>行事曆： %1</translation>
     </message>
 </context>
 <context>
@@ -154,7 +154,7 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="675"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="681"/>
         <source>save</source>
-        <translation>salvesta</translation>
+        <translation>儲存</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="372"/>
@@ -170,13 +170,13 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="653"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="664"/>
         <source>event</source>
-        <translation>sündmus</translation>
+        <translation>事件</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="390"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="541"/>
         <source>edit</source>
-        <translation>muuda</translation>
+        <translation>編輯</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="489"/>
@@ -192,12 +192,12 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="675"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="681"/>
         <source>task</source>
-        <translation>ülesanne</translation>
+        <translation>任務</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="569"/>
         <source>move</source>
-        <translation>teisalda</translation>
+        <translation>移動</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="590"/>
@@ -205,39 +205,39 @@
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="622"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="642"/>
         <source>delete</source>
-        <translation>kustuta</translation>
+        <translation>刪除</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="598"/>
         <source>selected task</source>
-        <translation>valitud ülesanne</translation>
+        <translation>所選任務</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="601"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="634"/>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="738"/>
         <source>Organizer</source>
-        <translation type="unfinished"></translation>
+        <translation>行事曆排程器</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="602"/>
         <source>Delete task &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除任務 &quot;%1&quot; ？</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="630"/>
         <source>selected event</source>
-        <translation type="unfinished"></translation>
+        <translation>所選事件</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="632"/>
         <source>Delete event &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除事件 &quot;%1&quot; ？</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpanecontroller.cpp" line="738"/>
         <source>No writable calendar collection is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>無可寫入的行事曆合集可供使用。</translation>
     </message>
 </context>
 <context>
@@ -246,93 +246,93 @@
         <location filename="../ui/panes/calendarpaneutils.cpp" line="173"/>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="223"/>
         <source>New Event</source>
-        <translation type="unfinished"></translation>
+        <translation>新建事件</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="177"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>新建</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="179"/>
         <source>New Task</source>
-        <translation type="unfinished"></translation>
+        <translation>新建任務</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="183"/>
         <source>Task</source>
-        <translation type="unfinished"></translation>
+        <translation>任務</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="185"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="189"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="194"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="199"/>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找下一個</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="204"/>
         <source>Find Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找上一個</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="226"/>
         <source>Edit Event</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯事件</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="229"/>
         <source>Mark as Not Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>標記為尚未完成</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="230"/>
         <source>Mark as Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>標記為已經完成</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="232"/>
         <source>Open URL</source>
-        <translation type="unfinished"></translation>
+        <translation>開啟 URL</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="234"/>
         <source>Open Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>開啟附件</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="237"/>
         <source>Delete Event</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除事件</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="264"/>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="271"/>
         <source>Organizer</source>
-        <translation type="unfinished"></translation>
+        <translation>行事曆排程器</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="265"/>
         <source>Could not open the event URL.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法開啟事件 URL。</translation>
     </message>
     <message>
         <location filename="../ui/panes/calendarpaneutils.cpp" line="272"/>
         <source>Could not open the event attachment.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法開啟事件附件。</translation>
     </message>
 </context>
 <context>
@@ -341,152 +341,152 @@
         <location filename="../ui/dialogs/contactdialog.ui" line="14"/>
         <location filename="../ui/dialogs/contactdialog.ui" line="87"/>
         <source>Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>聯絡</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="30"/>
         <source>Identity</source>
-        <translation type="unfinished"></translation>
+        <translation>身分</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="36"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="45"/>
         <source>&amp;First name</source>
-        <translation type="unfinished"></translation>
+        <translation>名(&amp;F)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="58"/>
         <source>&amp;Middle names</source>
-        <translation type="unfinished"></translation>
+        <translation>中間名(&amp;M)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="71"/>
         <source>&amp;Last name</source>
-        <translation type="unfinished"></translation>
+        <translation>姓(&amp;L)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="96"/>
         <source>&amp;Email</source>
-        <translation type="unfinished"></translation>
+        <translation>電子郵件(&amp;E)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="109"/>
         <source>&amp;Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>電話(&amp;P)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="122"/>
         <source>&amp;Collection</source>
-        <translation type="unfinished"></translation>
+        <translation>彙集(&amp;C)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="177"/>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation>地址</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="183"/>
         <source>Postal Address</source>
-        <translation type="unfinished"></translation>
+        <translation>通訊地址</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="192"/>
         <source>&amp;Street</source>
-        <translation type="unfinished"></translation>
+        <translation>街路(&amp;S)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="205"/>
         <source>&amp;District</source>
-        <translation type="unfinished"></translation>
+        <translation>區(&amp;D)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="218"/>
         <source>&amp;City</source>
-        <translation type="unfinished"></translation>
+        <translation>城市(&amp;C)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="231"/>
         <source>C&amp;ounty</source>
-        <translation type="unfinished"></translation>
+        <translation>縣(&amp;O)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="244"/>
         <source>Post&amp;code</source>
-        <translation type="unfinished"></translation>
+        <translation>郵遞區號(&amp;C)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.ui" line="257"/>
         <source>Co&amp;untry</source>
-        <translation type="unfinished"></translation>
+        <translation>國家(&amp;U)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="40"/>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="41"/>
         <source>Middle Names</source>
-        <translation type="unfinished"></translation>
+        <translation>中間名</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="42"/>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>姓</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="43"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>電子郵件</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="44"/>
         <source>Collection</source>
-        <translation type="unfinished"></translation>
+        <translation>彙集</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="45"/>
         <source>Street</source>
-        <translation type="unfinished"></translation>
+        <translation>街路</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="46"/>
         <source>District</source>
-        <translation type="unfinished"></translation>
+        <translation>區</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="47"/>
         <source>City</source>
-        <translation type="unfinished"></translation>
+        <translation>城市</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="48"/>
         <source>County</source>
-        <translation type="unfinished"></translation>
+        <translation>縣</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="49"/>
         <source>Postcode</source>
-        <translation type="unfinished"></translation>
+        <translation>郵遞區號</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="50"/>
         <source>Country</source>
-        <translation type="unfinished"></translation>
+        <translation>國家</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="51"/>
         <source>Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>電話</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/contactdialog.cpp" line="112"/>
         <source>Empty Details</source>
-        <translation type="unfinished"></translation>
+        <translation>空白詳細資訊</translation>
     </message>
 </context>
 <context>
@@ -494,7 +494,7 @@
     <message>
         <location filename="../domain/contactvalidation.cpp" line="29"/>
         <source>Must enter first and last name</source>
-        <translation type="unfinished"></translation>
+        <translation>必須輸入名與姓</translation>
     </message>
 </context>
 <context>
@@ -502,62 +502,62 @@
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="209"/>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="211"/>
         <source>Middle Names</source>
-        <translation type="unfinished"></translation>
+        <translation>中間名</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="213"/>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>姓</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="215"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>電子郵件</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="217"/>
         <source>Street</source>
-        <translation type="unfinished"></translation>
+        <translation>街路</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="219"/>
         <source>District</source>
-        <translation type="unfinished"></translation>
+        <translation>區</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="221"/>
         <source>City</source>
-        <translation type="unfinished"></translation>
+        <translation>城市</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="223"/>
         <source>County</source>
-        <translation type="unfinished"></translation>
+        <translation>縣</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="225"/>
         <source>Postcode</source>
-        <translation type="unfinished"></translation>
+        <translation>郵遞區號</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="227"/>
         <source>Country</source>
-        <translation type="unfinished"></translation>
+        <translation>國家</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="229"/>
         <source>Telephone</source>
-        <translation type="unfinished"></translation>
+        <translation>電話</translation>
     </message>
     <message>
         <location filename="../ui/models/contactmodel.cpp" line="231"/>
         <source>Collection</source>
-        <translation type="unfinished"></translation>
+        <translation>彙集</translation>
     </message>
 </context>
 <context>
@@ -565,71 +565,71 @@
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="101"/>
         <source>Find Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找上一個</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="95"/>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找下一個</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="65"/>
         <location filename="../ui/panes/contactspane.cpp" line="306"/>
         <source>New Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>新建聯絡</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="67"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>新建</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="73"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="78"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="84"/>
         <location filename="../ui/panes/contactspane.cpp" line="309"/>
         <source>Mail To...</source>
-        <translation type="unfinished"></translation>
+        <translation>郵寄至...</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="89"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="112"/>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>聯絡</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="141"/>
         <source>Address Book: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>通訊錄： %1</translation>
     </message>
     <message numerus="yes">
         <location filename="../ui/panes/contactspane.cpp" line="143"/>
         <source>%n contact(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n 個聯絡人</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="308"/>
         <source>Edit Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯聯絡</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspane.cpp" line="311"/>
         <source>Delete Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除聯絡</translation>
     </message>
 </context>
 <context>
@@ -642,12 +642,12 @@
         <location filename="../ui/panes/contactspanecontroller.cpp" line="180"/>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="194"/>
         <source>Organizer</source>
-        <translation type="unfinished"></translation>
+        <translation>行事曆排程器</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="51"/>
         <source>No writable address book collection is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>無可寫入的通訊錄合集可供使用。</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="64"/>
@@ -655,7 +655,7 @@
         <location filename="../ui/panes/contactspanecontroller.cpp" line="102"/>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="124"/>
         <source>save</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="64"/>
@@ -667,59 +667,59 @@
         <location filename="../ui/panes/contactspanecontroller.cpp" line="132"/>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="159"/>
         <source>contact</source>
-        <translation type="unfinished"></translation>
+        <translation>聯絡</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="83"/>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="114"/>
         <source>move</source>
-        <translation type="unfinished"></translation>
+        <translation>移動</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="132"/>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="159"/>
         <source>delete</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="146"/>
         <source>selected contact</source>
-        <translation type="unfinished"></translation>
+        <translation>所選聯絡人</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="150"/>
         <source>Delete contact &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除聯絡 &quot;%1&quot; ？</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="168"/>
         <source>Select a contact to email.</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇一個聯絡人發送電子郵件。</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="174"/>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="180"/>
         <source>The selected contact does not have an email address.</source>
-        <translation type="unfinished"></translation>
+        <translation>所選的聯絡人沒有電子郵件。</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="188"/>
         <source>Enter the subject</source>
-        <translation type="unfinished"></translation>
+        <translation>輸入主旨</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="189"/>
         <source>Enter message</source>
-        <translation type="unfinished"></translation>
+        <translation>輸入訊息</translation>
     </message>
     <message>
         <location filename="../ui/panes/contactspanecontroller.cpp" line="194"/>
         <source>Could not open the default mail application.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法開啟預設的電子郵件應用挰式。</translation>
     </message>
 </context>
 <context>
@@ -727,12 +727,12 @@
     <message>
         <location filename="../ui/widgets/daytimelinewidget.cpp" line="548"/>
         <source>New event</source>
-        <translation type="unfinished"></translation>
+        <translation>新建事件</translation>
     </message>
     <message>
         <location filename="../ui/widgets/daytimelinewidget.cpp" line="659"/>
         <source>Untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>無標題</translation>
     </message>
 </context>
 <context>
@@ -741,62 +741,62 @@
         <location filename="../ui/dialogs/eventdialog.ui" line="20"/>
         <location filename="../ui/dialogs/eventdialog.cpp" line="100"/>
         <source>Event</source>
-        <translation type="unfinished"></translation>
+        <translation>事件</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/eventdialog.ui" line="29"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>詳細資訊</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/eventdialog.ui" line="38"/>
         <source>&amp;Title</source>
-        <translation type="unfinished"></translation>
+        <translation>標題(&amp;T)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/eventdialog.ui" line="51"/>
         <source>&amp;Location</source>
-        <translation type="unfinished"></translation>
+        <translation>位置(&amp;L)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/eventdialog.ui" line="67"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>時間</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/eventdialog.ui" line="76"/>
         <source>&amp;Date</source>
-        <translation type="unfinished"></translation>
+        <translation>日期(&amp;D)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/eventdialog.ui" line="93"/>
         <source>All &amp;day</source>
-        <translation type="unfinished"></translation>
+        <translation>全日(&amp;D)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/eventdialog.ui" line="100"/>
         <source>&amp;Start time</source>
-        <translation type="unfinished"></translation>
+        <translation>開始時間(&amp;S)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/eventdialog.ui" line="113"/>
         <source>&amp;End time</source>
-        <translation type="unfinished"></translation>
+        <translation>結束時間(&amp;E)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/eventdialog.ui" line="126"/>
         <source>Time &amp;zone</source>
-        <translation type="unfinished"></translation>
+        <translation>時區(&amp;Z)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/eventdialog.ui" line="142"/>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>行事曆</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/eventdialog.ui" line="151"/>
         <source>&amp;Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>行事曆(&amp;C)</translation>
     </message>
     <message>
         <location filename="../ui/dialogs/eventdialog.ui" line="164"/>
